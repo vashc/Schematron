@@ -1,8 +1,14 @@
-from . import *
+import operator
+import os
+from lxml import etree
+from pyparsing import Literal, Suppress, Forward, Word, \
+    Group, ZeroOrMore, Optional, oneOf, nums
+
+_root = os.path.dirname(os.path.abspath(__file__))
 
 
-class SchematronInterpreter(object):
-    def __init__(self):
+class SchematronChecker(object):
+    def __init__(self, xsd_root=_root):
         self._nullary_map = {
             'usch:getFileName': self._usch_file_name
         }
@@ -31,6 +37,28 @@ class SchematronInterpreter(object):
 
         self._stack = []
         self._expr = self._create_tokenizer()
+        self._xsd_root = xsd_root
+        self._parser = etree.XMLParser(encoding='cp1251', remove_comments=True)
+
+    def _get_asserts(self, content):
+        assertions = content.findall('.//xs:appinfo', namespaces=content.nsmap)
+        assert_list = []
+
+        for assertion in assertions:
+            for pattern in assertion:
+                name = pattern.attrib.get('name', None)
+                if not name:
+                    continue
+
+                for rule in pattern:
+                    for sch_assert in rule:
+                        assert_list.append({
+                            'name':     name,
+                            'assert':   sch_assert.attrib['test'],
+                            'context':  rule.attrib['context']
+                        })
+
+        return assert_list
 
     def _push(self, toks):
         self._stack.append(toks[0])
@@ -63,6 +91,7 @@ class SchematronInterpreter(object):
         node = element + ZeroOrMore(('*' + element).setParseAction(self._push))
         parenthesized_node = Group(lpar + node + rpar)
         parenthesized_expr = Group(lpar + expr + rpar)
+
         count_func = Literal('count') + parenthesized_node
         round_func = Literal('round') + parenthesized_node
         sum_func = Literal('sum') + parenthesized_node
@@ -75,11 +104,16 @@ class SchematronInterpreter(object):
                    Group(lpar + expr + comma + expr + comma + expr + rpar))
         usch_compare_date = (Literal('usch:compareDate') +
                              Group(lpar + node + comma + node + rpar))
-        funcs = (count_func | round_func | sum_func | number_func | substring_func |
-                 usch_filename | usch_iif | usch_compare_date).setParseAction(self._push)
-        atom = funcs | node | (Optional(bool_not) + parenthesized_expr).setParseAction(self._push_not)
-        factor = atom + ZeroOrMore((general_comp + integer).setParseAction(self._push))
-        term = factor + ZeroOrMore((bool_and + factor).setParseAction(self._push))
+        funcs = (count_func | round_func | sum_func |
+                 number_func | substring_func | usch_filename |
+                 usch_iif | usch_compare_date).setParseAction(self._push)
+
+        atom = (funcs | node | (Optional(bool_not) + parenthesized_expr)
+                .setParseAction(self._push_not))
+        factor = atom + ZeroOrMore((general_comp + integer)
+                                   .setParseAction(self._push))
+        term = factor + ZeroOrMore((bool_and + factor)
+                                   .setParseAction(self._push))
         expr <<= term + ZeroOrMore((bool_or + term).setParseAction(self._push))
         return expr
 
@@ -143,3 +177,22 @@ class SchematronInterpreter(object):
     def parse(self, text):
         self.tokenize(text)
         return self._evaluate_stack()
+
+    def check(self, xml_file_path):
+        xml_filename = os.path.split(xml_file_path)[-1]
+        prefix = '_'.join(xml_filename.split('_')[:2])
+
+        with open(xml_file_path, 'rb') as xml_file:
+            content = etree.fromstring(xml_file.read())
+
+        with open(os.path.join(self._xsd_root, f'{prefix}.xsd'),
+                  'r', encoding='cp1251') as xsd_file:
+            xsd_content = etree.parse(xsd_file, self._parser).getroot()
+            xsd_schema = etree.XMLSchema(xsd_content)
+
+        asserts = self._get_asserts(xsd_content)
+
+        if not asserts:
+            return '+'
+
+        return '-'
