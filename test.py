@@ -5,4 +5,7 @@ sch = SchematronChecker()
 
 while s != '~':
     s = input('Enter sch/usch string: ')
-    print(sch.tokenize(s))
+    if s != '~':
+        # print(sch.tokenize(s))
+        sch.check_file(s)
+
