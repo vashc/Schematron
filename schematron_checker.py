@@ -68,6 +68,12 @@ class SchematronChecker(object):
                     if min_occurs and min_occurs[0] == '0':
                         continue
 
+                    # Пропуск опциональных проверок (choice)
+                    par_element_tag = par_element[0].getparent().tag
+                    if par_element_tag.split('}')[-1] == 'choice' and \
+                            len(self._xml_content.xpath(f'.//{context}', )) == 0:
+                        continue
+
                     for sch_assert in rule:
                         assert_list.append({
                             'name':     name,
@@ -79,7 +85,7 @@ class SchematronChecker(object):
 
     def _push(self, toks):
         self._stack.append(toks[0])
-        print('=>', self._stack)
+        # print('=>', self._stack)
 
     def _push_not(self, toks):
         for tok in toks:
@@ -156,12 +162,10 @@ class SchematronChecker(object):
                 arg = self._stack.pop()
             else:
                 arg = self._evaluate_stack()
-            # print('unary:', op, arg, self._unary_map[op](arg))
             return self._unary_map[op](arg)
         elif op in self._binary_map:
             arg1 = self._evaluate_stack()
             arg2 = self._evaluate_stack()
-            # print('binary:', op, arg1, arg2, self._binary_map[op](arg1, arg2))
             return self._binary_map[op](arg1, arg2)
         elif op in self._ternary_map:
             arg3 = self._evaluate_stack()
@@ -170,7 +174,6 @@ class SchematronChecker(object):
                 # Получили substring без опционального третьего аргумента
                 return self._ternary_map[op](arg2, arg3)
             arg1 = self._evaluate_stack()
-            # print('tern:', self._ternary_map[op](arg1, arg2, arg3))
             return self._ternary_map[op](arg1, arg2, arg3)
         elif op.isdigit():
             # Возвращаем найденное число
@@ -179,7 +182,6 @@ class SchematronChecker(object):
             # Возвращаем строку без кавычек
             return op[1:-1]
         else:
-            # print('node:', op, self._evaluate_node(op))
             return self._evaluate_node(op)
 
     def _parse(self, assertion):
@@ -192,8 +194,8 @@ class SchematronChecker(object):
 
     def _count_func(self, node):
         if '@' in node:
-            return len(self._xml_content.xpath(f'.//{self._context}/*[{node}]'))
-        return len(self._xml_content.findall(f'.//{self._context}/{node}'))
+            return str(len(self._xml_content.xpath(f'.//{self._context}/*[{node}]')))
+        return str(len(self._xml_content.findall(f'.//{self._context}/{node}')))
 
     def _round_func(self, node):
         return round(node)
