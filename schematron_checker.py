@@ -49,6 +49,39 @@ class SchematronChecker(object):
         self._xsd_content = None
         self._context = None
 
+    def _get_error(self, node):
+        error = {}
+        replacing = []
+        error['code'] = node.get('code')
+
+        text = ''
+        if node.text:
+            text = node.text
+
+        for child in node:
+            select = child.get('select', None)
+            replacing.append(select)
+            text += select
+
+            if child.tail is not None:
+                # Конец текста ошибки перед закрывающим тегом
+                text += child.tail
+
+        # Убираем спецсимволы
+        text = ' '.join((text.replace('\n', '').replace('\t', '')).split())
+        error['text'] = text
+        error['replacing'] = replacing
+
+        return error
+
+    def _get_error_text(self, assertion):
+        error = assertion['error']
+        error_text = error['text']
+        for replacement in error['replacing']:
+            error_text = error_text.replace(
+                replacement, str(self._parse(replacement, assertion['context'])))
+        return error_text
+
     def _get_asserts(self, content):
         assertions = content.findall('.//xs:appinfo', namespaces=content.nsmap)
         assert_list = []
@@ -75,11 +108,15 @@ class SchematronChecker(object):
                         continue
 
                     for sch_assert in rule:
-                        assert_list.append({
-                            'name':     name,
-                            'assert':   sch_assert.attrib['test'],
-                            'context':  context
-                        })
+                        for error_node in sch_assert:
+                            error = self._get_error(error_node)
+
+                            assert_list.append({
+                                'name':     name,
+                                'assert':   sch_assert.attrib['test'],
+                                'context':  context,
+                                'error': error
+                            })
 
         return assert_list
 
@@ -184,10 +221,10 @@ class SchematronChecker(object):
         else:
             return self._evaluate_node(op)
 
-    def _parse(self, assertion):
-        print(assertion['assert'])
-        self._context = assertion['context']
-        self.tokenize(assertion['assert'])
+    def _parse(self, expression, context):
+        print(expression)
+        self._context = context
+        self.tokenize(expression)
         return self._evaluate_stack()
 
     # Функции
@@ -227,7 +264,6 @@ class SchematronChecker(object):
 
     def check_file(self, xml_file):
         start_time = time()
-        # xml_filename = os.path.split(xml_file_path)[-1]
         prefix = '_'.join(xml_file.split('_')[:2])
 
         with open(os.path.join(self._xml_root, xml_file), 'rb') as xml_file_handler:
@@ -244,9 +280,6 @@ class SchematronChecker(object):
 
         asserts = self._get_asserts(xsd_content)
 
-        # for _ in asserts:
-        #     print('\n', _)
-
         if not asserts:
             return '+'
 
@@ -254,12 +287,14 @@ class SchematronChecker(object):
         for assertion in asserts:
             results.append({
                 'name':     assertion['name'],
-                'result':   self._parse(assertion)
+                'result':   self._parse(assertion['assert'],
+                                        assertion['context'])
             })
             if results[-1]['result']:
-                print(assertion['name'], '\u001b[32mOk\u001b[0m')
+                print(assertion['name'], ': \u001b[32mOk\u001b[0m')
             else:
-                print(assertion['name'], '\u001b[31mFail\u001b[0m')
+                print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
+                print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
 
         if all(result['result'] for result in results):
             print('\u001b[32mTest passed\u001b[0m')
@@ -267,6 +302,6 @@ class SchematronChecker(object):
             print('\u001b[31mTest failed\u001b[0m')
 
         elapsed_time = time() - start_time
-        print('Elapsed time:', elapsed_time)
+        print(f'Elapsed time: {round(elapsed_time, 4)} s')
 
         return results
