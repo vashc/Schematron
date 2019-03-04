@@ -79,7 +79,7 @@ class SchematronChecker(object):
 
     def _push(self, toks):
         self._stack.append(toks[0])
-        # print('=>', self._stack)
+        print('=>', self._stack)
 
     def _push_not(self, toks):
         for tok in toks:
@@ -149,7 +149,6 @@ class SchematronChecker(object):
     def _evaluate_stack(self):
         op = self._stack.pop()
 
-        #TODO: check optional argument 'length' in substring function
         if op in self._nullary_map:
             return self._nullary_map[op]()
         elif op in self._unary_map:
@@ -167,6 +166,9 @@ class SchematronChecker(object):
         elif op in self._ternary_map:
             arg3 = self._evaluate_stack()
             arg2 = self._evaluate_stack()
+            if op == 'substring' and not arg2.isdigit():
+                # Получили substring без опционального третьего аргумента
+                return self._ternary_map[op](arg2, arg3)
             arg1 = self._evaluate_stack()
             # print('tern:', self._ternary_map[op](arg1, arg2, arg3))
             return self._ternary_map[op](arg1, arg2, arg3)
