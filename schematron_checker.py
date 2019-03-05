@@ -26,8 +26,10 @@ class SchematronChecker(object):
 
         self._binary_map = {
             '<':                operator.lt,
+            '<=':               operator.le,
             '=':                operator.eq,
             '>':                operator.gt,
+            '>=':               operator.ge,
             '!=':               operator.ne,
             '*':                operator.mul,
             'and':              operator.and_,
@@ -116,7 +118,6 @@ class SchematronChecker(object):
                     # которых не встречается
                     context = rule.attrib['context']
                     par_element = self._xsd_content.xpath(f'//*[@name="{context}"]')
-                    print(len(par_element))
                     min_occurs = par_element[0].xpath('@minOccurs')
                     if min_occurs and min_occurs[0] == '0':
                         continue
@@ -151,7 +152,7 @@ class SchematronChecker(object):
         # print('=>', self._stack)
 
     def _create_tokenizer(self):
-        general_comp = oneOf('< > = !=')
+        general_comp = oneOf('< > = != <= >=')
         bool_and = Literal('and')
         bool_or = Literal('or')
         bool_not = Literal('not')
@@ -160,11 +161,15 @@ class SchematronChecker(object):
         comma = Suppress(',')
 
         alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-        element = (Word(alphabet + alphabet.upper() + nums + '@/:')
+        element = (Word(alphabet + alphabet.upper() + nums + '@/:.')
                    .setParseAction(self._push))
         integer = Word(nums).setParseAction(self._push)
-        string = Word(alphabet + alphabet.upper() + nums + srange('[a-zA-Z]'))
+        string = Word(alphabet + alphabet.upper() +
+                      nums + srange('[a-zA-Z]' + '.'))
         quoted_string = Combine(tick + string + tick).setParseAction(self._push)
+        date = Combine(tick + Word(nums, exact=2) + '.' +
+                       Word(nums, exact=2) + '.' + Word(nums, exact=4) +
+                       tick).setParseAction(self._push)
 
         expr = Forward()
         node = element + ZeroOrMore(('*' + element).setParseAction(self._push))
@@ -190,7 +195,7 @@ class SchematronChecker(object):
         atom = (funcs | node | (Optional(bool_not) + parenthesized_expr)
                 .setParseAction(self._push_not))
         factor = atom + ZeroOrMore((general_comp +
-                                    (integer | atom | quoted_string))
+                                    (integer | atom | quoted_string | date))
                                    .setParseAction(self._push))
         term = factor + ZeroOrMore((bool_and + factor)
                                    .setParseAction(self._push))
@@ -200,7 +205,12 @@ class SchematronChecker(object):
     def _evaluate_node(self, node):
         if '@' in node:
             # Работаем с атрибутом, возвращаем значение
-            value = self._xml_content.xpath(f'//{self._context}/{node}')[0]
+            value = self._xml_content.xpath(f'//{self._context}/{node}')
+            if not value:
+                # Атрибут не найден
+                raise Exception(f'Атрибут {self._context}/{node} в '
+                                f'файле {self._xml_file} не найден')
+            value = value[0]
             return value
         else:
             # Работаем с элементом, возвращаем наличие
@@ -239,13 +249,18 @@ class SchematronChecker(object):
             # Возвращаем строку без кавычек
             return op[1:-1]
         else:
-            return self._evaluate_node(op)
+            node = self._evaluate_node(op)
+            return node
 
     def _parse(self, expression, context):
-        # print(expression)
+        print(expression)
         self._context = context
         self.tokenize(expression)
-        return self._evaluate_stack()
+        try:
+            parsing_result = self._evaluate_stack()
+            return parsing_result
+        except Exception as ex:
+            print('\u001b[31mError.\u001b[0m', ex)
 
     # Функции
 
@@ -291,6 +306,7 @@ class SchematronChecker(object):
 
         xml_info = self._get_xml_info(xml_content)
         xsd_file = await self._get_xsd_scheme(xml_info)
+        print('XSD FILE:', xsd_file)
 
         with open(os.path.join(self._xsd_root, xsd_file),
                   'r', encoding='cp1251') as xsd_file_handler:

@@ -14,8 +14,8 @@ sch = SchematronChecker(xsd_root=xsd_root, xml_root=xml_root)
 # while s != '~':
 #     s = input('Enter sch/usch string: ')
 #     if s != '~':
-#         # print(sch.tokenize(s))
-#         sch.check_file(s)
+#         print(sch.tokenize(s))
+#         # sch.check_file(s)
 
 test_xml = ['NO_NDPI_9999_9999_9624840906999901001_20170309_CB8F959F-C631-4C37-AEC9-EC54B55112A3.xml',
             'IU_ZAPR_9999_9999_9624840906999901001_20170309_D37C7B47-516E-4A7F-AF4D-C9E728CCADF1.xml',
@@ -46,6 +46,7 @@ def sync_test():
 
     loop = asyncio.get_event_loop()
     for xml_file in glob('*')[:10]:
+        print('FILE:', xml_file)
         loop.run_until_complete(sch.check_file(xml_file))
 
 
@@ -78,6 +79,7 @@ def async_test():
 
 el_t, avg_t = sync_test()
 print(f'Elapsed time: {round(el_t, 4)}; average time per sync run: {round(avg_t, 4)}')
+
 # el_t, avg_t = async_test()
 # print(f'Elapsed time: {round(el_t, 4)}; average time per async run: {round(avg_t, 4)}')
 # async_test()
