@@ -1,5 +1,7 @@
 import operator
 import os
+import asyncio
+from database import db
 from time import time
 from lxml import etree
 from pyparsing import Literal, Suppress, Forward, Word, \
@@ -9,7 +11,7 @@ _root = os.path.dirname(os.path.abspath(__file__))
 
 
 class SchematronChecker(object):
-    def __init__(self, xsd_root=_root, xml_root=_root):
+    def __init__(self, *, xsd_root=_root, xml_root=_root):
         self._nullary_map = {
             'usch:getFileName': self._usch_file_name
         }
@@ -48,6 +50,23 @@ class SchematronChecker(object):
         self._xml_content = None
         self._xsd_content = None
         self._context = None
+
+    async def _get_xsd_scheme(self, xml_info):
+        query = '''SELECT xsd
+                FROM documents
+                WHERE knd = $1
+                AND version = $2'''
+
+        return await db.fetchval(query, xml_info['knd'], xml_info['version'])
+
+    def _get_xml_info(self, xml_content):
+        xml_info = {}
+        xml_info['version'] = xml_content.attrib.get('ВерсФорм')
+        document_node = xml_content.find('Документ')
+        if document_node is not None:
+            xml_info['knd'] = document_node.get('КНД')
+
+        return xml_info
 
     def _get_error(self, node):
         error = {}
@@ -97,6 +116,7 @@ class SchematronChecker(object):
                     # которых не встречается
                     context = rule.attrib['context']
                     par_element = self._xsd_content.xpath(f'//*[@name="{context}"]')
+                    print(len(par_element))
                     min_occurs = par_element[0].xpath('@minOccurs')
                     if min_occurs and min_occurs[0] == '0':
                         continue
@@ -222,7 +242,7 @@ class SchematronChecker(object):
             return self._evaluate_node(op)
 
     def _parse(self, expression, context):
-        print(expression)
+        # print(expression)
         self._context = context
         self.tokenize(expression)
         return self._evaluate_stack()
@@ -262,14 +282,17 @@ class SchematronChecker(object):
         self._stack = []
         return self._expr.parseString(text).asList()
 
-    def check_file(self, xml_file):
+    async def check_file(self, xml_file):
         start_time = time()
         prefix = '_'.join(xml_file.split('_')[:2])
 
         with open(os.path.join(self._xml_root, xml_file), 'rb') as xml_file_handler:
             xml_content = etree.fromstring(xml_file_handler.read())
 
-        with open(os.path.join(self._xsd_root, f'{prefix}.xsd'),
+        xml_info = self._get_xml_info(xml_content)
+        xsd_file = await self._get_xsd_scheme(xml_info)
+
+        with open(os.path.join(self._xsd_root, xsd_file),
                   'r', encoding='cp1251') as xsd_file_handler:
             xsd_content = etree.parse(xsd_file_handler, self._parser).getroot()
             xsd_schema = etree.XMLSchema(xsd_content)
