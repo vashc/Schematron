@@ -32,6 +32,7 @@ class SchematronChecker(object):
             '>=':               operator.ge,
             '!=':               operator.ne,
             '*':                operator.mul,
+            '-':                operator.sub,
             'and':              operator.and_,
             'or':               operator.or_,
             'usch:compareDate': self._usch_compare_date
@@ -66,6 +67,7 @@ class SchematronChecker(object):
         xml_info['version'] = xml_content.attrib.get('ВерсФорм')
         document_node = xml_content.find('Документ')
         if document_node is not None:
+            print('ITEMS:', document_node.items())
             xml_info['knd'] = document_node.get('КНД')
 
         return xml_info
@@ -158,10 +160,12 @@ class SchematronChecker(object):
         bool_not = Literal('not')
         lpar, rpar = map(Suppress, '()')
         tick = Literal("'")
+        minus = Literal('-')
+        mul = Literal('*')
         comma = Suppress(',')
 
         alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-        element = (Word(alphabet + alphabet.upper() + nums + '@/:.')
+        element = (Word(alphabet + alphabet.upper() + nums + '@/:._-')
                    .setParseAction(self._push))
         integer = Word(nums).setParseAction(self._push)
         string = Word(alphabet + alphabet.upper() +
@@ -172,7 +176,8 @@ class SchematronChecker(object):
                        tick).setParseAction(self._push)
 
         expr = Forward()
-        node = element + ZeroOrMore(('*' + element).setParseAction(self._push))
+        node = element + ZeroOrMore(((mul | minus) + element)
+                                    .setParseAction(self._push))
         parenthesized_node = Group(lpar + node + rpar)
         parenthesized_expr = Group(lpar + expr + rpar)
 
@@ -194,6 +199,7 @@ class SchematronChecker(object):
 
         atom = (funcs | node | (Optional(bool_not) + parenthesized_expr)
                 .setParseAction(self._push_not))
+
         factor = atom + ZeroOrMore((general_comp +
                                     (integer | atom | quoted_string | date))
                                    .setParseAction(self._push))
@@ -306,6 +312,10 @@ class SchematronChecker(object):
 
         xml_info = self._get_xml_info(xml_content)
         xsd_file = await self._get_xsd_scheme(xml_info)
+        if not xsd_file:
+            # На найдена xsd схема для проверки
+            print(f'\u001b[31mError. Не найдена xsd схема для проверки файла {xml_file}.\u001b[0m')
+            return '-'
         print('XSD FILE:', xsd_file)
 
         with open(os.path.join(self._xsd_root, xsd_file),

@@ -45,9 +45,16 @@ def sync_test():
     os.chdir(xml_root)
 
     loop = asyncio.get_event_loop()
-    for xml_file in glob('*')[:10]:
+
+    time_list = []
+
+    for xml_file in glob('*'):
         print('FILE:', xml_file)
+        start_time = time()
         loop.run_until_complete(sch.check_file(xml_file))
+        time_list.append(time() - start_time)
+    print(f'\u001b[32mOElapsed time: {sum(time_list)}; '
+          f'average time: {sum(time_list) / len(time_list)}\u001b[0m')
 
 
 async def run_task(executor, xml):
