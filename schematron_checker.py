@@ -31,8 +31,8 @@ class SchematronChecker(object):
             '>':                operator.gt,
             '>=':               operator.ge,
             '!=':               operator.ne,
-            '*':                operator.mul,
-            '-':                operator.sub,
+            '*':                self._op_mul,
+            '-':                self._op_sub,
             'and':              operator.and_,
             'or':               operator.or_,
             'usch:compareDate': self._usch_compare_date
@@ -54,6 +54,9 @@ class SchematronChecker(object):
         self._xsd_content = None
         self._context = None
 
+    def _return_error(self, text):
+        return f'\u001b[31mError. {text}.\u001b[0m'
+
     async def _get_xsd_scheme(self, xml_info):
         query = '''SELECT xsd
                 FROM documents
@@ -64,11 +67,14 @@ class SchematronChecker(object):
 
     def _get_xml_info(self, xml_content):
         xml_info = {}
-        xml_info['version'] = xml_content.attrib.get('ВерсФорм')
         document_node = xml_content.find('Документ')
         if document_node is not None:
-            print('ITEMS:', document_node.items())
             xml_info['knd'] = document_node.get('КНД')
+            xml_info['version'] = xml_content.attrib.get('ВерсФорм')
+        else:
+            # Ошибка, элемент "Документ" не найден
+            raise Exception(f'Элемент "Документ" в файле '
+                            f'{self._xml_file} не найден')
 
         return xml_info
 
@@ -116,19 +122,28 @@ class SchematronChecker(object):
                     continue
 
                 for rule in pattern:
-                    # Пропуск проверок, родительский элемент
-                    # которых не встречается
                     context = rule.attrib['context']
-                    par_element = self._xsd_content.xpath(f'//*[@name="{context}"]')
-                    min_occurs = par_element[0].xpath('@minOccurs')
-                    if min_occurs and min_occurs[0] == '0':
+
+                    # Пропуск проверок, родительский элемент
+                    # которых может не встречаться, minOccurs=0
+                    occurs_elements = assertion.xpath(
+                        f'ancestor::*[@minOccurs=0]')
+                    if len(occurs_elements):
                         continue
 
-                    # Пропуск опциональных проверок (choice)
-                    par_element_tag = par_element[0].getparent().tag
-                    if par_element_tag.split('}')[-1] == 'choice' and \
-                            len(self._xml_content.xpath(f'.//{context}', )) == 0:
-                        continue
+                    # Проверка, присутствует ли контекст в xml файле
+                    if len(self._xml_content.xpath(f'//{context}')) == 0:
+                        # Не найден контекст в xml файле
+
+                        # Пропуск опциональных проверок, choice
+                        choice_elements = assertion.xpath(f'ancestor::xs:choice',
+                                                          namespaces=content.nsmap)
+                        if len(choice_elements):
+                            # Опциональная проверка, пропускаем
+                            continue
+                        # Ошибка, проверка обязательна, контекст не найден
+                        raise Exception(f'Контекст {context} в файле '
+                                        f'{self._xml_file} не найден')
 
                     for sch_assert in rule:
                         for error_node in sch_assert:
@@ -209,21 +224,21 @@ class SchematronChecker(object):
         return expr
 
     def _evaluate_node(self, node):
+        value = self._xml_content.xpath(f'//{self._context}/{node}')
+        # if not value:
+            # Элемент/атрибут не найден
+            # raise Exception(f'Элемент/атрибут {self._context}/{node} в '
+            #                 f'файле {self._xml_file} не найден')
         if '@' in node:
-            # Работаем с атрибутом, возвращаем значение
-            value = self._xml_content.xpath(f'//{self._context}/{node}')
+            #TODO: Что делать с ненайденными атрибутами?
             if not value:
-                # Атрибут не найден
-                raise Exception(f'Атрибут {self._context}/{node} в '
-                                f'файле {self._xml_file} не найден')
+                return ''
+            # Работаем с атрибутом, возвращаем значение
             value = value[0]
             return value
         else:
             # Работаем с элементом, возвращаем наличие
-            if self._xml_content.xpath(f'//{self._context}/{node}'):
-                # Элемент присутствует в файле
-                return True
-            return False
+            return True if value else False
 
     def _evaluate_stack(self):
         op = self._stack.pop()
@@ -239,7 +254,7 @@ class SchematronChecker(object):
         elif op in self._binary_map:
             arg1 = self._evaluate_stack()
             arg2 = self._evaluate_stack()
-            return self._binary_map[op](arg1, arg2)
+            return self._binary_map[op](arg2, arg1)
         elif op in self._ternary_map:
             arg3 = self._evaluate_stack()
             arg2 = self._evaluate_stack()
@@ -266,14 +281,32 @@ class SchematronChecker(object):
             parsing_result = self._evaluate_stack()
             return parsing_result
         except Exception as ex:
-            print('\u001b[31mError.\u001b[0m', ex)
+            print(f'\u001b[35mError. {ex}.\u001b[0m')
 
     # Функции
 
+    # Обёртки для некоторых арифметических операций
+    def _op_mul(self, a, b):
+        try:
+            mul = float(a) * float(b)
+            return mul
+        #TODO: Ошибка приведения к типу
+        except Exception as ex:
+            raise Exception(f'Ошибка при приведении к целому типу: {ex}')
+
+    def _op_sub(self, a, b):
+        try:
+            mul = float(a) - float(b)
+            return mul
+        # TODO: Ошибка приведения к типу
+        except Exception as ex:
+            raise Exception(f'Ошибка при приведении к целому типу: {ex}')
+
     def _count_func(self, node):
-        if '@' in node:
-            return str(len(self._xml_content.xpath(f'.//{self._context}/*[{node}]')))
-        return str(len(self._xml_content.findall(f'.//{self._context}/{node}')))
+        # if '@' in node:
+            # return str(len(self._xml_content.xpath(f'.//{self._context}/*[{node}]')))
+        # return str(len(self._xml_content.findall(f'//{self._context}/{node}')))
+        return str(len(self._xml_content.xpath(f'//{self._context}/{node}')))
 
     def _round_func(self, node):
         return round(node)
@@ -285,7 +318,7 @@ class SchematronChecker(object):
         return node
 
     def _substring_func(self, node, start, length='0'):
-        start, length = int(start), int(length)
+        start, length = int(start) - 1, int(length)
         return node[start:start + int(length)] if length else node[start:]
 
     def _usch_file_name(self):
@@ -310,8 +343,20 @@ class SchematronChecker(object):
         with open(os.path.join(self._xml_root, xml_file), 'rb') as xml_file_handler:
             xml_content = etree.fromstring(xml_file_handler.read())
 
-        xml_info = self._get_xml_info(xml_content)
-        xsd_file = await self._get_xsd_scheme(xml_info)
+        try:
+            xml_info = self._get_xml_info(xml_content)
+        except Exception as ex:
+            # Ошибка при получении информации (КНД, версия и т.д.)
+            print(f'\u001b[31mError. {ex}.\u001b[0m')
+            return '-'
+
+        try:
+            xsd_file = await self._get_xsd_scheme(xml_info)
+        except Exception as ex:
+            # Ошибка при получении имени xsd схемы из БД
+            print(f'\u001b[31mError. Ошибка при получении имени xsd '
+                  f'схемы из БД при проверке файла {xml_file}.\u001b[0m')
+            return '-'
         if not xsd_file:
             # На найдена xsd схема для проверки
             print(f'\u001b[31mError. Не найдена xsd схема для проверки файла {xml_file}.\u001b[0m')
@@ -327,7 +372,11 @@ class SchematronChecker(object):
         self._xsd_content = xsd_content
         self._xml_file = xml_file
 
-        asserts = self._get_asserts(xsd_content)
+        try:
+            asserts = self._get_asserts(xsd_content)
+        except Exception as ex:
+            print(self._return_error(ex))
+            return '-'
 
         if not asserts:
             return '+'
@@ -339,15 +388,16 @@ class SchematronChecker(object):
                 'result':   self._parse(assertion['assert'],
                                         assertion['context'])
             })
-            if results[-1]['result']:
-                print(assertion['name'], ': \u001b[32mOk\u001b[0m')
-            else:
-                print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
-                print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
 
         if all(result['result'] for result in results):
             print('\u001b[32mTest passed\u001b[0m')
         else:
+            for result in results:
+                # if result['result']:
+                #     print(result['name'], ': \u001b[32mOk\u001b[0m')
+                # else:
+                    print(result['name'], ': \u001b[31mError\u001b[0m', end='. ')
+                    print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
             print('\u001b[31mTest failed\u001b[0m')
 
         elapsed_time = time() - start_time
