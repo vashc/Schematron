@@ -1,0 +1,12 @@
+# DB section
+DB_POOL:
+  min_size:         20
+  max_size:         100
+  max_queries:      40
+
+DB:
+  database:     flk
+  host:         ''
+  user:         postgres
+  password:     ''
+  port:         ''
