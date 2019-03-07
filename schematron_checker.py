@@ -347,20 +347,24 @@ class SchematronChecker(object):
             xml_info = self._get_xml_info(xml_content)
         except Exception as ex:
             # Ошибка при получении информации (КНД, версия и т.д.)
-            print(f'\u001b[31mError. {ex}.\u001b[0m')
-            return '-'
+            print(self._return_error(ex))
+            test_result = 'failed'
+            return test_result
 
         try:
             xsd_file = await self._get_xsd_scheme(xml_info)
         except Exception as ex:
             # Ошибка при получении имени xsd схемы из БД
-            print(f'\u001b[31mError. Ошибка при получении имени xsd '
-                  f'схемы из БД при проверке файла {xml_file}.\u001b[0m')
-            return '-'
+            print(self._return_error(f'Ошибка при получении имени xsd схемы из'
+                                     f' БД при проверке файла {xml_file}.\u001b[0m'))
+            test_result = 'failed'
+            return test_result
         if not xsd_file:
             # На найдена xsd схема для проверки
-            print(f'\u001b[31mError. Не найдена xsd схема для проверки файла {xml_file}.\u001b[0m')
-            return '-'
+            print(self._return_error(f'Не найдена xsd схема для проверки '
+                                     f'файла {xml_file}.'))
+            test_result = 'failed'
+            return test_result
         print('XSD FILE:', xsd_file)
 
         with open(os.path.join(self._xsd_root, xsd_file),
@@ -376,10 +380,12 @@ class SchematronChecker(object):
             asserts = self._get_asserts(xsd_content)
         except Exception as ex:
             print(self._return_error(ex))
-            return '-'
+            test_result = 'failed'
+            return test_result
 
         if not asserts:
-            return '+'
+            test_result = 'failed'
+            return test_result
 
         results = []
         for assertion in asserts:
@@ -388,19 +394,20 @@ class SchematronChecker(object):
                 'result':   self._parse(assertion['assert'],
                                         assertion['context'])
             })
+            if results[-1]['result']:
+                print(assertion['name'], ': \u001b[32mOk\u001b[0m')
+            else:
+                print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
+                print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
 
         if all(result['result'] for result in results):
             print('\u001b[32mTest passed\u001b[0m')
+            test_result = 'passed'
         else:
-            for result in results:
-                # if result['result']:
-                #     print(result['name'], ': \u001b[32mOk\u001b[0m')
-                # else:
-                    print(result['name'], ': \u001b[31mError\u001b[0m', end='. ')
-                    print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
             print('\u001b[31mTest failed\u001b[0m')
+            test_result = 'failed'
 
         elapsed_time = time() - start_time
         print(f'Elapsed time: {round(elapsed_time, 4)} s')
 
-        return results
+        return test_result

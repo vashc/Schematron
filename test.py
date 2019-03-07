@@ -51,14 +51,22 @@ def sync_test():
     loop = asyncio.get_event_loop()
 
     time_list = []
+    test_results = {'passed': 0, 'failed': 0}
 
-    for xml_file in test_xml[8:]:
+    for xml_file in glob('*'):
         print('FILE:', xml_file)
         start_time = time()
-        loop.run_until_complete(sch.check_file(xml_file))
+        result = loop.run_until_complete(sch.check_file(xml_file))
+        if result == 'passed':
+            test_results['passed'] += 1
+        else:
+            test_results['failed'] += 1
         time_list.append(time() - start_time)
-    print(f'\u001b[32mElapsed time: {sum(time_list)}; '
-          f'average time: {sum(time_list) / len(time_list)}\u001b[0m')
+    print(f'\nElapsed time: {round(sum(time_list), 4)}; '
+          f'average time: {round(sum(time_list) / len(time_list), 4)}')
+    print(f'\u001b[31mFailed: {test_results["failed"]};\u001b[0m\t'
+          f'\u001b[32mPassed: {test_results["passed"]};\u001b[0m\t'
+          f'Ratio: {round(test_results["passed"] / (test_results["passed"] + test_results["failed"]), 4)}')
 
 
 async def run_task(executor, xml):
@@ -88,7 +96,7 @@ def async_test():
     return el_t, avg_t
 
 
-el_t, avg_t = sync_test()
+sync_test()
 # print(f'Elapsed time: {round(el_t, 4)}; average time per sync run: {round(avg_t, 4)}')
 
 # el_t, avg_t = async_test()
