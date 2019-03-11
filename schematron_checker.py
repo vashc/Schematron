@@ -1,6 +1,7 @@
 import operator
 import os
 import asyncio
+from functools import wraps
 from database import db
 from time import time
 from lxml import etree
@@ -53,6 +54,30 @@ class SchematronChecker(object):
         self._xml_content = None
         self._xsd_content = None
         self._context = None
+        self._cache = dict()
+
+    def _cached_node(func):
+        # Кэшируется только один элемент - узел
+        @wraps(func)
+        def _inner(*args, **kwargs):
+            self = args[0]
+            element = f'//{self._context}/{args[1]}'
+            if element not in self._cache:
+                self._cache[element] = func(*args, **kwargs)
+            return self._cache[element]
+        return _inner
+
+    def _cached_func(func):
+        @wraps(func)
+        def _inner(*args, **kwargs):
+            self = args[0]
+            # Нужен контекст, могут быть идентичные сигнатуры
+            # в разных контекстах
+            element = f'{func.__name__}/{self._context}/{args[1:]}'
+            if element not in self._cache:
+                self._cache[element] = func(*args, **kwargs)
+            return self._cache[element]
+        return _inner
 
     def _return_error(self, text):
         return f'\u001b[31mError. {text}.\u001b[0m'
@@ -223,8 +248,10 @@ class SchematronChecker(object):
         expr <<= term + ZeroOrMore((bool_or + term).setParseAction(self._push))
         return expr
 
+    @_cached_node
     def _evaluate_node(self, node):
-        value = self._xml_content.xpath(f'//{self._context}/{node}')
+        element = f'//{self._context}/{node}'
+        value = self._xml_content.xpath(element)
         # if not value:
             # Элемент/атрибут не найден
             # raise Exception(f'Элемент/атрибут {self._context}/{node} в '
@@ -302,21 +329,26 @@ class SchematronChecker(object):
         except Exception as ex:
             raise Exception(f'Ошибка при приведении к целому типу: {ex}')
 
+    @_cached_func
     def _count_func(self, node):
         # if '@' in node:
             # return str(len(self._xml_content.xpath(f'.//{self._context}/*[{node}]')))
         # return str(len(self._xml_content.findall(f'//{self._context}/{node}')))
         return str(len(self._xml_content.xpath(f'//{self._context}/{node}')))
 
+    @_cached_func
     def _round_func(self, node):
         return round(node)
 
+    @_cached_func
     def _sum_func(self, node):
         return node
 
+    @_cached_func
     def _number_func(self, node):
         return node
 
+    @_cached_func
     def _substring_func(self, node, start, length='0'):
         start, length = int(start) - 1, int(length)
         return node[start:start + int(length)] if length else node[start:]
@@ -337,6 +369,8 @@ class SchematronChecker(object):
         return self._expr.parseString(text).asList()
 
     async def check_file(self, xml_file):
+        # Очищаем кэш
+        self._cache = dict()
         start_time = time()
         prefix = '_'.join(xml_file.split('_')[:2])
 
@@ -384,7 +418,7 @@ class SchematronChecker(object):
             return test_result
 
         if not asserts:
-            test_result = 'failed'
+            test_result = 'passed'
             return test_result
 
         results = []
@@ -409,5 +443,6 @@ class SchematronChecker(object):
 
         elapsed_time = time() - start_time
         print(f'Elapsed time: {round(elapsed_time, 4)} s')
+        print('Cache:', self._cache)
 
         return test_result

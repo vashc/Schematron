@@ -39,7 +39,10 @@ def time_test(n):
                 start_time = time()
                 func(*args, **kwargs)
                 time_list.append(time() - start_time)
-            return sum(time_list), sum(time_list) / n
+            print(f'\nSummary on {n} runs. Total time: '
+                  f'{round(sum(time_list), 4)}; '
+                  f'average time: {round(sum(time_list) / n, 4)}')
+            return
         return run_func
     return test_func_deco
 
@@ -54,6 +57,7 @@ def sync_test():
     test_results = {'passed': 0, 'failed': 0}
 
     for xml_file in glob('*'):
+        print('_' * 80)
         print('FILE:', xml_file)
         start_time = time()
         result = loop.run_until_complete(sch.check_file(xml_file))
