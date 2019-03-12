@@ -1,6 +1,5 @@
 import operator
 import os
-import asyncio
 from functools import wraps
 from database import db
 from time import time
@@ -13,6 +12,13 @@ _root = os.path.dirname(os.path.abspath(__file__))
 
 class SchematronChecker(object):
     def __init__(self, *, xsd_root=_root, xml_root=_root):
+        # Символы, которые могут содержаться в элементе узла
+        self._alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+        self._nums = '1234567890'
+        self._special_symbols = '@/:._-'
+        self._element = set(self._alphabet + self._alphabet.upper() +
+                         self._nums + self._special_symbols)
+
         self._nullary_map = {
             'usch:getFileName': self._usch_file_name
         }
@@ -26,7 +32,7 @@ class SchematronChecker(object):
         }
 
         self._binary_map = {
-            '<':                operator.lt,
+            '<':                self._op_lt,
             '<=':               operator.le,
             '=':                operator.eq,
             '>':                operator.gt,
@@ -35,6 +41,7 @@ class SchematronChecker(object):
             '*':                self._op_mul,
             '-':                self._op_sub,
             '+':                self._op_add,
+            'mod':              self._op_mod,
             'and':              operator.and_,
             'or':               operator.or_,
             'usch:compareDate': self._usch_compare_date
@@ -46,7 +53,7 @@ class SchematronChecker(object):
         }
 
         self._varargs_map = {
-            'concat':   self._concat_func
+            'concat':       self._concat_func
         }
 
         self._stack = []
@@ -208,6 +215,7 @@ class SchematronChecker(object):
         minus = Literal('-')
         plus = Literal('+')
         mul = Literal('*')
+        mod = Literal('mod')
         comma = Suppress(',')
 
         alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
@@ -250,7 +258,7 @@ class SchematronChecker(object):
 
         atom = (funcs | node | (Optional(bool_not) + parenthesized_expr)
                 .setParseAction(self._push_not))
-        left_expr = atom + ZeroOrMore(((mul | minus | plus) + atom)
+        left_expr = atom + ZeroOrMore(((mul | minus | plus | mod) + atom)
                                       .setParseAction(self._push))
 
         factor = (left_expr +
@@ -302,7 +310,17 @@ class SchematronChecker(object):
             arg1 = self._evaluate_stack()
             return self._ternary_map[op](arg1, arg2, arg3)
         elif op in self._varargs_map:
-            pass
+            args = []
+            # Смотрим на вершину стека, если он не пуст
+            if len(self._stack):
+                arg = self._stack[-1]
+                while set(arg) <= self._element:
+                    # Если элемент узла - можно вычислять значение
+                    arg = self._evaluate_stack()
+                    args.append(arg)
+                    arg = self._stack[-1]
+            # Разворачиваем аргументы, приходят из стека в обратном порядке
+            return self._varargs_map[op](*args[::-1])
         elif op.isdigit():
             # Возвращаем найденное число
             return op
@@ -321,11 +339,26 @@ class SchematronChecker(object):
             parsing_result = self._evaluate_stack()
             return parsing_result
         except Exception as ex:
-            print(f'\u001b[35mError. {ex}.\u001b[0m')
+            return f'Error. {ex}.'
 
     # Функции
 
     # Обёртки для некоторых арифметических операций
+    def _type_converter(func):
+        @wraps(func)
+        def _inner(*args, **kwargs):
+            inner_args = [*args]
+            try:
+                inner_args[1:] = map(float, args[1:])
+            except ValueError:
+                inner_args[1:] = map(str, args[1:])
+            return func(*inner_args, **kwargs)
+        return _inner
+
+    @_type_converter
+    def _op_lt(self, a, b):
+        return a < b
+
     def _op_mul(self, a, b):
         try:
             val = float(a) * float(b)
@@ -345,6 +378,14 @@ class SchematronChecker(object):
     def _op_add(self, a, b):
         try:
             val = float(a) + float(b)
+            return val
+        # TODO: Ошибка приведения к типу
+        except Exception as ex:
+            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
+
+    def _op_mod(self, a, b):
+        try:
+            val = float(a) % float(b)
             return val
         # TODO: Ошибка приведения к типу
         except Exception as ex:
@@ -393,9 +434,15 @@ class SchematronChecker(object):
         return self._expr.parseString(text).asList()
 
     async def check_file(self, xml_file):
+        start_time = time()
         # Очищаем кэш
         self._cache = dict()
-        start_time = time()
+
+        # Формирование результата
+        result = {'file': xml_file,
+                  'result': ['failed', ''],
+                  'asserts': []}
+
         prefix = '_'.join(xml_file.split('_')[:2])
 
         with open(os.path.join(self._xml_root, xml_file), 'rb') as xml_file_handler:
@@ -406,8 +453,8 @@ class SchematronChecker(object):
         except Exception as ex:
             # Ошибка при получении информации (КНД, версия и т.д.)
             print(self._return_error(ex))
-            test_result = 'failed'
-            return test_result
+            result['result'][1] = self._return_error(ex)
+            return result
 
         try:
             xsd_file = await self._get_xsd_scheme(xml_info)
@@ -415,15 +462,19 @@ class SchematronChecker(object):
             # Ошибка при получении имени xsd схемы из БД
             print(self._return_error(f'Ошибка при получении имени xsd схемы из'
                                      f' БД при проверке файла {xml_file}.\u001b[0m'))
-            test_result = 'failed'
-            return test_result
+            result['result'][1] = self._return_error(
+                f'Ошибка при получении имени xsd схемы из БД при проверке файла {xml_file}.\u001b[0m')
+            return result
+
         if not xsd_file:
             # На найдена xsd схема для проверки
             print(self._return_error(f'Не найдена xsd схема для проверки '
                                      f'файла {xml_file}.'))
-            test_result = 'failed'
-            return test_result
+            result['result'][1] = self._return_error(
+                f'Не найдена xsd схема для проверки файла {xml_file}.')
+            return result
         print('XSD FILE:', xsd_file)
+        result['xsd_scheme'] = xsd_file
 
         with open(os.path.join(self._xsd_root, xsd_file),
                   'r', encoding='cp1251') as xsd_file_handler:
@@ -438,35 +489,43 @@ class SchematronChecker(object):
             asserts = self._get_asserts(xsd_content)
         except Exception as ex:
             print(self._return_error(ex))
-            test_result = 'failed'
-            return test_result
+            result['result'][1] = self._return_error(ex)
+            return result
 
         if not asserts:
-            test_result = 'passed'
-            return test_result
+            result['result'][0] = 'passed'
+            return result
 
-        results = []
         for assertion in asserts:
-            results.append({
-                'name':     assertion['name'],
-                'result':   self._parse(assertion['assert'],
-                                        assertion['context'])
-            })
-            if results[-1]['result']:
-                print(assertion['name'], ': \u001b[32mOk\u001b[0m')
-            else:
-                print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
-                print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
+            assertion_result = self._parse(assertion['assert'],
+                                           assertion['context'])
 
-        if all(result['result'] for result in results):
+            if type(assertion_result) == bool:
+                if assertion_result:
+                    print(assertion['name'], ': \u001b[32mOk\u001b[0m')
+                    result['asserts'].append({assertion['name']: 'passed'})
+                else:
+                    print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
+                    print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
+                    result['asserts'].append(
+                        {assertion['name']: self._get_error_text(assertion)})
+            elif assertion_result.startswith('Error'):
+                print(f'{assertion["name"]}: \u001b[31m{assertion_result}\u001b[0m')
+                result['asserts'].append(
+                    {assertion['name']: assertion_result})
+
+        if all(list(_result.values())[0] == 'passed' for _result in result['asserts']):
             print('\u001b[32mTest passed\u001b[0m')
-            test_result = 'passed'
+            result['result'][0] = 'passed'
+        elif any(list(_result.values())[0].startswith('Error') for _result in result['asserts']):
+            print('\u001b[31mTest failed, some attributes are missed\u001b[0m')
+            result['result'][1] = 'some attributes are missed'
         else:
             print('\u001b[31mTest failed\u001b[0m')
-            test_result = 'failed'
+            result['result'][1] = 'some tests are not passed'
 
         elapsed_time = time() - start_time
         print(f'Elapsed time: {round(elapsed_time, 4)} s')
         print('Cache:', self._cache)
 
-        return test_result
+        return result
