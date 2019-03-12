@@ -34,14 +34,19 @@ class SchematronChecker(object):
             '!=':               operator.ne,
             '*':                self._op_mul,
             '-':                self._op_sub,
+            '+':                self._op_add,
             'and':              operator.and_,
             'or':               operator.or_,
             'usch:compareDate': self._usch_compare_date
         }
 
         self._ternary_map = {
-            'substring': self._substring_func,
-            'usch:iif': self._usch_iif
+            'substring':    self._substring_func,
+            'usch:iif':     self._usch_iif
+        }
+
+        self._varargs_map = {
+            'concat':   self._concat_func
         }
 
         self._stack = []
@@ -201,6 +206,7 @@ class SchematronChecker(object):
         lpar, rpar = map(Suppress, '()')
         tick = Literal("'")
         minus = Literal('-')
+        plus = Literal('+')
         mul = Literal('*')
         comma = Suppress(',')
 
@@ -219,6 +225,10 @@ class SchematronChecker(object):
         node = element + ZeroOrMore(((mul | minus) + element)
                                     .setParseAction(self._push))
         parenthesized_node = Group(lpar + node + rpar)
+        node_or_parnode = node | parenthesized_node
+        # Переменное (не менее двух) количество узлов, разделённых запятыми
+        variadic_node = Group(node_or_parnode + comma + node_or_parnode +
+                              ZeroOrMore(comma + node_or_parnode))
         parenthesized_expr = Group(lpar + expr + rpar)
 
         count_func = Literal('count') + parenthesized_node
@@ -228,21 +238,25 @@ class SchematronChecker(object):
         substring_func = (Literal('substring') +
                           Group(lpar + node + comma + integer +
                                 Optional(comma + integer) + rpar))
+        concat_func = (Literal('concat') + Group(lpar + variadic_node + rpar))
         usch_filename = Literal('usch:getFileName') + Group(lpar + rpar)
         usch_iif = (Literal('usch:iif') +
                    Group(lpar + expr + comma + expr + comma + expr + rpar))
         usch_compare_date = (Literal('usch:compareDate') +
                              Group(lpar + node + comma + node + rpar))
-        funcs = (count_func | round_func | sum_func |
-                 number_func | substring_func | usch_filename |
+        funcs = (count_func | round_func | sum_func | number_func |
+                 substring_func | concat_func | usch_filename |
                  usch_iif | usch_compare_date).setParseAction(self._push)
 
         atom = (funcs | node | (Optional(bool_not) + parenthesized_expr)
                 .setParseAction(self._push_not))
+        left_expr = atom + ZeroOrMore(((mul | minus | plus) + atom)
+                                      .setParseAction(self._push))
 
-        factor = atom + ZeroOrMore((general_comp +
-                                    (integer | atom | quoted_string | date))
-                                   .setParseAction(self._push))
+        factor = (left_expr +
+                  ZeroOrMore((general_comp +
+                              (integer | atom | quoted_string | date))
+                             .setParseAction(self._push)))
         term = factor + ZeroOrMore((bool_and + factor)
                                    .setParseAction(self._push))
         expr <<= term + ZeroOrMore((bool_or + term).setParseAction(self._push))
@@ -252,14 +266,11 @@ class SchematronChecker(object):
     def _evaluate_node(self, node):
         element = f'//{self._context}/{node}'
         value = self._xml_content.xpath(element)
-        # if not value:
+        if not value:
             # Элемент/атрибут не найден
-            # raise Exception(f'Элемент/атрибут {self._context}/{node} в '
-            #                 f'файле {self._xml_file} не найден')
+            raise Exception(f'Элемент/атрибут {self._context}/{node} в '
+                            f'файле {self._xml_file} не найден')
         if '@' in node:
-            #TODO: Что делать с ненайденными атрибутами?
-            if not value:
-                return ''
             # Работаем с атрибутом, возвращаем значение
             value = value[0]
             return value
@@ -290,6 +301,8 @@ class SchematronChecker(object):
                 return self._ternary_map[op](arg2, arg3)
             arg1 = self._evaluate_stack()
             return self._ternary_map[op](arg1, arg2, arg3)
+        elif op in self._varargs_map:
+            pass
         elif op.isdigit():
             # Возвращаем найденное число
             return op
@@ -315,19 +328,27 @@ class SchematronChecker(object):
     # Обёртки для некоторых арифметических операций
     def _op_mul(self, a, b):
         try:
-            mul = float(a) * float(b)
-            return mul
+            val = float(a) * float(b)
+            return val
         #TODO: Ошибка приведения к типу
         except Exception as ex:
-            raise Exception(f'Ошибка при приведении к целому типу: {ex}')
+            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
 
     def _op_sub(self, a, b):
         try:
-            mul = float(a) - float(b)
-            return mul
+            val= float(a) - float(b)
+            return val
         # TODO: Ошибка приведения к типу
         except Exception as ex:
-            raise Exception(f'Ошибка при приведении к целому типу: {ex}')
+            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
+
+    def _op_add(self, a, b):
+        try:
+            val = float(a) + float(b)
+            return val
+        # TODO: Ошибка приведения к типу
+        except Exception as ex:
+            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
 
     @_cached_func
     def _count_func(self, node):
@@ -352,6 +373,9 @@ class SchematronChecker(object):
     def _substring_func(self, node, start, length='0'):
         start, length = int(start) - 1, int(length)
         return node[start:start + int(length)] if length else node[start:]
+
+    def _concat_func(self, *args):
+        return ''.join(args)
 
     def _usch_file_name(self):
         return ''.join(self._xml_file.split('.')[:-1])

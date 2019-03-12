@@ -3,12 +3,14 @@ import asyncio
 import concurrent.futures
 from time import time
 from glob import glob
-from schematron_checker import SchematronChecker
+from schematron.schematron_checker import SchematronChecker
+from schematron.checker import check_file, _get_xsd_file
+from config import CONFIG
 
-xsd_root = '/home/vasily/PyProjects/FLK/Schematron/xsd'
-xml_root = '/home/vasily/PyProjects/FLK/Schematron/xml'
-sch = SchematronChecker(xsd_root=xsd_root, xml_root=xml_root)
-# sch = SchematronChecker()
+xsd_root = CONFIG['xsd_root']
+xml_root = CONFIG['xml_root']
+# sch = SchematronChecker(xsd_root=xsd_root, xml_root=xml_root)
+sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
 
 # s = ''
 # while s != '~':
@@ -56,7 +58,7 @@ def sync_test():
     time_list = []
     test_results = {'passed': 0, 'failed': 0}
 
-    for xml_file in glob('*'):
+    for xml_file in glob('*')[:]:
         print('_' * 80)
         print('FILE:', xml_file)
         start_time = time()
@@ -76,28 +78,90 @@ def sync_test():
 async def run_task(executor, xml):
     print(xml)
     loop = asyncio.get_event_loop()
-    return await loop.run_in_executor(executor, sch.check_file, xml)
+    return await loop.run_in_executor(executor, check_file, xml)
 
 
 async def run_tasks(executor):
     time_list = []
+    test_results = {'passed': 0, 'failed': 0}
+
     loop = asyncio.get_event_loop()
     for _ in range(n_runs):
         start_time = time()
-        tasks = [run_task(executor, xml) for xml in test_xml]
+        tasks = [loop.run_in_executor(executor, check_file, xml)
+                 for xml in test_xml]
         # tasks = [run_task(executor, xml) for xml in test_xml]
-        await asyncio.gather(*tasks)
+        completed, pending = await asyncio.wait(tasks)
+        results = [t.result() for t in completed]
+        for result in results:
+            if result == 'passed':
+                test_results['passed'] += 1
+            else:
+                test_results['failed'] += 1
+        print(f'\u001b[31mFailed: {test_results["failed"]};\u001b[0m\t'
+              f'\u001b[32mPassed: {test_results["passed"]};\u001b[0m\t'
+              f'Ratio: {round(test_results["passed"] / (test_results["passed"] + test_results["failed"]), 4)}')
         time_list.append(time() - start_time)
     return sum(time_list), sum(time_list) / n_runs
 
 
+async def async_check_one(executor, xml_file):
+    loop = asyncio.get_event_loop()
+    result = await _get_xsd_file(xml_file)
+    if result != 'failed':
+        xml_content, xsd_file = result
+        start_time = time()
+        result = await loop.run_in_executor(executor, check_file,
+                                            xml_file, xml_content, xsd_file)
+        print('Executor time:', time() - start_time)
+        return result
+    return 'failed'
+
+
+async def check_one(xml_file):
+    # result = await _get_xsd_file(xml_file)
+    # if result != 'failed':
+    #     xml_content, xsd_file = result
+    #     return check_file(xml_file, xml_content, xsd_file)
+    # return 'failed'
+    sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
+    result = await sch.check_file(xml_file)
+    return result
+
+
+async def run_checker_tasks(executor):
+    loop = asyncio.get_event_loop()
+    # tasks = [async_check_one(executor, xml)
+    #          for xml in glob('*')[:2]]
+    tasks = [check_one(xml) for xml in glob('*')[:10]]
+    results = await asyncio.gather(*tasks)
+    return results
+
+
 def async_test():
-    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
+    start_time = time()
+    os.chdir(xml_root)
+    test_results = {'passed': 0, 'failed': 0}
+
+    with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
         event_loop = asyncio.get_event_loop()
-        el_t, avg_t = event_loop.run_until_complete(run_tasks(executor))
-        # event_loop.run_until_complete(run_task(executor, test_xml[3]))
-        event_loop.close()
-    return el_t, avg_t
+        try:
+            # el_t, avg_t = event_loop.run_until_complete(run_tasks(executor))
+            # result = event_loop.run_until_complete(run_task(executor, test_xml[3]))
+            results = event_loop.run_until_complete(run_checker_tasks(executor))
+        finally:
+            event_loop.close()
+        # results = executor.map(check_one, glob('*')[:2])
+    print('\nTotal time:', time() - start_time)
+    for result in results:
+        if result == 'passed':
+            test_results['passed'] += 1
+        else:
+            test_results['failed'] += 1
+    print(f'\u001b[31mFailed: {test_results["failed"]};\u001b[0m\t'
+          f'\u001b[32mPassed: {test_results["passed"]};\u001b[0m\t'
+          f'Ratio: {round(test_results["passed"] / (test_results["passed"] + test_results["failed"]), 4)}')
+    # return el_t, avg_t
 
 
 sync_test()
