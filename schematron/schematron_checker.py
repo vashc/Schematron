@@ -274,12 +274,12 @@ class SchematronChecker(object):
     def _evaluate_node(self, node):
         element = f'//{self._context}/{node}'
         value = self._xml_content.xpath(element)
-        if not value:
-            # Элемент/атрибут не найден
-            raise Exception(f'Элемент/атрибут {self._context}/{node} в '
-                            f'файле {self._xml_file} не найден')
         if '@' in node:
             # Работаем с атрибутом, возвращаем значение
+            if not value:
+                # Элемент/атрибут не найден
+                raise Exception(f'Атрибут {self._context}/{node} в '
+                                f'файле {self._xml_file} не найден')
             value = value[0]
             return value
         else:
