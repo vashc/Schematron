@@ -222,6 +222,8 @@ class SchematronChecker(object):
         element = (Word(alphabet + alphabet.upper() + nums + '@/:._-')
                    .setParseAction(self._push))
         integer = Word(nums).setParseAction(self._push)
+        floats = (Combine(Word(nums) + '.' + Optional(Word(nums)))
+                  .setParseAction(self._push))
         string = Word(alphabet + alphabet.upper() +
                       nums + srange('[a-zA-Z]' + '.'))
         quoted_string = Combine(tick + string + tick).setParseAction(self._push)
@@ -263,7 +265,7 @@ class SchematronChecker(object):
 
         factor = (left_expr +
                   ZeroOrMore((general_comp +
-                              (integer | atom | quoted_string | date))
+                              (floats | integer | atom | quoted_string | date))
                              .setParseAction(self._push)))
         term = factor + ZeroOrMore((bool_and + factor)
                                    .setParseAction(self._push))

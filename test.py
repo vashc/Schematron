@@ -5,7 +5,7 @@ from time import time
 from glob import glob
 from schematron.schematron_checker import SchematronChecker
 from schematron.checker import check_file, _get_xsd_file
-from config import CONFIG
+from config import CONFIG, ROOT
 
 xsd_root = CONFIG['xsd_root']
 xml_root = CONFIG['xml_root']
@@ -18,6 +18,18 @@ sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
 #     if s != '~':
 #         print(sch.tokenize(s))
 #         # sch.check_file(s)
+
+
+def tokenize_asserts(file):
+    with open(os.path.join(*os.path.split(ROOT)[:-1], file), 'r') as handler:
+        for line in handler:
+            assertion = handler.readline()
+            try:
+                sch.tokenize(assertion)
+            except Exception as ex:
+                print(assertion)
+                print('Error:', ex)
+
 
 test_xml = ['NO_NDPI_9999_9999_9624840906999901001_20170309_CB8F959F-C631-4C37-AEC9-EC54B55112A3.xml',
             'IU_ZAPR_9999_9999_9624840906999901001_20170309_D37C7B47-516E-4A7F-AF4D-C9E728CCADF1.xml',
@@ -164,9 +176,10 @@ def async_test():
     # return el_t, avg_t
 
 
-sync_test()
+# sync_test()
 # print(f'Elapsed time: {round(el_t, 4)}; average time per sync run: {round(avg_t, 4)}')
 
 # el_t, avg_t = async_test()
 # print(f'Elapsed time: {round(el_t, 4)}; average time per async run: {round(avg_t, 4)}')
 # async_test()
+tokenize_asserts('_asserts.txt')
