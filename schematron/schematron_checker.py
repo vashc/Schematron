@@ -505,16 +505,12 @@ class SchematronChecker(object):
             assertion_result = self._parse(assertion['assert'],
                                            assertion['context'])
 
-            if type(assertion_result) == bool:
-                if assertion_result:
-                    print(assertion['name'], ': \u001b[32mOk\u001b[0m')
-                else:
-                    print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
-                    print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
-                    result['asserts'][assertion['name']] = self._get_error_text(assertion)
-            elif assertion_result.startswith('Error'):
-                print(f'{assertion["name"]}: \u001b[31m{assertion_result}\u001b[0m')
-                result['asserts'][assertion['name']] = assertion_result
+            if assertion_result:
+                print(assertion['name'], ': \u001b[32mOk\u001b[0m')
+            else:
+                print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
+                print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
+                result['asserts'][assertion['name']] = self._get_error_text(assertion)
 
         if not result['asserts']:
             print('\u001b[32mTest passed\u001b[0m')
