@@ -22,12 +22,12 @@ sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
 
 def tokenize_asserts(file):
     with open(os.path.join(*os.path.split(ROOT)[:-1], file), 'r') as handler:
-        for line in handler:
-            assertion = handler.readline()
+        for line in handler.readlines():
+            # assertion = handler.readline()
             try:
-                sch.tokenize(assertion)
+                sch.tokenize(line)
             except Exception as ex:
-                print(assertion)
+                print(line)
                 print('Error:', ex)
 
 

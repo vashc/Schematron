@@ -435,10 +435,12 @@ class SchematronChecker(object):
         self._stack = []
         return self._expr.parseString(text).asList()
 
-    async def check_file(self, xml_file):
+    async def check_file(self, xml_path):
         start_time = time()
         # Очищаем кэш
         self._cache = dict()
+
+        xml_file = os.path.basename(xml_path)
 
         # Формирование результата
         result = {'file': xml_file,
