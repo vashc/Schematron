@@ -35,8 +35,8 @@ results = sync_test()
 test_results = {'passed': [], 'failed': [], 'missed_attribute': []}
 
 for result in results:
-    if result['result'][0] == 'failed':
-        if result['result'][1] == 'some attributes are missed':
+    if result['result'] == 'failed':
+        if result['description'] == 'some attributes are missed':
             test_results['missed_attribute'].append(result)
         else:
             test_results['failed'].append(result)

@@ -440,8 +440,9 @@ class SchematronChecker(object):
 
         # Формирование результата
         result = {'file': xml_file,
-                  'result': ['failed', ''],
-                  'asserts': []}
+                  'result': 'failed',
+                  'description': '',
+                  'asserts': {}}
 
         prefix = '_'.join(xml_file.split('_')[:2])
 
@@ -453,7 +454,7 @@ class SchematronChecker(object):
         except Exception as ex:
             # Ошибка при получении информации (КНД, версия и т.д.)
             print(self._return_error(ex))
-            result['result'][1] = self._return_error(ex)
+            result['description'] = self._return_error(ex)
             return result
 
         try:
@@ -462,7 +463,7 @@ class SchematronChecker(object):
             # Ошибка при получении имени xsd схемы из БД
             print(self._return_error(f'Ошибка при получении имени xsd схемы из'
                                      f' БД при проверке файла {xml_file}.\u001b[0m'))
-            result['result'][1] = self._return_error(
+            result['description'] = self._return_error(
                 f'Ошибка при получении имени xsd схемы из БД при проверке файла {xml_file}.\u001b[0m')
             return result
 
@@ -470,7 +471,7 @@ class SchematronChecker(object):
             # На найдена xsd схема для проверки
             print(self._return_error(f'Не найдена xsd схема для проверки '
                                      f'файла {xml_file}.'))
-            result['result'][1] = self._return_error(
+            result['description'] = self._return_error(
                 f'Не найдена xsd схема для проверки файла {xml_file}.')
             return result
         print('XSD FILE:', xsd_file)
@@ -489,11 +490,11 @@ class SchematronChecker(object):
             asserts = self._get_asserts(xsd_content)
         except Exception as ex:
             print(self._return_error(ex))
-            result['result'][1] = self._return_error(ex)
+            result['description'] = self._return_error(ex)
             return result
 
         if not asserts:
-            result['result'][0] = 'passed'
+            result['result'] = 'passed'
             return result
 
         for assertion in asserts:
@@ -503,26 +504,23 @@ class SchematronChecker(object):
             if type(assertion_result) == bool:
                 if assertion_result:
                     print(assertion['name'], ': \u001b[32mOk\u001b[0m')
-                    result['asserts'].append({assertion['name']: 'passed'})
                 else:
                     print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
                     print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
-                    result['asserts'].append(
-                        {assertion['name']: self._get_error_text(assertion)})
+                    result['asserts'][assertion['name']] = self._get_error_text(assertion)
             elif assertion_result.startswith('Error'):
                 print(f'{assertion["name"]}: \u001b[31m{assertion_result}\u001b[0m')
-                result['asserts'].append(
-                    {assertion['name']: assertion_result})
+                result['asserts'][assertion['name']] = assertion_result
 
-        if all(list(_result.values())[0] == 'passed' for _result in result['asserts']):
+        if not result['asserts']:
             print('\u001b[32mTest passed\u001b[0m')
-            result['result'][0] = 'passed'
-        elif any(list(_result.values())[0].startswith('Error') for _result in result['asserts']):
+            result['result'] = 'passed'
+        elif all(value.startswith('Error') for value in list(result['asserts'].values())):
             print('\u001b[31mTest failed, some attributes are missed\u001b[0m')
-            result['result'][1] = 'some attributes are missed'
+            result['description'] = 'some attributes are missed'
         else:
             print('\u001b[31mTest failed\u001b[0m')
-            result['result'][1] = 'some tests are not passed'
+            result['description'] = 'some tests are not passed'
 
         elapsed_time = time() - start_time
         print(f'Elapsed time: {round(elapsed_time, 4)} s')
