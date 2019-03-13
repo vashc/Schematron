@@ -19,14 +19,12 @@ def sync_test():
     results = []
 
     for xml_file in glob('*')[:]:
-        print('_' * 80)
-        print('FILE:', xml_file)
         start_time = time()
         result = loop.run_until_complete(sch.check_file(xml_file))
         results.append(result)
         time_list.append(time() - start_time)
-    print(f'\nElapsed time: {round(sum(time_list), 4)}; '
-          f'average time: {round(sum(time_list) / len(time_list), 4)}')
+    # print(f'\nElapsed time: {round(sum(time_list), 4)}; '
+    #       f'average time: {round(sum(time_list) / len(time_list), 4)}')
     return results
 
 

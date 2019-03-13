@@ -300,9 +300,9 @@ class SchematronChecker(object):
                 arg = self._evaluate_stack()
             return self._unary_map[op](arg)
         elif op in self._binary_map:
-            arg1 = self._evaluate_stack()
             arg2 = self._evaluate_stack()
-            return self._binary_map[op](arg2, arg1)
+            arg1 = self._evaluate_stack()
+            return self._binary_map[op](arg1, arg2)
         elif op in self._ternary_map:
             arg3 = self._evaluate_stack()
             arg2 = self._evaluate_stack()
@@ -334,7 +334,7 @@ class SchematronChecker(object):
             return node
 
     def _parse(self, expression, context):
-        print(expression)
+        # print(expression)
         self._context = context
         self.tokenize(expression)
         try:
@@ -473,12 +473,13 @@ class SchematronChecker(object):
 
         if not xsd_file:
             # На найдена xsd схема для проверки
+            print('_' * 80)
+            print('FILE:', xml_file)
             print(self._return_error(f'Не найдена xsd схема для проверки '
                                      f'файла {xml_file}.'))
             result['description'] = self._return_error(
                 f'Не найдена xsd схема для проверки файла {xml_file}.')
             return result
-        print('XSD FILE:', xsd_file)
         result['xsd_scheme'] = xsd_file
 
         with open(os.path.join(self._xsd_root, xsd_file),
@@ -506,24 +507,29 @@ class SchematronChecker(object):
                                            assertion['context'])
 
             if assertion_result:
-                print(assertion['name'], ': \u001b[32mOk\u001b[0m')
+                # print(assertion['name'], ': \u001b[32mOk\u001b[0m')
+                pass
             else:
-                print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
-                print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
+                # print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
+                # print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
                 result['asserts'][assertion['name']] = self._get_error_text(assertion)
 
         if not result['asserts']:
-            print('\u001b[32mTest passed\u001b[0m')
+            # print('\u001b[32mTest passed\u001b[0m')
             result['result'] = 'passed'
         elif all(value.startswith('Error') for value in list(result['asserts'].values())):
             print('\u001b[31mTest failed, some attributes are missed\u001b[0m')
             result['description'] = 'some attributes are missed'
         else:
+            print('_' * 80)
+            print('FILE:', xml_file)
+            print('XSD FILE:', xsd_file)
+            for key, value in result['asserts'].items():
+                print(f'{key}: \u001b[31m{value}\u001b[0m')
             print('\u001b[31mTest failed\u001b[0m')
             result['description'] = 'some tests are not passed'
 
         elapsed_time = time() - start_time
-        print(f'Elapsed time: {round(elapsed_time, 4)} s')
-        print('Cache:', self._cache)
+        # print(f'Elapsed time: {round(elapsed_time, 4)} s')
 
         return result
