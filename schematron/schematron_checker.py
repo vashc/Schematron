@@ -69,6 +69,7 @@ class SchematronChecker(local):
         self._local_data.xml_file = None
         self._local_data.xml_content = None
         self._local_data.xsd_content = None
+        self._local_data.xsd_schema = None
         self._local_data.context = None
         self._local_data.cache = dict()
 
@@ -454,10 +455,24 @@ class SchematronChecker(local):
         with open(os.path.join(self._local_data.xsd_root, self._local_data.result['xsd_scheme']),
                   'r', encoding='cp1251') as xsd_file_handler:
             xsd_content = etree.parse(xsd_file_handler, self._local_data.parser).getroot()
-            # xsd_schema = etree.XMLSchema(xsd_content)
+            xsd_schema = etree.XMLSchema(xsd_content)
 
         self._local_data.xsd_content = xsd_content
+        self._local_data.xsd_schema = xsd_schema
         self._local_data.xml_file = self._local_data.result['file']
+
+        # Проверка по xsd
+        try:
+            self._local_data.xsd_schema.assertValid(self._local_data.xml_content)
+        except etree.DocumentInvalid as ex:
+            print('_' * 80)
+            print('FILE:', self._local_data.xml_file)
+            print('XSD FILE:', self._local_data.result['xsd_scheme'])
+            print(self._return_error(f'Ошибка при валидации по xsd схеме '
+                                     f'файла {self._local_data.xml_file}: {ex}.'))
+            result['description'] = f'Ошибка при валидации по xsd схеме ' \
+                                    f'файла {self._local_data.xml_file}: {ex}.'
+            return self._local_data.result
 
         try:
             asserts = self._get_asserts(xsd_content)

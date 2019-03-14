@@ -11,7 +11,11 @@ def _get_xml_info(xml_file, xml_content):
     xml_info = {}
     document_node = xml_content.find('Документ')
     if document_node is not None:
-        xml_info['knd'] = document_node.get('КНД')
+        xml_info['knd'] = document_node.get('КНД', None)
+        if not xml_info['knd']:
+            xml_info['knd'] = document_node.get('Индекс', None)
+        if not xml_info['knd']:
+            xml_info['knd'] = xml_content.xpath('//Документ/ОписПерСвед/@КНД')[0]
         xml_info['version'] = xml_content.attrib.get('ВерсФорм')
     else:
         # Ошибка, элемент "Документ" не найден
@@ -54,7 +58,7 @@ async def get_xsd_file(xml_path):
     except Exception as ex:
         # Ошибка при получении имени xsd схемы из БД
         print(_return_error(f'Ошибка при получении имени xsd схемы из'
-                            f' БД при проверке файла {xml_file}: {ex}.\u001b[0m'))
+                            f' БД при проверке файла {xml_file}: {ex}.'))
         result['description'] = f'Ошибка при получении имени xsd ' \
                                 f'схемы из БД при проверке файла {xml_file}.'
         return result
