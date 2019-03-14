@@ -1,5 +1,6 @@
 import operator
 import os
+from threading import local
 from functools import wraps
 from database import db
 from time import time
@@ -10,14 +11,14 @@ from pyparsing import Literal, Suppress, Forward, Word, \
 _root = os.path.dirname(os.path.abspath(__file__))
 
 
-class SchematronChecker(object):
+class SchematronChecker(local):
     def __init__(self, *, xsd_root=_root, xml_root=_root):
         # Символы, которые могут содержаться в элементе узла
         self._alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
         self._nums = '1234567890'
         self._special_symbols = '@/:._-'
         self._element = set(self._alphabet + self._alphabet.upper() +
-                         self._nums + self._special_symbols)
+                            self._nums + self._special_symbols)
 
         self._nullary_map = {
             'usch:getFileName': self._usch_file_name
@@ -56,27 +57,30 @@ class SchematronChecker(object):
             'concat':       self._concat_func
         }
 
-        self._stack = []
-        self._expr = self._create_tokenizer()
-        self._xsd_root = xsd_root
-        self._xml_root = xml_root
-        self._parser = etree.XMLParser(encoding='cp1251', remove_comments=True)
+        self._local_data = local()
 
-        self._xml_file = None
-        self._xml_content = None
-        self._xsd_content = None
-        self._context = None
-        self._cache = dict()
+        self._local_data.stack = []
+        self._local_data.expr = self._create_tokenizer()
+        self._local_data.xsd_root = xsd_root
+        self._local_data.xml_root = xml_root
+        self._local_data.parser = etree \
+            .XMLParser(encoding='cp1251', remove_comments=True)
+
+        self._local_data.xml_file = None
+        self._local_data.xml_content = None
+        self._local_data.xsd_content = None
+        self._local_data.context = None
+        self._local_data.cache = dict()
 
     def _cached_node(func):
         # Кэшируется только один элемент - узел
         @wraps(func)
         def _inner(*args, **kwargs):
             self = args[0]
-            element = f'//{self._context}/{args[1]}'
-            if element not in self._cache:
-                self._cache[element] = func(*args, **kwargs)
-            return self._cache[element]
+            element = f'//{self._local_data.context}/{args[1]}'
+            if element not in self._local_data.cache:
+                self._local_data.cache[element] = func(*args, **kwargs)
+            return self._local_data.cache[element]
         return _inner
 
     def _cached_func(func):
@@ -85,10 +89,10 @@ class SchematronChecker(object):
             self = args[0]
             # Нужен контекст, могут быть идентичные сигнатуры
             # в разных контекстах
-            element = f'{func.__name__}/{self._context}/{args[1:]}'
-            if element not in self._cache:
-                self._cache[element] = func(*args, **kwargs)
-            return self._cache[element]
+            element = f'{func.__name__}/{self._local_data.context}/{args[1:]}'
+            if element not in self._local_data.cache:
+                self._local_data.cache[element] = func(*args, **kwargs)
+            return self._local_data.cache[element]
         return _inner
 
     def _return_error(self, text):
@@ -111,7 +115,7 @@ class SchematronChecker(object):
         else:
             # Ошибка, элемент "Документ" не найден
             raise Exception(f'Элемент "Документ" в файле '
-                            f'{self._xml_file} не найден')
+                            f'{self._local_data.xml_file} не найден')
 
         return xml_info
 
@@ -169,7 +173,7 @@ class SchematronChecker(object):
                         continue
 
                     # Проверка, присутствует ли контекст в xml файле
-                    if len(self._xml_content.xpath(f'//{context}')) == 0:
+                    if len(self._local_data.xml_content.xpath(f'//{context}')) == 0:
                         # Не найден контекст в xml файле
 
                         # Пропуск опциональных проверок, choice
@@ -180,7 +184,7 @@ class SchematronChecker(object):
                             continue
                         # Ошибка, проверка обязательна, контекст не найден
                         raise Exception(f'Контекст {context} в файле '
-                                        f'{self._xml_file} не найден')
+                                        f'{self._local_data.xml_file} не найден')
 
                     for sch_assert in rule:
                         for error_node in sch_assert:
@@ -196,13 +200,13 @@ class SchematronChecker(object):
         return assert_list
 
     def _push(self, toks):
-        self._stack.append(toks[0])
+        self._local_data.stack.append(toks[0])
         # print('=>', self._stack)
 
     def _push_not(self, toks):
         for tok in toks:
             if tok == 'not':
-                self._stack.append(tok)
+                self._local_data.stack.append(tok)
         # print('=>', self._stack)
 
     def _create_tokenizer(self):
@@ -274,14 +278,14 @@ class SchematronChecker(object):
 
     @_cached_node
     def _evaluate_node(self, node):
-        element = f'//{self._context}/{node}'
-        value = self._xml_content.xpath(element)
+        element = f'//{self._local_data.context}/{node}'
+        value = self._local_data.xml_content.xpath(element)
         if '@' in node:
             # Работаем с атрибутом, возвращаем значение
             if not value:
                 # Элемент/атрибут не найден
-                raise Exception(f'Атрибут {self._context}/{node} в '
-                                f'файле {self._xml_file} не найден')
+                raise Exception(f'Атрибут {self._local_data.context}/{node} в '
+                                f'файле {self._local_data.xml_file} не найден')
             value = value[0]
             return value
         else:
@@ -289,13 +293,13 @@ class SchematronChecker(object):
             return True if value else False
 
     def _evaluate_stack(self):
-        op = self._stack.pop()
+        op = self._local_data.stack.pop()
 
         if op in self._nullary_map:
             return self._nullary_map[op]()
         elif op in self._unary_map:
             if op == 'count':
-                arg = self._stack.pop()
+                arg = self._local_data.stack.pop()
             else:
                 arg = self._evaluate_stack()
             return self._unary_map[op](arg)
@@ -314,13 +318,13 @@ class SchematronChecker(object):
         elif op in self._varargs_map:
             args = []
             # Смотрим на вершину стека, если он не пуст
-            if len(self._stack):
-                arg = self._stack[-1]
+            if len(self._local_data.stack):
+                arg = self._local_data.stack[-1]
                 while set(arg) <= self._element:
                     # Если элемент узла - можно вычислять значение
                     arg = self._evaluate_stack()
                     args.append(arg)
-                    arg = self._stack[-1]
+                    arg = self._local_data.stack[-1]
             # Разворачиваем аргументы, приходят из стека в обратном порядке
             return self._varargs_map[op](*args[::-1])
         elif op.isdigit():
@@ -335,7 +339,7 @@ class SchematronChecker(object):
 
     def _parse(self, expression, context):
         # print(expression)
-        self._context = context
+        self._local_data.context = context
         self.tokenize(expression)
         try:
             parsing_result = self._evaluate_stack()
@@ -395,10 +399,7 @@ class SchematronChecker(object):
 
     @_cached_func
     def _count_func(self, node):
-        # if '@' in node:
-            # return str(len(self._xml_content.xpath(f'.//{self._context}/*[{node}]')))
-        # return str(len(self._xml_content.findall(f'//{self._context}/{node}')))
-        return str(len(self._xml_content.xpath(f'//{self._context}/{node}')))
+        return str(len(self._local_data.xml_content.xpath(f'//{self._local_data.context}/{node}')))
 
     @_cached_func
     def _round_func(self, node):
@@ -421,7 +422,7 @@ class SchematronChecker(object):
         return ''.join(args)
 
     def _usch_file_name(self):
-        return ''.join(self._xml_file.split('.')[:-1])
+        return ''.join(self._local_data.xml_file.split('.')[:-1])
 
     def _usch_iif(self, cond, true, false):
         return true if cond else false
@@ -432,75 +433,42 @@ class SchematronChecker(object):
     # Публичное API
 
     def tokenize(self, text):
-        self._stack = []
-        return self._expr.parseString(text).asList()
+        self._local_data.stack = []
+        return self._local_data.expr.parseString(text).asList()
 
-    async def check_file(self, xml_path):
+    def check_file(self, result):
         start_time = time()
         # Очищаем кэш
-        self._cache = dict()
+        self._local_data.cache = dict()
 
-        xml_file = os.path.basename(xml_path)
+        self._local_data.result = result
 
-        # Формирование результата
-        result = {'file': xml_file,
-                  'result': 'failed',
-                  'description': '',
-                  'asserts': {}}
+        if not self._local_data.result.get('xsd_scheme'):
+            return self._local_data.result
 
-        prefix = '_'.join(xml_file.split('_')[:2])
+        with open(self._local_data.result['file'], 'rb') as xml_file_handler:
+            self._local_data.xml_content = etree.fromstring(xml_file_handler.read())
 
-        with open(os.path.join(self._xml_root, xml_file), 'rb') as xml_file_handler:
-            xml_content = etree.fromstring(xml_file_handler.read())
+        self._local_data.result['file'] = os.path.basename(self._local_data.result['file'])
 
-        try:
-            xml_info = self._get_xml_info(xml_content)
-        except Exception as ex:
-            # Ошибка при получении информации (КНД, версия и т.д.)
-            print(self._return_error(ex))
-            result['description'] = self._return_error(ex)
-            return result
-
-        try:
-            xsd_file = await self._get_xsd_scheme(xml_info)
-        except Exception as ex:
-            # Ошибка при получении имени xsd схемы из БД
-            print(self._return_error(f'Ошибка при получении имени xsd схемы из'
-                                     f' БД при проверке файла {xml_file}.\u001b[0m'))
-            result['description'] = self._return_error(
-                f'Ошибка при получении имени xsd схемы из БД при проверке файла {xml_file}.\u001b[0m')
-            return result
-
-        if not xsd_file:
-            # На найдена xsd схема для проверки
-            print('_' * 80)
-            print('FILE:', xml_file)
-            print(self._return_error(f'Не найдена xsd схема для проверки '
-                                     f'файла {xml_file}.'))
-            result['description'] = self._return_error(
-                f'Не найдена xsd схема для проверки файла {xml_file}.')
-            return result
-        result['xsd_scheme'] = xsd_file
-
-        with open(os.path.join(self._xsd_root, xsd_file),
+        with open(os.path.join(self._local_data.xsd_root, self._local_data.result['xsd_scheme']),
                   'r', encoding='cp1251') as xsd_file_handler:
-            xsd_content = etree.parse(xsd_file_handler, self._parser).getroot()
-            xsd_schema = etree.XMLSchema(xsd_content)
+            xsd_content = etree.parse(xsd_file_handler, self._local_data.parser).getroot()
+            # xsd_schema = etree.XMLSchema(xsd_content)
 
-        self._xml_content = xml_content
-        self._xsd_content = xsd_content
-        self._xml_file = xml_file
+        self._local_data.xsd_content = xsd_content
+        self._local_data.xml_file = self._local_data.result['file']
 
         try:
             asserts = self._get_asserts(xsd_content)
         except Exception as ex:
             print(self._return_error(ex))
-            result['description'] = self._return_error(ex)
-            return result
+            self._local_data.result['description'] = self._return_error(ex)
+            return self._local_data.result
 
         if not asserts:
-            result['result'] = 'passed'
-            return result
+            self._local_data.result['result'] = 'passed'
+            return self._local_data.result
 
         for assertion in asserts:
             assertion_result = self._parse(assertion['assert'],
@@ -512,24 +480,24 @@ class SchematronChecker(object):
             else:
                 # print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
                 # print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
-                result['asserts'][assertion['name']] = self._get_error_text(assertion)
+                self._local_data.result['asserts'][assertion['name']] = self._get_error_text(assertion)
 
-        if not result['asserts']:
+        if not self._local_data.result['asserts']:
             # print('\u001b[32mTest passed\u001b[0m')
-            result['result'] = 'passed'
-        elif all(value.startswith('Error') for value in list(result['asserts'].values())):
+            self._local_data.result['result'] = 'passed'
+        elif all(value.startswith('Error') for value in list(self._local_data.result['asserts'].values())):
             print('\u001b[31mTest failed, some attributes are missed\u001b[0m')
-            result['description'] = 'some attributes are missed'
+            self._local_data.result['description'] = 'some attributes are missed'
         else:
             print('_' * 80)
-            print('FILE:', xml_file)
-            print('XSD FILE:', xsd_file)
-            for key, value in result['asserts'].items():
+            print('FILE:', self._local_data.xml_file)
+            print('XSD FILE:', self._local_data.result['xsd_scheme'])
+            for key, value in self._local_data.result['asserts'].items():
                 print(f'{key}: \u001b[31m{value}\u001b[0m')
             print('\u001b[31mTest failed\u001b[0m')
-            result['description'] = 'some tests are not passed'
+            self._local_data.result['description'] = 'some tests are not passed'
 
         elapsed_time = time() - start_time
         # print(f'Elapsed time: {round(elapsed_time, 4)} s')
 
-        return result
+        return self._local_data.result
