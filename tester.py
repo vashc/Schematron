@@ -124,5 +124,4 @@ if __name__ == '__main__':
 
     print(f'\n\u001b[31mFailed: {len(test_results["failed"])};\u001b[0m')
     print(f'\u001b[32mPassed: {len(test_results["passed"])};\u001b[0m')
-    print(f'\u001b[35mMissed attributes: {len(test_results["missed_attribute"])};\u001b[0m')
-    # print(f'Ratio: {round(test_results["passed"] / (test_results["passed"] + test_results["failed"]), 4)}')
+    print(f'Ratio: {round(len(test_results["passed"]) / len(test_results["passed"] + test_results["failed"]), 4)}')

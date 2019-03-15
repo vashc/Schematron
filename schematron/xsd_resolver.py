@@ -40,7 +40,7 @@ async def get_xsd_file(xml_path):
     result = {'file': xml_path,
               'result': 'failed',
               'description': '',
-              'asserts': {}}
+              'asserts': []}
 
     with open(xml_file, 'rb') as xml_file_handler:
         xml_content = etree.fromstring(xml_file_handler.read())

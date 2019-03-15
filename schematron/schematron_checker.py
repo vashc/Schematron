@@ -490,25 +490,22 @@ class SchematronChecker(local):
                                            assertion['context'])
 
             if assertion_result:
-                # print(assertion['name'], ': \u001b[32mOk\u001b[0m')
                 pass
             else:
-                # print(assertion['name'], ': \u001b[31mError\u001b[0m', end='. ')
-                # print(f'\u001b[31m{self._get_error_text(assertion)}\u001b[0m')
-                self._local_data.result['asserts'][assertion['name']] = self._get_error_text(assertion)
+                self._local_data.result['asserts'] \
+                    .append((assertion['name'],
+                            assertion['error']['code'],
+                            self._get_error_text(assertion)))
 
         if not self._local_data.result['asserts']:
             # print('\u001b[32mTest passed\u001b[0m')
             self._local_data.result['result'] = 'passed'
-        elif all(value.startswith('Error') for value in list(self._local_data.result['asserts'].values())):
-            print('\u001b[31mTest failed, some attributes are missed\u001b[0m')
-            self._local_data.result['description'] = 'some attributes are missed'
         else:
             print('_' * 80)
             print('FILE:', self._local_data.xml_file)
             print('XSD FILE:', self._local_data.result['xsd_scheme'])
-            for key, value in self._local_data.result['asserts'].items():
-                print(f'{key}: \u001b[31m{value}\u001b[0m')
+            for name, errcode, errtext in self._local_data.result['asserts']:
+                print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
             print('\u001b[31mTest failed\u001b[0m')
             self._local_data.result['description'] = 'some tests are not passed'
 
