@@ -325,12 +325,17 @@ class SchematronChecker(local):
     def _parse(self, expression, context):
         # print(expression)
         self._local_data.context = context
-        self.tokenize(expression)
+        try:
+            self.tokenize(expression)
+        except Exception as ex:
+            raise Exception(f'Ошибка при лексическом анализе xpath выражения '
+                            f'{expression} в файле {self._local_data.xml_file} ({ex}).')
         try:
             parsing_result = self._evaluate_stack()
             return parsing_result
         except Exception as ex:
-            return f'Error. {ex}.'
+            raise Exception(f'Ошибка при интерпретации xpath выражения '
+                            f'{expression} в файле {self._local_data.xml_file} ({ex}).')
 
     # Функции
 
@@ -415,14 +420,16 @@ class SchematronChecker(local):
         self._local_data.cache = dict()
 
         self._local_data.output = input
-        self._local_data.xml_file = input.xml_file
-        self._local_data.xml_content = input.xml_content
-        self._local_data.xsd_content = input.xsd_content
+        self._local_data.xml_file = input.filename
+        self._local_data.xml_content = input.xml_obj
+        self._local_data.xsd_content = input.xsd_schema
         self._local_data.xsd_scheme = etree.XMLSchema(input.xsd_content)
 
-        self._local_data.output.result = 'passed'
-        self._local_data.output.description = ''
-        self._local_data.output.asserts = []
+        self._local_data.output.verify_result = dict()
+
+        self._local_data.output.verify_result['result'] = 'passed'
+        self._local_data.output.verify_result['xsd_asserts'] = []
+        self._local_data.output.verify_result['sch_asserts'] = []
 
         # if not self._local_data.result.get('xsd_scheme'):
         #     return self._local_data.result
@@ -451,8 +458,8 @@ class SchematronChecker(local):
                 print('XSD FILE:', self._local_data.xsd_scheme)
                 print(self._return_error(f'Ошибка при валидации по xsd схеме '
                                          f'файла {self._local_data.xml_file}: {ex}.'))
-            self._local_data.output.result = 'failed_xsd'
-            self._local_data.output.description = (
+            self._local_data.output.verify_result['result'] = 'failed_xsd'
+            self._local_data.output.verify_result['description'] = (
                 f'Ошибка при валидации по xsd схеме файла '
                 f'{self._local_data.xml_file}: {ex}.')
             return self._local_data.output
@@ -463,7 +470,8 @@ class SchematronChecker(local):
         except Exception as ex:
             if self._verbose:
                 self._return_error(ex)
-            self._local_data.output.description = self._return_error(ex)
+            self._local_data.output.verify_result['result'] = 'failed_sch'
+            self._local_data.output.verify_result['description'] = self._return_error(ex)
             return self._local_data.output
 
         # Нет выражений для проверки
@@ -471,25 +479,27 @@ class SchematronChecker(local):
             return self._local_data.output
 
         for assertion in asserts:
-            assertion_result = self._parse(assertion['assert'],
-                                           assertion['context'])
+            try:
+                assertion_result = self._parse(assertion['assert'],
+                                               assertion['context'])
+                if not assertion_result:
+                    self._local_data.output.verify_result['sch_asserts'] \
+                        .append((assertion['name'],
+                                 assertion['error']['code'],
+                                 self._get_error_text(assertion)))
 
-            if assertion_result:
-                pass
-            else:
-                self._local_data.output.asserts \
-                    .append((assertion['name'],
-                            assertion['error']['code'],
-                            self._get_error_text(assertion)))
+            except Exception as ex:
+                self._local_data.output.verify_result['result'] = 'failed_sch'
+                self._local_data.output.verify_result['description'] = ex
 
-        if self._local_data.output.asserts:
+        if self._local_data.output.verify_result['sch_asserts']:
             if self._verbose:
                 print('_' * 80)
                 print('FILE:', self._local_data.xml_file)
                 print('XSD FILE:', self._local_data.xsd_scheme)
-                for name, errcode, errtext in self._local_data.output.asserts:
+                for name, errcode, errtext in self._local_data.output.verify_result['sch_asserts']:
                     print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
                 print('\u001b[31mTest failed\u001b[0m')
-            self._local_data.output.description = 'Some tests are not passed'
+            self._local_data.output.verify_result['description'] = 'Ошибки при проверке schematron'
 
         return self._local_data.output
