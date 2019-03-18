@@ -500,6 +500,7 @@ class SchematronChecker(local):
                 for name, errcode, errtext in self._local_data.output.verify_result['sch_asserts']:
                     print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
                 print('\u001b[31mTest failed\u001b[0m')
+            self._local_data.output.verify_result['result'] = 'failed_sch'
             self._local_data.output.verify_result['description'] = 'Ошибки при проверке schematron'
 
         return self._local_data.output
