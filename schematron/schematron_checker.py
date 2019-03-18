@@ -443,7 +443,7 @@ class SchematronChecker(local):
 
         # Проверка по xsd
         try:
-            self._local_data.xsd_schema.assertValid(self._local_data.xml_content)
+            self._local_data.xsd_scheme.assertValid(self._local_data.xml_content)
         except etree.DocumentInvalid as ex:
             if self._verbose:
                 print('_' * 80)
