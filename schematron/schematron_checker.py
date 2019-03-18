@@ -12,7 +12,7 @@ _root = os.path.dirname(os.path.abspath(__file__))
 
 
 class SchematronChecker(local):
-    def __init__(self, *, xsd_root=_root, xml_root=_root):
+    def __init__(self, *, xsd_root=_root, xml_root=_root, verbose=False):
         # Символы, которые могут содержаться в элементе узла
         self._alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
         self._nums = '1234567890'
@@ -57,6 +57,8 @@ class SchematronChecker(local):
             'concat':       self._concat_func
         }
 
+        self._verbose = verbose
+
         self._local_data = local()
 
         self._local_data.stack = []
@@ -72,6 +74,9 @@ class SchematronChecker(local):
         self._local_data.xsd_schema = None
         self._local_data.context = None
         self._local_data.cache = dict()
+
+        # Контейнер для хранения результатов обработки
+        self._local_data.output = None
 
     def _cached_node(func):
         # Кэшируется только один элемент - узел
@@ -98,27 +103,6 @@ class SchematronChecker(local):
 
     def _return_error(self, text):
         return f'\u001b[31mError. {text}.\u001b[0m'
-
-    async def _get_xsd_scheme(self, xml_info):
-        query = '''SELECT xsd
-                FROM documents
-                WHERE knd = $1
-                AND version = $2'''
-
-        return await db.fetchval(query, xml_info['knd'], xml_info['version'])
-
-    def _get_xml_info(self, xml_content):
-        xml_info = {}
-        document_node = xml_content.find('Документ')
-        if document_node is not None:
-            xml_info['knd'] = document_node.get('КНД')
-            xml_info['version'] = xml_content.attrib.get('ВерсФорм')
-        else:
-            # Ошибка, элемент "Документ" не найден
-            raise Exception(f'Элемент "Документ" в файле '
-                            f'{self._local_data.xml_file} не найден')
-
-        return xml_info
 
     def _get_error(self, node):
         error = {}
@@ -351,56 +335,45 @@ class SchematronChecker(local):
     # Функции
 
     # Обёртки для некоторых арифметических операций
-    def _type_converter(func):
+    def _float_converter(func):
         @wraps(func)
         def _inner(*args, **kwargs):
             inner_args = [*args]
             try:
                 inner_args[1:] = map(float, args[1:])
-            except ValueError:
-                inner_args[1:] = map(str, args[1:])
+            except ValueError as ex:
+                raise Exception(f'Ошибка при приведении к '
+                                f'вещественному типу: {ex}')
             return func(*inner_args, **kwargs)
         return _inner
 
-    @_type_converter
     def _op_lt(self, a, b):
-        return a < b
+        return str(a) < str(b)
 
+    @_float_converter
     def _op_mul(self, a, b):
-        try:
-            val = float(a) * float(b)
-            return val
-        #TODO: Ошибка приведения к типу
-        except Exception as ex:
-            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
+        val = a * b
+        return val
 
+    @_float_converter
     def _op_sub(self, a, b):
-        try:
-            val= float(a) - float(b)
-            return val
-        # TODO: Ошибка приведения к типу
-        except Exception as ex:
-            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
+        val = a - b
+        return val
 
+    @_float_converter
     def _op_add(self, a, b):
-        try:
-            val = float(a) + float(b)
-            return val
-        # TODO: Ошибка приведения к типу
-        except Exception as ex:
-            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
+        val = a + b
+        return val
 
+    @_float_converter
     def _op_mod(self, a, b):
-        try:
-            val = float(a) % float(b)
-            return val
-        # TODO: Ошибка приведения к типу
-        except Exception as ex:
-            raise Exception(f'Ошибка при приведении к вещественному типу: {ex}')
+        val = a % b
+        return val
 
     @_cached_func
     def _count_func(self, node):
-        return str(len(self._local_data.xml_content.xpath(f'//{self._local_data.context}/{node}')))
+        return str(len(self._local_data.xml_content
+                       .xpath(f'//{self._local_data.context}/{node}')))
 
     @_cached_func
     def _round_func(self, node):
@@ -437,53 +410,65 @@ class SchematronChecker(local):
         self._local_data.stack = []
         return self._local_data.expr.parseString(text).asList()
 
-    def check_file(self, result):
-        start_time = time()
+    def check_file(self, input):
         # Очищаем кэш
         self._local_data.cache = dict()
 
-        self._local_data.result = result
+        self._local_data.output = input
+        self._local_data.xml_file = input.xml_file
+        self._local_data.xml_content = input.xml_content
+        self._local_data.xsd_content = input.xsd_content
+        self._local_data.xsd_scheme = etree.XMLSchema(input.xsd_content)
 
-        if not self._local_data.result.get('xsd_scheme'):
-            return self._local_data.result
+        self._local_data.output.result = 'passed'
+        self._local_data.output.description = ''
+        self._local_data.output.asserts = []
 
-        with open(self._local_data.result['file'], 'rb') as xml_file_handler:
-            self._local_data.xml_content = etree.fromstring(xml_file_handler.read())
-
-        self._local_data.result['file'] = os.path.basename(self._local_data.result['file'])
-
-        with open(os.path.join(self._local_data.xsd_root, self._local_data.result['xsd_scheme']),
-                  'r', encoding='cp1251') as xsd_file_handler:
-            xsd_content = etree.parse(xsd_file_handler, self._local_data.parser).getroot()
-            xsd_schema = etree.XMLSchema(xsd_content)
-
-        self._local_data.xsd_content = xsd_content
-        self._local_data.xsd_schema = xsd_schema
-        self._local_data.xml_file = self._local_data.result['file']
+        # if not self._local_data.result.get('xsd_scheme'):
+        #     return self._local_data.result
+        #
+        # with open(self._local_data.result['file'], 'rb') as xml_file_handler:
+        #     self._local_data.xml_content = etree.fromstring(xml_file_handler.read())
+        #
+        # self._local_data.result['file'] = os.path.basename(self._local_data.result['file'])
+        #
+        # with open(os.path.join(self._local_data.xsd_root, self._local_data.result['xsd_scheme']),
+        #           'r', encoding='cp1251') as xsd_file_handler:
+        #     xsd_content = etree.parse(xsd_file_handler, self._local_data.parser).getroot()
+        #     xsd_schema = etree.XMLSchema(xsd_content)
+        #
+        # self._local_data.xsd_content = xsd_content
+        # self._local_data.xsd_schema = xsd_schema
+        # self._local_data.xml_file = self._local_data.result['file']
 
         # Проверка по xsd
         try:
             self._local_data.xsd_schema.assertValid(self._local_data.xml_content)
         except etree.DocumentInvalid as ex:
-            print('_' * 80)
-            print('FILE:', self._local_data.xml_file)
-            print('XSD FILE:', self._local_data.result['xsd_scheme'])
-            print(self._return_error(f'Ошибка при валидации по xsd схеме '
-                                     f'файла {self._local_data.xml_file}: {ex}.'))
-            result['description'] = f'Ошибка при валидации по xsd схеме ' \
-                                    f'файла {self._local_data.xml_file}: {ex}.'
-            return self._local_data.result
+            if self._verbose:
+                print('_' * 80)
+                print('FILE:', self._local_data.xml_file)
+                print('XSD FILE:', self._local_data.xsd_scheme)
+                print(self._return_error(f'Ошибка при валидации по xsd схеме '
+                                         f'файла {self._local_data.xml_file}: {ex}.'))
+            self._local_data.output.result = 'failed_xsd'
+            self._local_data.output.description = (
+                f'Ошибка при валидации по xsd схеме файла '
+                f'{self._local_data.xml_file}: {ex}.')
+            return self._local_data.output
 
+        # Проверка выражений schematron
         try:
-            asserts = self._get_asserts(xsd_content)
+            asserts = self._get_asserts(self._local_data.xsd_content)
         except Exception as ex:
-            print(self._return_error(ex))
-            self._local_data.result['description'] = self._return_error(ex)
-            return self._local_data.result
+            if self._verbose:
+                self._return_error(ex)
+            self._local_data.output.description = self._return_error(ex)
+            return self._local_data.output
 
+        # Нет выражений для проверки
         if not asserts:
-            self._local_data.result['result'] = 'passed'
-            return self._local_data.result
+            return self._local_data.output
 
         for assertion in asserts:
             assertion_result = self._parse(assertion['assert'],
@@ -492,24 +477,19 @@ class SchematronChecker(local):
             if assertion_result:
                 pass
             else:
-                self._local_data.result['asserts'] \
+                self._local_data.output.asserts \
                     .append((assertion['name'],
                             assertion['error']['code'],
                             self._get_error_text(assertion)))
 
-        if not self._local_data.result['asserts']:
-            # print('\u001b[32mTest passed\u001b[0m')
-            self._local_data.result['result'] = 'passed'
-        else:
-            print('_' * 80)
-            print('FILE:', self._local_data.xml_file)
-            print('XSD FILE:', self._local_data.result['xsd_scheme'])
-            for name, errcode, errtext in self._local_data.result['asserts']:
-                print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
-            print('\u001b[31mTest failed\u001b[0m')
-            self._local_data.result['description'] = 'some tests are not passed'
+        if self._local_data.output.asserts:
+            if self._verbose:
+                print('_' * 80)
+                print('FILE:', self._local_data.xml_file)
+                print('XSD FILE:', self._local_data.xsd_scheme)
+                for name, errcode, errtext in self._local_data.output.asserts:
+                    print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
+                print('\u001b[31mTest failed\u001b[0m')
+            self._local_data.output.description = 'Some tests are not passed'
 
-        elapsed_time = time() - start_time
-        # print(f'Elapsed time: {round(elapsed_time, 4)} s')
-
-        return self._local_data.result
+        return self._local_data.output

@@ -32,19 +32,29 @@ def _unpickle_method(func_name, obj, cls):
 copyreg.pickle(types.MethodType, _pickle_method, _unpickle_method)
 
 
-def sync_test():
+async def sync_run():
     loop = asyncio.get_event_loop()
 
     time_list = []
     results = []
 
-    for xml_file in glob('*')[:]:
+    xsd_tasks = [asyncio.ensure_future(get_xsd_file(xml_file), loop=loop)
+                 for xml_file in glob('*')[:]]
+    xsd_schemes = await asyncio.gather(*xsd_tasks)
+
+    for xml_file in xsd_schemes:
         start_time = time()
-        result = loop.run_until_complete(sch.check_file(xml_file))
+        result = sch.check_file(xml_file)
         results.append(result)
         time_list.append(time() - start_time)
     print(f'\nElapsed time: {round(sum(time_list), 4)}; '
           f'average time: {round(sum(time_list) / len(time_list), 4)}')
+    return results
+
+
+def sync_test():
+    loop = asyncio.get_event_loop()
+    results = loop.run_until_complete(sync_run())
     return results
 ########################################################################################################################
 
@@ -109,7 +119,7 @@ sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
 if __name__ == '__main__':
     os.chdir(xml_root)
 
-    results = multiproc_test()
+    results = sync_test()
 
     test_results = {'passed': [], 'failed': [], 'missed_attribute': []}
 

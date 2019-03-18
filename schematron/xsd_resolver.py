@@ -3,6 +3,13 @@ from database import db
 from lxml import etree
 
 
+class TestResolver(object):
+    def __init__(self, xsd_content, xml_content, xml_file):
+        self.xsd_content = xsd_content
+        self.xml_content = xml_content
+        self.file = xml_file
+
+
 def _return_error(text):
     return f'\u001b[31mError. {text}.\u001b[0m'
 
@@ -73,5 +80,7 @@ async def get_xsd_file(xml_path):
         return result
 
     result['xsd_scheme'] = xsd_file
+
+    # resolver = TestResolver()
 
     return result
