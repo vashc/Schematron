@@ -46,8 +46,8 @@ async def sync_run():
 
     for xml_file in schemes:
         start_time = time()
-        result = sch.check_file(xml_file)
-        results.append(result)
+        sch.check_file(xml_file)
+        results.append(xml_file)
         time_list.append(time() - start_time)
     print(f'\nElapsed time: {round(sum(time_list), 4)}; '
           f'average time: {round(sum(time_list) / len(time_list), 4)}')

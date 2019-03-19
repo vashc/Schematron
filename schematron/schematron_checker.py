@@ -414,17 +414,16 @@ class SchemaChecker(local):
         # Очищаем кэш
         self._local_data.cache = dict()
 
-        self._local_data.output = input
         self._local_data.xml_file = input.filename
         self._local_data.xml_content = input.xml_obj
         self._local_data.xsd_content = input.xsd_schema
         self._local_data.xsd_scheme = etree.XMLSchema(self._local_data.xsd_content)
 
-        self._local_data.output.verify_result = dict()
+        input.verify_result = dict()
 
-        self._local_data.output.verify_result['result'] = 'passed'
-        self._local_data.output.verify_result['xsd_asserts'] = []
-        self._local_data.output.verify_result['sch_asserts'] = []
+        input.verify_result['result'] = 'passed'
+        input.verify_result['xsd_asserts'] = []
+        input.verify_result['sch_asserts'] = []
 
         # if not self._local_data.result.get('xsd_scheme'):
         #     return self._local_data.result
@@ -451,12 +450,17 @@ class SchemaChecker(local):
                 print('_' * 80)
                 print('FILE:', self._local_data.xml_file)
                 print(self._return_error(f'Ошибка при валидации по xsd схеме '
-                                         f'файла {self._local_data.xml_file}: {ex}.'))
-            self._local_data.output.verify_result['result'] = 'failed_xsd'
-            self._local_data.output.verify_result['description'] = (
+                                         f'файла {self._local_data.xml_file}.'))
+
+            for error in self._local_data.xsd_scheme.error_log:
+                input.verify_result['xsd_asserts']\
+                    .append(f'{error.message} (строка {error.line})')
+
+            input.verify_result['result'] = 'failed_xsd'
+            input.verify_result['description'] = (
                 f'Ошибка при валидации по xsd схеме файла '
                 f'{self._local_data.xml_file}: {ex}.')
-            return self._local_data.output
+            return
 
         # Проверка выражений schematron
         try:
@@ -464,20 +468,20 @@ class SchemaChecker(local):
         except Exception as ex:
             if self._verbose:
                 self._return_error(ex)
-            self._local_data.output.verify_result['result'] = 'failed_sch'
-            self._local_data.output.verify_result['description'] = self._return_error(ex)
-            return self._local_data.output
+            input.verify_result['result'] = 'failed_sch'
+            input.verify_result['description'] = self._return_error(ex)
+            return
 
         # Нет выражений для проверки
         if not asserts:
-            return self._local_data.output
+            return
 
         for assertion in asserts:
             try:
                 assertion_result = self._parse(assertion['assert'],
                                                assertion['context'])
                 if not assertion_result:
-                    self._local_data.output.verify_result['sch_asserts'] \
+                    input.verify_result['sch_asserts'] \
                         .append((assertion['name'],
                                  assertion['error']['code'],
                                  self._get_error_text(assertion)))
@@ -488,18 +492,18 @@ class SchemaChecker(local):
                     print('_' * 80)
                     print('FILE:', self._local_data.xml_file)
                     self._return_error(ex)
-                self._local_data.output.verify_result['result'] = 'failed_sch'
-                self._local_data.output.verify_result['description'] = ex
-                return self._local_data.output
+                input.verify_result['result'] = 'failed_sch'
+                input.verify_result['description'] = ex
+                return
 
-        if self._local_data.output.verify_result['sch_asserts']:
+        if input.verify_result['sch_asserts']:
             if self._verbose:
                 print('_' * 80)
                 print('FILE:', self._local_data.xml_file)
-                for name, errcode, errtext in self._local_data.output.verify_result['sch_asserts']:
+                for name, errcode, errtext in input.verify_result['sch_asserts']:
                     print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
                 print('\u001b[31mTest failed\u001b[0m')
-            self._local_data.output.verify_result['result'] = 'failed_sch'
-            self._local_data.output.verify_result['description'] = 'Ошибки при проверке schematron'
+            input.verify_result['result'] = 'failed_sch'
+            input.verify_result['description'] = 'Ошибки при проверке schematron'
 
-        return self._local_data.output
+        return
