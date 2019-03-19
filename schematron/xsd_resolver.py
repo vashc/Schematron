@@ -85,10 +85,11 @@ async def get_xsd_file(xml_path, xsd_root):
 
     result['xsd_scheme'] = xsd_file
 
-    with open(os.path.join(xsd_root, result['xsd_scheme']),
-              'r', encoding='cp1251') as xsd_file_handler:
-        xsd_content = etree.parse(xsd_file_handler, parser).getroot()
-
-    resolver = TestResolver(xsd_content, xml_content, xml_file)
-
-    return resolver
+    try:
+        with open(os.path.join(xsd_root, result['xsd_scheme']),
+                  'r', encoding='cp1251') as xsd_file_handler:
+            xsd_content = etree.parse(xsd_file_handler, parser).getroot()
+        resolver = TestResolver(xsd_content, xml_content, xml_file)
+        return resolver
+    except FileNotFoundError as ex:
+        return TestResolver(None, None, None)
