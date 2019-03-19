@@ -5,9 +5,9 @@ from lxml import etree
 
 class TestResolver(object):
     def __init__(self, xsd_content, xml_content, xml_file):
-        self.xsd_content = xsd_content
-        self.xml_content = xml_content
-        self.file = xml_file
+        self.xsd_schema = xsd_content
+        self.xml_obj = xml_content
+        self.filename = xml_file
 
 
 def _return_error(text):
@@ -40,7 +40,8 @@ async def _get_xsd_scheme(xml_info):
     return await db.fetchval(query, xml_info['knd'], xml_info['version'])
 
 
-async def get_xsd_file(xml_path):
+async def get_xsd_file(xml_path, xsd_root):
+    parser = etree.XMLParser(encoding='cp1251', remove_comments=True)
     xml_file = os.path.basename(xml_path)
 
     # Формирование результата
@@ -58,7 +59,8 @@ async def get_xsd_file(xml_path):
         # Ошибка при получении информации (КНД, версия и т.д.)
         print(_return_error(ex))
         result['description'] = _return_error(ex)
-        return result
+        return TestResolver(None, None, None)
+        # return result
 
     try:
         xsd_file = await _get_xsd_scheme(xml_info)
@@ -68,7 +70,8 @@ async def get_xsd_file(xml_path):
                             f' БД при проверке файла {xml_file}: {ex}.'))
         result['description'] = f'Ошибка при получении имени xsd ' \
                                 f'схемы из БД при проверке файла {xml_file}.'
-        return result
+        return TestResolver(None, None, None)
+        # return result
 
     if not xsd_file:
         # На найдена xsd схема для проверки
@@ -77,10 +80,15 @@ async def get_xsd_file(xml_path):
         print(_return_error(f'Не найдена xsd схема для проверки '
                             f'файла {xml_file}.'))
         result['description'] = f'Не найдена xsd схема для проверки файла {xml_file}.'
-        return result
+        return TestResolver(None, None, None)
+        # return result
 
     result['xsd_scheme'] = xsd_file
 
-    # resolver = TestResolver()
+    with open(os.path.join(xsd_root, result['xsd_scheme']),
+              'r', encoding='cp1251') as xsd_file_handler:
+        xsd_content = etree.parse(xsd_file_handler, parser).getroot()
 
-    return result
+    resolver = TestResolver(xsd_content, xml_content, xml_file)
+
+    return resolver

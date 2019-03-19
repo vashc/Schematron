@@ -2,16 +2,15 @@ import operator
 import os
 from threading import local
 from functools import wraps
-from database import db
-from time import time
 from lxml import etree
 from pyparsing import Literal, Suppress, Forward, Word, \
     Group, ZeroOrMore, Optional, oneOf, nums, srange, Combine
+from .exceptions import *
 
 _root = os.path.dirname(os.path.abspath(__file__))
 
 
-class SchematronChecker(local):
+class SchemaChecker(local):
     def __init__(self, *, xsd_root=_root, xml_root=_root, verbose=False):
         # Символы, которые могут содержаться в элементе узла
         self._alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
@@ -168,8 +167,7 @@ class SchematronChecker(local):
                             # Опциональная проверка, пропускаем
                             continue
                         # Ошибка, проверка обязательна, контекст не найден
-                        raise Exception(f'Контекст {context} в файле '
-                                        f'{self._local_data.xml_file} не найден')
+                        raise ContextError(context, self._local_data.xml_file)
 
                     for sch_assert in rule:
                         for error_node in sch_assert:
@@ -269,8 +267,8 @@ class SchematronChecker(local):
             # Работаем с атрибутом, возвращаем значение
             if not value:
                 # Элемент/атрибут не найден
-                raise Exception(f'Атрибут {self._local_data.context}/{node} в '
-                                f'файле {self._local_data.xml_file} не найден')
+                raise NodeAttributeError(self._local_data.context,
+                                         node, self._local_data.xml_file)
             value = value[0]
             return value
         else:
@@ -328,14 +326,12 @@ class SchematronChecker(local):
         try:
             self.tokenize(expression)
         except Exception as ex:
-            raise Exception(f'Ошибка при лексическом анализе xpath выражения '
-                            f'{expression} в файле {self._local_data.xml_file} ({ex}).')
+            raise TokenizerError(expression, self._local_data.xml_file, ex)
         try:
             parsing_result = self._evaluate_stack()
             return parsing_result
         except Exception as ex:
-            raise Exception(f'Ошибка при интерпретации xpath выражения '
-                            f'{expression} в файле {self._local_data.xml_file} ({ex}).')
+            raise ParserError(expression, self._local_data.xml_file, ex)
 
     # Функции
 
@@ -347,8 +343,7 @@ class SchematronChecker(local):
             try:
                 inner_args[1:] = map(float, args[1:])
             except ValueError as ex:
-                raise Exception(f'Ошибка при приведении к '
-                                f'вещественному типу: {ex}')
+                raise TypeConvError(inner_args[1:], ex)
             return func(*inner_args, **kwargs)
         return _inner
 
@@ -423,7 +418,7 @@ class SchematronChecker(local):
         self._local_data.xml_file = input.filename
         self._local_data.xml_content = input.xml_obj
         self._local_data.xsd_content = input.xsd_schema
-        self._local_data.xsd_scheme = etree.XMLSchema(input.xsd_content)
+        self._local_data.xsd_scheme = etree.XMLSchema(self._local_data.xsd_content)
 
         self._local_data.output.verify_result = dict()
 
@@ -455,7 +450,6 @@ class SchematronChecker(local):
             if self._verbose:
                 print('_' * 80)
                 print('FILE:', self._local_data.xml_file)
-                print('XSD FILE:', self._local_data.xsd_scheme)
                 print(self._return_error(f'Ошибка при валидации по xsd схеме '
                                          f'файла {self._local_data.xml_file}: {ex}.'))
             self._local_data.output.verify_result['result'] = 'failed_xsd'
@@ -487,16 +481,21 @@ class SchematronChecker(local):
                         .append((assertion['name'],
                                  assertion['error']['code'],
                                  self._get_error_text(assertion)))
-
+            except ParserError:
+                pass
             except Exception as ex:
+                if self._verbose:
+                    print('_' * 80)
+                    print('FILE:', self._local_data.xml_file)
+                    self._return_error(ex)
                 self._local_data.output.verify_result['result'] = 'failed_sch'
                 self._local_data.output.verify_result['description'] = ex
+                return self._local_data.output
 
         if self._local_data.output.verify_result['sch_asserts']:
             if self._verbose:
                 print('_' * 80)
                 print('FILE:', self._local_data.xml_file)
-                print('XSD FILE:', self._local_data.xsd_scheme)
                 for name, errcode, errtext in self._local_data.output.verify_result['sch_asserts']:
                     print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
                 print('\u001b[31mTest failed\u001b[0m')

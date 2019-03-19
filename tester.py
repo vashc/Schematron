@@ -6,7 +6,7 @@ import types
 from time import time
 from glob import glob
 from multiprocessing import cpu_count
-from schematron.schematron_checker import SchematronChecker
+from schematron import SchemaChecker
 from config import CONFIG
 from schematron.xsd_resolver import get_xsd_file
 
@@ -33,16 +33,18 @@ copyreg.pickle(types.MethodType, _pickle_method, _unpickle_method)
 
 
 async def sync_run():
+    xsd_root = '/home/vasily/PyProjects/FLK/Schematron/xsd'
     loop = asyncio.get_event_loop()
 
     time_list = []
     results = []
 
-    xsd_tasks = [asyncio.ensure_future(get_xsd_file(xml_file), loop=loop)
+    xsd_tasks = [asyncio.ensure_future(get_xsd_file(xml_file, xsd_root), loop=loop)
                  for xml_file in glob('*')[:]]
     xsd_schemes = await asyncio.gather(*xsd_tasks)
+    schemes = [scheme for scheme in xsd_schemes if scheme.filename is not None]
 
-    for xml_file in xsd_schemes:
+    for xml_file in schemes:
         start_time = time()
         result = sch.check_file(xml_file)
         results.append(result)
@@ -86,9 +88,10 @@ def async_test():
 
 
 async def multiproc_get_xsd():
+    xsd_root = '/home/vasily/PyProjects/FLK/Schematron/xsd'
     loop = asyncio.get_event_loop()
 
-    xsd_tasks = [asyncio.ensure_future(get_xsd_file(xml_file), loop=loop)
+    xsd_tasks = [asyncio.ensure_future(get_xsd_file(xml_file, xsd_root), loop=loop)
                  for xml_file in glob('*')[:]]
     return await asyncio.gather(*xsd_tasks)
 
@@ -104,7 +107,8 @@ def multiproc_test():
         event_loop = asyncio.get_event_loop()
         try:
             xsd_schemes = event_loop.run_until_complete(multiproc_get_xsd())
-            results = list(executor.map(multiproc_task, xsd_schemes))
+            schemes = [scheme for scheme in xsd_schemes if scheme.filename is not None]
+            results = list(executor.map(multiproc_task, schemes))
         finally:
             event_loop.close()
 
@@ -114,24 +118,24 @@ def multiproc_test():
 
 xsd_root = CONFIG['xsd_root']
 xml_root = CONFIG['xml_root']
-sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
+sch = SchemaChecker(xml_root=xml_root, xsd_root=xsd_root, verbose=True)
 
 if __name__ == '__main__':
     os.chdir(xml_root)
 
     results = sync_test()
 
-    test_results = {'passed': [], 'failed': [], 'missed_attribute': []}
+    test_results = {'passed': [], 'failed_xsd': [], 'failed_sch': []}
 
     for result in results:
-        if result['result'] == 'failed':
-            if result['description'] == 'some attributes are missed':
-                test_results['missed_attribute'].append(result)
-            else:
-                test_results['failed'].append(result)
+        if result.verify_result['result'] == 'failed_xsd':
+            test_results['failed_xsd'].append(result)
+        elif result.verify_result['result'] == 'failed_sch':
+            test_results['failed_sch'].append(result)
         else:
             test_results['passed'].append(result)
 
-    print(f'\n\u001b[31mFailed: {len(test_results["failed"])};\u001b[0m')
+    print(f'\n\u001b[31mFailed xsd: {len(test_results["failed_xsd"])}; '
+          f'Failed sch: {len(test_results["failed_sch"])};\u001b[0m')
     print(f'\u001b[32mPassed: {len(test_results["passed"])};\u001b[0m')
-    print(f'Ratio: {round(len(test_results["passed"]) / len(test_results["passed"] + test_results["failed"]), 4)}')
+    # print(f'Ratio: {round(len(test_results["passed"]) / len(test_results["passed"] + test_results["failed"]), 4)}')
