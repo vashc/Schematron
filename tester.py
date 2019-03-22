@@ -1,8 +1,6 @@
 import os
 import asyncio
 import concurrent.futures
-import copyreg
-import types
 from time import time
 from glob import glob
 from multiprocessing import cpu_count
@@ -11,36 +9,24 @@ from config import CONFIG
 from schematron.xsd_resolver import get_xsd_file
 
 
-def _pickle_method(method):
-    func_name = method.im_func.__name__
-    obj = method.im_self
-    cls = method.im_class
-    return _unpickle_method, (func_name, obj, cls)
-
-
-def _unpickle_method(func_name, obj, cls):
-    for cls in cls.mro():
-        try:
-            func = cls.__dict__[func_name]
-        except KeyError:
-            pass
-        else:
-            break
-    return func.__get__(obj, cls)
-
-
-copyreg.pickle(types.MethodType, _pickle_method, _unpickle_method)
-
-
 async def sync_run():
-    xsd_root = '/home/vasily/PyProjects/FLK/Schematron/xsd'
-    loop = asyncio.get_event_loop()
-
+    # xsd_root = '/home/vasily/PyProjects/FLK/Schematron/xsd'
     time_list = []
     results = []
+    file_list = []
 
-    xsd_tasks = [asyncio.ensure_future(get_xsd_file(xml_file, xsd_root), loop=loop)
-                 for xml_file in glob('*')[:]]
+    loop = asyncio.get_event_loop()
+
+    root_dir = '/home/vasily/PyProjects/FLK/2'
+    for root, dirs, files in os.walk(root_dir):
+        for file in files:
+            if not file.startswith('UO'):
+                file_list.append(os.path.join(root, file))
+
+    print(len(file_list))
+
+    xsd_tasks = [asyncio.ensure_future(get_xsd_file(file, xsd_root), loop=loop) for file in file_list]
+
     xsd_schemes = await asyncio.gather(*xsd_tasks)
     schemes = [scheme for scheme in xsd_schemes if scheme.filename is not None]
 
@@ -121,7 +107,7 @@ xml_root = CONFIG['xml_root']
 sch = SchemaChecker(xml_root=xml_root, xsd_root=xsd_root, verbose=True)
 
 if __name__ == '__main__':
-    os.chdir(xml_root)
+    # os.chdir(xml_root)
 
     results = sync_test()
 

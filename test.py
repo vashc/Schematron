@@ -3,14 +3,14 @@ import asyncio
 import concurrent.futures
 from time import time
 from glob import glob
-from schematron.schematron_checker import SchematronChecker
-from schematron.checker import check_file, _get_xsd_file
+from schematron import SchemaChecker
+from schematron.xsd_resolver import get_xsd_file
 from config import CONFIG, ROOT
 
 xsd_root = CONFIG['xsd_root']
 xml_root = CONFIG['xml_root']
 # sch = SchematronChecker(xsd_root=xsd_root, xml_root=xml_root)
-sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
+sch = SchemaChecker(xml_root=xml_root, xsd_root=xsd_root)
 
 # s = ''
 # while s != '~':
@@ -22,6 +22,9 @@ sch = SchematronChecker(xml_root=xml_root, xsd_root=xsd_root)
 
 def tokenize_asserts(file):
     with open(os.path.join(*os.path.split(ROOT)[:-1], file), 'r') as handler:
+        nlines = 0
+        start_time = time()
+
         for line in handler.readlines():
             # assertion = handler.readline()
             try:
@@ -29,6 +32,11 @@ def tokenize_asserts(file):
             except Exception as ex:
                 print(line)
                 print('Error:', ex)
+            nlines += 1
+
+        end_time = time() - start_time
+        print(f'Elapsed time: {round(end_time, 4)}; lines: {nlines};'
+              f' expr/sec: {round(nlines / end_time, 4)}')
 
 
 test_xml = ['NO_NDPI_9999_9999_9624840906999901001_20170309_CB8F959F-C631-4C37-AEC9-EC54B55112A3.xml',

@@ -50,8 +50,12 @@ async def get_xsd_file(xml_path, xsd_root):
               'description': '',
               'asserts': []}
 
-    with open(xml_file, 'rb') as xml_file_handler:
-        xml_content = etree.fromstring(xml_file_handler.read())
+    with open(xml_path, 'rb') as xml_file_handler:
+        try:
+            xml_content = etree.fromstring(xml_file_handler.read())
+        except etree.XMLSyntaxError:
+            print('Error xml file parsing:', xml_path)
+            return TestResolver(None, None, None)
 
     try:
         xml_info = _get_xml_info(xml_file, xml_content)

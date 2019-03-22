@@ -206,7 +206,7 @@ class SchemaChecker(local):
         comma = Suppress(',')
 
         alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-        element = (Word(alphabet + alphabet.upper() + nums + '@/:._-')
+        element = (Word(alphabet + alphabet.upper() + nums + '@/:._- ')
                    .setParseAction(self._push))
         integer = Word(nums).setParseAction(self._push)
         floats = (Combine(Word(nums) + '.' + Optional(Word(nums)))
