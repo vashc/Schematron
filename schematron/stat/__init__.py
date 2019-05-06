@@ -1,2 +1,2 @@
-from stat.stat_checker import StatChecker
-from stat.exceptions import *
+from .stat_checker import StatChecker
+from .exceptions import *

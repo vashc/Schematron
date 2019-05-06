@@ -1,4 +1,4 @@
-import edo
-import fns
-import pfr
-import stat
+from . import edo
+from . import fns
+from . import pfr
+from . import stat

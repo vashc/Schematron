@@ -1,4 +1,5 @@
 import os
+import sys
 import asyncio
 import aiohttp
 from lxml import html
@@ -6,8 +7,6 @@ from rarfile import RarFile
 from io import BytesIO
 from pprint import pprint
 
-
-ROOT = os.path.dirname(os.path.abspath(__file__))
 
 base_url = 'http://www.gks.ru/metod/XML-2019/'
 compendium_link = base_url + 'XML_plan_2019.htm'
@@ -51,6 +50,10 @@ def get_files(url):
 
 
 if __name__ == '__main__':
-    urls = get_files(compendium_link)
-    pprint(urls)
-    print(len(urls))
+    try:
+        ROOT = sys.argv[1]
+        urls = get_files(compendium_link)
+        pprint(urls)
+        print(len(urls))
+    except IndexError as ex:
+        print(ex)

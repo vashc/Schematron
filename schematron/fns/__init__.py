@@ -1,2 +1,2 @@
-from fns.fns_checker import SchemaChecker
-from fns.exceptions import *
+from .fns_checker import SchemaChecker
+from .exceptions import *
