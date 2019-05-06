@@ -157,7 +157,7 @@ class StatChecker:
     def setup_compendium(self):
         self.compendium = Dict()
 
-        comp_root = os.path.join(self.root, '_')
+        comp_root = os.path.join(self.root, 'compendium')
         os.chdir(comp_root)
         for file in glob('*'):
             with open(os.path.join(comp_root, file), 'r') as handler:
