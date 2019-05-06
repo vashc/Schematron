@@ -3,8 +3,8 @@ import asyncio
 import concurrent.futures
 from time import time
 from glob import glob
-from schematron import SchemaChecker
-from schematron.xsd_resolver import get_xsd_file
+from fns import SchemaChecker
+from fns.xsd_resolver import get_xsd_file
 from config import CONFIG, ROOT
 
 xsd_root = CONFIG['xsd_root']
@@ -190,4 +190,34 @@ def async_test():
 # el_t, avg_t = async_test()
 # print(f'Elapsed time: {round(el_t, 4)}; average time per async run: {round(avg_t, 4)}')
 # async_test()
-tokenize_asserts('_asserts.txt')
+
+# tokenize_asserts('_asserts.txt')
+
+import BaseXClient
+
+session = BaseXClient.Session('localhost', 1984, 'admin', 'admin')
+try:
+    session.execute('create db database')
+
+    root = '/home/vasily/PyProjects/FLK/pfr/exam'
+    file = 'ПФР_050-017-100075_050017_СЗВ-М_20180212_a4d9580e-6d3a-40db-9cb4-cba69b663659.xml'
+
+    with open(os.path.join(root, file), 'r') as handler:
+        session.add('test.xml', handler.read())
+    print(session.info())
+
+    query = session.execute('xquery //ФИО')
+    print(query)
+    # for id, item in query.iter():
+    #     print(id, item)
+    # query.close()
+
+    # print(session.execute('xquery collection("database")'))
+
+    session.execute('drop db database')
+    print(session.info())
+
+finally:
+    if session:
+        session.close()
+

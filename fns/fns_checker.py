@@ -462,7 +462,7 @@ class SchemaChecker(local):
                 f'{self._local_data.xml_file}: {ex}.')
             return
 
-        # Проверка выражений schematron
+        # Проверка выражений fns
         try:
             asserts = self._get_asserts(self._local_data.xsd_content)
         except Exception as ex:
@@ -504,6 +504,6 @@ class SchemaChecker(local):
                     print(f'{name}: \u001b[31m{errtext} ({errcode})\u001b[0m')
                 print('\u001b[31mTest failed\u001b[0m')
             input.verify_result['result'] = 'failed_sch'
-            input.verify_result['description'] = 'Ошибки при проверке schematron'
+            input.verify_result['description'] = 'Ошибки при проверке fns'
 
         return

@@ -4,9 +4,9 @@ import concurrent.futures
 from time import time
 from glob import glob
 from multiprocessing import cpu_count
-from schematron import SchemaChecker
+from fns import SchemaChecker
 from config import CONFIG
-from schematron.xsd_resolver import get_xsd_file
+from fns.xsd_resolver import get_xsd_file
 
 
 async def sync_run():
@@ -17,7 +17,7 @@ async def sync_run():
 
     loop = asyncio.get_event_loop()
 
-    root_dir = '/home/vasily/PyProjects/FLK/2'
+    root_dir = '/home/vasily/PyProjects/FLK/4'
     for root, dirs, files in os.walk(root_dir):
         for file in files:
             if not file.startswith('UO'):
@@ -125,3 +125,7 @@ if __name__ == '__main__':
           f'Failed sch: {len(test_results["failed_sch"])};\u001b[0m')
     print(f'\u001b[32mPassed: {len(test_results["passed"])};\u001b[0m')
     # print(f'Ratio: {round(len(test_results["passed"]) / len(test_results["passed"] + test_results["failed"]), 4)}')
+
+    # print(test_results['failed_sch'][-1].verify_result)
+    for assertion in test_results["failed_xsd"][-1].verify_result["xsd_asserts"]:
+        print(assertion)
