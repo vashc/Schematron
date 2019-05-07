@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='SchemaChecker',
-    version='0.0.3.dev9',
+    version='0.0.3.dev10',
     packages=['schematron',
               'schematron.edo',
               'schematron.fns',
