@@ -1,6 +1,5 @@
 import os
 from collections import OrderedDict
-from glob import glob
 from lxml import etree
 from .utils import Dict
 from .interpreter import Interpreter, PeriodInterpreter
@@ -158,141 +157,141 @@ class StatChecker:
         self.compendium = Dict()
 
         comp_root = os.path.join(self.root, 'compendium')
-        os.chdir(comp_root)
-        for file in glob('*'):
-            with open(os.path.join(comp_root, file), 'r') as handler:
-                try:
-                    content = etree.fromstring(handler.read(), parser=self.parser)
-                except etree.XMLSyntaxError as ex:
-                    print(f'Ошибка при разборе .xml файла шаблона: {ex}')
-                    continue
-
-            scheme = Dict()
-            # Данные раздела metaForm
-            scheme['metaForm'] = Dict(content.items())
-
-            # Данные раздела title
-            title_items = content.xpath('/metaForm/title//item')
-            title = Dict()
-            try:
-                for item in title_items:
-                    item_attribs = (item.attrib['name']) if not item.get('dic')\
-                        else (item.attrib['name'], item.attrib['dic'])
-                    title[item.attrib['field']] = item_attribs
-
-                scheme['title'] = title
-            except KeyError as ex:
-                print(f'Не найден обязательный атрибут в элементе item: {ex}')
-
-            # Данные раздела sections
-            scheme['sections'] = Dict()
-            sections = content.xpath('/metaForm/sections//section')
-            for section in sections:
-                _section = Dict(section.items())
-
-                _section['columns'] = Dict()
-                _section['rows'] = Dict()
-
-                cols = section.xpath('./columns//column')
-                for col in cols:
-                    _col = Dict(col.items())
-                    default_cell = col.find('./default-cell')
-                    if default_cell is not None:
-                        _col['default-cell'] = Dict(default_cell.items())
-
-                    _section['columns'][col.attrib['code']] = _col
-
-                rows = section.xpath('./rows//row')
-
-                for row in rows:
-                    _row = Dict(row.items())
-
-                    cells = row.xpath('./cell')
-                    for cell in cells:
-                        # Заполнение значения по умолчанию
-                        if 'default' in cell.keys():
-                            col_code = cell.attrib['column']
-                            cell_default = cell.attrib['default']
-                            _section['columns'][col_code]['default'] = cell_default
-
-                    if _row.type != 'C':
-                        _section['rows'][row.attrib['code']] = _row
-
-                # Создание структуры для датафрейма
-                _section['df_struct'] = self._create_df_structure(_section)
-
-                scheme['sections'][section.attrib['code']] = _section
-
-            # Данные раздела controls
-            scheme['controls'] = list()
-            controls = content.xpath('/metaForm/controls//control')
-            for control in controls:
-                _control = Dict(control.items())
-                # Нет информации о предыдущем периоде,
-                # пропускаем такие проверки
-                if '{{' in _control.rule.lower():
-                    continue
-
-                # Парсинг и сохранение выражения
-                ex_rule = _control.rule
-                try:
-                    _rule = self.tokenizer.tokenize_expression(
-                        _control.rule.lower(), self.log_expr)
-                    _control.rule = _rule
-                except Exception:
-                    raise TokenizerError(ex_rule)
-
-                # Парсинг и сохранение условия
-                # Могут попадаться условия, содержащие только пробелы
-                if _control.condition and not _control.condition.isspace():
-                    if '{{' in _control.condition.lower():
+        for root, dirs, files in os.walk(comp_root):
+            for file in files:
+                with open(os.path.join(root, file), 'r') as handler:
+                    try:
+                        content = etree.fromstring(handler.read(), parser=self.parser)
+                    except etree.XMLSyntaxError as ex:
+                        print(f'Ошибка при разборе .xml файла шаблона: {ex}')
                         continue
-                    ex_condition = _control.condition
+
+                scheme = Dict()
+                # Данные раздела metaForm
+                scheme['metaForm'] = Dict(content.items())
+
+                # Данные раздела title
+                title_items = content.xpath('/metaForm/title//item')
+                title = Dict()
+                try:
+                    for item in title_items:
+                        item_attribs = (item.attrib['name']) if not item.get('dic')\
+                            else (item.attrib['name'], item.attrib['dic'])
+                        title[item.attrib['field']] = item_attribs
+
+                    scheme['title'] = title
+                except KeyError as ex:
+                    print(f'Не найден обязательный атрибут в элементе item: {ex}')
+
+                # Данные раздела sections
+                scheme['sections'] = Dict()
+                sections = content.xpath('/metaForm/sections//section')
+                for section in sections:
+                    _section = Dict(section.items())
+
+                    _section['columns'] = Dict()
+                    _section['rows'] = Dict()
+
+                    cols = section.xpath('./columns//column')
+                    for col in cols:
+                        _col = Dict(col.items())
+                        default_cell = col.find('./default-cell')
+                        if default_cell is not None:
+                            _col['default-cell'] = Dict(default_cell.items())
+
+                        _section['columns'][col.attrib['code']] = _col
+
+                    rows = section.xpath('./rows//row')
+
+                    for row in rows:
+                        _row = Dict(row.items())
+
+                        cells = row.xpath('./cell')
+                        for cell in cells:
+                            # Заполнение значения по умолчанию
+                            if 'default' in cell.keys():
+                                col_code = cell.attrib['column']
+                                cell_default = cell.attrib['default']
+                                _section['columns'][col_code]['default'] = cell_default
+
+                        if _row.type != 'C':
+                            _section['rows'][row.attrib['code']] = _row
+
+                    # Создание структуры для датафрейма
+                    _section['df_struct'] = self._create_df_structure(_section)
+
+                    scheme['sections'][section.attrib['code']] = _section
+
+                # Данные раздела controls
+                scheme['controls'] = list()
+                controls = content.xpath('/metaForm/controls//control')
+                for control in controls:
+                    _control = Dict(control.items())
+                    # Нет информации о предыдущем периоде,
+                    # пропускаем такие проверки
+                    if '{{' in _control.rule.lower():
+                        continue
+
+                    # Парсинг и сохранение выражения
+                    ex_rule = _control.rule
                     try:
-                        _condition = self.tokenizer.tokenize_expression(
-                            _control.condition.lower(), self.condition)
-                        _control.condition = _condition
+                        _rule = self.tokenizer.tokenize_expression(
+                            _control.rule.lower(), self.log_expr)
+                        _control.rule = _rule
                     except Exception:
-                        raise TokenizerError(ex_condition)
+                        raise TokenizerError(ex_rule)
 
-                # Парсинг и сохранение условия на период
-                if _control.periodClause:
-                    ex_period = _control.periodClause
-                    try:
-                        _period = self.tokenizer.tokenize_expression(
-                            _control.periodClause.lower(), self.period_cond)
-                        _control.period = _period
-                    except Exception:
-                        raise TokenizerError(ex_period)
+                    # Парсинг и сохранение условия
+                    # Могут попадаться условия, содержащие только пробелы
+                    if _control.condition and not _control.condition.isspace():
+                        if '{{' in _control.condition.lower():
+                            continue
+                        ex_condition = _control.condition
+                        try:
+                            _condition = self.tokenizer.tokenize_expression(
+                                _control.condition.lower(), self.condition)
+                            _control.condition = _condition
+                        except Exception:
+                            raise TokenizerError(ex_condition)
 
-                # Парсинг и получение списка строк/колонок/специфик
-                # для правила и условия
-                element_map = self._parse_elements(_control.rule,
-                                                   _control.condition)
-                _control['section'] = element_map.section
-                _control['rows'] = element_map.rows
-                _control['cols'] = element_map.cols
-                _control['specs'] = element_map.specs
+                    # Парсинг и сохранение условия на период
+                    if _control.periodClause:
+                        ex_period = _control.periodClause
+                        try:
+                            _period = self.tokenizer.tokenize_expression(
+                                _control.periodClause.lower(), self.period_cond)
+                            _control.period = _period
+                        except Exception:
+                            raise TokenizerError(ex_period)
 
-                scheme['controls'].append(_control)
+                    # Парсинг и получение списка строк/колонок/специфик
+                    # для правила и условия
+                    element_map = self._parse_elements(_control.rule,
+                                                       _control.condition)
+                    _control['section'] = element_map.section
+                    _control['rows'] = element_map.rows
+                    _control['cols'] = element_map.cols
+                    _control['specs'] = element_map.specs
 
-            # Данные справочников
-            scheme['dics'] = Dict()
-            dics = content.xpath('/metaForm/dics//dic')
-            for dic in dics:
-                _dic = Dict(dic.items())
-                _dic['terms'] = Dict()
-                terms = dic.xpath('.//term')
-                for term in terms:
-                    _dic['terms'][term.attrib['id']] = term.text
+                    scheme['controls'].append(_control)
 
-                scheme['dics'][dic.attrib['id']] = _dic
+                # Данные справочников
+                scheme['dics'] = Dict()
+                dics = content.xpath('/metaForm/dics//dic')
+                for dic in dics:
+                    _dic = Dict(dic.items())
+                    _dic['terms'] = Dict()
+                    terms = dic.xpath('.//term')
+                    for term in terms:
+                        _dic['terms'][term.attrib['id']] = term.text
 
-            _okud = content.get('OKUD')
-            if _okud:
-                self.compendium[_okud] = scheme
-            else:
-                raise OkudError(self.filename)
+                    scheme['dics'][dic.attrib['id']] = _dic
+
+                _okud = content.get('OKUD')
+                if _okud:
+                    self.compendium[_okud] = scheme
+                else:
+                    raise OkudError(self.filename)
 
     def check_file(self, input):
         self.filename = input.filename

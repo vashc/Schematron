@@ -1,5 +1,4 @@
 import os
-from glob import glob
 from lxml import etree
 from .exceptions import *
 
@@ -20,18 +19,18 @@ class EdoChecker:
         self.compendium = dict()
 
         comp_root = os.path.join(self.root, 'compendium')
-        os.chdir(comp_root)
-        for file in glob('*'):
-            filename = file.split('.')[0]
-            with open(os.path.join(comp_root, file), 'r',
-                      encoding='cp1251') as handler:
-                try:
-                    xsd_name = '_'.join(filename.split('_')[:2])
-                    xsd_content = etree.parse(handler, self.parser).getroot()
-                    xsd_scheme = etree.XMLSchema(xsd_content)
-                    self.compendium[xsd_name] = xsd_content, xsd_scheme
-                except etree.XMLSyntaxError as ex:
-                    raise XsdSchemeError(ex)
+        for root, dirs, files in os.walk(comp_root):
+            for file in files:
+                filename = file.split('.')[0]
+                with open(os.path.join(root, file), 'r',
+                          encoding='cp1251') as handler:
+                    try:
+                        xsd_name = '_'.join(filename.split('_')[:2])
+                        xsd_content = etree.parse(handler, self.parser).getroot()
+                        xsd_scheme = etree.XMLSchema(xsd_content)
+                        self.compendium[xsd_name] = xsd_content, xsd_scheme
+                    except etree.XMLSyntaxError as ex:
+                        raise XsdSchemeError(ex)
 
     def check_file(self, input):
         self.filename = input.filename
