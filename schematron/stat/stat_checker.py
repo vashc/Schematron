@@ -255,7 +255,7 @@ class StatChecker:
                             raise TokenizerError(ex_condition)
 
                     # Парсинг и сохранение условия на период
-                    if _control.periodClause:
+                    if _control.periodClause and not _control.periodClause.isspace():
                         ex_period = _control.periodClause
                         try:
                             _period = self.tokenizer.tokenize_expression(
