@@ -326,7 +326,7 @@ class StatChecker:
                             .evaluate_expr(control.period)
                     if control.condition:
                         condition = self.interpreter\
-                            .evaluate_expr(control.condition, self.frames)
+                            .evaluate_expr_cond(control.condition, self.frames)
                     if period_cond and condition:
                         ret = self.interpreter\
                             .evaluate_expr(control.rule, self.frames)

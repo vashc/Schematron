@@ -33,7 +33,7 @@ class PeriodInterpreter:
             return self.unary_map[op](arg1, arg2)
 
         # Код периода
-        elif op.isalnum():
+        elif op.isdigit():
             return op
 
         elif op == '&np':
@@ -46,6 +46,7 @@ class PeriodInterpreter:
             while arg != '&np':
                 arg = self._evaluate_stack()
                 args.append(arg)
+                arg = self.stack[-1]
             return self.period in args
 
     @property
@@ -115,6 +116,8 @@ class Interpreter:
 
         # Стек выражения
         self.stack = []
+        # Флаг условного выражения
+        self.condition = False
         # Флаги тернарного сравнения
         self.ternary = False
         self.first_op = False
@@ -224,6 +227,12 @@ class Interpreter:
             return self.unary_map[op](arg)
 
         elif op in self.bool_map:
+            # Условное выражение, отсутствуют тернарные сравнения
+            if self.condition:
+                arg2 = self._evaluate_stack()
+                arg1 = self._evaluate_stack()
+                arg1, arg2 = self._check_context(arg1, arg2)
+                return self.bool_map[op](arg1, arg2)
             self.first_op = ~self.first_op
             if not self.first_op:
                 self.ternary = True
@@ -268,9 +277,26 @@ class Interpreter:
             return op
 
     def evaluate_expr(self, expr, frame_map):
+        """
+        Вычисление котрольного выражения
+        """
         self.frame_map = frame_map
         self.stack = deepcopy(expr)
         try:
             return self._evaluate_stack()
         except Exception:
             raise InterpreterError(expr)
+
+    def evaluate_expr_cond(self, expr, frame_map):
+        """
+        Вычисление условного выражения
+        """
+        self.condition = True
+        self.frame_map = frame_map
+        self.stack = deepcopy(expr)
+        try:
+            return self._evaluate_stack()
+        except Exception:
+            raise InterpreterError(expr)
+        finally:
+            self.condition = False
