@@ -253,6 +253,8 @@ class StatChecker:
                             _control.condition = _condition
                         except Exception:
                             raise TokenizerError(ex_condition)
+                    else:
+                        _control.condition = ''
 
                     # Парсинг и сохранение условия на период
                     if _control.periodClause and not _control.periodClause.isspace():
@@ -263,6 +265,8 @@ class StatChecker:
                             _control.period = _period
                         except Exception:
                             raise TokenizerError(ex_period)
+                    else:
+                        _control.period = ''
 
                     # Парсинг и получение списка строк/колонок/специфик
                     # для правила и условия
