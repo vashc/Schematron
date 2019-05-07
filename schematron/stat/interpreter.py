@@ -56,7 +56,7 @@ class PeriodInterpreter:
         self._period = value
 
     def evaluate_expr(self, expr):
-        self.stack = expr
+        self.stack = expr.copy()
         try:
             return self._evaluate_stack()
         except Exception:
@@ -268,7 +268,7 @@ class Interpreter:
 
     def evaluate_expr(self, expr, frame_map):
         self.frame_map = frame_map
-        self.stack = expr
+        self.stack = expr.copy()
         try:
             return self._evaluate_stack()
         except Exception:
