@@ -1,5 +1,6 @@
 import operator
 import numpy as np
+from copy import deepcopy
 from .dataframe import DataFrame
 from .exceptions import InterpreterError
 
@@ -56,7 +57,7 @@ class PeriodInterpreter:
         self._period = value
 
     def evaluate_expr(self, expr):
-        self.stack = expr.copy()
+        self.stack = expr.deepcopy()
         try:
             return self._evaluate_stack()
         except Exception:
@@ -268,7 +269,7 @@ class Interpreter:
 
     def evaluate_expr(self, expr, frame_map):
         self.frame_map = frame_map
-        self.stack = expr.copy()
+        self.stack = expr.deepcopy()
         try:
             return self._evaluate_stack()
         except Exception:
