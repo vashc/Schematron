@@ -396,7 +396,7 @@ class SchemaChecker(local):
         return ''.join(args)
 
     def _usch_file_name(self):
-        return ''.join(self._local_data.xml_file.split('.')[:-1])
+        return '.'.join(self._local_data.xml_file.split('.')[:-1])
 
     def _usch_iif(self, cond, true, false):
         return true if cond else false
