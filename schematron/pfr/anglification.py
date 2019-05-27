@@ -1,7 +1,7 @@
 import sys
 import os
 from lxml import etree
-from utils import translate
+from .utils import Translator
 
 comp_root = '/home/vasily/PyProjects/FLK/pfr/compendium'
 
@@ -44,7 +44,7 @@ for direction in directions:
 
                 for loc in locations:
                     old_uri = loc.attrib['schemaLocation']
-                    uri = translate(old_uri)
+                    uri = Translator.translate(old_uri)
                     loc.attrib['schemaLocation'] = uri
                     if utf_flag:
                         tree = etree.tostring(scheme, encoding='utf-8')
@@ -57,13 +57,13 @@ for direction in directions:
                     handler.write(tree)
 
             # Переименовываем файл
-            new_file = translate(file)
+            new_file = Translator.translate(file)
             os.rename(file_path, os.path.join(root, new_file))
 
         # Переименовываем директории
         for idx, dir in enumerate(dirs):
             dir_path = os.path.join(root, dir)
-            new_dir = translate(dir)
+            new_dir = Translator.translate(dir)
             os.rename(dir_path, os.path.join(root, new_dir))
             dirs[idx] = new_dir
 

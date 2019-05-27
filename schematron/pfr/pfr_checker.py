@@ -1,6 +1,7 @@
 import os
 import BaseXClient
 from lxml import etree
+from .utils import Flock
 
 
 class PfrChecker:
@@ -15,8 +16,8 @@ class PfrChecker:
         self.db_data = os.path.join(root, 'basex/data/')
         # Синхронизация записи в базы данных BaseX
         # для избежания write lock
-        #TODO: mutex
-        with open(os.path.join(self.db_data, '.sync'), 'r+') as handler:
+        with Flock(os.path.join(self.db_data, '.sync')) as handler:
+        # with open(os.path.join(self.db_data, '.sync'), 'r+') as handler:
             self.db_num = int(handler.read(1))
             if self.db_num < os.cpu_count():
                 self.db_num += 1
@@ -51,8 +52,8 @@ class PfrChecker:
 
     def __del__(self):
         # Воркер завершил работу, синхронизируем
-        #TODO: mutex
-        with open(os.path.join(self.db_data, '.sync'), 'r+') as handler:
+        with Flock(os.path.join(self.db_data, '.sync')) as handler:
+        # with open(os.path.join(self.db_data, '.sync'), 'r+') as handler:
             num = int(handler.read(1))
             if num > 0:
                 num -= 1
