@@ -52,5 +52,5 @@ class Flock:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         fcntl.flock(self.fd, fcntl.LOCK_UN)
-        os.close(self.fd)
+        self.fd.close()
         self.fd = None

@@ -1,7 +1,7 @@
 import sys
 import os
 from lxml import etree
-from .utils import Translator
+from utils import Translator
 
 comp_root = '/home/vasily/PyProjects/FLK/pfr/compendium'
 
@@ -18,6 +18,29 @@ utf_parser = etree.XMLParser(encoding='utf-8',
 
 directions = os.listdir(comp_root)
 for direction in directions:
+    # Переименовываем пути в компендиуме ПФР_КСАФ
+    compendium_path = os.path.join(comp_root, direction, 'ПФР_КСАФ.xml')
+    with open(compendium_path, 'rb') as handler:
+        compendium = etree.fromstring(handler.read(), parser=utf_parser)
+    nsmap = compendium.nsmap
+    nsmap['d'] = nsmap.pop(None)
+    doc_format = compendium.xpath(
+        f'//d:ТипДокумента//d:Формат'
+        f'[@Статус="Действующий" and @ПоУмолчанию="true"]',
+        namespaces=nsmap)
+
+    for doc in doc_format:
+        # Путь к валидационной схеме
+        scheme = doc.findall('.//d:Валидация/d:Схема', namespaces=nsmap)[0]
+        scheme_dirs = scheme.text.lstrip('\\').split('\\')
+        scheme_dirs[1:] = [Translator.translate(d) for d in scheme_dirs[1:]]
+        new_scheme = '\\'.join(scheme_dirs)
+        scheme.text = new_scheme
+
+    tree = etree.tostring(compendium, encoding='utf-8')
+    with open(compendium_path, 'wb') as handler:
+        handler.write(tree)
+
     cur_dir = os.path.join(comp_root, direction, 'Схемы')
 
     for root, dirs, files in os.walk(cur_dir):

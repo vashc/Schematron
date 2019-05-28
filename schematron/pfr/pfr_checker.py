@@ -28,7 +28,7 @@ class PfrChecker:
                 raise Exception('Too many BaseX workers')
 
         # Название основного валидационного файла
-        self.compendium_file = 'ПФР_КСАФ_20190205_a95f0eee-1556-488e-8d3e-27e89122314d.xml'
+        self.compendium_file = 'ПФР_КСАФ.xml'
 
         # Название файла ПФР
         self.xml_file = None
