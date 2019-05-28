@@ -47,6 +47,7 @@ class Flock:
                       and time() > start_time + self._timeout):
                     raise
 
+            # Ждём некоторое время и пробуем взять лок снова
             sleep(0.1)
 
     def __exit__(self, exc_type, exc_val, exc_tb):

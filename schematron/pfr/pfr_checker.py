@@ -17,7 +17,6 @@ class PfrChecker:
         # Синхронизация записи в базы данных BaseX
         # для избежания write lock
         with Flock(os.path.join(self.db_data, '.sync')) as handler:
-        # with open(os.path.join(self.db_data, '.sync'), 'r+') as handler:
             self.db_num = int(handler.read(1))
             if self.db_num < os.cpu_count():
                 self.db_num += 1
@@ -28,7 +27,7 @@ class PfrChecker:
                 raise Exception('Too many BaseX workers')
 
         # Название основного валидационного файла
-        self.compendium_file = 'ПФР_КСАФ.xml'
+        self.compendium_file = 'ПФР_КСАФ_20190205_a95f0eee-1556-488e-8d3e-27e89122314d.xml'
 
         # Название файла ПФР
         self.xml_file = None
@@ -53,7 +52,6 @@ class PfrChecker:
     def __del__(self):
         # Воркер завершил работу, синхронизируем
         with Flock(os.path.join(self.db_data, '.sync')) as handler:
-        # with open(os.path.join(self.db_data, '.sync'), 'r+') as handler:
             num = int(handler.read(1))
             if num > 0:
                 num -= 1
