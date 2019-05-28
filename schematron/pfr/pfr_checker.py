@@ -103,7 +103,7 @@ class PfrChecker:
 
         # Пути в схемах как в винде, поэтому меняем слэши
         for idx, scheme in enumerate(schemes):
-            schemes[idx] = scheme[1:].replace('\\', '/')
+            schemes[idx] = scheme.replace('\\', '/')
 
         # Работаем с проверяемым .xml файлом
         # Проверка, есть ли уже такой в базе

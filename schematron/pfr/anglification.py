@@ -37,6 +37,7 @@ for direction in directions:
         new_scheme = '\\'.join(scheme_dirs)
         scheme.text = new_scheme
 
+    # Перезаписываем файл компендиума
     tree = etree.tostring(compendium, encoding='utf-8')
     with open(compendium_path, 'wb') as handler:
         handler.write(tree)
