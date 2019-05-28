@@ -8,7 +8,8 @@ class PfrChecker:
     def __init__(self, *, root):
         self.root = root
         # Корневая директория для файлов валидации
-        self.xsd_root = os.path.join(root, 'compendium/СЗВ-М+ИС+УПП АФ.2.32д/')
+        self.xsd_root = os.path.join(root, 'compendium/pfr/compendium/'
+                                           'СЗВ-М+ИС+УПП АФ.2.32д/')
         # Справочники для проверок КОРР файлов
         # (нужны для передачи в переменную $dictFile)
         self.dict_file = os.path.join(self.xsd_root, 'Справочники/Справочники.xml')
