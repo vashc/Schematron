@@ -1,6 +1,7 @@
 import os
 import BaseXClient
 from lxml import etree
+from atexit import register
 from .utils import Flock
 
 
@@ -50,7 +51,8 @@ class PfrChecker:
 
         self.session = BaseXClient.Session('localhost', 1984, 'admin', 'admin')
 
-    def __del__(self):
+    @register
+    def _finalize(self):
         # Воркер завершил работу, синхронизируем
         with Flock(os.path.join(self.db_data, '.sync')) as handler:
             num = int(handler.read(1))
@@ -64,6 +66,9 @@ class PfrChecker:
         # Закрываем сессию
         if self.session:
             self.session.close()
+
+    def __del__(self):
+        self._finalize()
 
     def check_file(self, input, xml_file_path):
         self.xml_file = input.filename
@@ -86,7 +91,6 @@ class PfrChecker:
             prefix = self.xml_file.split('_')[1]
         elif 'ЗНП' in self.xml_file or 'ЗДП' in self.xml_file:
             prefix = self.xml_file.split('_')[2]
-
 
         # Пришлось модифицировать пространство имён,
         # т.к. не съедает пустые ключи в словаре

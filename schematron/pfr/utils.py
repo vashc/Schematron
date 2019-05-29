@@ -38,7 +38,7 @@ class Flock:
             try:
                 fcntl.flock(self.fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
                 return self.fd
-            except OSError as ex:
+            except (OSError, IOError) as ex:
                 # Ресурс недоступен
                 if ex.errno != errno.EAGAIN:
                     raise
