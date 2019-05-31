@@ -2,7 +2,10 @@ import os
 import BaseXClient
 from lxml import etree
 from atexit import register
-from utils import Flock
+from struct import pack, unpack
+from .utils import Flock, Logger
+from glob import glob
+from pprint import pprint
 
 
 class PfrChecker:
@@ -62,13 +65,13 @@ class PfrChecker:
         self.db_data = os.path.join(root, 'basex/data/')
         # Синхронизация записи в базы данных BaseX
         # для избежания write lock
-        with Flock(os.path.join(self.db_data, '.sync')) as handler:
-            self.db_num = int(handler.read(1))
+        with Flock(os.path.join(self.db_data, '.sync')) as fd:
+            self.db_num = unpack('I', os.read(fd, 4))[0]
             if self.db_num < os.cpu_count():
                 self.db_num += 1
                 self.db_root = self.db_data + f'xml_db{self.db_num}'
-                handler.seek(0)
-                handler.write(str(self.db_num))
+                os.lseek(fd, 0, os.SEEK_SET)
+                os.write(fd, pack('I', self.db_num))
             else:
                 raise Exception('Too many BaseX workers')
 
@@ -80,12 +83,12 @@ class PfrChecker:
         Метод для синхронизации процессов через .sync файл
         при завершении/рестарте
         """
-        with Flock(os.path.join(self.db_data, '.sync')) as handler:
-            num = int(handler.read(1))
+        with Flock(os.path.join(self.db_data, '.sync')) as fd:
+            num = unpack('I', os.read(fd, 4))[0]
             if num > 0:
                 num -= 1
-                handler.seek(0)
-                handler.write(str(num))
+                os.lseek(fd, 0, os.SEEK_SET)
+                os.write(fd, pack('I', num))
             else:
                 raise Exception('Incorrect synchronisation value')
 
@@ -107,7 +110,7 @@ class PfrChecker:
                                    namespaces=nsmap)
         return schemes, doc_format
 
-    def _get_adv_scheme(self, nsmap):
+    def _get_adv_scheme(self):
         """
         Метод для возврата схем для АДВ направлений
         """
@@ -118,12 +121,21 @@ class PfrChecker:
             doc_type = self.xml_content.find('.//d:ТипДокумента',
                                              namespaces=nsmap).text
         except AttributeError as ex:
-            # TODO: raise exception
-            print('Не определён тип документа')
+            raise Exception('Не определён тип документа')
 
-        doc_format = self.compendium[self.direction].xpath(
-            f'.//d:Валидация[contains(d:ОпределениеДокумента, "{doc_type}")]',
-            namespaces=self.nsmap)[0]
+        try:
+            doc_format = self.compendium[self.direction].xpath(
+                f'.//d:Валидация[contains(d:ОпределениеДокумента, "{doc_type}")]',
+                namespaces=self.nsmap)[0]
+        except Exception as ex:
+            logger = Logger(os.path.join(self.root, 'logs/'))
+            log = logger.get_logger('pfr_checker')
+            log.info(doc_type)
+            log.info(self.direction)
+            log.info(self.compendium[self.direction].xpath(
+                f'.//d:Валидация[contains(d:ОпределениеДокумента, "{doc_type}")]',
+                namespaces=self.nsmap))
+
         # Путь к валидационной схеме
         schemes = doc_format.xpath('.//d:Схема/text()', namespaces=self.nsmap)
         return schemes, doc_format
@@ -134,6 +146,7 @@ class PfrChecker:
         """
         # Префикс файла (СЗВ-М, СТАЖ и т.д.). None для АДВ направлений
         prefix = None
+        self.direction = 0
         if 'СЗВ' in self.xml_file or 'ОДВ' in self.xml_file:
             prefix = self.xml_file.split('_')[3]
             self.direction = 1
@@ -152,7 +165,7 @@ class PfrChecker:
             schemes, doc_format = self._get_nonadv_scheme(prefix, self.nsmap)
         # АДВ направление, ищем тип документа в xml файле
         else:
-            schemes, doc_format = self._get_adv_scheme(self.nsmap)
+            schemes, doc_format = self._get_adv_scheme()
 
         for idx, scheme in enumerate(schemes):
             schemes[idx] = scheme.replace('\\', '/')
@@ -184,7 +197,7 @@ class PfrChecker:
                         input.verify_result['result'] = 'failed_xsd'
                         input.verify_result['description'] = (
                             f'Ошибка при валидации по xsd схеме файла '
-                            f'{self.xml_file}: {ex}.')
+                            f'{self.xml_file}.')
                         return
 
                 except etree.XMLSyntaxError as ex:
@@ -214,7 +227,8 @@ class PfrChecker:
                                self.directions[self.direction],
                                scenario_file), 'rb') as handler:
             try:
-                scenario = etree.fromstring(handler.read(), parser=self.utf_parser)
+                scenario = etree.fromstring(handler.read(),
+                                            parser=self.utf_parser)
             except etree.XMLSyntaxError as ex:
                 #TODO: raise exception
                 print(f'Error scenario file parsing: {ex}')
@@ -279,7 +293,8 @@ class PfrChecker:
         Метод для проверки xml файла по протоколируемым проверкам из сценария
         """
         for validator in validators:
-            validator_file = validator.xpath('./d:Файл/text()', namespaces=nsmap)[0]
+            validator_file = validator.xpath('./d:Файл/text()',
+                                             namespaces=nsmap)[0]
             # Используем не .xml файл для проверки, а сразу сырой .xquery
             validator_file = validator_file.split('\\')[-1].split('.')[0] + '.xquery'
 
@@ -310,15 +325,16 @@ class PfrChecker:
                     '//d:Проверка[d:РезультатЗапроса/d:Результат[text()!=0]]',
                     namespaces=q_nsmap
                 )
-                # Обнаружили ошибки
                 if self.direction:
                     self._checkup_nonadv(checkups, q_nsmap, block_code, input)
                 else:
                     self._checkup_adv(checkups, q_nsmap, input)
-                input.verify_result['result'] = 'failed_xqr'
-                input.verify_result['description'] = (
-                    f'Ошибка при валидации по xquery выражению файла '
-                    f'{self.xml_file}.')
+                # Обнаружили ошибки
+                if checkups:
+                    input.verify_result['result'] = 'failed_xqr'
+                    input.verify_result['description'] = (
+                        f'Ошибка при валидации по xquery выражению файла '
+                        f'{self.xml_file}.')
             #TODO: check if no result has been returned
 
     def check_file(self, input, xml_file_path):
@@ -332,23 +348,32 @@ class PfrChecker:
         input.verify_result['xsd_asserts'] = []
         input.verify_result['xqr_asserts'] = []
 
-        # Открытие сессии BaseX
-        self.session.execute(f'open xml_db{self.db_num}')
-
-        # Работаем с проверяемым .xml файлом
-        # Проверка, есть ли уже такой в базе
-        query = self.session.query(f'db:exists("xml_db{self.db_num}", '
-                                   f'"{self.db_root}/{self.xml_file}")')
-        query_result = query.execute()
-        if query_result == 'false':
-            # Файл не найден, добавляем
-            self.session.add(f'{self.db_root}/{self.xml_file}',
-                             self.content.decode('utf-8'))
-        if query:
-            query.close()
-
         # Получение списка проверочных схем и формата документа
         schemes, doc_format = self._get_schemes()
+
+        # BaseX не умеет в декодирование,
+        # для АДВ направлений указываем кодировку вручную
+        # if self.direction:
+        #     session = self.session
+        # else:
+        #     session = BaseXClient.Session('localhost', 1984, 'admin', 'admin',
+        #                                   send_bytes_encoding='cp1251')
+        # Открытие сессии BaseX
+        self.session.execute(f'open xml_db{self.db_num}')
+        # session.execute(f'open xml_db{self.db_num}')
+        # Работаем с проверяемым .xml файлом
+        # Проверка, есть ли уже такой в базе
+        # query = session.query(f'db:exists("xml_db{self.db_num}", '
+        #                            f'"{self.db_root}/{self.xml_file}")')
+        # query_result = query.execute()
+        # if query_result == 'false':
+        #     # Файл не найден, добавляем
+        #     encoding = 'utf-8' if self.direction else 'cp1251'
+        #     session.add(f'{self.db_root}/{self.xml_file}',
+        #                 self.content.decode(encoding))
+        # if query:
+        #     query.close()
+        # session.close()
 
         # Проверка по xsd схеме
         self._validate_scheme(schemes, input)
@@ -359,3 +384,29 @@ class PfrChecker:
 
         self._validate_scenario(validators, scenario_dir, nsmap,
                                 xml_file_path, input)
+
+# class Input:
+#     def __init__(self, filename, content, data):
+#         # self.parser = etree.XMLParser(encoding='utf-8',
+#         #                               recover=True,
+#         #                               remove_comments=True)
+#         self.filename = filename
+#         self.xml_obj = content
+#         self.content = data
+#
+# xsd_root = '/home/vasily/PyProjects/FLK/pfr'
+# root = '/home/vasily/PyProjects/FLK/pfr/compendium/АДВ+АДИ+ДСВ 1.17.12д/Примеры/ВЗЛ/Входящие'
+# # root = '/home/vasily/PyProjects/FLK/pfr/_'
+# checker = PfrChecker(root=xsd_root)
+# os.chdir(root)
+# for file in glob('*'):
+#     xml_file_path = os.path.join(root, file)
+#     with open(xml_file_path, 'rb') as handler:
+#         data = handler.read()
+#         xml_content = etree.fromstring(data, parser=checker.cp_parser)
+#
+#         etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
+#
+#         input = Input(file, xml_content, data)
+#         checker.check_file(input, xml_file_path)
+#         # pprint(input.verify_result)

@@ -1,6 +1,7 @@
 import errno
 import fcntl
 import os
+import logging
 from time import time, sleep
 
 
@@ -31,7 +32,7 @@ class Flock:
         self.fd = None
 
     def __enter__(self):
-        self.fd = open(self._path, 'r+')
+        self.fd = os.open(self._path, os.O_RDWR)
         start_time = time()
 
         while True:
@@ -52,5 +53,24 @@ class Flock:
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         fcntl.flock(self.fd, fcntl.LOCK_UN)
-        self.fd.close()
+        os.close(self.fd)
         self.fd = None
+
+
+class Logger:
+    def __init__(self, logs_path):
+        self.log_format = "%(asctime)s [%(levelname)5s] %(message)s"
+        self.date_format = "%d.%m.%Y %H:%M:%S"
+        self.logs_path = logs_path
+
+    def get_logger(self, name):
+        __formatter = logging.Formatter(fmt=self.log_format,
+                                        datefmt=self.date_format)
+
+        logger = logging.getLogger(name)
+        handler = logging.FileHandler(os.path.join(self.logs_path,
+                                                   f"{name}.log"))
+        handler.setFormatter(__formatter)
+        logger.setLevel('DEBUG')
+        logger.addHandler(handler)
+        return logger
