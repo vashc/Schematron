@@ -34,6 +34,8 @@ class PfrChecker:
         self.content = None
         # Содержимое файла в виде etree Element
         self.xml_content = None
+        # Тип документа (например, АНКЕТА_ЗЛ)
+        self.doc_type = None
 
         # Используемые парсеры
         self.cp_parser = etree.XMLParser(encoding='cp1251',
@@ -118,23 +120,20 @@ class PfrChecker:
         nsmap['d'] = nsmap.pop(None)
 
         try:
-            doc_type = self.xml_content.find('.//d:ТипДокумента',
-                                             namespaces=nsmap).text
+            self.doc_type = self.xml_content.find('.//d:ТипДокумента',
+                                                  namespaces=nsmap).text
         except AttributeError as ex:
             raise Exception('Не определён тип документа')
 
         try:
             doc_format = self.compendium[self.direction].xpath(
-                f'.//d:Валидация[contains(d:ОпределениеДокумента, "{doc_type}")]',
+                f'.//d:Валидация[contains(d:ОпределениеДокумента, "{self.doc_type}")]',
                 namespaces=self.nsmap)[0]
-        except Exception as ex:
+        except IndexError as ex:
             logger = Logger(os.path.join(self.root, 'logs/'))
             log = logger.get_logger('pfr_checker')
-            log.info(doc_type)
-            log.info(self.direction)
-            log.info(self.compendium[self.direction].xpath(
-                f'.//d:Валидация[contains(d:ОпределениеДокумента, "{doc_type}")]',
-                namespaces=self.nsmap))
+            log.exception(ex)
+            raise
 
         # Путь к валидационной схеме
         schemes = doc_format.xpath('.//d:Схема/text()', namespaces=self.nsmap)
@@ -249,14 +248,21 @@ class PfrChecker:
         Метод для получения результатов проверки (ошибок) для АДВ направлений
         """
         for checkup in checkups:
+            code_presence = checkup.find('./d:КодРезультата', namespaces=q_nsmap)
+            if len(code_presence):
+                code = code_presence.text
+            else:
+                code = 50
+            prot_code = self.doc_type
             description = checkup.find('./d:Описание', namespaces=q_nsmap).text
             results = checkup.findall('.//d:Результат', namespaces=q_nsmap)
             element_objs = []
             for result in results:
                 element_path = result.text
                 element_objs.append(element_path)
-            input.verify_result['xqr_asserts'].append((description,
-                                                       element_objs))
+            input.verify_result['xqr_asserts'].append((
+                code, prot_code, description, element_objs
+            ))
 
     def _checkup_nonadv(self, checkups, q_nsmap, block_code, input):
         """
@@ -351,29 +357,8 @@ class PfrChecker:
         # Получение списка проверочных схем и формата документа
         schemes, doc_format = self._get_schemes()
 
-        # BaseX не умеет в декодирование,
-        # для АДВ направлений указываем кодировку вручную
-        # if self.direction:
-        #     session = self.session
-        # else:
-        #     session = BaseXClient.Session('localhost', 1984, 'admin', 'admin',
-        #                                   send_bytes_encoding='cp1251')
         # Открытие сессии BaseX
         self.session.execute(f'open xml_db{self.db_num}')
-        # session.execute(f'open xml_db{self.db_num}')
-        # Работаем с проверяемым .xml файлом
-        # Проверка, есть ли уже такой в базе
-        # query = session.query(f'db:exists("xml_db{self.db_num}", '
-        #                            f'"{self.db_root}/{self.xml_file}")')
-        # query_result = query.execute()
-        # if query_result == 'false':
-        #     # Файл не найден, добавляем
-        #     encoding = 'utf-8' if self.direction else 'cp1251'
-        #     session.add(f'{self.db_root}/{self.xml_file}',
-        #                 self.content.decode(encoding))
-        # if query:
-        #     query.close()
-        # session.close()
 
         # Проверка по xsd схеме
         self._validate_scheme(schemes, input)
@@ -409,4 +394,4 @@ class PfrChecker:
 #
 #         input = Input(file, xml_content, data)
 #         checker.check_file(input, xml_file_path)
-#         # pprint(input.verify_result)
+#         pprint(input.verify_result)
