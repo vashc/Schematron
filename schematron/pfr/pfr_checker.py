@@ -3,7 +3,7 @@ import BaseXClient
 from lxml import etree
 from atexit import register
 from struct import pack, unpack
-from .utils import Flock, Logger
+from utils import Flock, Logger
 from glob import glob
 from pprint import pprint
 
@@ -94,7 +94,6 @@ class PfrChecker:
             else:
                 raise Exception('Incorrect synchronisation value')
 
-        # Закрываем сессию
         if self.session:
             self.session.close()
 
@@ -130,6 +129,7 @@ class PfrChecker:
                 f'.//d:Валидация[contains(d:ОпределениеДокумента, "{self.doc_type}")]',
                 namespaces=self.nsmap)[0]
         except IndexError as ex:
+            #TODO: make logger belong to class instance
             logger = Logger(os.path.join(self.root, 'logs/'))
             log = logger.get_logger('pfr_checker')
             log.exception(ex)
@@ -144,16 +144,17 @@ class PfrChecker:
         Метод для получения проверочной схемы для xml файла
         """
         # Префикс файла (СЗВ-М, СТАЖ и т.д.). None для АДВ направлений
+        prefix_list = self.xml_file.split('_')
         prefix = None
         self.direction = 0
         if 'СЗВ' in self.xml_file or 'ОДВ' in self.xml_file:
-            prefix = self.xml_file.split('_')[3]
+            prefix = prefix_list[3]
             self.direction = 1
         elif 'УППО' in self.xml_file:
-            prefix = self.xml_file.split('_')[1]
+            prefix = prefix_list[1]
             self.direction = 1
         elif 'ЗНП' in self.xml_file or 'ЗДП' in self.xml_file:
-            prefix = self.xml_file.split('_')[2]
+            prefix = prefix_list[2]
             self.direction = 2
 
         self.nsmap = self.compendium[self.direction].nsmap
@@ -186,23 +187,28 @@ class PfrChecker:
                 try:
                     xsd_content = etree.parse(xsd_handler, self.parser).getroot()
                     xsd_scheme = etree.XMLSchema(xsd_content)
-                    try:
-                        xsd_scheme.assertValid(self.xml_content)
-                    except etree.DocumentInvalid as ex:
-                        for error in xsd_scheme.error_log:
-                            input.verify_result['xsd_asserts'] \
-                                .append(f'{error.message} (строка {error.line})')
-
-                        input.verify_result['result'] = 'failed_xsd'
-                        input.verify_result['description'] = (
-                            f'Ошибка при валидации по xsd схеме файла '
-                            f'{self.xml_file}.')
-                        return
-
                 except etree.XMLSyntaxError as ex:
                     # TODO: logger
-                    # print(f'Error xsd file parsing: {ex}')
-                    return
+                    raise Exception(f'Error xsd file parsing: {ex}')
+
+            try:
+                xsd_scheme.assertValid(self.xml_content)
+            except etree.DocumentInvalid as ex:
+                for error in xsd_scheme.error_log:
+                    input.verify_result['xsd_asserts'] \
+                        .append(f'{error.message} (строка {error.line})')
+
+                input.verify_result['result'] = 'failed_xsd'
+                input.verify_result['description'] = (
+                    f'Ошибка при валидации по xsd схеме файла '
+                    f'{self.xml_file}.')
+                return
+            except Exception as ex:
+                logger = Logger(os.path.join(self.root, 'logs/'))
+                log = logger.get_logger('pfr_misc')
+                log.exception(ex)
+
+
 
     def _get_validators(self, doc_format):
         """
@@ -370,28 +376,30 @@ class PfrChecker:
         self._validate_scenario(validators, scenario_dir, nsmap,
                                 xml_file_path, input)
 
-# class Input:
-#     def __init__(self, filename, content, data):
-#         # self.parser = etree.XMLParser(encoding='utf-8',
-#         #                               recover=True,
-#         #                               remove_comments=True)
-#         self.filename = filename
-#         self.xml_obj = content
-#         self.content = data
-#
-# xsd_root = '/home/vasily/PyProjects/FLK/pfr'
+class Input:
+    def __init__(self, filename, content, data):
+        # self.parser = etree.XMLParser(encoding='utf-8',
+        #                               recover=True,
+        #                               remove_comments=True)
+        self.filename = filename
+        self.xml_obj = content
+        self.content = data
+
+xsd_root = '/home/vasily/PyProjects/FLK/pfr'
 # root = '/home/vasily/PyProjects/FLK/pfr/compendium/АДВ+АДИ+ДСВ 1.17.12д/Примеры/ВЗЛ/Входящие'
-# # root = '/home/vasily/PyProjects/FLK/pfr/_'
-# checker = PfrChecker(root=xsd_root)
-# os.chdir(root)
-# for file in glob('*'):
-#     xml_file_path = os.path.join(root, file)
-#     with open(xml_file_path, 'rb') as handler:
-#         data = handler.read()
-#         xml_content = etree.fromstring(data, parser=checker.cp_parser)
-#
-#         etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
-#
-#         input = Input(file, xml_content, data)
-#         checker.check_file(input, xml_file_path)
-#         pprint(input.verify_result)
+root = '/home/vasily/PyProjects/FLK/pfr/__test'
+# root = '/home/vasily/PyProjects/FLK/pfr/_'
+checker = PfrChecker(root=xsd_root)
+os.chdir(root)
+for file in glob('*'):
+    xml_file_path = os.path.join(root, file)
+    with open(xml_file_path, 'rb') as handler:
+        data = handler.read()
+        # xml_content = etree.fromstring(data, parser=checker.cp_parser)
+        xml_content = etree.fromstring(data, parser=checker.utf_parser)
+
+        # etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
+
+        input = Input(file, xml_content, data)
+        checker.check_file(input, xml_file_path)
+        pprint(input.verify_result)
