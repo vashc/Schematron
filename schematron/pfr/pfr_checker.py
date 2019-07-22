@@ -1,9 +1,10 @@
 import os
 import BaseXClient
 from lxml import etree
+from urllib.parse import unquote
 from atexit import register
 from struct import pack, unpack
-from utils import Flock, Logger
+from .utils import Flock, Logger
 from glob import glob
 from pprint import pprint
 
@@ -15,7 +16,8 @@ class PfrChecker:
         self.xsd_root = os.path.join(root, 'compendium/pfr/compendium/')
         # Список существующих направлений
         self.directions = ['АДВ+АДИ+ДСВ 1.17.12д',
-                           'СЗВ-М+ИС+УПП АФ.2.32д',
+                           'СЗВ-М+ИС+УПП 2.36д',
+                           # 'СЗВ-М+ИС+УПП АФ.2.32д',
                            'ЗНП+ЗДП 2.24д']
         # Направление xml файла:
         # 0 - АДВ, 1 - СЗВ, 2 - ЗНП
@@ -109,6 +111,7 @@ class PfrChecker:
         # Путь к валидационной схеме
         schemes = doc_format.xpath('.//d:Валидация/d:Схема/text()',
                                    namespaces=nsmap)
+
         return schemes, doc_format
 
     def _get_adv_scheme(self):
@@ -168,7 +171,7 @@ class PfrChecker:
             schemes, doc_format = self._get_adv_scheme()
 
         for idx, scheme in enumerate(schemes):
-            schemes[idx] = scheme.replace('\\', '/')
+            schemes[idx] = unquote(scheme).replace('\\', '/')
         return schemes, doc_format
 
     def _validate_scheme(self, schemes, input):
@@ -183,7 +186,7 @@ class PfrChecker:
         for scheme in schemes:
             with open(os.path.join(self.xsd_root,
                                    self.directions[self.direction],
-                                   scheme), 'rb') as xsd_handler:
+                                   scheme.lstrip('/')), 'rb') as xsd_handler:
                 try:
                     xsd_content = etree.parse(xsd_handler, self.parser).getroot()
                     xsd_scheme = etree.XMLSchema(xsd_content)
@@ -207,8 +210,6 @@ class PfrChecker:
                 logger = Logger(os.path.join(self.root, 'logs/'))
                 log = logger.get_logger('pfr_misc')
                 log.exception(ex)
-
-
 
     def _get_validators(self, doc_format):
         """
@@ -320,6 +321,8 @@ class PfrChecker:
 
             # Передача external переменных в xquery запрос
             query.bind('$doc', f'{xml_file_path}')
+            # file_content = open(xml_file_path, 'rb').read().decode('cp1251')
+            # query.bind('$doc', file_content)
             # Внешняя переменная dictFile присутствует только в СЗВ направлениях
             if self.direction == 1:
                 query.bind('$dictFile', f'{self.dict_file}')
@@ -376,30 +379,31 @@ class PfrChecker:
         self._validate_scenario(validators, scenario_dir, nsmap,
                                 xml_file_path, input)
 
-class Input:
-    def __init__(self, filename, content, data):
-        # self.parser = etree.XMLParser(encoding='utf-8',
-        #                               recover=True,
-        #                               remove_comments=True)
-        self.filename = filename
-        self.xml_obj = content
-        self.content = data
-
-xsd_root = '/home/vasily/PyProjects/FLK/pfr'
-# root = '/home/vasily/PyProjects/FLK/pfr/compendium/АДВ+АДИ+ДСВ 1.17.12д/Примеры/ВЗЛ/Входящие'
-root = '/home/vasily/PyProjects/FLK/pfr/__test'
-# root = '/home/vasily/PyProjects/FLK/pfr/_'
-checker = PfrChecker(root=xsd_root)
-os.chdir(root)
-for file in glob('*'):
-    xml_file_path = os.path.join(root, file)
-    with open(xml_file_path, 'rb') as handler:
-        data = handler.read()
-        # xml_content = etree.fromstring(data, parser=checker.cp_parser)
-        xml_content = etree.fromstring(data, parser=checker.utf_parser)
-
-        # etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
-
-        input = Input(file, xml_content, data)
-        checker.check_file(input, xml_file_path)
-        pprint(input.verify_result)
+# class Input:
+#     def __init__(self, filename, content, data):
+#         # self.parser = etree.XMLParser(encoding='utf-8',
+#         #                               recover=True,
+#         #                               remove_comments=True)
+#         self.filename = filename
+#         self.xml_obj = content
+#         self.content = data
+#
+# xsd_root = '/home/vasily/PyProjects/FLK/pfr'
+# # root = '/home/vasily/PyProjects/FLK/pfr/compendium/АДВ+АДИ+ДСВ 1.17.12д/Примеры/ВЗЛ/Входящие'
+# root = '/home/vasily/PyProjects/FLK/pfr/_test'
+# # root = '/home/vasily/PyProjects/FLK/pfr/__test'
+# # root = '/home/vasily/PyProjects/FLK/pfr/_'
+# checker = PfrChecker(root=xsd_root)
+# os.chdir(root)
+# for file in glob('*'):
+#     xml_file_path = os.path.join(root, file)
+#     with open(xml_file_path, 'rb') as handler:
+#         data = handler.read()
+#         xml_content = etree.fromstring(data, parser=checker.cp_parser)
+#         # xml_content = etree.fromstring(data, parser=checker.utf_parser)
+#
+#         # etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
+#
+#         input = Input(file, xml_content, data)
+#         checker.check_file(input, xml_file_path)
+#         pprint(input.verify_result)

@@ -1,9 +1,10 @@
-import sys
 import os
+from urllib.parse import quote
 from lxml import etree
 from utils import Translator
 
-comp_root = '/home/vasily/PyProjects/FLK/pfr/compendium'
+# comp_root = '/home/vasily/PyProjects/FLK/pfr/compendium'
+comp_root = '/home/vasily/PyProjects/FLK/pfr/compendium/pfr/test_compendium'
 
 # Флаг кодировки
 utf_flag = True
@@ -32,9 +33,10 @@ for direction in directions:
     for doc in doc_format:
         # Путь к валидационной схеме
         scheme = doc.findall('.//d:Валидация/d:Схема', namespaces=nsmap)[0]
-        scheme_dirs = scheme.text.lstrip('\\').split('\\')
-        scheme_dirs[1:] = [Translator.translate(d) for d in scheme_dirs[1:]]
-        new_scheme = '\\'.join(scheme_dirs)
+        new_scheme = quote(scheme.text)
+        # scheme_dirs = scheme.text.lstrip('\\').split('\\')
+        # scheme_dirs[1:] = [Translator.translate(d) for d in scheme_dirs[1:]]
+        # new_scheme = '\\'.join(scheme_dirs)
         scheme.text = new_scheme
 
     # Перезаписываем файл компендиума
@@ -68,7 +70,8 @@ for direction in directions:
 
                 for loc in locations:
                     old_uri = loc.attrib['schemaLocation']
-                    uri = Translator.translate(old_uri)
+                    uri = quote(old_uri)
+                    # uri = Translator.translate(old_uri)
                     loc.attrib['schemaLocation'] = uri
                     if utf_flag:
                         tree = etree.tostring(scheme, encoding='utf-8')
@@ -81,15 +84,15 @@ for direction in directions:
                     handler.write(tree)
 
             # Переименовываем файл
-            new_file = Translator.translate(file)
-            os.rename(file_path, os.path.join(root, new_file))
+            # new_file = Translator.translate(file)
+            # os.rename(file_path, os.path.join(root, new_file))
 
         # Переименовываем директории
-        for idx, dir in enumerate(dirs):
-            dir_path = os.path.join(root, dir)
-            new_dir = Translator.translate(dir)
-            os.rename(dir_path, os.path.join(root, new_dir))
-            dirs[idx] = new_dir
+        # for idx, dir in enumerate(dirs):
+        #     dir_path = os.path.join(root, dir)
+        #     new_dir = Translator.translate(dir)
+        #     os.rename(dir_path, os.path.join(root, new_dir))
+        #     dirs[idx] = new_dir
 
     # Изменяем document-node()
     xquery_root = os.path.join(comp_root, direction, 'XQuery')
