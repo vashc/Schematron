@@ -181,6 +181,8 @@ class PfrChecker:
         # Определение типа используемого парсера, для АДВ - cp1251
         if not self.direction:
             self.parser = self.cp_parser
+        else:
+            self.parser = self.utf_parser
 
         # Пробегаем по всем .xsd схемам и проверяем файл
         for scheme in schemes:
@@ -390,17 +392,17 @@ class PfrChecker:
 #
 # xsd_root = '/home/vasily/PyProjects/FLK/pfr'
 # # root = '/home/vasily/PyProjects/FLK/pfr/compendium/АДВ+АДИ+ДСВ 1.17.12д/Примеры/ВЗЛ/Входящие'
-# root = '/home/vasily/PyProjects/FLK/pfr/_test'
+# # root = '/home/vasily/PyProjects/FLK/pfr/_test'
 # # root = '/home/vasily/PyProjects/FLK/pfr/__test'
-# # root = '/home/vasily/PyProjects/FLK/pfr/_'
+# root = '/home/vasily/PyProjects/FLK/pfr/_'
 # checker = PfrChecker(root=xsd_root)
 # os.chdir(root)
 # for file in glob('*'):
 #     xml_file_path = os.path.join(root, file)
 #     with open(xml_file_path, 'rb') as handler:
 #         data = handler.read()
-#         xml_content = etree.fromstring(data, parser=checker.cp_parser)
-#         # xml_content = etree.fromstring(data, parser=checker.utf_parser)
+#         # xml_content = etree.fromstring(data, parser=checker.cp_parser)
+#         xml_content = etree.fromstring(data, parser=checker.utf_parser)
 #
 #         # etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
 #
