@@ -1,25 +1,11 @@
 import os
 import asyncio
-from typing import List, Dict, Awaitable, Union
+from typing import Dict, Awaitable, Union
 from lxml import etree
 from tests.database import db
 
 
-def assert_list_equality(first: List[str],
-                         second: List[str]) -> bool:
-    return all(f == s for f, s in zip(first, second))
-
-
-def get_file_list(path: str) -> List[str]:
-    tests = []
-    for dirpath, dirnames, filenames in os.walk(path):
-        tests.extend(filenames)
-        break
-
-    return tests
-
-
-class FileResolver:
+class Input:
     def __init__(self, xsd_content=None, xml_content=None, xml_file=None):
         self.xsd_schema = xsd_content
         self.xml_obj = xml_content
@@ -57,7 +43,7 @@ class FileResolver:
         return await db.fetchval(query, xml_info['knd'], xml_info['version'])
 
     @staticmethod
-    async def get_xsd_file(xml_path: str, xsd_root: str) -> 'FileResolver':
+    async def get_xsd_file(xml_path: str, xsd_root: str) -> 'Input':
         parser = etree.XMLParser(encoding='cp1251', remove_comments=True)
         xml_file = os.path.basename(xml_path)
 
@@ -72,36 +58,36 @@ class FileResolver:
                 xml_content = etree.fromstring(xml_file_handler.read())
             except etree.XMLSyntaxError:
                 print('Error xml file parsing:', xml_path)
-                return FileResolver()
+                return Input()
 
         try:
-            xml_info = FileResolver.get_xml_info(xml_file, xml_content)
+            xml_info = Input.get_xml_info(xml_file, xml_content)
         except Exception as ex:
             # Ошибка при получении информации (КНД, версия и т.д.)
-            print(FileResolver.return_error(ex))
-            result['description'] = FileResolver.return_error(ex)
-            return FileResolver()
+            print(Input.return_error(ex))
+            result['description'] = Input.return_error(ex)
+            return Input()
             # return result
 
         try:
-            xsd_file = await FileResolver.get_xsd_scheme(xml_info)
+            xsd_file = await Input.get_xsd_scheme(xml_info)
         except Exception as ex:
             # Ошибка при получении имени xsd схемы из БД
-            print(FileResolver.return_error(f'Ошибка при получении имени xsd схемы из'
-                                            f' БД при проверке файла {xml_file}: {ex}.'))
+            print(Input.return_error(f'Ошибка при получении имени xsd схемы из'
+                                     f' БД при проверке файла {xml_file}: {ex}.'))
             result['description'] = f'Ошибка при получении имени xsd ' \
                                     f'схемы из БД при проверке файла {xml_file}.'
-            return FileResolver()
+            return Input()
             # return result
 
         if not xsd_file:
             # На найдена xsd схема для проверки
             print('_' * 80)
             print('FILE:', xml_file)
-            print(FileResolver.return_error(f'Не найдена xsd схема для проверки '
-                                            f'файла {xml_file}.'))
+            print(Input.return_error(f'Не найдена xsd схема для проверки '
+                                     f'файла {xml_file}.'))
             result['description'] = f'Не найдена xsd схема для проверки файла {xml_file}.'
-            return FileResolver()
+            return Input()
             # return result
 
         result['xsd_scheme'] = xsd_file
@@ -110,11 +96,11 @@ class FileResolver:
             with open(os.path.join(xsd_root, result['xsd_scheme']),
                       'r', encoding='cp1251') as xsd_file_handler:
                 xsd_content = etree.parse(xsd_file_handler, parser).getroot()
-            return FileResolver(xsd_content, xml_content, xml_file)
+            return Input(xsd_content, xml_content, xml_file)
         except FileNotFoundError as ex:
-            return FileResolver()
+            return Input()
 
-    def resolve_file(self, xml_path: str, xsd_root: str) -> 'FileResolver':
+    def resolve_file(self, xml_path: str, xsd_root: str) -> 'Input':
         loop = asyncio.get_event_loop()
         resolver = loop.run_until_complete(self.get_xsd_file(xml_path, xsd_root))
         return resolver

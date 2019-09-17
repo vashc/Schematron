@@ -1,12 +1,14 @@
 import os
 from lxml import etree
-from glob import glob
 from src.schematron.fns.tokenizer import Tokenizer
 from src.schematron.fns.interpreter import Interpreter
 from src.schematron.fns.fns_checker import FnsChecker
-from utils import assert_list_equality, get_file_list, FileResolver  # .
+from tests.utils import assert_list_equality, get_file_list
+from tests.fns_tests.utils import Input  # .
 
 root = os.path.dirname(os.path.abspath(__file__))
+xsd_root = os.path.join(root, 'xsd')
+xml_root = os.path.join(root, 'xml')
 
 
 class TestFnsTokenizer:
@@ -30,17 +32,12 @@ class TestFnsInterpreter:
 
     def test_fns_interpreter(self):
         tests = []
-        curr_dir = os.curdir
+        files = get_file_list(xml_root)
 
-        # Filling in test matrix
-        os.chdir(os.path.join(curr_dir, 'tests/fns_tests/xml'))
-
-        for file in glob('*'):
-            with open(file, 'rb') as fd:
+        for file in files:
+            with open(os.path.join(xml_root, file), 'rb') as fd:
                 xml_content = etree.fromstring(fd.read())
                 tests.append((file, xml_content))
-
-        os.chdir(curr_dir)
 
         # Test matrix traversing
         for test in tests:
@@ -48,13 +45,11 @@ class TestFnsInterpreter:
 
 
 class TestFnsChecker:
-    xsd_root = os.path.join(root, 'xsd')
-    xml_root = os.path.join(root, 'xml')
     checker = FnsChecker()
 
     def test_fns_checker(self):
-        tests = get_file_list(self.xml_root)
-        for test in tests:
-            input = FileResolver().resolve_file(test, self.xsd_root)
+        files = get_file_list(xml_root)
+        for file in files:
+            input = Input().resolve_file(os.path.join(xml_root, file), xsd_root)
             self.checker.check_file(input)
             print(input.verify_result)
