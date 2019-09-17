@@ -1,0 +1,1733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="604030002001" idp="1" idf="2" shifr="nk" name="Сведения о работе аспирантуры и докторантуры" obj="okpo" OKUD="0604030" format-version="1.3" version="27-11-2018">
+  <settings>
+    <validation>always</validation>
+  </settings>
+  <title>
+    <item field="okpo" name="Код ОКПО" dic="s_okpo" />
+    <item field="vid" name="Вид учреждения" dic="s_vid_view" />
+    <item field="sektor" name="Код сектора деятельности НИИ" dic="s_sektor_view" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail" /> 
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1.1 Прием в аспирантуру по направлениям подготовки" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Код направления подготовки">
+          <default-cell column="3" format="C(8)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Принято в аспирантуру в отчетном году - всего">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="из них на очную форму обучения">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Численность аспирантов - всего">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="Из стр.01 - численнось женщин">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Из стр. 01 - численность аспирантов по направлениям подготовки (сумма данных по направлениям подготовки равна строке 01):" />
+        <row code="03" type="M" grv="3" name="">
+          <cell column="3" dic="s_np" format="C(8)" inputType="1" vldType="4" vld="pril_np_1" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="04" type="F" name="Из общей численности аспирантов (из стр.01) - численность аспирантов иностранных государств">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="05" type="F" name="     из них стран СНГ">
+          <cell column="3" format="C(8)" inputType="0" />
+        </row>
+        <row code="06" type="F" name="Из стр. 01 - численность инвалидов и лиц с ОВЗ">
+          <cell column="3" format="C(8)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="2" name="Раздел 1.2 Численность аспирантов по направлениям подготовки" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Код направления подготовки">
+          <default-cell column="3" format="C(8)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Численность аспирантов на конец года - всего">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="из них женщин">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Из общей численности аспирантов (из гр.4) - обучавшихся по очной форме обучения">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="обучавшихся по договорам об оказании платных образовательных услуг">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Численность аспирантов - всего">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="Из стр.01 - численнось женщин">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="0" />
+          <cell column="5" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Из стр.01 - численность аспирантов по направлениям подготовки (сумма данных по направлениям подготовки равна строке 01):" />
+        <row code="03" type="M" grv="3" name="">
+          <cell column="3" dic="s_np" format="C(8)" inputType="1" vldType="4" vld="pril_np_1" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="04" type="F" name="Из общей численности аспирантов (из стр.01) - численность аспирантов иностранных государств">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="05" type="F" name="     из них стран СНГ">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="06" type="F" name="Из стр. 01 - численность инвалидов и лиц с ОВЗ">
+          <cell column="3" format="C(8)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="3" name="Раздел 1.3 Выпуск аспирантов по направлениям подготовки и научным специальностям" nb="4">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Шифр научной специальности, код направления подготовки">
+          <default-cell column="3" format="C(8)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Фактический выпуск аспирантов в отчетном году - всего">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="из них с защитой диссертации">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="очной формы обучения - всего (из гр.4)">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="из них с защитой диссертации (из гр.6)">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Из гр.4 - выпуск аспирантов, обучавшихся по договорам об оказании платных образовательных услуг">
+          <default-cell column="8" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="из них (гр.8) с защитой диссертации">
+          <default-cell column="9" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="Из гр.5 - численность лиц, защитивших диссертации в отчитывающейся организации">
+          <default-cell column="10" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Численность аспирантов - всего (сумма стр.03,04)">
+          <cell column="10" format="N(7,0)" inputType="2" />
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+          <cell column="7" format="N(7,0)" inputType="2" />
+          <cell column="8" format="N(7,0)" inputType="2" />
+          <cell column="9" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="Из стр.01 - численнось женщин">
+          <cell column="10" format="N(7,0)" inputType="2" />
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+          <cell column="7" format="N(7,0)" inputType="2" />
+          <cell column="8" format="N(7,0)" inputType="2" />
+          <cell column="9" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Из строки 01 - численность аспирантов по научным специальностям (сумма данных по научным специальностям равна стр.03):" />
+        <row code="03" type="M" grv="3" name="">
+          <cell column="3" dic="s_spech" format="C(8)" inputType="1" vldType="4" vld="pril_spech_2" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+          <cell column="8" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Из стр.01 - численность аспирантов по направлениям подготовки (сумма данных по направлениям подготовки равна стр.04):" />
+        <row code="04" type="M" grv="3" name="">
+          <cell column="3" dic="s_np" format="C(8)" inputType="1" vldType="4" vld="pril_np_1" />
+        </row>
+        <row code="05" type="F" name="Из общей численности аспирантов (из стр.01) - численность аспирантов иностранных государств">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="7" format="N(7,0)" inputType="2" />
+          <cell column="8" format="N(7,0)" inputType="0" />
+          <cell column="9" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="06" type="F" name="     из них стран СНГ">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="8" format="N(7,0)" inputType="0" />
+          <cell column="9" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="07" type="F" name="Из стр.01 - численность инвалидов и лиц с ОВЗ">
+          <cell column="3" format="C(8)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="4" name="Раздел 2 Движение численности аспирантов" nb="5">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Численность аспирантов на начало года">
+          <default-cell column="3" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Принято в аспирантуру из числа лиц, окончивших образовательные организации высшего образования, в отчетном году">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Зачислено в аспирантуру в порядке восстановления или перевода из других организаций">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Численность аспирантов, выбывших до окончания аспирантуры, в отчетном году">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="Численность аспирантов, проходивших подготовку свыше установленного срока, на конец года">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Всего">
+          <cell column="3" format="N(7,0)" inputType="2" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="5" format="N(7,0)" inputType="2" />
+          <cell column="6" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="    из них очной формы обучения">
+          <cell column="3" format="N(7,0)" inputType="2" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+          <cell column="6" format="N(7,0)" inputType="2" />
+          <cell column="7" format="N(7,0)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+    <section code="5" name="Раздел 3 Защита кандидатских диссертаций в диссертационных советах научных организаций" nb="6">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Шифр научной специальности, код направления подготовки">
+          <default-cell column="3" format="C(8)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Число диссертационных советов в отчетном году, единиц">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Число кандидатских диссертаций представленных к защите в отчетном году, единиц">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Численность лиц, защитивших кандидатские диссертации в диссертационных советах в отчетном году - всего (сумма гр.7,8,9,11)">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="лицами, прикрепленными для подготовки кандидатской диссертации">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="лицами,прошедшими аспирантскую подготовку до отчетного года">
+          <default-cell column="8" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="лицами, выпущенными из аспирантуры с защитой диссертации в отчетном году в период аспирантской подготовки - всего">
+          <default-cell column="9" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="из них в отчитывающейся организации (из гр.9)">
+          <default-cell column="10" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="11" type="Z" name="после аспирантской подготовки">
+          <default-cell column="11" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="12" type="Z" name="Справочно: Численность лиц, прикрепленных для подготовки кандидатской диссертации, на конец года">
+          <default-cell column="12" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Всего (сумма стр.03,04)">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="0" />
+          <cell column="8" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="   из них женщины">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Из стр.01 - по научным специальностям (сумма данных по научным специальностям равна стр.03):" />
+        <row code="03" type="M" grv="3" name="">
+          <cell column="3" dic="s_spech" format="C(8)" inputType="1" vldType="4" vld="pril_spech_2" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Из стр.01 - по направлениям подготовки (сумма данных по направлениям подготовки равна стр.04):" />
+        <row code="04" type="M" grv="3" name="">
+          <cell column="3" dic="s_np" format="C(8)" inputType="1" vldType="4" vld="pril_np_1" />
+          <cell column="4" format="N(7,0)" inputType="2" />
+        </row>
+        <row code="05" type="F" name="Из стр.01 - инвалиды и лица с ОВЗ">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="4" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Справка к разделу 3." />
+        <row code="06" type="F" name="Число действующих диссертационных советов на конец отчетного года, единиц">
+          <cell column="10" format="N(7,0)" inputType="0" />
+          <cell column="11" format="N(7,0)" inputType="0" />
+          <cell column="12" format="N(7,0)" inputType="0" />
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="5" format="N(7,0)" inputType="0" />
+          <cell column="6" format="N(7,0)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+          <cell column="8" format="N(7,0)" inputType="0" />
+          <cell column="9" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="07" type="F" name="Число объединенных диссертационных советов на конец отчетного года, единиц">
+          <cell column="10" format="N(7,0)" inputType="0" />
+          <cell column="11" format="N(7,0)" inputType="0" />
+          <cell column="12" format="N(7,0)" inputType="0" />
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="5" format="N(7,0)" inputType="0" />
+          <cell column="6" format="N(7,0)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+          <cell column="8" format="N(7,0)" inputType="0" />
+          <cell column="9" format="N(7,0)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="6" name="Раздел 4 Научное руководство аспирантами" nb="7">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Численность научных руководителей на конец года - всего">
+          <default-cell column="3" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Из них имеют звание (ученое звание) доцента">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="профессора">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="члена - корреспондента государственной академии наук">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="академика (действительного члена) государственной академии наук">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Всего" />
+        <row code="02" type="F" name="   из них женщины" />
+        <row code="" type="C" name="Из стр.01 - имеют ученую степень" />
+        <row code="03" type="F" name="  кандидата наук">
+          <cell column="6" format="N(7,0)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="04" type="F" name="    из них женщины">
+          <cell column="6" format="N(7,0)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="05" type="F" name="  доктора наук" />
+        <row code="06" type="F" name="    из них женщины" />
+      </rows>
+    </section>
+    <section code="7" name="Раздел 5 Распределение численности аспирантов по возрасту" nb="8">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Всего (сумма гр.4-14)">
+          <default-cell column="3" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="в том числе в возрасте до 22 (включительно)">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="23">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="24">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="25">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="26">
+          <default-cell column="8" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="27">
+          <default-cell column="9" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="28">
+          <default-cell column="10" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="11" type="Z" name="29">
+          <default-cell column="11" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="12" type="Z" name="30-34">
+          <default-cell column="12" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="13" type="Z" name="35-39">
+          <default-cell column="13" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="14" type="Z" name="40 и старше">
+          <default-cell column="14" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Численность аспирантов на конец года - всего" />
+        <row code="02" type="F" name="  из них женщины" />
+        <row code="03" type="F" name="Из общей численности аспирантов (из стр.01) - обучались по очной форме обучения" />
+        <row code="04" type="F" name="  из них женщины" />
+      </rows>
+    </section>
+    <section code="8" name="Раздел 6 Сведения о приеме, численности и выпуске докторантов" nb="9">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Шифр научной специальности">
+          <default-cell column="3" format="C(8)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Принято в докторантуру в отчетном году">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Численность докторантов на конец года - всего">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="  из них женщины">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="из гр.5 - направленных в докторантуру из других организаций">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Фактический выпуск докторантов в отчетном году - всего">
+          <default-cell column="8" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="из них с защитой диссертации">
+          <default-cell column="9" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="Из гр.8 - выпуск докторантов, направленных в докторантуру из других организаций - всего">
+          <default-cell column="10" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="11" type="Z" name="из них (из гр.10) с защитой диссертации">
+          <default-cell column="11" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="12" type="Z" name="Численность докторантов, выбывших до окончания докторантуры в отчетном году">
+          <default-cell column="12" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="13" type="Z" name="Справочно: численность лиц, подготавливающих или подготовивших докторскую диссертацию вне докторантуры - всего на конец года">
+          <default-cell column="13" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="14" type="Z" name="защитившие докторские диссертации в отчетном году">
+          <default-cell column="14" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Всего">
+          <cell column="3" format="C(8)" inputType="0" />
+        </row>
+        <row code="02" type="F" name=" из них - женщины">
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="5" format="N(7,0)" inputType="0" />
+          <cell column="6" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Из стр. 01 - по научным специальностям (сумма данных по научным специальностям равна стр.01):" />
+        <row code="03" type="M" grv="3" name="">
+          <cell column="3" dic="s_spech" format="C(8)" inputType="1" vldType="4" vld="pril_spech_2" />
+        </row>
+        <row code="04" type="F" name="Из стр.01 - численность докторантов иностранных государств">
+          <cell column="10" format="N(7,0)" inputType="0" />
+          <cell column="11" format="N(7,0)" inputType="0" />
+          <cell column="3" format="C(8)" inputType="0" />
+          <cell column="7" format="N(7,0)" inputType="0" />
+        </row>
+        <row code="05" type="F" name="Из стр.01 - численность инвалидов и лиц с ОВЗ">
+          <cell column="3" format="C(8)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="9" name="Раздел 7 Распределение численности докторантов по возрасту" nb="10">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Всего (сумма гр.4-9)">
+          <default-cell column="3" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="в том числе в возрасте до 34 (включительно)">
+          <default-cell column="4" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="35-39">
+          <default-cell column="5" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="40-49">
+          <default-cell column="6" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="50-54">
+          <default-cell column="7" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="55-59">
+          <default-cell column="8" format="N(7,0)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="60 и старше">
+          <default-cell column="9" format="N(7,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Численность докторантов на конец года - всего" />
+        <row code="02" type="F" name=" из них женщины" />
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="[Раздел 1.1] гр 4 &gt;= гр 5 по строкам 01-06" condition="" rule=" {[1][1,2,3,4,5,6][4][*]}|&gt;=| {[1][1,2,3,4,5,6][5][*]}" tip="1" />
+    <control id="2" name="[Раздел 1.1] cтр.01 &gt;= стр.02 по гр.4,5" condition="" rule=" {[1][01][4,5][*]}|&gt;=|{[1][02][4,5][*]}" tip="1" />
+    <control id="3" name="[Раздел 1.1] cтр.01 &gt;= стр.04 по гр.4,5" condition="" rule=" {[1][01][4,5][*]}|&gt;=|{[1][04][4,5][*]}&#xD;&#xA;" tip="1" />
+    <control id="4" name="[Раздел 1.1] стр.04 &gt;= стр.05 по гр.4,5" condition="" rule=" {[1][04][4,5][*]}|&gt;=|{[1][05][4,5][*]}" tip="1" />
+    <control id="5" name="[Раздел 1.1] стр.01 = сумме стр.03 по гр.4,5" condition="" rule=" {[1][01][4,5][0]}|=|SUM{[1][03][4,5][*]}&#xD;&#xA;" tip="1" />
+    <control id="6" name="[Раздел 1.1] cтр.01 &gt;= стр.05 по гр.4,5" condition="" rule=" {[1][01][4,5][*]}|&gt;=|{[1][05][4,5][*]}&#xD;&#xA;" tip="1" />
+    <control id="7" name="Если Разд 1.1 стр.01 гр.4,5 = Разд 1.2 стр.01 гр.4,6, то Разд 1.1 стр.02 гр5 = Разд 1.2 стр.02 гр.6" condition=" {[1][1][4][*]}|=| {[2][1][4][*]} AND {[1][1][5][*]}|=| {[2][1][6][*]}" rule=" {[1][2][5][*]}|=| {[2][2][6][*]}" tip="0" />
+    <control id="8" name="[Раздел 1.2] гр 4 &gt;= гр 5 по строкам 01,03-06" condition="" rule=" {[2][1,3,4,5,6][4][*]}|&gt;=| {[2][1,3,4,5,6][5][*]}" tip="1" />
+    <control id="9" name="[Раздел 1.2] гр 4 &gt;= гр 6 по строкам 01,03-06" condition="" rule=" {[2][1,3,4,5,6][4][*]}|&gt;=| {[2][1,3,4,5,6][6][*]}" tip="1" />
+    <control id="10" name="[Раздел 1.2] гр 4 &gt;= гр 7 по строкам 01,03,06" condition="" rule=" {[2][1,3,6][4][*]}|&gt;=| {[2][1,3,6][7][*]}" tip="1" />
+    <control id="11" name="[Раздел 1.2] cтр.01 &gt;= стр.02 по гр.6-7" condition="" rule=" {[2][01][6,7][*]}|&gt;=|{[2][02][6,7][*]}" tip="1" />
+    <control id="12" name="[Раздел 1.2] cтр.01 &gt;= стр.04 по гр.4-6" condition="" rule=" {[2][01][4,5,6][*]}|&gt;=|{[2][04][4,5,6][*]}" tip="1" />
+    <control id="13" name="[Раздел 1.2] cтр.04 &gt;= стр.05 по гр.4-6" condition="" rule=" {[2][04][4,5,6][*]}|&gt;=|{[2][05][4,5,6][*]}" tip="1" />
+    <control id="14" name="[Раздел 1.2] стр.01 = сумме стр.03 по гр.4-7" condition="" rule=" {[2][01][4,5,6,7][0]}|=|SUM{[2][03][4,5,6,7][*]}&#xD;&#xA;" tip="1" />
+    <control id="15" name="[Раздел 1.2] стр 01 гр 5 &gt;= стр 02 гр 6" condition="" rule=" {[2][1][5][*]}|&gt;=| {[2][2][6][*]}" tip="1" />
+    <control id="16" name="[Раздел 1.2] стр 01 гр 5 &gt;= стр 02 гр 7" condition="" rule=" {[2][1][5][*]}|&gt;=| {[2][2][7][*]}" tip="1" />
+    <control id="17" name="[Раздел 1.2] cтр.01 &gt;= стр.05 по гр.4-6" condition="" rule=" {[2][01][4,5,6][*]}|&gt;=|{[2][05][4,5,6][*]}" tip="1" />
+    <control id="18" name="Если [Раздел 1.2]  гр 4  &gt; 0, то [Раздел 1.1] гр 4 &gt; 0 по стр 01, 04, 05, 06" condition="{[2][1,4,5,6][4][*]}|&gt;|0" rule="{[1][1,4,5,6][4][*]}|&gt;|0" tip="0" />
+    <control id="19" name="Если [Раздел 1.2]  гр 4  &gt; 0, то [Раздел 1.1] гр 4 &gt; 0 по стр 03" condition="{[2][3][4][*]}|&gt;|0" rule="{[1][3][4][*]}|&gt;|0" precision="0" tip="0" />
+    <control id="20" name="[Раздел 1.3] cтр.01 &gt;= стр.07 по гр.4-10" condition="" rule=" {[3][01][4-10][*]}|&gt;=|{[3][07][4-10][*]}" tip="1" />
+    <control id="21" name="[Раздел 1.1] cтр.01 &gt;= стр.06 по гр.4,5" condition="" rule=" {[1][01][4,5][*]}|&gt;=|{[1][06][4,5][*]}&#xD;&#xA;" tip="1" />
+    <control id="22" name="[Раздел 1.2] cтр.01 &gt;= стр.06 по гр.4-7" condition="" rule=" {[2][01][4,5,6,7][*]}|&gt;=|{[2][06][4,5,6,7][*]}" tip="1" />
+    <control id="23" name="[Раздел 3] гр 10 стр 05 = [Раздел 1.3] гр 10 стр 07" condition="" rule=" {[5][05][10][0]}|=| {[3][07][10][0]}" tip="1" />
+    <control id="24" name="[Раздел 3] cтр.01 &gt;= стр.05 по гр.5-12" condition="" rule=" {[5][01][5-12][*]}|&gt;=|{[5][05][5-12][*]}" tip="1" />
+    <control id="25" name="[Раздел 6] cтр.01 &gt;= стр.05 по гр.4-14" condition="" rule=" {[8][01][4-14][*]}|&gt;=|{[8][05][4-14][*]}" tip="1" />
+    <control id="30" name="[Раздел 1.3] гр 4 &gt;= гр 5 по строкам 01-07" condition="" rule=" {[3][1,2,3,4,5,6,7][4][*]}|&gt;=| {[3][1,2,3,4,5,6,7][5][*]}" tip="1" />
+    <control id="31" name="[Раздел 1.3] гр 4 &gt;= гр 6 по строкам 01-07" condition="" rule=" {[3][1,2,3,4,5,6,7][4][*]}|&gt;=| {[3][1,2,3,4,5,6,7][6][*]}" tip="1" />
+    <control id="32" name="[Раздел 1.3] гр 5 &gt;= гр 10 по строкам 01-07" condition="" rule=" {[3][1,2,3,4,5,6,7][5][*]}|&gt;=| {[3][1,2,3,4,5,6,7][10][*]}" tip="1" />
+    <control id="33" name="[Раздел 1.3] гр 5 &gt;= гр 7 по строкам 01-07" condition="" rule=" {[3][1,2,3,4,5,6,7][5][*]}|&gt;=| {[3][1,2,3,4,5,6,7][7][*]}" tip="1" />
+    <control id="34" name="[Раздел 1.3] гр 6 &gt;= гр 7 по строкам 01-07" condition="" rule=" {[3][1,2,3,4,5,6,7][6][*]}|&gt;=| {[3][1,2,3,4,5,6,7][7][*]}" tip="1" />
+    <control id="35" name="[Раздел 1.3] гр 4 &gt;= гр 8 по строкам 01-04,07" condition="" rule=" {[3][1,2,3,4,7][4][*]}|&gt;=| {[3][1,2,3,4,7][8][*]}" tip="1" />
+    <control id="36" name="[Раздел 1.3] гр 8 &gt;= гр 9 по строкам 01-04,07" condition="" rule=" {[3][1,2,3,4,7][8][*]}|&gt;=| {[3][1,2,3,4,7][9][*]}" tip="1" />
+    <control id="37" name="[Раздел 1.3] cтр.01 &gt;= стр.02 по гр.4-10" condition="" rule=" {[3][01][4-10][*]}|&gt;=|{[3][02][4-10][*]}" tip="1" />
+    <control id="38" name="[Раздел 1.3] cтр.05 &gt;= стр.06 по гр.4-7,10" condition="" rule=" {[3][05][4,5,6,7,10][*]}|&gt;=|{[3][06][4,5,6,7,10][*]}" tip="1" />
+    <control id="39" name="[Раздел 1.3] стр.01 = сумме стр.03 + сумме стр.04 по гр.4-10" condition="" rule=" {[3][01][4,5,6,7,8,9,10][0]}|=|SUM{[3][03,04][4,5,6,7,8,9,10][*]} &#xD;&#xA;" tip="1" />
+    <control id="40" name="[Раздел 1.3] cтр.01 &gt;= стр.06 по гр.4-7,10" condition="" rule=" {[3][01][4,5,6,7,10][*]}|&gt;=|{[3][06][4,5,6,7,10][*]}" tip="1" />
+    <control id="41" name="[Раздел 1.3] гр 5 &gt;= гр 9 по строкам 01-04,07" condition="" rule=" {[3][1,2,3,4,7][5][*]}|&gt;=| {[3][1,2,3,4,7][9][*]}" tip="1" />
+    <control id="42" name="[Раздел 1.3] cтр.01 &gt;= стр.05 по гр.4-7,10" condition="" rule=" {[3][01][4,5,6,7,10][*]}|&gt;=|{[3][05][4,5,6,7,10][*]}" tip="1" />
+    <control id="43" name="[Раздел 2] стр.01 &gt;= стр.02 по гр.3-7" condition="" rule=" {[4][01][3-7]}|&gt;=|{[4][02][3-7]}&#xD;&#xA;" tip="1" />
+    <control id="44" name="[Раздел 3] гр.6 = сумме гр.7,8,9,11 по стр.01-05" condition="" rule=" {[5][01-05][6][*]}|=|SUM{[5][01-05][7,8,9,11][*]}&#xD;&#xA;" tip="1" />
+    <control id="45" name="[Раздел 3] гр 9 &gt;= гр 10 по строкам 01-05" condition="" rule=" {[5][01-05][9][*]}|&gt;=| {[5][01-05][10][*]}" tip="1" />
+    <control id="46" name="[Раздел 3] гр 10 = [Раздел 1.3] гр 10 по строке 01" condition="" rule=" {[5][01][10][0]}|=| {[3][01][10][0]}" tip="1" />
+    <control id="47" name="[Раздел 3] cтр.01 &gt;= стр.02 по гр.5-12" condition="" rule=" {[5][01][5-12][*]}|&gt;=|{[5][02][5-12][*]}" tip="1" />
+    <control id="48" name="[Раздел 3] стр.01 = сумма стр.03 + сумма стр.04 по гр.5-12" condition="" rule=" {[5][01][5,6,7,8,9,10,11,12][0]}|=|SUM{[5][03,04][5,6,7,8,9,10,11,12][*]}" tip="1" />
+    <control id="49" name="[Раздел 3] стр 06 &gt;= стр 07 по графе 4" condition="" rule=" {[5][06][4][*]}|&gt;=| {[5][07][4][*]}" tip="1" />
+    <control id="50" name="[Раздел 3] если гр 6 &gt; 0, то гр 4 &gt; 0 по стр 03 хотя бы по одной из специальностей" condition="SUM{[5][03][6]}|&gt;|0" rule="SUM{[5][03][4]}|&gt;|0" tip="1" />
+    <control id="51" name="[Раздел 3] если гр.4 = 0, то гр.12 &gt; 0 по стр.03 хотя бы по одной из специальностей" condition="SUM{[5][3][4]}|=|0" rule="SUM{[5][3][12]}|&gt;|0" tip="1" />
+    <control id="52" name="[Раздел 3] если стр.06 &gt; 0, то стр.03 гр.4 &gt; 0 хотя бы по одной из специальностей и/или стр.04 гр.4 &gt; 0 хотя бы по одному из направлений подготовки" condition="{[5][06][4]}|&gt;|0" rule="isnull(SUM{[5][03,04][4]},0)|&gt;|0" tip="1" />
+    <control id="53" name="[Раздел 4] гр.3 &gt;= сумме гр.4-7 по стр.01,02,05,06" condition="" rule=" {[6][01,02,05,06][3]}|&gt;=|SUM{[6][01,02,05,06][4,5,6,7]}&#xD;&#xA;" tip="1" />
+    <control id="54" name="[Раздел 4] гр.3 &gt;= сумме гр.4-5 по стр.03,04" condition="" rule=" {[6][03,04][3]}|&gt;=|SUM{[6][03,04][4,5]}&#xD;&#xA;" tip="1" />
+    <control id="55" name="[Раздел 4] cтр.01 &gt;= стр.02 по гр.3-7" condition="" rule=" {[6][01][3-7]}|&gt;=|{[6][02][3-7]}" tip="1" />
+    <control id="56" name="[Раздел 4] cтр.01 &gt;= стр.03 по гр.3-5" condition="" rule=" {[6][01][3-5]}|&gt;=|{[6][03][3-5]}" tip="1" />
+    <control id="57" name="[Раздел 4] cтр.01 &gt;= стр.05 по гр.3-7" condition="" rule=" {[6][01][3-7]}|&gt;=|{[6][05][3-7]}" tip="1" />
+    <control id="58" name="[Раздел 4] cтр.02 &gt;= стр.04 по гр.3-5" condition="" rule=" {[6][02][3-5]}|&gt;=|{[6][04][3-5]}" tip="1" />
+    <control id="59" name="[Раздел 4] cтр.02 &gt;= стр.06 по гр.3-7" condition="" rule=" {[6][02][3-7]}|&gt;=|{[6][06][3-7]}" tip="1" />
+    <control id="60" name="[Раздел 4] cтр.01 &gt;= стр.03 + стр.05 по гр.3 - 5" condition="" rule="isnull( {[6][01][3,4,5]},0)|&gt;=|isnull({[6][03][3,4,5]},0)+isnull({[6][05][3,4,5]},0)" precision="0" tip="1" />
+    <control id="61" name="[Раздел 4] cтр.02 &gt;= стр.04 + стр.06 по гр.3 - 5" condition="" rule="isnull( {[6][02][3,4,5]},0)|&gt;=|isnull({[6][04][3,4,5]},0)+isnull({[6][06][3,4,5]},0)" tip="1" />
+    <control id="62" name="[Раздел 4] cтр.03 &gt;= стр.04 по гр.3-5" condition="" rule=" {[6][03][3-5]}|&gt;=|{[6][04][3-5]}" tip="1" />
+    <control id="63" name="[Раздел 4] cтр.05 &gt;= стр.06 по гр.3-7" condition="" rule=" {[6][05][3-7]}|&gt;=|{[6][06][3-7]}" tip="1" />
+    <control id="64" name="[Раздел 5] гр.3 = сумме гр.4-14 по стр.01-04" condition="" rule=" {[7][01,02,03,04][3]}|=|SUM{[7][01,02,03,04][4-14]}&#xD;&#xA;" tip="1" />
+    <control id="65" name="[Раздел 5] cтр.01 &gt;= стр.02 по гр.3-14" condition="" rule=" {[7][01][3-14]}|&gt;=|{[7][02][3-14]}" tip="1" />
+    <control id="66" name="[Раздел 5] cтр.01 &gt;= стр.03 по гр.3-14" condition="" rule=" {[7][01][3-14]}|&gt;=|{[7][03][3-14]}" tip="1" />
+    <control id="67" name="[Раздел 5] cтр.02 &gt;= стр.04 по гр.3-14" condition="" rule=" {[7][02][3-14]}|&gt;=|{[7][04][3-14]}" tip="1" />
+    <control id="68" name="[Раздел 5] cтр.01 гр.3 = [Раздел 1.2] стр.01 гр.4" condition="" rule="isnull( {[7][01][3]},0)|=|isnull({[2][01][4][*]},0)" tip="1" />
+    <control id="69" name="[Раздел 5] cтр.02 гр.3 = [Раздел 1.2] стр.01 гр.5" condition="" rule="isnull( {[7][02][3]},0)|=|isnull({[2][01][5][*]},0)" tip="1" />
+    <control id="70" name="[Раздел 5] cтр.03 гр.3 = [Раздел 1.2] стр.01 гр.6" condition="" rule="isnull( {[7][03][3]},0)|=|isnull({[2][01][6][*]},0)" tip="1" />
+    <control id="71" name="[Раздел 5] cтр.04 гр.3 = [Раздел 1.2] стр.02 гр.6" condition="" rule="isnull( {[7][04][3]},0)|=|isnull({[2][02][6][*]},0)" tip="1" />
+    <control id="72" name="[Раздел 5] cтр.03 &gt;= стр.04 по гр.3-14" condition="" rule=" {[7][03][3-14]}|&gt;=|{[7][04][3-14]}" tip="1" />
+    <control id="73" name="[Раздел 6] гр.5 &gt;= гр.6 по стр.01,03,04,05" condition="" rule=" {[8][01,03,04,05][5][*]}|&gt;=|{[8][01,03,04,05][6][*]}&#xD;&#xA;" tip="1" />
+    <control id="74" name="[Раздел 6] гр.5 &gt;= гр.7 по стр.01,03,05" condition="" rule=" {[8][01,03,05][5][*]}|&gt;=|{[8][01,03,05][7][*]}&#xD;&#xA;" tip="1" />
+    <control id="75" name="[Раздел 6] гр.8 &gt;= гр.9 по стр.01-05" condition="" rule=" {[8][01,02,03,04,05][8][*]}|&gt;=|{[8][01,02,03,04,05][9][*]}&#xD;&#xA;" tip="1" />
+    <control id="76" name="[Раздел 6] гр.8 &gt;= гр.10 по стр.01-03,05" condition="" rule=" {[8][01,02,03,05][8][*]}|&gt;=|{[8][01,02,03,05][10][*]}&#xD;&#xA;" tip="1" />
+    <control id="77" name="[Раздел 6] гр.10 &gt;= гр.11 по стр.01-03,05" condition="" rule=" {[8][01,02,03,05][10][*]}|&gt;=|{[8][01,02,03,05][11][*]}&#xD;&#xA;" tip="1" />
+    <control id="78" name="[Раздел 6] cтр.01 &gt;= стр.02 по гр.4,7-14" condition="" rule=" {[8][01][4,7,8,9,10,11,12,13,14][*]}|&gt;=|{[8][02][4,7,8,9,10,11,12,13,14][*]}" tip="1" />
+    <control id="79" name="[Раздел 6] cтр.01 &gt;= стр.04 по гр.4-6,8,9,12-14" condition="" rule=" {[8][01][4,5,6,8,9,12,13,14][*]}|&gt;=|{[8][04][4,5,6,8,9,12,13,14][*]}" tip="1" />
+    <control id="80" name="[Раздел 6] стр.01 = сумме стр.03 по гр.4-14" condition="" rule=" {[8][01][4-14][0]}|=|SUM{[8][03][4-14][*]}&#xD;&#xA;" tip="1" />
+    <control id="81" name="[Раздел 6] стр 01 гр 6 &gt;= стр 02 гр 7" condition="" rule=" {[8][1][6][*]}|&gt;=| {[8][2][7][*]}" tip="1" />
+    <control id="82" name="[Раздел 6] гр.9 &gt;= гр.11 по стр.01-03,05" condition="" rule=" {[8][01,02,03,05][9][*]}|&gt;=|{[8][01,02,03,05][11][*]}&#xD;&#xA;" tip="1" />
+    <control id="83" name="[Раздел 7] гр.3 = сумме гр.4-9 по стр.01,02" condition="" rule=" {[9][01,02][3]}|=|SUM{[9][01,02][4-9]}&#xD;&#xA;" tip="1" />
+    <control id="84" name="[Раздел 7] cтр.01 &gt;= стр.02 по гр.3-9" condition="" rule=" {[9][01][3-9]}|&gt;=|{[9][02][3-9]}" tip="1" />
+    <control id="85" name="[Раздел 7] cтр.01 гр.3 = [Раздел 6] стр.01 гр.5" condition="" rule=" {[9][01][3]}|=|{[8][01][5][*]}" tip="1" />
+    <control id="86" name="[Раздел 7] cтр.02 гр.3 = [Раздел 6] стр.01 гр.6" condition="" rule=" {[9][02][3]}|=|{[8][01][6][*]}" tip="1" />
+    <control id="87" name="[Раздел 1.3] стр 01 гр 4 минус гр 6 &gt;= стр 02 гр 4 минус гр 6 (др.формы обучения)" condition="" rule=" {[3][1][4][*]}-{[3][1][6][*]}|&gt;=|{[3][2][4][*]}-{[3][2][6][*]}" tip="1" />
+    <control id="88" name="[Раздел 1.3] стр 01 гр 5 минус гр 7 &gt;= стр 02 гр 5 минус гр 7 (др.формы обучения)" condition="" rule=" {[3][1][5][*]}-{[3][1][7][*]}|&gt;=|{[3][2][5][*]}-{[3][2][7][*]}" tip="1" />
+    <control id="89" name="[Раздел 5] cтр.01 минус стр 03 &gt;= стр.02 минус стр 04 по гр.3-14 (др.формы обучения)" condition="" rule=" {[7][01][3-14]}-{[7][03][3-14]}|&gt;=|{[7][02][3-14]}-{[7][04][3-14]}" tip="1" />
+    <control id="90" name="[Раздел 1.1] стр 01 гр 4 минус гр 5 &gt;= стр 02 гр 4 минус гр 5 (др.формы обучения)" condition="" rule=" {[1][1][4][*]}-{[1][1][5][*]}|&gt;=|{[1][2][4][*]}-{[1][2][5][*]}" tip="1" />
+    <control id="92" name="[Раздел 1.2] стр 01 гр 4 минус гр 6 &gt;= стр 01 гр 5 минус стр 02 гр 6 (др.формы обучения)" condition="" rule=" {[2][1][4][*]}-{[2][1][6][*]}|&gt;=|{[2][1][5][*]}-{[2][2][6][*]}" tip="1" />
+    <control id="94" name="[Раздел 3] если гр 6 &gt; 0, то гр 4 &gt; 0 по стр 04 хотя бы по одному из направлений подготовки" condition="SUM{[5][04][6]}|&gt;|0" rule="SUM{[5][04][4]}|&gt;|0" tip="1" />
+    <control id="95" name="[Раздел 3] если гр.4 = 0, то гр.12 &gt; 0 по стр.04 хотя бы по одному из направлений подготовки" condition="SUM{[5][04][4]}|=|0" rule="SUM{[5][04][12]}|&gt;|0" tip="1" />
+    <control id="96" name="[Раздел 3] гр 10 = [Раздел 1.3] гр 10 по строке 03" condition="" rule=" {[5][03][10][*]}|=| {[3][03][10][*]}" tip="1" />
+    <control id="97" name="[Раздел 3] гр 10 = [Раздел 1.3] гр 10 по строке 04" condition="" rule=" {[5][04][10][*]}|=| {[3][04][10][*]}" tip="1" />
+    <control id="98" name="[Раздел 3] гр 10 = [Раздел 1.3] гр 10 по строке 02" condition="" rule=" {[5][02][10][0]}|=| {[3][02][10][0]}" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2007">2007</term>
+      <term id="2008">2008</term>
+      <term id="2009">2009</term>
+      <term id="2010">2010</term>
+      <term id="2011">2011</term>
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="12">годовая</term>
+    </dic>
+    <dic name="Справочник кодов направлений подготовки" id="s_np">
+      <term id="1.АГ">ВСЕГО по направлениям подготовки</term>
+      <term id="01.00.00">МАТЕМАТИКА И МЕХАНИКА</term>
+      <term id="01.06.01">Математика и механика</term>
+      <term id="01.06.02">Статистика</term>
+      <term id="02.00.00">КОМПЬЮТЕРНЫЕ И ИНФОРМАЦИОННЫЕ НАУКИ</term>
+      <term id="02.06.01">Компьютерные и информационные науки</term>
+      <term id="03.00.00">ФИЗИКА И АСТРОНОМИЯ</term>
+      <term id="03.06.01">Физика и астрономия</term>
+      <term id="04.00.00">ХИМИЯ</term>
+      <term id="04.06.01">Химические науки</term>
+      <term id="05.00.00">НАУКИ О ЗЕМЛЕ</term>
+      <term id="05.06.01">Науки о Земле</term>
+      <term id="06.00.00">БИОЛОГИЧЕСКИЕ НАУКИ</term>
+      <term id="06.06.01">Биологические науки</term>
+      <term id="07.00.00">АРХИТЕКТУРА</term>
+      <term id="07.06.01">Архитектура</term>
+      <term id="08.00.00">ТЕХНИКА И ТЕХНОЛОГИИ СТРОИТЕЛЬСТВА</term>
+      <term id="08.06.01">Техника и технологии строительства</term>
+      <term id="09.00.00">ИНФОРМАТИКА И ВЫЧИСЛИТЕЛЬНАЯ ТЕХНИКА</term>
+      <term id="09.06.01">Информатика и вычислительная техника</term>
+      <term id="10.00.00">ИНФОРМАЦИОННАЯ БЕЗОПАСНОСТЬ</term>
+      <term id="10.06.01">Информационная безопасность</term>
+      <term id="11.00.00">ЭЛЕКТРОНИКА, РАДИОТЕХНИКА И СИСТЕМЫ СВЯЗИ</term>
+      <term id="11.06.01">Электроника, радиотехника и системы связи</term>
+      <term id="12.00.00">ФОТОНИКА, ПРИБОРОСТРОЕНИЕ, ОПТИЧЕСКИЕ И БИОТЕХНИЧЕСКИЕ СИСТЕМЫ И ТЕХНОЛОГИИ</term>
+      <term id="12.06.01">Фотоника, приборостроение, оптические и биотехнические системы и технологии</term>
+      <term id="13.00.00">ЭЛЕКТРО- И ТЕПЛОЭНЕРГЕТИКА</term>
+      <term id="13.06.01">Электро- и теплотехника</term>
+      <term id="14.00.00">ЯДЕРНАЯ ЭНЕРГЕТИКА И ТЕХНОЛОГИИ</term>
+      <term id="14.06.01">Ядерная, тепловая и возобновляемая энергетика и сопутствующие технологии</term>
+      <term id="15.00.00">МАШИНОСТРОЕНИЕ</term>
+      <term id="15.06.01">Машиностроение</term>
+      <term id="16.00.00">ФИЗИКО-ТЕХНИЧЕСКИЕ НАУКИ И ТЕХНОЛОГИИ</term>
+      <term id="16.06.01">Физико-технические науки и технологии</term>
+      <term id="17.00.00">ОРУЖИЕ И СИСТЕМЫ ВООРУЖЕНИЯ</term>
+      <term id="17.06.01">Оружие и системы вооружения</term>
+      <term id="18.00.00">ХИМИЧЕСКИЕ ТЕХНОЛОГИИ</term>
+      <term id="18.06.01">Химическая технология</term>
+      <term id="19.00.00">ПРОМЫШЛЕННАЯ ЭКОЛОГИЯ И БИОТЕХНОЛОГИИ</term>
+      <term id="19.06.01">Промышленная экология и биотехнологии</term>
+      <term id="20.00.00">ТЕХНОСФЕРНАЯ БЕЗОПАСНОСТЬ И ПРИРОДООБУСТРОЙСТВО</term>
+      <term id="20.06.01">Техносферная безопасность</term>
+      <term id="21.00.00">ПРИКЛАДНАЯ ГЕОЛОГИЯ, ГОРНОЕ ДЕЛО, НЕФТЕГАЗОВОЕ ДЕЛО И ГЕОДЕЗИЯ</term>
+      <term id="21.06.01">Геология, разведка и разработка полезных ископаемых</term>
+      <term id="21.06.02">Геодезия</term>
+      <term id="22.00.00">ТЕХНОЛОГИИ МАТЕРИАЛОВ</term>
+      <term id="22.06.01">Технологии материалов</term>
+      <term id="23.00.00">ТЕХНИКА И ТЕХНОЛОГИИ НАЗЕМНОГО ТРАНСПОРТА</term>
+      <term id="23.06.01">Техника и технологии наземного транспорта</term>
+      <term id="24.00.00">АВИАЦИОННАЯ И РАКЕТНО-КОСМИЧЕСКАЯ ТЕХНИКА</term>
+      <term id="24.06.01">Авиационная и ракетно-космическая техника</term>
+      <term id="25.00.00">АЭРОНАВИГАЦИЯ И ЭКСПЛУАТАЦИЯ АВИАЦИОННОЙ И РАКЕТНО-КОСМИЧЕСКОЙ ТЕХНИКИ</term>
+      <term id="25.06.01">Аэронавигация и эксплуатация авиационной и ракетно-космической техники</term>
+      <term id="26.00.00">ТЕХНИКА И ТЕХНОЛОГИИ КОРАБЛЕСТРОЕНИЯ И ВОДНОГО ТРАНСПОРТА</term>
+      <term id="26.06.01">Техника и технологии кораблестроения и водного транспорта (введено распоряжением Правительства РФ от 16.04.2016 N 685-р)</term>
+      <term id="27.00.00">УПРАВЛЕНИЕ В ТЕХНИЧЕСКИХ СИСТЕМАХ</term>
+      <term id="27.06.01">Управление в технических системах</term>
+      <term id="28.00.00">НАНОТЕХНОЛОГИИ И НАНОМАТЕРИАЛЫ</term>
+      <term id="28.06.01">Нанотехнологии и наноматериалы</term>
+      <term id="29.00.00">ТЕХНОЛОГИИ ЛЕГКОЙ ПРОМЫШЛЕННОСТИ</term>
+      <term id="29.06.01">Технологии легкой промышленности</term>
+      <term id="30.00.00">ФУНДАМЕНТАЛЬНАЯ МЕДИЦИНА</term>
+      <term id="30.06.01">Фундаментальная медицина</term>
+      <term id="31.00.00">КЛИНИЧЕСКАЯ МЕДИЦИНА</term>
+      <term id="31.06.01">Клиническая медицина</term>
+      <term id="32.00.00">НАУКИ О ЗДОРОВЬЕ И ПРОФИЛАКТИЧЕСКАЯ МЕДИЦИНА</term>
+      <term id="32.06.01">Медико-профилактическое дело</term>
+      <term id="33.00.00">ФАРМАЦИЯ</term>
+      <term id="33.06.01">Фармация</term>
+      <term id="35.00.00">СЕЛЬСКОЕ, ЛЕСНОЕ И РЫБНОЕ ХОЗЯЙСТВО</term>
+      <term id="35.06.01">Сельское хозяйство</term>
+      <term id="35.06.02">Лесное хозяйство</term>
+      <term id="35.06.03">Рыбное хозяйство</term>
+      <term id="35.06.04">Технологии, средства механизации и энергетическое оборудование в сельском, лесном и рыбном хозяйстве</term>
+      <term id="36.00.00">ВЕТЕРИНАРИЯ И ЗООТЕХНИЯ</term>
+      <term id="36.06.01">Ветеринария и зоотехния</term>
+      <term id="37.00.00">ПСИХОЛОГИЧЕСКИЕ НАУКИ</term>
+      <term id="37.06.01">Психологические науки</term>
+      <term id="38.00.00">ЭКОНОМИКА И УПРАВЛЕНИЕ</term>
+      <term id="38.06.01">Экономика</term>
+      <term id="39.00.00">СОЦИОЛОГИЯ И СОЦИАЛЬНАЯ РАБОТА</term>
+      <term id="39.06.01">Социологические науки</term>
+      <term id="40.00.00">ЮРИСПРУДЕНЦИЯ</term>
+      <term id="40.06.01">Юриспруденция</term>
+      <term id="41.00.00">ПОЛИТИЧЕСКИЕ НАУКИ И РЕГИОНОВЕДЕНИЕ</term>
+      <term id="41.06.01">Политические науки и регионоведение</term>
+      <term id="42.00.00">СРЕДСТВА МАССОВОЙ ИНФОРМАЦИИ И ИНФОРМАЦИОННО-БИБЛИОТЕЧНОЕ ДЕЛО</term>
+      <term id="42.06.01">Средства массовой информации и информационно-библиотечное дело</term>
+      <term id="44.00.00">ОБРАЗОВАНИЕ И ПЕДАГОГИЧЕСКИЕ НАУКИ</term>
+      <term id="44.06.01">Образование и педагогические науки</term>
+      <term id="45.00.00">ЯЗЫКОЗНАНИЕ И ЛИТЕРАТУРОВЕДЕНИЕ</term>
+      <term id="45.06.01">Языкознание и литературоведение</term>
+      <term id="46.00.00">ИСТОРИЯ И АРХЕОЛОГИЯ</term>
+      <term id="46.06.01">Исторические науки и археология</term>
+      <term id="47.00.00">ФИЛОСОФИЯ, ЭТИКА И РЕЛИГИОВЕДЕНИЕ</term>
+      <term id="47.06.01">Философия, этика и религиоведение</term>
+      <term id="48.00.00">ТЕОЛОГИЯ</term>
+      <term id="48.06.01">Теология</term>
+      <term id="49.00.00">ФИЗИЧЕСКАЯ КУЛЬТУРА И СПОРТ</term>
+      <term id="49.06.01">Физическая культура и спорт</term>
+      <term id="50.00.00">ИСКУССТВОЗНАНИЕ</term>
+      <term id="50.06.01">Искусствоведение</term>
+      <term id="51.00.00">КУЛЬТУРОВЕДЕНИЕ И СОЦИОКУЛЬТУРНЫЕ ПРОЕКТЫ</term>
+      <term id="51.06.01">Культурология</term>
+      <term id="2.АГ">ВСЕГО по направлениям подготовки, соответствующим приоритетным направлениям модернизации и технологического развития российской экономики</term>
+      <term id="0">Код отсутствует</term>
+    </dic>
+    <dic name="Приложение (направления подготовки) для ввода  строк в разделах ЭВФ" id="pril_np_1" parent="s_np">
+      <term id="01.06.01" />
+      <term id="01.06.02" />
+      <term id="02.06.01" />
+      <term id="03.06.01" />
+      <term id="04.06.01" />
+      <term id="05.06.01" />
+      <term id="06.06.01" />
+      <term id="07.06.01" />
+      <term id="08.06.01" />
+      <term id="09.06.01" />
+      <term id="10.06.01" />
+      <term id="11.06.01" />
+      <term id="12.06.01" />
+      <term id="13.06.01" />
+      <term id="14.06.01" />
+      <term id="15.06.01" />
+      <term id="16.06.01" />
+      <term id="17.06.01" />
+      <term id="18.06.01" />
+      <term id="19.06.01" />
+      <term id="20.06.01" />
+      <term id="21.06.01" />
+      <term id="21.06.02" />
+      <term id="22.06.01" />
+      <term id="23.06.01" />
+      <term id="24.06.01" />
+      <term id="25.06.01" />
+      <term id="26.06.01" />
+      <term id="27.06.01" />
+      <term id="28.06.01" />
+      <term id="29.06.01" />
+      <term id="30.06.01" />
+      <term id="31.06.01" />
+      <term id="32.06.01" />
+      <term id="33.06.01" />
+      <term id="35.06.01" />
+      <term id="35.06.02" />
+      <term id="35.06.03" />
+      <term id="35.06.04" />
+      <term id="36.06.01" />
+      <term id="37.06.01" />
+      <term id="38.06.01" />
+      <term id="39.06.01" />
+      <term id="40.06.01" />
+      <term id="41.06.01" />
+      <term id="42.06.01" />
+      <term id="44.06.01" />
+      <term id="45.06.01" />
+      <term id="46.06.01" />
+      <term id="47.06.01" />
+      <term id="48.06.01" />
+      <term id="49.06.01" />
+      <term id="50.06.01" />
+      <term id="51.06.01" />
+    </dic>
+    <dic name="Справочник отраслей наук и специальностей" id="s_spech">
+      <term id="1.АГ">ВСЕГО по научным специальностям</term>
+      <term id="01.01.00">МАТЕМАТИКА</term>
+      <term id="01.01.01">Вещественный, комплексный и функциональный анализ</term>
+      <term id="01.01.02">Дифференциальные уравнения,  динамические системы и оптимальное управление</term>
+      <term id="01.01.03">Математическая физика</term>
+      <term id="01.01.04">Геометрия и топология</term>
+      <term id="01.01.05">Теория вероятностей и математическая статистика</term>
+      <term id="01.01.06">Математическая логика, алгебра и теория чисел</term>
+      <term id="01.01.07">Вычислительная математика</term>
+      <term id="01.01.09">Дискретная математика и математическая кибернетика</term>
+      <term id="01.02.00">МЕХАНИКА</term>
+      <term id="01.02.01">Теоретическая механика</term>
+      <term id="01.02.04">Механика деформируемого твердого тела</term>
+      <term id="01.02.05">Механика жидкости, газа и плазмы</term>
+      <term id="01.02.06">Динамика, прочность машин, приборов и  аппаратуры</term>
+      <term id="01.02.08">Биомеханика</term>
+      <term id="01.03.00">АСТРОНОМИЯ</term>
+      <term id="01.03.01">Астрометрия и небесная механика</term>
+      <term id="01.03.02">Астрофизика и звездная астрономия</term>
+      <term id="01.03.03">Физика Солнца</term>
+      <term id="01.03.04">Планетные исследования</term>
+      <term id="01.04.00">ФИЗИКА</term>
+      <term id="01.04.01">Приборы и методы экспериментальной физики</term>
+      <term id="01.04.02">Теоретическая физика</term>
+      <term id="01.04.03">Радиофизика</term>
+      <term id="01.04.04">Физическая электроника</term>
+      <term id="01.04.05">Оптика</term>
+      <term id="01.04.06">Акустика</term>
+      <term id="01.04.07">Физика конденсированного состояния</term>
+      <term id="01.04.08">Физика плазмы</term>
+      <term id="01.04.09">Физика низких температур</term>
+      <term id="01.04.10">Физика полупроводников</term>
+      <term id="01.04.11">Физика магнитных явлений</term>
+      <term id="01.04.13">Электрофизика, электрофизические установки</term>
+      <term id="01.04.14">Теплофизика и теоретическая теплотехника</term>
+      <term id="01.04.15">Физика и технология наноструктур, атомная и молекулярная физика</term>
+      <term id="01.04.16">Физика атомного ядра и элементарных частиц</term>
+      <term id="01.04.17">Химическая физика, горение и взрыв, физика экстремальных состояний вещества</term>
+      <term id="01.04.18">Кристаллография, физика кристаллов</term>
+      <term id="01.04.20">Физика пучков заряженных частиц и  ускорительная техника</term>
+      <term id="01.04.21">Лазерная физика</term>
+      <term id="01.04.23">Физика высоких энергий</term>
+      <term id="02.00.00">ХИМИЯ</term>
+      <term id="02.00.01">Неорганическая химия</term>
+      <term id="02.00.02">Аналитическая химия</term>
+      <term id="02.00.03">Органическая химия</term>
+      <term id="02.00.04">Физическая химия</term>
+      <term id="02.00.05">Электрохимия</term>
+      <term id="02.00.06">Высокомолекулярные соединения</term>
+      <term id="02.00.08">Химия элементоорганических соединений</term>
+      <term id="02.00.09">Химия высоких энергий</term>
+      <term id="02.00.10">Биоорганическая химия</term>
+      <term id="02.00.11">Коллоидная химия</term>
+      <term id="02.00.12">Бионеорганическая химия</term>
+      <term id="02.00.13">Нефтехимия</term>
+      <term id="02.00.14">Радиохимия</term>
+      <term id="02.00.15">Кинетика и катализ</term>
+      <term id="02.00.16">Медицинская химия</term>
+      <term id="02.00.17">Математическая и квантовая химия</term>
+      <term id="02.00.21">Химия твердого тела</term>
+      <term id="03.01.00">ФИЗИКО-ХИМИЧЕСКАЯ БИОЛОГИЯ</term>
+      <term id="03.01.01">Радиобиология</term>
+      <term id="03.01.02">Биофизика</term>
+      <term id="03.01.03">Молекулярная биология</term>
+      <term id="03.01.04">Биохимия</term>
+      <term id="03.01.05">Физиология и биохимия растений</term>
+      <term id="03.01.06">Биотехнология (в том числе бионанотехнологии)</term>
+      <term id="03.01.07">Молекулярная генетика</term>
+      <term id="03.01.08">Биоинженерия</term>
+      <term id="03.01.09">Математическая биология, биоинформатика</term>
+      <term id="03.02.00">ОБЩАЯ БИОЛОГИЯ</term>
+      <term id="03.02.01">Ботаника</term>
+      <term id="03.02.02">Вирусология</term>
+      <term id="03.02.03">Микробиология</term>
+      <term id="03.02.04">Зоология</term>
+      <term id="03.02.05">Энтомология</term>
+      <term id="03.02.06">Ихтиология</term>
+      <term id="03.02.07">Генетика</term>
+      <term id="03.02.08">Экология (по отраслям)</term>
+      <term id="03.02.09">Биогеохимия</term>
+      <term id="03.02.10">Гидробиология</term>
+      <term id="03.02.11">Паразитология</term>
+      <term id="03.02.12">Микология</term>
+      <term id="03.02.13">Почвоведение</term>
+      <term id="03.02.14">Биологические ресурсы</term>
+      <term id="03.03.00">ФИЗИОЛОГИЯ</term>
+      <term id="03.03.01">Физиология</term>
+      <term id="03.03.02">Антропология</term>
+      <term id="03.03.03">Иммунология</term>
+      <term id="03.03.04">Клеточная биология, цитология, гистология</term>
+      <term id="03.03.05">Биология развития, эмбриология</term>
+      <term id="03.03.06">Нейробиология</term>
+      <term id="05.01.00">ИНЖЕНЕРНАЯ ГЕОМЕТРИЯ И КОМПЬЮТЕРНАЯ ГРАФИКА</term>
+      <term id="05.01.01">Инженерная геометрия и компьютерная  графика</term>
+      <term id="05.02.00">МАШИНОСТРОЕНИЕ И МАШИНОВЕДЕНИЕ</term>
+      <term id="05.02.02">Машиноведение, системы приводов и детали машин</term>
+      <term id="05.02.04">Трение и износ в машинах</term>
+      <term id="05.02.05">Роботы, мехатроника и робототехнические системы</term>
+      <term id="05.02.07">Технология и оборудование механической и физико-технической обработки</term>
+      <term id="05.02.08">Технология машиностроения</term>
+      <term id="05.02.09">Технологии и машины обработки давлением</term>
+      <term id="05.02.10">Сварка, родственные процессы и технологии</term>
+      <term id="05.02.11">Методы контроля и диагностика в машиностроении</term>
+      <term id="05.02.13">Машины, агрегаты и процессы (по отраслям)</term>
+      <term id="05.02.18">Теория механизмов и машин</term>
+      <term id="05.02.22">Организация производства (по отраслям)</term>
+      <term id="05.02.23">Стандартизация и управление качеством  продукции</term>
+      <term id="05.04.00">ЭНЕРГЕТИЧЕСКОЕ, МЕТАЛЛУРГИЧЕСКОЕ И ХИМИЧЕСКОЕ МАШИНОСТРОЕНИЕ</term>
+      <term id="05.04.02">Тепловые двигатели</term>
+      <term id="05.04.03">Машины и аппараты, процессы холодильной и криогенной техники, систем кондиционирования и жизнеобеспечения</term>
+      <term id="05.04.06">Вакуумная, компрессорная техника и пневмосистемы</term>
+      <term id="05.04.11">Атомное реакторостроение, машины, агрегаты и технология материалов атомной промышленности</term>
+      <term id="05.04.12">Турбомашины и комбинированные  турбоустановки</term>
+      <term id="05.04.13">Гидравлические машины и  гидропневмоагрегаты</term>
+      <term id="05.05.00">ТРАНСПОРТНОЕ, ГОРНОЕ И СТРОИТЕЛЬНОЕ МАШИНОСТРОЕНИЕ</term>
+      <term id="05.05.03">Колесные и гусеничные машины</term>
+      <term id="05.05.04">Дорожные, строительные и подъемно- транспортные машины</term>
+      <term id="05.05.06">Горные машины</term>
+      <term id="05.07.00">АВИАЦИОННАЯ И РАКЕТНО-КОСМИЧЕСКАЯ ТЕХНИКА</term>
+      <term id="05.07.01">Аэродинамика и процессы теплообмена летательных аппаратов</term>
+      <term id="05.07.02">Проектирование, конструкция и производство летательных аппаратов</term>
+      <term id="05.07.03">Прочность и тепловые режимы летательных аппаратов</term>
+      <term id="05.07.05">Тепловые, электроракетные двигатели и  энергоустановки летательных аппаратов</term>
+      <term id="05.07.06">Наземные комплексы, стартовое оборудование, эксплуатация летательных  аппаратов</term>
+      <term id="05.07.07">Контроль и испытание летательных аппаратов и их систем</term>
+      <term id="05.07.09">Динамика, баллистика, управление движением летательных аппаратов</term>
+      <term id="05.07.10">Инновационные технологии в аэрокосмической деятельности</term>
+      <term id="05.08.00">КОРАБЛЕСТРОЕНИЕ</term>
+      <term id="05.08.01">Теория корабля и строительная механика</term>
+      <term id="05.08.03">Проектирование и конструкция судов</term>
+      <term id="05.08.04">Технология судостроения, судоремонта и организация судостроительного производства</term>
+      <term id="05.08.05">Судовые энергетические установки и их элементы (главные и вспомогательные)</term>
+      <term id="05.08.06">Физические поля корабля, океана, атмосферы и их взаимодействие</term>
+      <term id="05.09.00">ЭЛЕКТРОТЕХНИКА</term>
+      <term id="05.09.01">Электромеханика и электрические аппараты</term>
+      <term id="05.09.02">Электротехнические материалы и изделия</term>
+      <term id="05.09.03">Электротехнические комплексы и системы</term>
+      <term id="05.09.05">Теоретическая электротехника</term>
+      <term id="05.09.07">Светотехника</term>
+      <term id="05.09.10">Электротехнология</term>
+      <term id="05.09.12">Силовая электроника</term>
+      <term id="05.11.00">ПРИБОРОСТРОЕНИЕ, МЕТРОЛОГИЯ И ИНФОРМАЦИОННО-ИЗМЕРИТЕЛЬНЫЕ ПРИБОРЫ И СИСТЕМЫ</term>
+      <term id="05.11.01">Приборы и методы измерения (по видам измерений)</term>
+      <term id="05.11.03">Приборы навигации</term>
+      <term id="05.11.06">Акустические приборы и системы</term>
+      <term id="05.11.07">Оптические и оптико-электронные приборы и комплексы</term>
+      <term id="05.11.08">Радиоизмерительные приборы</term>
+      <term id="05.11.10">Приборы и методы для измерения  ионизирующих излучений и рентгеновские приборы</term>
+      <term id="05.11.13">Приборы и методы контроля природной среды, веществ, материалов и изделий</term>
+      <term id="05.11.14">Технология приборостроения</term>
+      <term id="05.11.15">Метрология и метрологическое обеспечение</term>
+      <term id="05.11.16">Информационно-измерительные и управляющие системы (по отраслям)</term>
+      <term id="05.11.17">Приборы, системы и изделия медицинского назначения</term>
+      <term id="05.11.18">Приборы и методы преобразования  изображений и звука</term>
+      <term id="05.12.00">РАДИОТЕХНИКА И СВЯЗЬ</term>
+      <term id="05.12.04">Радиотехника, в том числе системы и    устройства телевидения</term>
+      <term id="05.12.07">Антенны, СВЧ-устройства и их технологии</term>
+      <term id="05.12.13">Системы, сети и устройства     телекоммуникаций</term>
+      <term id="05.12.14">Радиолокация и радионавигация</term>
+      <term id="05.13.00">ИНФОРМАТИКА, ВЫЧИСЛИТЕЛЬНАЯ ТЕХНИКА И УПРАВЛЕНИЕ</term>
+      <term id="05.13.01">Системный анализ, управление и обработка информации (по отраслям)</term>
+      <term id="05.13.05">Элементы и устройства вычислительной  техники и систем управления</term>
+      <term id="05.13.06">Автоматизация и управление  технологическими процессами и  производствами (по отраслям)</term>
+      <term id="05.13.10">Управление в социальных и экономических системах</term>
+      <term id="05.13.11">Математическое и программное обеспечение вычислительных машин,  комплексов и компьютерных сетей</term>
+      <term id="05.13.12">Системы автоматизации проектирования (по отраслям)</term>
+      <term id="05.13.15">Вычислительные машины, комплексы и компьютерные сети</term>
+      <term id="05.13.17">Теоретические основы информатики</term>
+      <term id="05.13.18">Математическое моделирование, численные методы и комплексы программ</term>
+      <term id="05.13.19">Методы и системы защиты информации,  информационная безопасность</term>
+      <term id="05.13.20">Квантовые методы обработки информации</term>
+      <term id="05.14.00">ЭНЕРГЕТИКА</term>
+      <term id="05.14.01">Энергетические системы и комплексы</term>
+      <term id="05.14.02">Электрические станции и  электроэнергетические системы</term>
+      <term id="05.14.03">Ядерные энергетические установки, включая проектирование, эксплуатацию и вывод из эксплуатации</term>
+      <term id="05.14.04">Промышленная теплоэнергетика</term>
+      <term id="05.14.08">Энергоустановки на основе возобновляемых видов энергии</term>
+      <term id="05.14.12">Техника высоких напряжений</term>
+      <term id="05.14.14">Тепловые электрические станции, их  энергетические системы и агрегаты</term>
+      <term id="05.16.00">МЕТАЛЛУРГИЯ И МАТЕРИАЛОВЕДЕНИЕ</term>
+      <term id="05.16.01">Металловедение и термическая обработка металлов и сплавов</term>
+      <term id="05.16.02">Металлургия черных, цветных и редких металлов</term>
+      <term id="05.16.04">Литейное производство</term>
+      <term id="05.16.05">Обработка металлов давлением</term>
+      <term id="05.16.06">Порошковая металлургия и композиционные материалы</term>
+      <term id="05.16.07">Металлургия техногенных и вторичных ресурсов</term>
+      <term id="05.16.08">Нанотехнологии и наноматериалы (по отраслям)</term>
+      <term id="05.16.09">Материаловедение (по отраслям)</term>
+      <term id="05.17.00">ХИМИЧЕСКАЯ ТЕХНОЛОГИЯ</term>
+      <term id="05.17.01">Технология неорганических веществ</term>
+      <term id="05.17.02">Технология редких, рассеянных и  радиоактивных элементов</term>
+      <term id="05.17.03">Технология электрохимических процессов и защита от коррозии</term>
+      <term id="05.17.04">Технология органических веществ</term>
+      <term id="05.17.06">Технология и переработка полимеров и  композитов</term>
+      <term id="05.17.07">Химическая технология топлива и высокоэнергетических веществ</term>
+      <term id="05.17.08">Процессы и аппараты химических технологий</term>
+      <term id="05.17.11">Технология силикатных и тугоплавких неметаллических материалов</term>
+      <term id="05.17.18">Мембраны и мембранная технология</term>
+      <term id="05.18.00">ТЕХНОЛОГИЯ ПРОДОВОЛЬСТВЕННЫХ ПРОДУКТОВ</term>
+      <term id="05.18.01">Технология обработки, хранения и переработки злаковых, бобовых культур,  крупяных продуктов, плодоовощной  продукции и виноградарства</term>
+      <term id="05.18.04">Технология мясных, молочных и рыбных  продуктов и холодильных производств</term>
+      <term id="05.18.05">Технология сахара и сахаристых продуктов, чая, табака и субтропических культур</term>
+      <term id="05.18.06">Технология жиров, эфирных масел и  парфюмерно-косметических продуктов</term>
+      <term id="05.18.07">Биотехнология пищевых продуктов и  биологических активных веществ</term>
+      <term id="05.18.12">Процессы и аппараты пищевых производств</term>
+      <term id="05.18.15">Технология и товароведение пищевых продуктов функционального и специализированного назначения и общественного питания</term>
+      <term id="05.18.17">Промышленное рыболовство</term>
+      <term id="05.19.00">ТЕХНОЛОГИЯ МАТЕРИАЛОВ И ИЗДЕЛИЙ ТЕКСТИЛЬНОЙ И ЛЕГКОЙ ПРОМЫШЛЕННОСТИ</term>
+      <term id="05.19.01">Материаловедение производств текстильной и легкой промышленности</term>
+      <term id="05.19.02">Технология и первичная обработка текстильных материалов и сырья</term>
+      <term id="05.19.04">Технология швейных изделий</term>
+      <term id="05.19.05">Технология кожи, меха, обувных и кожевенно-галантерейных изделий</term>
+      <term id="05.20.00">ПРОЦЕССЫ И МАШИНЫ АГРОИНЖЕНЕРНЫХ СИСТЕМ</term>
+      <term id="05.20.01">Технологии и средства механизации сельского хозяйства</term>
+      <term id="05.20.02">Электротехнологии и электрооборудование в сельском хозяйстве</term>
+      <term id="05.20.03">Технологии и средства технического обслуживания в сельском хозяйстве</term>
+      <term id="05.21.00">ТЕХНОЛОГИЯ, МАШИНЫ И ОБОРУДОВАНИЕ ЛЕСОЗАГОТОВОК, ЛЕСНОГО ХОЗЯЙСТВА, ДЕРЕВОПЕРЕРАБОТКИ И ХИМИЧЕСКОЙ ПЕРЕРАБОТКИ БИОМАССЫ ДЕРЕВА</term>
+      <term id="05.21.01">Технология и машины лесозаготовок и лесного хозяйства</term>
+      <term id="05.21.03">Технология и оборудование химической  переработки биомассы дерева; химия древесины</term>
+      <term id="05.21.05">Древесиноведение, технология и  оборудование деревопереработки</term>
+      <term id="05.22.00">ТРАНСПОРТ</term>
+      <term id="05.22.01">Транспортные и транспортно- технологические системы страны, ее  регионов и городов, организация   производства на транспорте</term>
+      <term id="05.22.06">Железнодорожный путь, изыскание и проектирование железных дорог</term>
+      <term id="05.22.07">Подвижной состав железных дорог, тяга поездов и электрификация</term>
+      <term id="05.22.08">Управление процессами перевозок</term>
+      <term id="05.22.10">Эксплуатация автомобильного транспорта</term>
+      <term id="05.22.13">Навигация и управление воздушным движением</term>
+      <term id="05.22.14">Эксплуатация воздушного транспорта</term>
+      <term id="05.22.17">Водные пути сообщения и гидрография</term>
+      <term id="05.22.19">Эксплуатация водного транспорта, судовождение</term>
+      <term id="05.23.00">СТРОИТЕЛЬСТВО И АРХИТЕКТУРА</term>
+      <term id="05.23.01">Строительные конструкции, здания и сооружения</term>
+      <term id="05.23.02">Основания и фундаменты, подземные  сооружения</term>
+      <term id="05.23.03">Теплоснабжение, вентиляция, кондиционирование воздуха, газоснабжение и освещение</term>
+      <term id="05.23.04">Водоснабжение, канализация, строительные системы охраны водных ресурсов</term>
+      <term id="05.23.05">Строительные материалы и изделия</term>
+      <term id="05.23.07">Гидротехническое строительство</term>
+      <term id="05.23.08">Технология и организация строительства</term>
+      <term id="05.23.11">Проектирование и строительство дорог, метрополитенов, аэродромов, мостов и транспортных тоннелей</term>
+      <term id="05.23.16">Гидравлика и инженерная гидрология</term>
+      <term id="05.23.17">Строительная механика</term>
+      <term id="05.23.19">Экологическая безопасность строительства и городского хозяйства</term>
+      <term id="05.23.20">Теория и история архитектуры, реставрация и реконструкция историко-архитектурного наследия</term>
+      <term id="05.23.21">Архитектура зданий и сооружений.Творческие концепции архитектурной деятельности</term>
+      <term id="05.23.22">Градостроительство, планировка сельских населенных пунктов</term>
+      <term id="05.25.00">ДОКУМЕНТАЛЬНАЯ ИНФОРМАЦИЯ</term>
+      <term id="05.25.02">Документалистика, документоведение, архивоведение</term>
+      <term id="05.25.03">Библиотековедение, библиографоведение и книговедение</term>
+      <term id="05.25.05">Информационные системы и процессы</term>
+      <term id="05.26.00">БЕЗОПАСНОСТЬ ДЕЯТЕЛЬНОСТИ ЧЕЛОВЕКА</term>
+      <term id="05.26.01">Охрана труда (по отраслям)</term>
+      <term id="05.26.02">Безопасность в чрезвычайных ситуациях (по отраслям)</term>
+      <term id="05.26.03">Пожарная и промышленная безопасность (по отраслям)</term>
+      <term id="05.26.05">Ядерная и радиационная безопасность</term>
+      <term id="05.26.06">Химическая, биологическая и  бактериологическая безопасность</term>
+      <term id="05.27.00">ЭЛЕКТРОНИКА</term>
+      <term id="05.27.01">Твердотельная электроника,  радиоэлектронные компоненты, микро- и  наноэлектроника, приборы на квантовых эффектах</term>
+      <term id="05.27.02">Вакуумная и плазменная электроника</term>
+      <term id="05.27.03">Квантовая электроника</term>
+      <term id="05.27.06">Технология и оборудование для производства полупроводников, материалов и приборов электронной техники</term>
+      <term id="06.01.00">АГРОНОМИЯ</term>
+      <term id="06.01.01">Общее земледелие, растениеводство</term>
+      <term id="06.01.02">Мелиорация, рекультивация и охрана земель</term>
+      <term id="06.01.03">Агрофизика</term>
+      <term id="06.01.04">Агрохимия</term>
+      <term id="06.01.05">Селекция и семеноводство  сельскохозяйственных растений</term>
+      <term id="06.01.06">Луговодство и лекарственные, эфирно- масличные культуры</term>
+      <term id="06.01.07">Защита растений</term>
+      <term id="06.01.08">Плодоводство, виноградство</term>
+      <term id="06.01.09">Овощеводство</term>
+      <term id="06.02.00">ВЕТЕРИНАРИЯ И ЗООТЕХНИЯ</term>
+      <term id="06.02.01">Диагностика болезней и терапия животных, патология, онкология и морфология животных</term>
+      <term id="06.02.02">Ветеринарная микробиология, вирусология, эпизоотология, микология с микотоксикологией и иммунология</term>
+      <term id="06.02.03">Ветеринарная фармакология с  токсикологией</term>
+      <term id="06.02.04">Ветеринарная хирургия</term>
+      <term id="06.02.05">Ветеринарная санитария, экология,     зоогигиена и ветеринарно-санитарная  экспертиза</term>
+      <term id="06.02.06">Ветеринарное акушерство и биотехника репродукции животных</term>
+      <term id="06.02.07">Разведение, селекция и генетика сельскохозяйственных животных</term>
+      <term id="06.02.08">Кормопроизводство, кормление     сельскохозяйственных животных и технология кормов</term>
+      <term id="06.02.09">Звероводство и охотоведение</term>
+      <term id="06.02.10">Частная зоотехния, технология производства продуктов животноводства</term>
+      <term id="06.03.00">ЛЕСНОЕ ХОЗЯЙСТВО</term>
+      <term id="06.03.01">Лесные культуры, селекция, семеноводство</term>
+      <term id="06.03.02">Лесоведение, лесоводство, лесоустройство и лесная таксация</term>
+      <term id="06.03.03">Агролесомелиорация, защитное  лесоразведение и озеленение населенных пунктов, лесные пожары и борьба с ними</term>
+      <term id="06.04.00">РЫБНОЕ ХОЗЯЙСТВО</term>
+      <term id="06.04.01">Рыбное хозяйство и аквакультура</term>
+      <term id="07.00.00">ИСТОРИЯ И АРХЕОЛОГИЯ</term>
+      <term id="07.00.02">Отечественная история</term>
+      <term id="07.00.03">Всеобщая история (соответствующего периода)</term>
+      <term id="07.00.06">Археология</term>
+      <term id="07.00.07">Этнография, этнология и антропология</term>
+      <term id="07.00.09">Историография, источниковедение и методы исторического исследования</term>
+      <term id="07.00.10">История науки и техники</term>
+      <term id="07.00.15">История международных отношений и внешней политики</term>
+      <term id="08.00.00">ЭКОНОМИКА</term>
+      <term id="08.00.01">Экономическая теория</term>
+      <term id="08.00.05">Экономика и управление народным хозяйством (по отраслям и сферам деятельности, в т.ч.: экономика, организация и управление предприятиями, отраслями, комплексами; управление инновациями; региональная экономика; логистика; экономика труда; экономика народонаселения и демография; экономика природопользования; экономика предпринимательства; маркетинг; менеджмент; ценообразование; экономическая безопасность; стандартизация и управление качеством продукции; землеустройство; рекреация и туризм)</term>
+      <term id="08.00.10">Финансы, денежное обращение и кредит</term>
+      <term id="08.00.12">Бухгалтерский учет, статистика</term>
+      <term id="08.00.13">Математические и инструментальные методы экономики</term>
+      <term id="08.00.14">Мировая экономика</term>
+      <term id="09.00.00">ФИЛОСОФИЯ</term>
+      <term id="09.00.01">Онтология и теория познания</term>
+      <term id="09.00.03">История философии</term>
+      <term id="09.00.04">Эстетика</term>
+      <term id="09.00.05">Этика</term>
+      <term id="09.00.07">Логика</term>
+      <term id="09.00.08">Философия науки и техники</term>
+      <term id="09.00.11">Социальная философия</term>
+      <term id="09.00.13">Философская антропология, философия культуры</term>
+      <term id="09.00.14">Философия религии и религиоведение</term>
+      <term id="10.01.00">ЛИТЕРАТУРОВЕДЕНИЕ</term>
+      <term id="10.01.01">Русская литература</term>
+      <term id="10.01.02">Литература народов Российской Федерации (с указанием конкретной литературы или группы литератур)</term>
+      <term id="10.01.03">Литература народов стран зарубежья (с указанием конкретной литературы)</term>
+      <term id="10.01.08">Теория литературы. Текстология</term>
+      <term id="10.01.09">Фольклористика</term>
+      <term id="10.01.10">Журналистика</term>
+      <term id="10.02.00">ЯЗЫКОЗНАНИЕ</term>
+      <term id="10.02.01">Русский язык</term>
+      <term id="10.02.02">Языки народов Российской Федерации (с указанием конкретного языка или языковой семьи)</term>
+      <term id="10.02.03">Славянские языки</term>
+      <term id="10.02.04">Германские языки</term>
+      <term id="10.02.05">Романские языки</term>
+      <term id="10.02.14">Классическая филология, византийская и новогреческая филология</term>
+      <term id="10.02.19">Теория языка</term>
+      <term id="10.02.20">Сравнительно-историческое,  типологическое и сопоставительное языкознание</term>
+      <term id="10.02.21">Прикладная и математическая лингвистика</term>
+      <term id="10.02.22">Языки народов зарубежных стран Европы, Азии, Африки, аборигенов Америки и Австралии (с указанием конкретного языка или языковой семьи)</term>
+      <term id="12.00.00">ЮРИСПРУДЕНЦИЯ</term>
+      <term id="12.00.01">Теория и история права и государства; история учений о праве и государстве</term>
+      <term id="12.00.02">Конституционное право; конституционный судебный процесс; муниципальное право</term>
+      <term id="12.00.03">Гражданское право; предпринимательское право; семейное право; международное частное право</term>
+      <term id="12.00.04">Финансовое право; налоговое право; бюджетное право</term>
+      <term id="12.00.05">Трудовое право; право социального обеспечения</term>
+      <term id="12.00.06">Земельное право; природоресурсное право; экологическое право; аграрное право</term>
+      <term id="12.00.07">Корпоративное право; конкурентное право; энергетическое право</term>
+      <term id="12.00.08">Уголовное право и криминология; уголовно-исполнительное право</term>
+      <term id="12.00.09">Уголовный процесс</term>
+      <term id="12.00.10">Международное право; Европейское право</term>
+      <term id="12.00.11">Судебная деятельность, прокурорская деятельность, правозащитная и правоохранительная деятельность</term>
+      <term id="12.00.12">Криминалистика; судебно-экспертная деятельность; оперативно-розыскная деятельность</term>
+      <term id="12.00.13">Информационное право</term>
+      <term id="12.00.14">Административное право; административный процесс</term>
+      <term id="12.00.15">Гражданский процесс; арбитражный процесс</term>
+      <term id="13.00.00">ПЕДАГОГИКА</term>
+      <term id="13.00.01">Общая педагогика, история педагогики и образования</term>
+      <term id="13.00.02">Теория и методика обучения и воспитания (по областям и уровням образования)</term>
+      <term id="13.00.03">Коррекционная педагогика (сурдопедагогика и тифлопедагогика,  олигофренопедагогика и логопедия)</term>
+      <term id="13.00.04">Теория и методика физического воспитания, спортивной тренировки, оздоровительной и адаптивной физической культуры</term>
+      <term id="13.00.05">Теория, методика и организация социально-культурной деятельности</term>
+      <term id="13.00.08">Теория и методика профессионального образования</term>
+      <term id="14.01.00">КЛИНИЧЕСКАЯ МЕДИЦИНА</term>
+      <term id="14.01.01">Акушерство и гинекология</term>
+      <term id="14.01.02">Эндокринология</term>
+      <term id="14.01.03">Болезни уха, горла и носа</term>
+      <term id="14.01.04">Внутренние болезни</term>
+      <term id="14.01.05">Кардиология</term>
+      <term id="14.01.06">Психиатрия</term>
+      <term id="14.01.07">Глазные болезни</term>
+      <term id="14.01.08">Педиатрия</term>
+      <term id="14.01.09">Инфекционные болезни</term>
+      <term id="14.01.10">Кожные и венерические болезни</term>
+      <term id="14.01.11">Нервные болезни</term>
+      <term id="14.01.12">Онкология</term>
+      <term id="14.01.13">Лучевая диагностика, лучевая терапия</term>
+      <term id="14.01.14">Стоматология</term>
+      <term id="14.01.15">Травматология и ортопедия</term>
+      <term id="14.01.16">Фтизиатрия</term>
+      <term id="14.01.17">Хирургия</term>
+      <term id="14.01.18">Нейрохирургия</term>
+      <term id="14.01.19">Детская хирургия</term>
+      <term id="14.01.20">Анестезиология и реаниматология</term>
+      <term id="14.01.21">Гематология и переливание крови</term>
+      <term id="14.01.22">Ревматология</term>
+      <term id="14.01.23">Урология</term>
+      <term id="14.01.24">Трансплантология и искусственные органы</term>
+      <term id="14.01.25">Пульмонология</term>
+      <term id="14.01.26">Сердечно - сосудистая хирургия</term>
+      <term id="14.01.27">Наркология</term>
+      <term id="14.01.28">Гастроэнтерология</term>
+      <term id="14.01.29">Нефрология</term>
+      <term id="14.01.30">Геронтология и гериатрия</term>
+      <term id="14.01.31">Пластическая хирургия (введено приказом Минобрнауки России от 14.12.2015 № 1458)</term>
+      <term id="14.02.00">ПРОФИЛАКТИЧЕСКАЯ МЕДИЦИНА</term>
+      <term id="14.02.01">Гигиена</term>
+      <term id="14.02.02">Эпидемиология</term>
+      <term id="14.02.03">Общественное здоровье и здравоохранение</term>
+      <term id="14.02.04">Медицина труда</term>
+      <term id="14.02.05">Социология медицины</term>
+      <term id="14.02.06">Медико-социальная  экспертиза и медико-социальная реабилитация</term>
+      <term id="14.03.00">МЕДИКО-БИОЛОГИЧЕСКИЕ НАУКИ</term>
+      <term id="14.03.01">Анатомия человека</term>
+      <term id="14.03.02">Патологическая анатомия</term>
+      <term id="14.03.03">Патологическая физиология</term>
+      <term id="14.03.04">Токсикология</term>
+      <term id="14.03.05">Судебная медицина</term>
+      <term id="14.03.06">Фармакология, клиническая фармакология</term>
+      <term id="14.03.07">Химиотерапия и антибиотики</term>
+      <term id="14.03.08">Авиационная, космическая и морская медицина</term>
+      <term id="14.03.09">Клиническая иммунология, аллергология</term>
+      <term id="14.03.10">Клиническая лабораторная диагностика</term>
+      <term id="14.03.11">Восстановительная медицина, спортивная медицина, лечебная физкультура, курортология и физиотерапия</term>
+      <term id="14.04.00">ФАРМАЦИЯ</term>
+      <term id="14.04.01">Технология получения лекарств</term>
+      <term id="14.04.02">Фармацевтическая химия, фармакогнозия</term>
+      <term id="14.04.03">Организация фармацевтического дела</term>
+      <term id="17.00.00">ИСКУССТВОВЕДЕНИЕ</term>
+      <term id="17.00.01">Театральное искусство</term>
+      <term id="17.00.02">Музыкальное искусство</term>
+      <term id="17.00.03">Кино-, теле- и другие экранные искусства</term>
+      <term id="17.00.04">Изобразительное и декоративно-прикладное искусство и архитектура</term>
+      <term id="17.00.05">Хореографическое искусство</term>
+      <term id="17.00.06">Техническая эстетика и дизайн</term>
+      <term id="17.00.09">Теория и история искусства</term>
+      <term id="19.00.00">ПСИХОЛОГИЯ</term>
+      <term id="19.00.01">Общая психология, психология личности, история психологии</term>
+      <term id="19.00.02">Психофизиология</term>
+      <term id="19.00.03">Психология труда, инженерная психология, эргономика</term>
+      <term id="19.00.04">Медицинская психология</term>
+      <term id="19.00.05">Социальная психология</term>
+      <term id="19.00.06">Юридическая психология</term>
+      <term id="19.00.07">Педагогическая психология</term>
+      <term id="19.00.10">Коррекционная психология</term>
+      <term id="19.00.12">Политическая психология</term>
+      <term id="19.00.13">Психология развития, акмеология</term>
+      <term id="22.00.00">СОЦИОЛОГИЯ</term>
+      <term id="22.00.01">Теория, методология и история социологии</term>
+      <term id="22.00.03">Экономическая социология и демография</term>
+      <term id="22.00.04">Социальная структура, социальные институты и процессы</term>
+      <term id="22.00.05">Политическая социология</term>
+      <term id="22.00.06">Социология культуры</term>
+      <term id="22.00.08">Социология управления</term>
+      <term id="23.00.00">ПОЛИТОЛОГИЯ</term>
+      <term id="23.00.01">Теория и философия политики, история и методология политической науки</term>
+      <term id="23.00.02">Политические институты, процессы и  технологии</term>
+      <term id="23.00.03">Политическая культура и идеологии</term>
+      <term id="23.00.04">Политические проблемы международных отношений, глобального и регионального развития</term>
+      <term id="23.00.05">Политическая регионалистика. Этнополитика</term>
+      <term id="23.00.06">Конфликтология</term>
+      <term id="24.00.00">КУЛЬТУРОЛОГИЯ</term>
+      <term id="24.00.01">Теория и история культуры</term>
+      <term id="24.00.03">Музееведение, консервация и реставрация историко-культурных объектов</term>
+      <term id="25.00.00">НАУКИ О ЗЕМЛЕ</term>
+      <term id="25.00.01">Общая и региональная геология</term>
+      <term id="25.00.02">Палеонтология и стратиграфия</term>
+      <term id="25.00.03">Геотектоника и геодинамика</term>
+      <term id="25.00.04">Петрология, вулканология</term>
+      <term id="25.00.05">Минералогия, кристаллография</term>
+      <term id="25.00.06">Литология</term>
+      <term id="25.00.07">Гидрогеология</term>
+      <term id="25.00.08">Инженерная геология, мерзлотоведение и грунтоведение</term>
+      <term id="25.00.09">Геохимия, геохимические методы поисков полезных ископаемых</term>
+      <term id="25.00.10">Геофизика, геофизические методы поисков полезных ископаемых</term>
+      <term id="25.00.11">Геология, поиски и разведка твердых полезных ископаемых, минерагения</term>
+      <term id="25.00.12">Геология, поиски и разведка нефтяных и газовых месторождений</term>
+      <term id="25.00.13">Обогащение полезных ископаемых</term>
+      <term id="25.00.14">Технология и техника геологоразведочных работ</term>
+      <term id="25.00.15">Технология бурения и освоения скважин</term>
+      <term id="25.00.16">Горнопромышленная и нефтегазопромысловая геология, геофизика, маркшейдерское дело и геометрия недр</term>
+      <term id="25.00.17">Разработка и эксплуатация нефтяных и газовых месторождений</term>
+      <term id="25.00.18">Технология освоения морских месторождений полезных ископаемых</term>
+      <term id="25.00.19">Строительство и эксплуатация нефтегазопроводов, баз и хранилищ</term>
+      <term id="25.00.20">Геомеханика, разрушение горных пород, рудничная аэрогазодинамика и горная теплофизика</term>
+      <term id="25.00.21">Теоретические основы проектирования горно-технических систем</term>
+      <term id="25.00.22">Геотехнология (подземная, открытая и строительная)</term>
+      <term id="25.00.23">Физическая география и биогеография,   география почв и геохимия ландшафтов</term>
+      <term id="25.00.24">Экономическая, социальная, политическая и рекреационная география</term>
+      <term id="25.00.25">Геоморфология и эволюционная география</term>
+      <term id="25.00.26">Землеустройство, кадастр и мониторинг земель</term>
+      <term id="25.00.27">Гидрология суши, водные ресурсы, гидрохимия</term>
+      <term id="25.00.28">Океанология</term>
+      <term id="25.00.29">Физика атмосферы и гидросферы</term>
+      <term id="25.00.30">Метеорология, климатология, агрометеорология</term>
+      <term id="25.00.31">Гляциология и криология Земли</term>
+      <term id="25.00.32">Геодезия</term>
+      <term id="25.00.33">Картография</term>
+      <term id="25.00.34">Аэрокосмические исследования Земли, фотограмметрия</term>
+      <term id="25.00.35">Геоинформатика</term>
+      <term id="25.00.36">Геоэкология (по отраслям)</term>
+      <term id="26.00.00">ТЕОЛОГИЯ</term>
+      <term id="26.00.01">Теология</term>
+      <term id="0">Код отсутствует</term>
+    </dic>
+    <dic name="Приложение (специальности) для ввода строк в разделах ЭВФ" id="pril_spech_2" parent="s_spech">
+      <term id="01.01.01" />
+      <term id="01.01.02" />
+      <term id="01.01.03" />
+      <term id="01.01.04" />
+      <term id="01.01.05" />
+      <term id="01.01.06" />
+      <term id="01.01.07" />
+      <term id="01.01.09" />
+      <term id="01.02.01" />
+      <term id="01.02.04" />
+      <term id="01.02.05" />
+      <term id="01.02.06" />
+      <term id="01.02.08" />
+      <term id="01.03.01" />
+      <term id="01.03.02" />
+      <term id="01.03.03" />
+      <term id="01.03.04" />
+      <term id="01.04.01" />
+      <term id="01.04.02" />
+      <term id="01.04.03" />
+      <term id="01.04.04" />
+      <term id="01.04.05" />
+      <term id="01.04.06" />
+      <term id="01.04.07" />
+      <term id="01.04.08" />
+      <term id="01.04.09" />
+      <term id="01.04.10" />
+      <term id="01.04.11" />
+      <term id="01.04.13" />
+      <term id="01.04.14" />
+      <term id="01.04.15" />
+      <term id="01.04.16" />
+      <term id="01.04.17" />
+      <term id="01.04.18" />
+      <term id="01.04.20" />
+      <term id="01.04.21" />
+      <term id="01.04.23" />
+      <term id="02.00.01" />
+      <term id="02.00.02" />
+      <term id="02.00.03" />
+      <term id="02.00.04" />
+      <term id="02.00.05" />
+      <term id="02.00.06" />
+      <term id="02.00.08" />
+      <term id="02.00.09" />
+      <term id="02.00.10" />
+      <term id="02.00.11" />
+      <term id="02.00.12" />
+      <term id="02.00.13" />
+      <term id="02.00.14" />
+      <term id="02.00.15" />
+      <term id="02.00.16" />
+      <term id="02.00.17" />
+      <term id="02.00.21" />
+      <term id="03.01.01" />
+      <term id="03.01.02" />
+      <term id="03.01.03" />
+      <term id="03.01.04" />
+      <term id="03.01.05" />
+      <term id="03.01.06" />
+      <term id="03.01.07" />
+      <term id="03.01.08" />
+      <term id="03.01.09" />
+      <term id="03.02.01" />
+      <term id="03.02.02" />
+      <term id="03.02.03" />
+      <term id="03.02.04" />
+      <term id="03.02.05" />
+      <term id="03.02.06" />
+      <term id="03.02.07" />
+      <term id="03.02.08" />
+      <term id="03.02.09" />
+      <term id="03.02.10" />
+      <term id="03.02.11" />
+      <term id="03.02.12" />
+      <term id="03.02.13" />
+      <term id="03.02.14" />
+      <term id="03.03.01" />
+      <term id="03.03.02" />
+      <term id="03.03.03" />
+      <term id="03.03.04" />
+      <term id="03.03.05" />
+      <term id="03.03.06" />
+      <term id="05.01.01" />
+      <term id="05.02.02" />
+      <term id="05.02.04" />
+      <term id="05.02.05" />
+      <term id="05.02.07" />
+      <term id="05.02.08" />
+      <term id="05.02.09" />
+      <term id="05.02.10" />
+      <term id="05.02.11" />
+      <term id="05.02.13" />
+      <term id="05.02.18" />
+      <term id="05.02.22" />
+      <term id="05.02.23" />
+      <term id="05.04.02" />
+      <term id="05.04.03" />
+      <term id="05.04.06" />
+      <term id="05.04.11" />
+      <term id="05.04.12" />
+      <term id="05.04.13" />
+      <term id="05.05.03" />
+      <term id="05.05.04" />
+      <term id="05.05.06" />
+      <term id="05.07.01" />
+      <term id="05.07.02" />
+      <term id="05.07.03" />
+      <term id="05.07.05" />
+      <term id="05.07.06" />
+      <term id="05.07.07" />
+      <term id="05.07.09" />
+      <term id="05.07.10" />
+      <term id="05.08.01" />
+      <term id="05.08.03" />
+      <term id="05.08.04" />
+      <term id="05.08.05" />
+      <term id="05.08.06" />
+      <term id="05.09.01" />
+      <term id="05.09.02" />
+      <term id="05.09.03" />
+      <term id="05.09.05" />
+      <term id="05.09.07" />
+      <term id="05.09.10" />
+      <term id="05.09.12" />
+      <term id="05.11.01" />
+      <term id="05.11.03" />
+      <term id="05.11.06" />
+      <term id="05.11.07" />
+      <term id="05.11.08" />
+      <term id="05.11.10" />
+      <term id="05.11.13" />
+      <term id="05.11.14" />
+      <term id="05.11.15" />
+      <term id="05.11.16" />
+      <term id="05.11.17" />
+      <term id="05.11.18" />
+      <term id="05.12.04" />
+      <term id="05.12.07" />
+      <term id="05.12.13" />
+      <term id="05.12.14" />
+      <term id="05.13.01" />
+      <term id="05.13.05" />
+      <term id="05.13.06" />
+      <term id="05.13.10" />
+      <term id="05.13.11" />
+      <term id="05.13.12" />
+      <term id="05.13.15" />
+      <term id="05.13.17" />
+      <term id="05.13.18" />
+      <term id="05.13.19" />
+      <term id="05.13.20" />
+      <term id="05.14.01" />
+      <term id="05.14.02" />
+      <term id="05.14.03" />
+      <term id="05.14.04" />
+      <term id="05.14.08" />
+      <term id="05.14.12" />
+      <term id="05.14.14" />
+      <term id="05.16.01" />
+      <term id="05.16.02" />
+      <term id="05.16.04" />
+      <term id="05.16.05" />
+      <term id="05.16.06" />
+      <term id="05.16.07" />
+      <term id="05.16.08" />
+      <term id="05.16.09" />
+      <term id="05.17.01" />
+      <term id="05.17.02" />
+      <term id="05.17.03" />
+      <term id="05.17.04" />
+      <term id="05.17.06" />
+      <term id="05.17.07" />
+      <term id="05.17.08" />
+      <term id="05.17.11" />
+      <term id="05.17.18" />
+      <term id="05.18.01" />
+      <term id="05.18.04" />
+      <term id="05.18.05" />
+      <term id="05.18.06" />
+      <term id="05.18.07" />
+      <term id="05.18.12" />
+      <term id="05.18.15" />
+      <term id="05.18.17" />
+      <term id="05.19.01" />
+      <term id="05.19.02" />
+      <term id="05.19.04" />
+      <term id="05.19.05" />
+      <term id="05.20.01" />
+      <term id="05.20.02" />
+      <term id="05.20.03" />
+      <term id="05.21.01" />
+      <term id="05.21.03" />
+      <term id="05.21.05" />
+      <term id="05.22.01" />
+      <term id="05.22.06" />
+      <term id="05.22.07" />
+      <term id="05.22.08" />
+      <term id="05.22.10" />
+      <term id="05.22.13" />
+      <term id="05.22.14" />
+      <term id="05.22.17" />
+      <term id="05.22.19" />
+      <term id="05.23.01" />
+      <term id="05.23.02" />
+      <term id="05.23.03" />
+      <term id="05.23.04" />
+      <term id="05.23.05" />
+      <term id="05.23.07" />
+      <term id="05.23.08" />
+      <term id="05.23.11" />
+      <term id="05.23.16" />
+      <term id="05.23.17" />
+      <term id="05.23.19" />
+      <term id="05.23.20" />
+      <term id="05.23.21" />
+      <term id="05.23.22" />
+      <term id="05.25.02" />
+      <term id="05.25.03" />
+      <term id="05.25.05" />
+      <term id="05.26.01" />
+      <term id="05.26.02" />
+      <term id="05.26.03" />
+      <term id="05.26.05" />
+      <term id="05.26.06" />
+      <term id="05.27.01" />
+      <term id="05.27.02" />
+      <term id="05.27.03" />
+      <term id="05.27.06" />
+      <term id="06.01.01" />
+      <term id="06.01.02" />
+      <term id="06.01.03" />
+      <term id="06.01.04" />
+      <term id="06.01.05" />
+      <term id="06.01.06" />
+      <term id="06.01.07" />
+      <term id="06.01.08" />
+      <term id="06.01.09" />
+      <term id="06.02.01" />
+      <term id="06.02.02" />
+      <term id="06.02.03" />
+      <term id="06.02.04" />
+      <term id="06.02.05" />
+      <term id="06.02.06" />
+      <term id="06.02.07" />
+      <term id="06.02.08" />
+      <term id="06.02.09" />
+      <term id="06.02.10" />
+      <term id="06.03.01" />
+      <term id="06.03.02" />
+      <term id="06.03.03" />
+      <term id="06.04.01" />
+      <term id="07.00.02" />
+      <term id="07.00.03" />
+      <term id="07.00.06" />
+      <term id="07.00.07" />
+      <term id="07.00.09" />
+      <term id="07.00.10" />
+      <term id="07.00.15" />
+      <term id="08.00.01" />
+      <term id="08.00.05" />
+      <term id="08.00.10" />
+      <term id="08.00.12" />
+      <term id="08.00.13" />
+      <term id="08.00.14" />
+      <term id="09.00.01" />
+      <term id="09.00.03" />
+      <term id="09.00.04" />
+      <term id="09.00.05" />
+      <term id="09.00.07" />
+      <term id="09.00.08" />
+      <term id="09.00.11" />
+      <term id="09.00.13" />
+      <term id="09.00.14" />
+      <term id="10.01.01" />
+      <term id="10.01.02" />
+      <term id="10.01.03" />
+      <term id="10.01.08" />
+      <term id="10.01.09" />
+      <term id="10.01.10" />
+      <term id="10.02.01" />
+      <term id="10.02.02" />
+      <term id="10.02.03" />
+      <term id="10.02.04" />
+      <term id="10.02.05" />
+      <term id="10.02.14" />
+      <term id="10.02.19" />
+      <term id="10.02.20" />
+      <term id="10.02.21" />
+      <term id="10.02.22" />
+      <term id="12.00.01" />
+      <term id="12.00.02" />
+      <term id="12.00.03" />
+      <term id="12.00.04" />
+      <term id="12.00.05" />
+      <term id="12.00.06" />
+      <term id="12.00.07" />
+      <term id="12.00.08" />
+      <term id="12.00.09" />
+      <term id="12.00.10" />
+      <term id="12.00.11" />
+      <term id="12.00.12" />
+      <term id="12.00.13" />
+      <term id="12.00.14" />
+      <term id="12.00.15" />
+      <term id="13.00.01" />
+      <term id="13.00.02" />
+      <term id="13.00.03" />
+      <term id="13.00.04" />
+      <term id="13.00.05" />
+      <term id="13.00.08" />
+      <term id="14.01.01" />
+      <term id="14.01.02" />
+      <term id="14.01.03" />
+      <term id="14.01.04" />
+      <term id="14.01.05" />
+      <term id="14.01.06" />
+      <term id="14.01.07" />
+      <term id="14.01.08" />
+      <term id="14.01.09" />
+      <term id="14.01.10" />
+      <term id="14.01.11" />
+      <term id="14.01.12" />
+      <term id="14.01.13" />
+      <term id="14.01.14" />
+      <term id="14.01.15" />
+      <term id="14.01.16" />
+      <term id="14.01.17" />
+      <term id="14.01.18" />
+      <term id="14.01.19" />
+      <term id="14.01.20" />
+      <term id="14.01.21" />
+      <term id="14.01.22" />
+      <term id="14.01.23" />
+      <term id="14.01.24" />
+      <term id="14.01.25" />
+      <term id="14.01.26" />
+      <term id="14.01.27" />
+      <term id="14.01.28" />
+      <term id="14.01.29" />
+      <term id="14.01.30" />
+      <term id="14.01.31" />
+      <term id="14.02.01" />
+      <term id="14.02.02" />
+      <term id="14.02.03" />
+      <term id="14.02.04" />
+      <term id="14.02.05" />
+      <term id="14.02.06" />
+      <term id="14.03.01" />
+      <term id="14.03.02" />
+      <term id="14.03.03" />
+      <term id="14.03.04" />
+      <term id="14.03.05" />
+      <term id="14.03.06" />
+      <term id="14.03.07" />
+      <term id="14.03.08" />
+      <term id="14.03.09" />
+      <term id="14.03.10" />
+      <term id="14.03.11" />
+      <term id="14.04.01" />
+      <term id="14.04.02" />
+      <term id="14.04.03" />
+      <term id="17.00.01" />
+      <term id="17.00.02" />
+      <term id="17.00.03" />
+      <term id="17.00.04" />
+      <term id="17.00.05" />
+      <term id="17.00.06" />
+      <term id="17.00.09" />
+      <term id="19.00.01" />
+      <term id="19.00.02" />
+      <term id="19.00.03" />
+      <term id="19.00.04" />
+      <term id="19.00.05" />
+      <term id="19.00.06" />
+      <term id="19.00.07" />
+      <term id="19.00.10" />
+      <term id="19.00.12" />
+      <term id="19.00.13" />
+      <term id="22.00.01" />
+      <term id="22.00.03" />
+      <term id="22.00.04" />
+      <term id="22.00.05" />
+      <term id="22.00.06" />
+      <term id="22.00.08" />
+      <term id="23.00.01" />
+      <term id="23.00.02" />
+      <term id="23.00.03" />
+      <term id="23.00.04" />
+      <term id="23.00.05" />
+      <term id="23.00.06" />
+      <term id="24.00.01" />
+      <term id="24.00.03" />
+      <term id="25.00.01" />
+      <term id="25.00.02" />
+      <term id="25.00.03" />
+      <term id="25.00.04" />
+      <term id="25.00.05" />
+      <term id="25.00.06" />
+      <term id="25.00.07" />
+      <term id="25.00.08" />
+      <term id="25.00.09" />
+      <term id="25.00.10" />
+      <term id="25.00.11" />
+      <term id="25.00.12" />
+      <term id="25.00.13" />
+      <term id="25.00.14" />
+      <term id="25.00.15" />
+      <term id="25.00.16" />
+      <term id="25.00.17" />
+      <term id="25.00.18" />
+      <term id="25.00.19" />
+      <term id="25.00.20" />
+      <term id="25.00.21" />
+      <term id="25.00.22" />
+      <term id="25.00.23" />
+      <term id="25.00.24" />
+      <term id="25.00.25" />
+      <term id="25.00.26" />
+      <term id="25.00.27" />
+      <term id="25.00.28" />
+      <term id="25.00.29" />
+      <term id="25.00.30" />
+      <term id="25.00.31" />
+      <term id="25.00.32" />
+      <term id="25.00.33" />
+      <term id="25.00.34" />
+      <term id="25.00.35" />
+      <term id="25.00.36" />
+      <term id="26.00.01" />
+    </dic>
+    <dic name="Вид учреждения" id="s_vid_view">
+      <term id="14">Научно-исследовательские организации</term>
+      <term id="45">Организации дополнительного профессионального образования</term>
+      <term id="18">Образовательные организации высшего образования</term>
+      <term id="98">Иные организации</term>
+    </dic>
+    <dic name="Код сектора деятельности НИИ" id="s_sektor_view">
+      <term id="0">Сектор не обозначен</term>
+      <term id="100">Государственный сектор</term>
+      <term id="200">Предпринимательский сектор</term>
+      <term id="300">Сектор высшего образования</term>
+      <term id="600">Сектор некоммерческих организаций</term>
+    </dic>
+  </dics>
+</metaForm>

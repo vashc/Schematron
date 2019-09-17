@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="615008002004" idp="04" idf="2" shifr="tr_65gel" name="65-ЖЕЛ.Сведения об услугах железнодорожного транспорта" obj="okpo" OKUD="0615008" version="07-11-2018" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>true</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="1" type="Z" name="Величина показателя">
+          <default-cell column="1" format="N(15,2)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="210" type="F" name="Доходные поступления от отправления пассажиров железно-дорожным транспортом - все сообщения, с точ. до 0,1 тыс руб (сумма строк 211, 214, 216)" />
+        <row code="211" type="F" name="   в целом международное и междудорожное - прямое сообщение" />
+        <row code="214" type="F" name="   внутридорожное (без пригородного) местное сообщение" />
+        <row code="216" type="F" name="   пригородное сообщение" />
+        <row code="220" type="F" name="Доходные поступления от отправления багажа, грузобагажа во всех сообщениях, с точн. до 0,1 тыс руб" />
+        <row code="230" type="F" name="Доходные поступления,нач. по моменту произ-ва расчетов за перевозку грузов жел. тр.–во всех сообщениях, с точн. до цел. ч.,тыс руб(сумма строк 231,251,271)" />
+        <row code="" type="C" name="            в том числе:" />
+        <row code="231" type="F" name="   международное сообщение - всего" />
+        <row code="232" type="F" name="            уголь каменный" />
+        <row code="233" type="F" name="нефть сырая">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="234" type="F" name="бензин">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="235" type="F" name="топливо дизельное">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="236" type="F" name="мазут нефтяной и каменнойгольный">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="237" type="F" name="руды и концентраты железные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="238" type="F" name="руды и концентраты цветных металлов">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="239" type="F" name="заготовки стальные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="240" type="F" name="лом черных металлов">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="241" type="F" name="металлы цветные и их сплавы">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="242" type="F" name="лесоматериалы круглые, кроме крепежных">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="243" type="F" name="земля, песок, глина строительные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="244" type="F" name="земля, песок, глина и камни природные – сырье промышленное">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="245" type="F" name="камни природные строительные и поделочные, туф">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="246" type="F" name="балласт для железных дорог">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="247" type="F" name="цемент">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="248" type="F" name="сырье горно-химическое для производства удобрений">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="249" type="F" name="удобрения азотные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="250" type="F" name="пшеница">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="251" type="F" name="   междудорожное сообщение (прямое без международного) - всего" />
+        <row code="252" type="F" name="уголь каменный">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="253" type="F" name="нефть сырая">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="254" type="F" name="бензин">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="255" type="F" name="топливо дизельное">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="256" type="F" name="мазут нефтяной и каменноугольный">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="257" type="F" name="руды и концентраты железные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="258" type="F" name="руды  и концентраты цветных металлов">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="259" type="F" name="заготовки стальные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="260" type="F" name="лом черных металлов">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="261" type="F" name="металлы цветные и их сплавы">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="262" type="F" name="лесоматериалы круглые, кроме крепежных">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="263" type="F" name="земля, песок, глина строительные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="264" type="F" name="  земля, песок, глина и камни природные - сырье       промышленное">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="265" type="F" name="камни природные строительные и поделочные, туф">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="266" type="F" name="балласт для железных дорог">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="267" type="F" name="цемент">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="268" type="F" name="сырье горно-химическое для производства удобрений">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="269" type="F" name="    удобрения азотные" />
+        <row code="270" type="F" name="пшеница">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="271" type="F" name="   внутридорожное местное сообщение" />
+        <row code="" type="C" name="                  из него по видам грузов:" />
+        <row code="272" type="F" name="            уголь каменный" />
+        <row code="273" type="F" name="нефть сырая">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="274" type="F" name="бензин">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="275" type="F" name="топливо дизельное">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="276" type="F" name="мазут нефтяной и каменноугольный">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="277" type="F" name="руды и концентраты железные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="278" type="F" name="руды  и концентраты цветных металлов">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="279" type="F" name="заготовки стальные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="280" type="F" name="лом черных металлов">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="281" type="F" name="металлы цветные и их сплавы">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="282" type="F" name="лесоматериалы круглые, кроме крепежных">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="283" type="F" name="земля, песок, глина строительные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="284" type="F" name="земля, песок, глина и камни природные - сырье промышленное">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="285" type="F" name="камни природные строительные и поделочные, туф">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="286" type="F" name="балласт для железных дорог">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="287" type="F" name="цемент">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="288" type="F" name="сырье горно-химическое для производства удобрений">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="289" type="F" name="удобрения азотные">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="290" type="F" name="пшеница">
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="291" type="F" name="Отправлено пассажиров ж/д транспортом - все сообщения, с точн. до 0,1 тыс человек (сумма строк 292, 293, 294)" />
+        <row code="292" type="F" name="   в целом международное и междудорожное - прямое сообщение" />
+        <row code="293" type="F" name="   внутридорожное (без пригородного) местное сообщение" />
+        <row code="294" type="F" name="   пригородное сообщение" />
+        <row code="295" type="F" name="Отправлено багажа, грузобагажа во всех сообщениях, с точн. до 0,1 тыс т" />
+        <row code="296" type="F" name="Доставлено (прибыло грузов) ж/д транспортом - все сообщения,с точн. до 0,1 тыс т (сумма строк 297,298,299)" />
+        <row code="" type="C" name="            в том числе сообщение:" />
+        <row code="297" type="F" name="   международное" />
+        <row code="298" type="F" name="   междудорожное (прямое сообщение без международного)" />
+        <row code="299" type="F" name="   внутридорожное местное сообщение" />
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="стр.210=стр.211+стр.214+стр.216" condition="" rule="{[1][210][1]}|=|SUM{[1][211,214,216][1]}" tip="1" />
+    <control id="2" name="стр.230=стр.231+стр.251+стр.271" condition="" rule="{[1][230][1]}|=|SUM{[1][231,251,271][1]}" tip="1" />
+    <control id="3" name="стр.291=стр.292+стр.293+стр.294" condition="" rule="{[1][291][1]}|=|SUM{[1][292,293,294][1]}" tip="1" />
+    <control id="4" name="стр.296=стр.297+стр.298+стр.299" condition="" rule="{[1][296][1]}|=|SUM{[1][297,298,299][1]}" tip="1" />
+    <control id="5" name="Если стр. 291&gt;0, то стр. 210&gt;0" condition="{[1][291][1]}|&gt;|0" rule="{[1][210][1]}|&gt;|0" tip="1" />
+    <control id="6" name="Если стр. 295&gt;0, то стр. 220&gt;0 " condition="{[1][295][1]}|&gt;|0" rule="{[1][220][1]}|&gt;|0" tip="1" />
+    <control id="7" name="Если стр. 296&gt;0, то стр. 230&gt;0 " condition="{[1][296][1]}|&gt;|0" rule="{[1][230][1]}|&gt;|0" tip="1" />
+    <control id="8" name="стр.231&gt;=сумма с стр.232 по стр.250 " condition="" rule="{[1][231][1]}|&gt;=|SUM{[1][232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,247,248,249,250][1]}" tip="1" />
+    <control id="9" name="стр.251&gt;=сумма с стр.252 по стр.270 " condition="" rule="{[1][251][1]}|&gt;=|SUM{[1][252,253,254,255,256,257,258,259,260,261,262,263,264,265,266,267,268,269,270][1]}" tip="1" />
+    <control id="10" name="стр.271&gt;=сумма с стр.272 по стр.290 " condition="" rule="{[1][271][1]}|&gt;=|SUM{[1][272,273,274,275,276,277,278,279,280,281,282,283,284,285,286,287,288,289,290][1]}" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2010">2010</term>
+      <term id="2011">2011</term>
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="1">первый квартал</term>
+      <term id="2">второй квартал</term>
+      <term id="3">третий квартал</term>
+      <term id="4">четвертый квартал</term>
+    </dic>
+  </dics>
+</metaForm>

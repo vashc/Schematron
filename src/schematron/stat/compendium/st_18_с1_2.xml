@@ -1,0 +1,1924 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="612008002012" idp="12" idf="2" shifr="st_18_c1" name="Ф.C-1 (месяц) Сведения о вводе в эксплуатацию зданий и сооружений" obj="okpo" OKUD="0612008" format-version="1.3" version="13-12-2018">
+  <settings>
+    <validation>always</validation>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail" /> 
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1 Ввод в эксплуатацию зданий заказчиками" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Код вида мощности">
+          <default-cell column="3" format="N(4,0)" inputType="2" />
+        </column>
+        <column code="4" type="S" fld="s2" name="Код характера строительства">
+          <default-cell column="4" format="N(4,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Введено за отчетный месяц (год)">
+          <default-cell column="6" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="Количество зданий, единица">
+          <default-cell column="7" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Общий строительный объем зданий, куб м">
+          <default-cell column="8" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="Общая площадь зданий, кв м">
+          <default-cell column="9" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="Фактическая стоимость для застройщика. тыс руб">
+          <default-cell column="10" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="M" grv="3,4" name="Жилые здания - кв м общей площади">
+          <cell column="3" dic="s_mosh" format="N(4,0)" inputType="1" vldType="4" vld="pril_mosh_2" />
+          <cell column="4" dic="s_xarst" format="N(1,0)" inputType="1" vldType="4" vld="pril_xarst_1" />
+        </row>
+        <row code="02" type="M" grv="3" name="Тип жилого здания:">
+          <cell column="3" dic="s_mosh" format="N(4,0)" inputType="1" vldType="4" vld="pril_mosh_1" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+        </row>
+        <row code="07" type="F" name="Нежилые здания (по ОКОФ)">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="7" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="" type="C" name="       из них:" />
+        <row code="08" type="F" name=" промышленные">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="8" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="09" type="F" name=" сельскохозяйственные">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="9" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="10" type="F" name=" коммерческие">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="10" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="11" type="F" name=" административные">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="6" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="12" type="F" name=" учебные">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="11" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="13" type="F" name=" здравоохранения">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="12" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="14" type="F" name=" другие">
+          <cell column="10" format="N(15,0)" inputType="0" />
+          <cell column="3" format="N(4,0)" default="13" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="15" type="F" name="Жилые помещения в нежилых зданиях - кв м общей площади">
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="3" format="N(4,0)" default="19" inputType="0" />
+          <cell column="4" format="N(4,0)" inputType="0" />
+          <cell column="7" format="N(15,0)" inputType="0" />
+          <cell column="8" format="N(15,0)" inputType="0" />
+          <cell column="9" format="N(15,0)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="2" name="Раздел 2 Мощность введенных объектов в нежилых зданиях и сооружений" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование мощности, объекта">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="S" fld="s1" name="Код вида мощности">
+          <default-cell column="3" format="N(6,0)" inputType="2" />
+        </column>
+        <column code="4" type="S" fld="s2" name="Код характера строительства">
+          <default-cell column="4" format="N(4,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Введено за отчетный месяц (год)">
+          <default-cell column="6" format="N(15,1)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="16" type="M" grv="3,4" name="">
+          <cell column="3" dic="s_mosh2" format="N(6,0)" inputType="1" vldType="1" />
+          <cell column="4" dic="s_xarst" format="N(1,0)" inputType="1" vldType="4" vld="pril_xarst_1" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+    <section code="3" name="Раздел 3 Жилые единицы во введенных жилых и нежилых зданиях" nb="3">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="В жилых зданиях">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="В нежилых зданиях">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="21" type="F" name="Квартиры">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name=" из них:" />
+        <row code="22" type="F" name=" однокомнатные" />
+        <row code="23" type="F" name=" двухкомнатные" />
+        <row code="24" type="F" name=" трехкомнатные" />
+        <row code="25" type="F" name=" четырехкомнатные и более" />
+      </rows>
+    </section>
+    <section code="4" name="Раздел 4 Распределение введенных жилых зданий по материалам стен и этажности" nb="4">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Площадь квартир, кв м общей площади">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Количество зданий, единиц">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="4.1. Из стр. 01 гр.6,7 Материал стен жилых зданий" />
+        <row code="26" type="F" name=" каменные" />
+        <row code="27" type="F" name=" кирпичные" />
+        <row code="28" type="F" name=" панельные" />
+        <row code="29" type="F" name=" блочные" />
+        <row code="30" type="F" name=" деревянные" />
+        <row code="31" type="F" name=" монолитные" />
+        <row code="32" type="F" name=" прочие" />
+        <row code="" type="C" name="4.2. Из стр. 01 гр.6,7 Этажность жилых зданий" />
+        <row code="33" type="F" name=" 1 этажные" />
+        <row code="34" type="F" name=" 2 этажные" />
+        <row code="35" type="F" name=" 3 этажные" />
+        <row code="36" type="F" name=" 4 этажные" />
+        <row code="37" type="F" name=" 5 этажные" />
+        <row code="38" type="F" name=" 6 этажные" />
+        <row code="39" type="F" name=" 7 этажные" />
+        <row code="40" type="F" name=" 8 этажные" />
+        <row code="41" type="F" name=" 9 этажные" />
+        <row code="42" type="F" name=" 10 этажные" />
+        <row code="43" type="F" name=" 11 этажные" />
+        <row code="44" type="F" name=" 12-16 этажные" />
+        <row code="45" type="F" name=" 17 и более этажные" />
+      </rows>
+    </section>
+    <section code="5" name="Раздел 5 Сведения о находящихся в незавершенном строительстве зданиях и сооружениях по состоянию на конец года" nb="5">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Количество зданий и сооружений, находящихся в незавершенном строительстве, единица">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="в том числе жилые здания">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Площадь квартир в жилых зданиях, кв м общей площади">
+          <default-cell column="5" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="46" type="F" name="Всего">
+          <cell column="3" format="N(15,0)" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="0" />
+          <cell column="5" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="" type="C" name=" в том числе:" />
+        <row code="47" type="F" name=" приостановленные или законсервированные">
+          <cell column="3" format="N(15,0)" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="0" />
+          <cell column="5" format="N(15,0)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="6" name="Раздел 6  Справочно (заполняется ежемесячно)" nb="6">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="4" type="Z" name="Значение">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="48" type="F" name="Поступило средств от продажи жилья физическим лицам  (тыс.руб.)" />
+        <row code="49" type="F" name="Общая площадь проданного жилья физическим лицам (кв м общей площади )" />
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="[Раздел 1] гр.8 &gt; гр.9" condition="{[1][1,2][8][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|0 OR {[1][1,2][9][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|0" rule="{[1][1,2][8][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|{[1][1,2][9][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}" precision="0" tip="1" />
+    <control id="2" name="*[Раздел 1] гр.8 &gt; гр.6" condition="{[1][1,2][8][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|0 OR  {[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|0" rule="{[1][1,2][8][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}" precision="0" tip="0" />
+    <control id="3" name="*[Раздел 1] гр.9 &gt; гр.6" condition="{[1][1,2][9][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|0 OR  {[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|0" rule="{[1][1,2][9][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}|&gt;|{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528,6,7,8,9,10,11,12,13][0,1]}" precision="0" tip="0" />
+    <control id="4" name="[Раздел 1] код мощности 501(1)+501(3) &gt;= 507 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|&gt;=|{[1][2][6,7,8,9,10][507][*]}" precision="0" tip="1" />
+    <control id="5" name="[Раздел 1] код мощности 501(1)+501(3) &gt;= 508 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|&gt;=|{[1][2][6,7,8,9,10][508][*]}" tip="1" />
+    <control id="6" name="[Раздел 1] код мощности 501(1)+501(3) &gt;= 509 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|&gt;=|{[1][2][6,7,8,9,10][509][*]}" tip="1" />
+    <control id="7" name="[Раздел 1] код мощности 501(1)+501(3) &gt;= 511 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|&gt;=|{[1][2][6,7,8,9,10][511][*]}" tip="1" />
+    <control id="8" name="[Раздел 1] код мощности 501(1)+501(3) &gt;= 518 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|&gt;=|{[1][2][6,7,8,9,10][518][*]}" tip="1" />
+    <control id="9" name="[Раздел 1] код мощности 501(1)+501(3) &gt;= 529 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|&gt;=|{[1][2][6,7,8,9,10][529][*]}" tip="1" />
+    <control id="10" name="[Раздел 1] код мощности 509 &gt;= 510 по гр.6,7,8,9,10" condition="" rule="{[1][2][6,7,8,9,10][509][*]}|&gt;=|{[1][2][6,7,8,9,10][510][*]}" precision="0" tip="1" />
+    <control id="11" name="[Раздел 1] код мощности 508 &gt;= 510 по гр.6,7,8,9,10" condition="" rule="{[1][2][6,7,8,9,10][508][*]}|&gt;=|{[1][2][6,7,8,9,10][510][*]}" tip="1" />
+    <control id="12" name="[Раздел 1]  код мощности 501(1)+501(3) &gt;= 512+513 по гр.6,10" condition="" rule="{[1][1][6,10][501][1]}+{[1][1][6,10][501][3]}|&gt;=|{[1][2][6,10][512][*]}+{[1][2][6,10][513][*]}" precision="0" tip="1" />
+    <control id="13" name="[Раздел 1]  код мощности 501(1)+501(3) &gt;= 515 по гр.6,10" condition="" rule="{[1][1][6,10][501][1]}+{[1][1][6,10][501][3]}|&gt;=|{[1][2][6,10][515][*]}" tip="1" />
+    <control id="14" name="[Раздел 1]  код мощности 501(1)+501(3)-509 &gt;= 508-510 по графам 6,7,8,9,10" condition="" rule="{[1][1][6-10][501][1]}+{[1][1][6-10][501][3]}-{[1][2][6-10][509][*]}|&gt;=|{[1][2][6-10][508][*]}-{[1][2][6-10][510][*]}" precision="1" tip="1" />
+    <control id="15" name="[Раздел 1] код мощности 518 &gt;= 527 по гр.6,7,8,9,10" condition="" rule="{[1][2][6,7,8,9,10][518][*]}|&gt;=|{[1][2][6,7,8,9,10][527][*]}" precision="1" tip="1" />
+    <control id="16" name="[Раздел 1] код мощности 518 &gt;= 527+530 по гр.6,7,8,9,10" condition="" rule="{[1][2][6,7,8,9,10][518][*]}|&gt;=|{[1][2][6,7,8,9,10][530][*]}+{[1][2][6,7,8,9,10][527][*]}" precision="1" tip="1" />
+    <control id="17" name="[Раздел 1]  код мощности 501(1)+501(3) = 518+529+507 по гр.6,7,8,9,10" condition="" rule="{[1][1][6,7,8,9,10][501][1]}+{[1][1][6,7,8,9,10][501][3]}|=|{[1][2][6,7,8,9,10][518][*]}+{[1][2][6,7,8,9,10][529][*]}+{[1][2][6,7,8,9,10][507][*]}" precision="1" tip="1" />
+    <control id="18" name="[Раздел 1] код мощности 529 &gt;= 528 по гр.6,7,8,9,10" condition="" rule="{[1][2][6,7,8,9,10][529][*]}|&gt;=|{[1][2][6,7,8,9,10][528][*]}" precision="1" tip="1" />
+    <control id="19" name="[Раздел 1] код мощности 7 =  6+8+9+10+11+12+13 по гр.7,8,9" condition="" rule="{[1][7][7,8,9][7][0]}|=|{[1][11][7,8,9][6][0]}+{[1][8][7,8,9][8][0]}+{[1][9][7,8,9][9][0]}+{[1][10][7,8,9][10][0]}+{[1][12][7,8,9][11][0]}+{[1][13][7,8,9][12][0]}+{[1][14][7,8,9][13][0]}" precision="1" tip="1" />
+    <control id="20" name="*[Раздел 1] если гр.6&gt;0, то гр.7&gt;0" condition="{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" rule="{[1][1,2][7][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" precision="1" tip="0" />
+    <control id="21" name="*[Раздел 1] если гр.6&gt;0, то гр.8&gt;0" condition="{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" rule="{[1][1,2][8][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" tip="0" />
+    <control id="22" name="*[Раздел 1] если гр.6&gt;0, то гр.9&gt;0" condition="{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" rule="{[1][1,2][9][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" tip="0" />
+    <control id="23" name="*[Раздел 1] если гр.6&gt;0, то гр.10&gt;0" condition="{[1][*][6][501,507,508,509,510,511,512,513,515,518,529,530,527,528,19][*]}|&gt;|0" rule="{[1][*][10][501,507,508,509,510,511,512,513,515,518,529,530,527,528,19][*]}|&gt;|0" tip="0" />
+    <control id="24" name="[Раздел 1] если гр.7&gt;0, то гр.6&gt;0" condition="{[1][1,2][7][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" rule="{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" tip="1" />
+    <control id="25" name="[Раздел 1] если гр.8&gt;0, то гр.6&gt;0" condition="{[1][1,2][8][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" rule="{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" tip="1" />
+    <control id="26" name="[Раздел 1] если гр.9&gt;0, то гр.6&gt;0" condition="{[1][1,2][9][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" rule="{[1][1,2][6][501,507,508,509,510,511,518,529,530,527,528][0,1]}|&gt;|0" tip="1" />
+    <control id="27" name="[Раздел 1] если гр.10&gt;0, то гр.6&gt;0" condition="{[1][*][10][501,507,508,509,510,511,512,513,515,518,529,530,527,528,19][*]}|&gt;|0" rule="{[1][*][6][501,507,508,509,510,511,512,513,515,518,529,530,527,528,19][*]}|&gt;|0" tip="1" />
+    <control id="28" name="[Раздел 1] если гр.501(3) гр.7=0, то графы 8,9=0" condition="{[1][1][7][501][3]}|=|0" rule="{[1][1][8][501][3]}+{[1][1][9][501][3]}|=|0" precision="1" tip="1" />
+    <control id="29" name="[Раздел 1] если гр.501(3) гр.7&gt;0, то графа 8&gt;0" condition="{[1][1][7][501][3]}|&gt;|0" rule="{[1][1][8][501][3]}|&gt;|0" tip="1" />
+    <control id="30" name="[Раздел 1] если гр.501(3) гр.7&gt;0, то графа 9&gt;0" condition="{[1][1][7][501][3]}|&gt;|0" rule="{[1][1][9][501][3]}|&gt;|0" tip="1" />
+    <control id="31" name="[Раздел 1] если гр.7&gt;0, то графы 8&gt;0" condition="{[1][7,8,9,10,11,12,13,14][7][*][*]}|&gt;|0" rule="{[1][7,8,9,10,11,12,13,14][8][*][*]}|&gt;|0" tip="1" />
+    <control id="32" name="[Раздел 1] если гр.7&gt;0, то графа 9&gt;0" condition="{[1][7,8,9,10,11,12,13,14][7][*][*]}|&gt;|0" rule="{[1][7,8,9,10,11,12,13,14][9][*][*]}|&gt;|0" tip="1" />
+    <control id="33" name="[Раздел 1] если гр.8&gt;0, то графы 7&gt;0" condition="{[1][7,8,9,10,11,12,13,14][8][*][*]}|&gt;|0" rule="{[1][7,8,9,10,11,12,13,14][7][*][*]}|&gt;|0" precision="1" tip="1" />
+    <control id="34" name="[Раздел 1] если гр.8&gt;0, то графы 9&gt;0" condition="{[1][7,8,9,10,11,12,13,14][8][*][*]}|&gt;|0" rule="{[1][7,8,9,10,11,12,13,14][9][*][*]}|&gt;|0" tip="1" />
+    <control id="35" name="[Раздел 1] если гр.9&gt;0, то графы 7&gt;0" condition="{[1][7,8,9,10,11,12,13,14][9][*][*]}|&gt;|0" rule="{[1][7,8,9,10,11,12,13,14][7][*][*]}|&gt;|0" tip="1" />
+    <control id="36" name="[Раздел 1] если гр.9&gt;0, то графы 8&gt;0" condition="{[1][7,8,9,10,11,12,13,14][9][*][*]}|&gt;|0" rule="{[1][7,8,9,10,11,12,13,14][8][*][*]}|&gt;|0" tip="1" />
+    <control id="37" name="*[Раздел 1] по мощностям 512,513,515 гр. 7,8,9 не заполняется" condition="" rule="{[1][2][7,8,9][512,513,515][*]}|=|0" precision="1" tip="0" />
+    <control id="38" name="[Раздел 2] мощности 1120&gt;=1122+1123+1124" condition="" rule="SUM{[2][16][6][1120]}|&gt;=|SUM{[2][16][6][1122,1123,1124]}" precision="1" tip="1" />
+    <control id="40" name="[Раздел 2] мощности 2312&gt;=2307+2308" condition="" rule="SUM{[2][16][6][2312]}|&gt;=|SUM{[2][16][6][2307,2308]}" precision="1" tip="1" />
+    <control id="41" name="[Раздел 2] мощности 4354&gt;=4355+4357+4358" condition="" rule="SUM{[2][16][6][4354]}|&gt;=|SUM{[2][16][6][4355,4357,4358]}" precision="1" tip="1" />
+    <control id="42" name="[Раздел 2] мощности 545&gt;=546+547+548" condition="" rule="SUM{[2][16][6][545]}|&gt;=|SUM{[2][16][6][546,547,548]}" precision="1" tip="1" />
+    <control id="43" name="[Раздел 2] мощности 570&gt;=574+577+580" condition="" rule="SUM{[2][16][6][570]}|&gt;=|SUM{[2][16][6][574,577,580]}" precision="1" tip="1" />
+    <control id="44" name="[Раздел 2] мощности 572&gt;=584+586" condition="" rule="SUM{[2][16][6][572]}|&gt;=|SUM{[2][16][6][584,586]}" precision="1" tip="1" />
+    <control id="45" name="[Раздел 2] мощности 1120&gt;=1121" condition="" rule="SUM{[2][16][6][1120]}|&gt;=|SUM{[2][16][6][1121]}" precision="1" tip="1" />
+    <control id="46" name="[Раздел 2] мощности 1132&gt;=7832" condition="" rule="SUM{[2][16][6][1132]}|&gt;=|SUM{[2][16][6][7832]}" precision="1" tip="1" />
+    <control id="47" name="[Раздел 2] мощности 1140&gt;=1141" condition="" rule="SUM{[2][16][6][1140]}|&gt;=|SUM{[2][16][6][1141]}" precision="1" tip="1" />
+    <control id="48" name="[Раздел 2] мощности 3032&gt;=3035" condition="" rule="SUM{[2][16][6][3032]}|&gt;=|SUM{[2][16][6][3035]}" precision="1" tip="1" />
+    <control id="49" name="[Раздел 2] мощности 3040&gt;=3042" condition="" rule="SUM{[2][16][6][3040]}|&gt;=|SUM{[2][16][6][3042]}" precision="1" tip="1" />
+    <control id="50" name="[Раздел 2] мощности 3151&gt;=3235" condition="" rule="SUM{[2][16][6][3151]}|&gt;=|SUM{[2][16][6][3235]}" precision="1" tip="1" />
+    <control id="51" name="[Раздел 2] мощности 3170&gt;=3171" condition="" rule="SUM{[2][16][6][3170]}|&gt;=|SUM{[2][16][6][3171]}" precision="1" tip="1" />
+    <control id="52" name="[Раздел 2] мощности 3210&gt;=3214" condition="" rule="SUM{[2][16][6][3210]}|&gt;=|SUM{[2][16][6][3214]}" precision="1" tip="1" />
+    <control id="53" name="[Раздел 2] мощности 3541&gt;=3543" condition="" rule="SUM{[2][16][6][3541]}|&gt;=|SUM{[2][16][6][3543]}" precision="1" tip="1" />
+    <control id="54" name="[Раздел 2] мощности 3641&gt;=3642" condition="" rule="SUM{[2][16][6][3641]}|&gt;=|SUM{[2][16][6][3642]}" precision="1" tip="1" />
+    <control id="55" name="[Раздел 2] мощности 4371&gt;=4372" condition="" rule="SUM{[2][16][6][4371]}|&gt;=|SUM{[2][16][6][4372]}" precision="1" tip="1" />
+    <control id="56" name="[Раздел 2] мощности 4781&gt;=4782" condition="" rule="SUM{[2][16][6][4781]}|&gt;=|SUM{[2][16][6][4782]}" precision="1" tip="1" />
+    <control id="57" name="[Раздел 2] мощности 5095&gt;=5158" condition="" rule="SUM{[2][16][6][5095]}|&gt;=|SUM{[2][16][6][5158]}" precision="1" tip="1" />
+    <control id="58" name="[Раздел 2] мощности 1421&gt;=7777" condition="" rule="SUM{[2][16][6][1421]}|&gt;=|SUM{[2][16][6][7777]}" precision="1" tip="1" />
+    <control id="59" name="[Раздел 2] мощности 7781&gt;=7830" condition="" rule="SUM{[2][16][6][7781]}|&gt;=|SUM{[2][16][6][7830]}" precision="1" tip="1" />
+    <control id="60" name="[Раздел 2] мощности 7211&gt;=7212" condition="" rule="SUM{[2][16][6][7211]}|&gt;=|SUM{[2][16][6][7212]}" precision="1" tip="1" />
+    <control id="61" name="[Раздел 2] мощности 7783&gt;=7881" condition="" rule="SUM{[2][16][6][7783]}|&gt;=|SUM{[2][16][6][7881]}" precision="1" tip="1" />
+    <control id="62" name="[Раздел 2] мощности 7550&gt;=7551" condition="" rule="SUM{[2][16][6][7550]}|&gt;=|SUM{[2][16][6][7551]}" precision="1" tip="1" />
+    <control id="63" name="[Раздел 2] мощности 7550&gt;7551+7555+7553" condition="SUM{[2][16][6][7550,7555,7553,7551]}|&gt;|0" rule="SUM{[2][16][6][7550]}|&gt;|SUM{[2][16][6][7555,7553,7551]}" precision="1" tip="1" />
+    <control id="64" name="[Раздел 2] мощности 531&gt;=535" condition="" rule="SUM{[2][16][6][531]}|&gt;=|SUM{[2][16][6][535]}" precision="1" tip="1" />
+    <control id="65" name="[Раздел 2] мощности 532&gt;=536" condition="" rule="SUM{[2][16][6][532]}|&gt;=|SUM{[2][16][6][536]}" precision="1" tip="1" />
+    <control id="66" name="[Раздел 2] мощности 545&gt;=556" condition="" rule="SUM{[2][16][6][545]}|&gt;=|SUM{[2][16][6][556]}" precision="1" tip="1" />
+    <control id="67" name="[Раздел 2] мощности 545&gt;=546" condition="" rule="SUM{[2][16][6][545]}|&gt;=|SUM{[2][16][6][546]}" tip="1" />
+    <control id="68" name="[Раздел 2] мощности 545&gt;=547" condition="" rule="SUM{[2][16][6][545]}|&gt;=|SUM{[2][16][6][547]}" tip="1" />
+    <control id="69" name="[Раздел 2] мощности 545&gt;=548" condition="" rule="SUM{[2][16][6][545]}|&gt;=|SUM{[2][16][6][548]}" tip="1" />
+    <control id="70" name="[Раздел 2] мощности 570&gt;=576" condition="" rule="SUM{[2][16][6][570]}|&gt;=|SUM{[2][16][6][576]}" tip="1" />
+    <control id="71" name="[Раздел 2] мощности 570&gt;=577" condition="" rule="SUM{[2][16][6][570]}|&gt;=|SUM{[2][16][6][577]}" tip="1" />
+    <control id="72" name="[Раздел 2] мощности 570&gt;=580" condition="" rule="SUM{[2][16][6][570]}|&gt;=|SUM{[2][16][6][580]}" tip="1" />
+    <control id="73" name="[Раздел 2] мощности 570&gt;=574" condition="" rule="SUM{[2][16][6][570]}|&gt;=|SUM{[2][16][6][574]}" tip="1" />
+    <control id="74" name="[Раздел 2] мощности 572&gt;=578" condition="" rule="SUM{[2][16][6][572]}|&gt;=|SUM{[2][16][6][578]}" tip="1" />
+    <control id="75" name="[Раздел 2] мощности 572&gt;=584" condition="" rule="SUM{[2][16][6][572]}|&gt;=|SUM{[2][16][6][584]}" tip="1" />
+    <control id="76" name="[Раздел 2] мощности 572&gt;=586" condition="" rule="SUM{[2][16][6][572]}|&gt;=|SUM{[2][16][6][586]}" tip="1" />
+    <control id="78" name="[Раздел 2] мощности 901&gt;=900" condition="" rule="SUM{[2][16][6][901]}|&gt;=|SUM{[2][16][6][900]}" tip="1" />
+    <control id="79" name="[Раздел 2] мощности 910&gt;=912" condition="" rule="SUM{[2][16][6][910]}|&gt;=|SUM{[2][16][6][912]}" tip="1" />
+    <control id="80" name="[Раздел 2] мощности 929&gt;=930" condition="" rule="SUM{[2][16][6][929]}|&gt;=|SUM{[2][16][6][930]}" tip="1" />
+    <control id="81" name="[Раздел 2] если есть 7834  то должен быть 7550" condition="{[2][16][6][7834][*]}|&gt;|0" rule="{[2][16][6][7550][*]}|&gt;|0" precision="1" tip="1" />
+    <control id="82" name="[Раздел 2] если есть 7835  то должен быть 7560" condition="{[2][16][6][7835][*]}|&gt;|0" rule="{[2][16][6][7560][*]}|&gt;|0" precision="1" tip="1" />
+    <control id="83" name="[Раздел 2] если есть 7833  то должен быть 7510" condition="{[2][16][6][7833][*]}|&gt;|0" rule="{[2][16][6][7510][*]}|&gt;|0" precision="1" tip="1" />
+    <control id="84" name="*[Раздел 2] если есть 629  то должен быть 630" condition="{[2][16][6][629][1]}|&gt;|0" rule="{[2][16][6][630][1]}|&gt;|0" tip="0" />
+    <control id="85" name="*[Раздел 2] если есть 643  то должен быть 644" condition="{[2][16][6][643][1]}|&gt;|0" rule="{[2][16][6][644][1]}|&gt;|0" tip="0" />
+    <control id="86" name="*[Раздел 2] если есть 1441  то должен быть 1442" condition="{[2][16][6][1441][1]}|&gt;|0" rule="{[2][16][6][1442][1]}|&gt;|0" tip="0" />
+    <control id="87" name="*[Раздел 2] если есть 3061  то должен быть 3062" condition="{[2][16][6][3061][1]}|&gt;|0" rule="{[2][16][6][3062][1]}|&gt;|0" tip="0" />
+    <control id="88" name="*[Раздел 2] если есть 3162  то должен быть 3163" condition="{[2][16][6][3162][1]}|&gt;|0" rule="{[2][16][6][3163][1]}|&gt;|0" tip="0" />
+    <control id="89" name="*[Раздел 2] если есть 3166  то должен быть 3167" condition="{[2][16][6][3166][1]}|&gt;|0" rule="{[2][16][6][3167][1]}|&gt;|0" tip="0" />
+    <control id="90" name="*[Раздел 2] если есть 3311  то должен быть 3312" condition="{[2][16][6][3311][1]}|&gt;|0" rule="{[2][16][6][3312][1]}|&gt;|0" tip="0" />
+    <control id="91" name="*[Раздел 2] если есть 3321  то должен быть 3322" condition="{[2][16][6][3321][1]}|&gt;|0" rule="{[2][16][6][3322][1]}|&gt;|0" tip="0" />
+    <control id="92" name="*[Раздел 2] если есть 3713  то должен быть 3714" condition="{[2][16][6][3713][1]}|&gt;|0" rule="{[2][16][6][3714][1]}|&gt;|0" tip="0" />
+    <control id="93" name="*[Раздел 2] если есть 3726  то должен быть 3727" condition="{[2][16][6][3726][1]}|&gt;|0" rule="{[2][16][6][3727][1]}|&gt;|0" tip="0" />
+    <control id="94" name="*[Раздел 2] если есть 3736  то должен быть 3737" condition="{[2][16][6][3736][1]}|&gt;|0" rule="{[2][16][6][3737][1]}|&gt;|0" tip="0" />
+    <control id="95" name="*[Раздел 2] если есть 1650  то должен быть 1651" condition="{[2][16][6][1650][1]}|&gt;|0" rule="{[2][16][6][1651][1]}|&gt;|0" tip="0" />
+    <control id="96" name="*[Раздел 2] если есть 1661  то должен быть 1662" condition="{[2][16][6][1661][1]}|&gt;|0" rule="{[2][16][6][1662][1]}|&gt;|0" tip="0" />
+    <control id="97" name="*[Раздел 2] если есть 1665  то должен быть 1666" condition="{[2][16][6][1665][1]}|&gt;|0" rule="{[2][16][6][1666][1]}|&gt;|0" tip="0" />
+    <control id="98" name="*[Раздел 2] если есть 1671  то должен быть 1672" condition="{[2][16][6][1671][1]}|&gt;|0" rule="{[2][16][6][1672][1]}|&gt;|0" tip="0" />
+    <control id="99" name="*[Раздел 2] если есть 1691  то должен быть 1692" condition="{[2][16][6][1691][1]}|&gt;|0" rule="{[2][16][6][1692][1]}|&gt;|0" tip="0" />
+    <control id="100" name="*[Раздел 2] если есть 1721  то должен быть 1722" condition="{[2][16][6][1721][1]}|&gt;|0" rule="{[2][16][6][1722][1]}|&gt;|0" tip="0" />
+    <control id="101" name="*[Раздел 2] если есть 1731  то должен быть 1732" condition="{[2][16][6][1731][1]}|&gt;|0" rule="{[2][16][6][1732][1]}|&gt;|0" tip="0" />
+    <control id="102" name="*[Раздел 2] если есть 1741  то должен быть 1742" condition="{[2][16][6][1741][1]}|&gt;|0" rule="{[2][16][6][1742][1]}|&gt;|0" tip="0" />
+    <control id="103" name="*[Раздел 2] если есть 4971  то должен быть 4972" condition="{[2][16][6][4971][1]}|&gt;|0" rule="{[2][16][6][4972][1]}|&gt;|0" tip="0" />
+    <control id="104" name="*[Раздел 2] если есть 551  то должен быть 552" condition="{[2][16][6][551][1]}|&gt;|0" rule="{[2][16][6][552][1]}|&gt;|0" tip="0" />
+    <control id="105" name="*[Раздел 2] если есть 6271  то должен быть 6272" condition="{[2][16][6][6271][1]}|&gt;|0" rule="{[2][16][6][6272][1]}|&gt;|0" tip="0" />
+    <control id="106" name="*[Раздел 2] если есть 6583  то должен быть 6584" condition="{[2][16][6][6583][1]}|&gt;|0" rule="{[2][16][6][6584][1]}|&gt;|0" tip="0" />
+    <control id="107" name="*[Раздел 2] если есть 1442  то должен быть 1441" condition="{[2][16][6][1442][1]}|&gt;|0" rule="{[2][16][6][1441][1]}|&gt;|0" tip="0" />
+    <control id="108" name="*[Раздел 2] если есть 3062  то должен быть 3061" condition="{[2][16][6][3062][1]}|&gt;|0" rule="{[2][16][6][3061][1]}|&gt;|0" tip="0" />
+    <control id="109" name="*[Раздел 2] если есть 3163  то должен быть 3162" condition="{[2][16][6][3163][1]}|&gt;|0" rule="{[2][16][6][3162][1]}|&gt;|0" tip="0" />
+    <control id="110" name="*[Раздел 2] если есть 3167  то должен быть 3166" condition="{[2][16][6][3167][1]}|&gt;|0" rule="{[2][16][6][3166][1]}|&gt;|0" tip="0" />
+    <control id="111" name="*[Раздел 2] если есть 3312  то должен быть 3311" condition="{[2][16][6][3312][1]}|&gt;|0" rule="{[2][16][6][3311][1]}|&gt;|0" tip="0" />
+    <control id="112" name="*[Раздел 2] если есть 3322  то должен быть 3321" condition="{[2][16][6][3322][1]}|&gt;|0" rule="{[2][16][6][3321][1]}|&gt;|0" tip="0" />
+    <control id="113" name="*[Раздел 2] если есть 3714  то должен быть 3713" condition="{[2][16][6][3714][1]}|&gt;|0" rule="{[2][16][6][3713][1]}|&gt;|0" tip="0" />
+    <control id="114" name="*[Раздел 2] если есть 3727  то должен быть 3726" condition="{[2][16][6][3727][1]}|&gt;|0" rule="{[2][16][6][3726][1]}|&gt;|0" tip="0" />
+    <control id="115" name="*[Раздел 2] если есть 3737  то должен быть 3736" condition="{[2][16][6][3737][1]}|&gt;|0" rule="{[2][16][6][3736][1]}|&gt;|0" tip="0" />
+    <control id="116" name="*[Раздел 2] если есть 1651  то должен быть 1650" condition="{[2][16][6][1651][1]}|&gt;|0" rule="{[2][16][6][1650][1]}|&gt;|0" tip="0" />
+    <control id="117" name="*[Раздел 2] если есть 1662  то должен быть 1661" condition="{[2][16][6][1662][1]}|&gt;|0" rule="{[2][16][6][1661][1]}|&gt;|0" tip="0" />
+    <control id="118" name="*[Раздел 2] если есть 1666  то должен быть 1665" condition="{[2][16][6][1666][1]}|&gt;|0" rule="{[2][16][6][1665][1]}|&gt;|0" tip="0" />
+    <control id="119" name="*[Раздел 2] если есть 1672  то должен быть 1671" condition="{[2][16][6][1672][1]}|&gt;|0" rule="{[2][16][6][1671][1]}|&gt;|0" tip="0" />
+    <control id="120" name="*[Раздел 2] если есть 1692  то должен быть 1691" condition="{[2][16][6][1692][1]}|&gt;|0" rule="{[2][16][6][1691][1]}|&gt;|0" tip="0" />
+    <control id="121" name="*[Раздел 2] если есть 1722  то должен быть 1721" condition="{[2][16][6][1722][1]}|&gt;|0" rule="{[2][16][6][1721][1]}|&gt;|0" tip="0" />
+    <control id="122" name="*[Раздел 2] если есть 1732  то должен быть 1731" condition="{[2][16][6][1732][1]}|&gt;|0" rule="{[2][16][6][1731][1]}|&gt;|0" tip="0" />
+    <control id="123" name="*[Раздел 2] если есть 1742  то должен быть 1741" condition="{[2][16][6][1742][1]}|&gt;|0" rule="{[2][16][6][1741][1]}|&gt;|0" tip="0" />
+    <control id="124" name="*[Раздел 2] если есть 4972  то должен быть 4971" condition="{[2][16][6][4972][1]}|&gt;|0" rule="{[2][16][6][4971][1]}|&gt;|0" tip="0" />
+    <control id="125" name="*[Раздел 2] если есть 552  то должен быть 551" condition="{[2][16][6][552][1]}|&gt;|0" rule="{[2][16][6][551][1]}|&gt;|0" tip="0" />
+    <control id="126" name="*[Раздел 2] если есть 6272  то должен быть 6271" condition="{[2][16][6][6272][1]}|&gt;|0" rule="{[2][16][6][6271][1]}|&gt;|0" tip="0" />
+    <control id="127" name="*[Раздел 2] если есть 6584  то должен быть 6583" condition="{[2][16][6][6584][1]}|&gt;|0" rule="{[2][16][6][6583][1]}|&gt;|0" tip="0" />
+    <control id="128" name="*[Раздел 2] если есть 630  то должен быть 629" condition="{[2][16][6][630][1]}|&gt;|0" rule="{[2][16][6][629][1]}|&gt;|0" tip="0" />
+    <control id="129" name="*[Раздел 2] если есть 644  то должен быть 643" condition="{[2][16][6][644][1]}|&gt;|0" rule="{[2][16][6][643][1]}|&gt;|0" tip="0" />
+    <control id="130" name="[Раздел 3] стр.21=стр.(22+23+24+25)" condition="" rule="{[3][21][3,4]}|=|{[3][22][3,4]}+{[3][23][3,4]}+{[3][24][3,4]}+{[3][25][3,4]}" precision="1" tip="1" />
+    <control id="131" name="[Раздел 3]  стр. 21 гр.4&gt;0 если [Раздел 1] стр.15 гр.6&gt;0" condition="{[1][15][6]}|&gt;|0" rule="{[3][21][4]}|&gt;|0" precision="1" tip="1" />
+    <control id="132" name="[Раздел 1]  стр.15 гр.6&gt;0 если [Раздел 3] стр. 21 гр.4&gt;0" condition="{[3][21][4]}|&gt;|0" rule="{[1][15][6]}|&gt;|0" precision="1" tip="1" />
+    <control id="133" name="[Раздел 3]  стр. 21 гр.3&gt;0 если  [Раздел 1] 501(1)+501(3)-507 гр.6&gt;0" condition="{[1][1][6][501][1]}+{[1][1][6][501][3]}-{[1][2][6][507][0]}|&gt;|0" rule="{[3][21][3]}|&gt;|0" precision="1" tip="1" />
+    <control id="134" name="[Раздел 1]  501(1)+501(3)-507 гр.6&gt;0 если [Раздел 3] стр. 21 гр.3&gt;0" condition="{[3][21][3]}|&gt;|0" rule="{[1][1][6][501][1]}+{[1][1][6][501][3]}-{[1][2][6][507][0]}|&gt;|0" precision="1" tip="1" />
+    <control id="135" name="[Раздел 1]  501(1)+501(3) гр.6 = сумме [Раздел 4] строк (26-32) гр.3" condition="" rule="{[1][1][6][501][1]}+{[1][1][6][501][3]}|=|{[4][26][3]}+{[4][27][3]}+{[4][28][3]}+{[4][29][3]}+{[4][30][3]}+{[4][31][3]}+{[4][32][3]}" precision="1" tip="1" />
+    <control id="136" name="[Раздел 1]  501(1)+501(3) гр.7 = сумме [Раздел 4] строк (26-32) гр.4" condition="" rule="{[1][1][7][501][1]}+{[1][1][7][501][3]}|=|{[4][26][4]}+{[4][27][4]}+{[4][28][4]}+{[4][29][4]}+{[4][30][4]}+{[4][31][4]}+{[4][32][4]}" tip="1" />
+    <control id="137" name="[Раздел 1]  501(1)+501(3) гр.6 &gt;= сумме [Раздел 4] стр. (33-45) гр.3" condition="" rule="{[1][1][6][501][1]}+{[1][1][6][501][3]}|&gt;=|{[4][33][3]}+{[4][34][3]}+{[4][35][3]}+{[4][36][3]}+{[4][37][3]}+{[4][38][3]}+{[4][39][3]}+{[4][40][3]}+{[4][41][3]}+{[4][42][3]}+{[4][43][3]}+{[4][44][3]}+{[4][45][3]}" precision="1" tip="1" />
+    <control id="138" name="[Раздел 1]  501(1)+501(3) гр.7 = сумме [Раздел 4] стр. (33-45) гр.4" condition="" rule="{[1][1][7][501][1]}+{[1][1][7][501][3]}|=|{[4][33][4]}+{[4][34][4]}+{[4][35][4]}+{[4][36][4]}+{[4][37][4]}+{[4][38][4]}+{[4][39][4]}+{[4][40][4]}+{[4][41][4]}+{[4][42][4]}+{[4][43][4]}+{[4][44][4]}+{[4][45][4]}" precision="1" tip="1" />
+    <control id="139" name="[Раздел 5]  гр.5=0 если гр.4=0 по стр.46,47" condition="{[5][46,47][4]}|=|0" rule="{[5][46,47][5]}|=|0" precision="1" tip="1" />
+    <control id="140" name="[Раздел 5]  гр.4&gt;0 если гр.5&gt;0 по стр.46,47" condition="{[5][46,47][5]}|&gt;|0" rule="{[5][46,47][4]}|&gt;|0" precision="1" tip="1" />
+    <control id="141" name="[Раздел 5]  гр.3&gt;0 если гр.5&gt;0 по стр.46,47" condition="{[5][46,47][5]}|&gt;|0" rule="{[5][46,47][3]}|&gt;|0" precision="1" tip="1" />
+    <control id="142" name="[Раздел 5]  гр.3&gt;0 если гр.4&gt;0 по стр.46,47" condition="{[5][46,47][4]}|&gt;|0" rule="{[5][46,47][3]}|&gt;|0" precision="1" tip="1" />
+    <control id="143" name="[Раздел 5]  гр.5&gt;0 если гр.4&gt;0 по стр.46,47" condition="{[5][46,47][4]}|&gt;|0" rule="{[5][46,47][5]}|&gt;|0" precision="1" tip="1" />
+    <control id="144" name="[Раздел 5]  стр.46&gt;=стр.47" condition="" rule="{[5][46][3-5]}|&gt;=|{[5][47][3-5]}" precision="1" tip="1" />
+    <control id="145" name="[Раздел 5]  гр.3&gt;= гр.4" condition="" rule="{[5][46,47][3]}|&gt;=|{[5][46,47][4]}" precision="1" tip="1" />
+    <control id="146" name="[Раздел 6]  стр.49&gt;0 если стр.48&gt;0" condition="{[6][48][4]}|&gt;|0" rule="{[6][49][4]}|&gt;|0" precision="1" tip="1" />
+    <control id="147" name="[Раздел 6]  стр.48&gt;0 если стр.49&gt;0" condition="{[6][49][4]}|&gt;|0" rule="{[6][48][4]}|&gt;|0" precision="1" tip="1" />
+    <control id="148" name="[Раздел 2] если есть 1351  то должен быть 1352" condition="{[2][16][6][1351][*]}|&gt;|0" rule="{[2][16][6][1352][*]}|&gt;|0" tip="1" />
+    <control id="149" name="[Раздел 2] если есть 1352  то должен быть 1351" condition="{[2][16][6][1352][*]}|&gt;|0" rule="{[2][16][6][1351][*]}|&gt;|0" tip="1" />
+    <control id="150" name="[Раздел 2] если есть 6252  то должен быть 6253" condition="{[2][16][6][6252][*]}|&gt;|0" rule="{[2][16][6][6253][*]}|&gt;|0" tip="1" />
+    <control id="151" name="[Раздел 2] если есть 6253  то должен быть 6252" condition="{[2][16][6][6253][*]}|&gt;|0" rule="{[2][16][6][6252][*]}|&gt;|0" tip="1" />
+    <control id="152" name="[Раздел 2] если есть 6254  то должен быть 6255" condition="{[2][16][6][6254][*]}|&gt;|0" rule="{[2][16][6][6255][*]}|&gt;|0" tip="1" />
+    <control id="153" name="[Раздел 2] если есть 6255  то должен быть 6254" condition="{[2][16][6][6255][*]}|&gt;|0" rule="{[2][16][6][6254][*]}|&gt;|0" tip="1" />
+    <control id="154" name="*[Раздел 2] если есть 531  то должен быть 532" condition="{[2][16][6][531][*]}|&gt;|0" rule="{[2][16][6][532][*]}|&gt;|0" tip="0" />
+    <control id="155" name="*[Раздел 2] если есть 532  то должен быть 531" condition="{[2][16][6][532][*]}|&gt;|0" rule="{[2][16][6][531][*]}|&gt;|0" tip="0" />
+    <control id="156" name="*[Раздел 2] если есть 535  то должен быть 536" condition="{[2][16][6][535][*]}|&gt;|0" rule="{[2][16][6][536][*]}|&gt;|0" tip="0" />
+    <control id="157" name="*[Раздел 2] если есть 536  то должен быть 535" condition="{[2][16][6][536][*]}|&gt;|0" rule="{[2][16][6][535][*]}|&gt;|0" tip="0" />
+    <control id="158" name="*[Раздел 2] если есть 538  то должен быть 539" condition="{[2][16][6][538][*]}|&gt;|0" rule="{[2][16][6][539][*]}|&gt;|0" tip="0" />
+    <control id="159" name="*[Раздел 2] если есть 539  то должен быть 538" condition="{[2][16][6][539][*]}|&gt;|0" rule="{[2][16][6][538][*]}|&gt;|0" tip="0" />
+    <control id="160" name="*[Раздел 2] если есть 1549  то должен быть 550" condition="{[2][16][6][1549][*]}|&gt;|0" rule="{[2][16][6][550][*]}|&gt;|0" tip="0" />
+    <control id="161" name="*[Раздел 2] если есть 550  то должен быть 1549" condition="{[2][16][6][550][*]}|&gt;|0" rule="{[2][16][6][1549][*]}|&gt;|0" tip="0" />
+    <control id="162" name="[Раздел 2] мощности 141&gt;=65880+142" condition="" rule="SUM{[2][16][6][141]}|&gt;=|SUM{[2][16][6][65880,142]}" tip="1" />
+    <control id="163" name="[Раздел 2] мощности 65880&gt;=1131" condition="" rule="SUM{[2][16][6][65880]}|&gt;=|SUM{[2][16][6][1131]}" tip="1" />
+    <control id="164" name="[Раздел 2] мощности 142&gt;=1132" condition="" rule="SUM{[2][16][6][142]}|&gt;=|SUM{[2][16][6][1132]}" tip="1" />
+    <control id="165" name="[Раздел 2] мощности 6511&gt;=7781" condition="" rule="SUM{[2][16][6][6511]}|&gt;=|SUM{[2][16][6][7781]}" tip="1" />
+    <control id="166" name="[Раздел 2] мощности 6515&gt;=6516" condition="" rule="SUM{[2][16][6][6515]}|&gt;=|SUM{[2][16][6][6516]}" tip="1" />
+    <control id="167" name="[Раздел 2] мощности 6520+6540+6517=6513+6514+6515" condition="" rule="isnull({[2][16][6][6520]},0)+isnull({[2][16][6][6540]},0)+isnull({[2][16][6][6517]},0)|=|isnull({[2][16][6][6513]},0)+isnull({[2][16][6][6514]},0)+isnull({[2][16][6][6515]},0)" tip="1" />
+    <control id="168" name="[Раздел 2] мощности 538&gt;=136" condition="" rule="SUM{[2][16][6][538]}|&gt;=|SUM{[2][16][6][136]}" tip="1" />
+    <control id="169" name="[Раздел 2] мощности 539&gt;=137" condition="" rule="SUM{[2][16][6][539]}|&gt;=|SUM{[2][16][6][137]}" tip="1" />
+    <control id="170" name="[Раздел 2] мощности 1549&gt;=138" condition="" rule="SUM{[2][16][6][1549]}|&gt;=|SUM{[2][16][6][138]}" tip="1" />
+    <control id="171" name="[Раздел 2] мощности 550&gt;=139" condition="" rule="SUM{[2][16][6][550]}|&gt;=|SUM{[2][16][6][139]}" tip="1" />
+    <control id="172" name="[Раздел 2] мощности 901&gt;=903" condition="" rule="SUM{[2][16][6][901]}|&gt;=|SUM{[2][16][6][903]}" tip="1" />
+    <control id="173" name="*[Раздел 2] если есть 121  то должен быть 151" condition="{[2][16][6][121][1]}|&gt;|0" rule="{[2][16][6][151][1]}|&gt;|0" tip="0" />
+    <control id="174" name="*[Раздел 2] если есть 129  то должен быть 146" condition="{[2][16][6][129][1]}|&gt;|0" rule="{[2][16][6][146][1]}|&gt;|0" tip="0" />
+    <control id="175" name="*[Раздел 2] если есть 151  то должен быть 121" condition="{[2][16][6][151][1]}|&gt;|0" rule="{[2][16][6][121][1]}|&gt;|0" tip="0" />
+    <control id="176" name="*[Раздел 2] если есть 146  то должен быть 129" condition="{[2][16][6][146][1]}|&gt;|0" rule="{[2][16][6][129][1]}|&gt;|0" tip="0" />
+    <control id="177" name="[Раздел 2] мощности 126&gt;=1260" condition="" rule="SUM{[2][16][6][126]}|&gt;=|SUM{[2][16][6][1260]}" tip="1" />
+    <control id="178" name="[Раздел 2] мощности 127&gt;=1270" condition="" rule="SUM{[2][16][6][127]}|&gt;=|SUM{[2][16][6][1270]}" tip="1" />
+    <control id="179" name="[Раздел 2] мощности 7110&gt;=7111" condition="" rule="SUM{[2][16][6][7110]}|&gt;=|SUM{[2][16][6][7111]}" tip="1" />
+    <control id="180" name="[Раздел 2] мощности 7220&gt;=7226" condition="" rule="SUM{[2][16][6][7220]}|&gt;=|SUM{[2][16][6][7226]}" tip="1" />
+    <control id="181" name="[Раздел 2] мощности 7220&gt;=7227" condition="" rule="SUM{[2][16][6][7220]}|&gt;=|SUM{[2][16][6][7227]}" tip="1" />
+    <control id="182" name="[Раздел 2] мощности 7220&gt;=7228" condition="" rule="SUM{[2][16][6][7220]}|&gt;=|SUM{[2][16][6][7228]}" tip="1" />
+    <control id="183" name="[Раздел 2] мощности 7220&gt;=7229" condition="" rule="SUM{[2][16][6][7220]}|&gt;=|SUM{[2][16][6][7229]}" tip="1" />
+    <control id="184" name="[Раздел 2] мощности 7220&gt;=7226+7227+7228+7229" condition="" rule="SUM{[2][16][6][7220]}|&gt;=|SUM{[2][16][6][7226,7227,7228,7229]}" tip="1" />
+    <control id="185" name="[Раздел 2] мощности 8121&gt;=8122" condition="" rule="SUM{[2][16][6][8121]}|&gt;=|SUM{[2][16][6][8122]}" tip="1" />
+    <control id="186" name="[Раздел 2] мощности 8121&gt;=8123" condition="" rule="SUM{[2][16][6][8121]}|&gt;=|SUM{[2][16][6][8123]}" tip="1" />
+    <control id="187" name="[Раздел 2] мощности 8121&gt;=8124" condition="" rule="SUM{[2][16][6][8121]}|&gt;=|SUM{[2][16][6][8124]}" tip="1" />
+    <control id="188" name="[Раздел 2] мощности 8121&gt;=8125" condition="" rule="SUM{[2][16][6][8121]}|&gt;=|SUM{[2][16][6][8125]}" tip="1" />
+    <control id="189" name="[Раздел 2] мощности 7220&gt;=8122+8123+8124+8125" condition="" rule="SUM{[2][16][6][7220]}|&gt;=|SUM{[2][16][6][8122,8123,8124,8125]}" tip="1" />
+    <control id="190" name="[Раздел 2] мощности 572&gt;=575" condition="" rule="SUM{[2][16][6][572]}|&gt;=|SUM{[2][16][6][575]}" tip="1" />
+    <control id="191" name="[Раздел 2] мощности 572&gt;=579" condition="" rule="SUM{[2][16][6][572]}|&gt;=|SUM{[2][16][6][579]}" tip="1" />
+    <control id="192" name="[Раздел 2] мощности 576&gt;=1576" condition="" rule="SUM{[2][16][6][576]}|&gt;=|SUM{[2][16][6][1576]}" tip="1" />
+    <control id="193" name="[Раздел 2] мощности 578&gt;=1578" condition="" rule="SUM{[2][16][6][578]}|&gt;=|SUM{[2][16][6][1578]}" tip="1" />
+    <control id="194" name="[Раздел 2] мощности 595&gt;=1595" condition="" rule="SUM{[2][16][6][595]}|&gt;=|SUM{[2][16][6][1595]}" tip="1" />
+    <control id="195" name="[Раздел 2] мощности 610&gt;=611" condition="" rule="SUM{[2][16][6][610]}|&gt;=|SUM{[2][16][6][611]}" tip="1" />
+    <control id="196" name="[Раздел 2] мощности 645&gt;=1645" condition="" rule="SUM{[2][16][6][645]}|&gt;=|SUM{[2][16][6][1645]}" tip="1" />
+    <control id="197" name="[Раздел 2] мощности 647&gt;=1647" condition="" rule="SUM{[2][16][6][647]}|&gt;=|SUM{[2][16][6][1647]}" tip="1" />
+    <control id="198" name="[Раздел 2] мощности 648&gt;=1648" condition="" rule="SUM{[2][16][6][648]}|&gt;=|SUM{[2][16][6][1648]}" tip="1" />
+    <control id="199" name="[Раздел 2] мощности 650&gt;=2650" condition="" rule="SUM{[2][16][6][650]}|&gt;=|SUM{[2][16][6][2650]}" tip="1" />
+    <control id="200" name="[Раздел 2] мощности 901&gt;=1901" condition="" rule="SUM{[2][16][6][901]}|&gt;=|SUM{[2][16][6][1901]}" tip="1" />
+    <control id="201" name="[Раздел 2] мощности 1901&gt;=2900" condition="" rule="SUM{[2][16][6][1901]}|&gt;=|SUM{[2][16][6][2900]}" tip="1" />
+    <control id="202" name="[Раздел 2] мощности 1902&gt;=3900" condition="" rule="SUM{[2][16][6][1902]}|&gt;=|SUM{[2][16][6][3900]}" tip="1" />
+    <control id="203" name="[Раздел 2] мощности 901&gt;=900+903+1901" condition="" rule="SUM{[2][16][6][901]}|&gt;=|SUM{[2][16][6][900,903,1901]}" tip="1" />
+    <control id="204" name="[Раздел 2] мощности 910&gt;=913" condition="" rule="SUM{[2][16][6][910]}|&gt;=|SUM{[2][16][6][913]}" tip="1" />
+    <control id="205" name="[Раздел 2] мощности 910&gt;=1910" condition="" rule="SUM{[2][16][6][910]}|&gt;=|SUM{[2][16][6][1910]}" tip="1" />
+    <control id="206" name="[Раздел 2] мощности 912&gt;=914" condition="" rule="SUM{[2][16][6][912]}|&gt;=|SUM{[2][16][6][914]}" tip="1" />
+    <control id="207" name="[Раздел 2] мощности 913&gt;=914" condition="" rule="SUM{[2][16][6][913]}|&gt;=|SUM{[2][16][6][914]}" tip="1" />
+    <control id="208" name="[Раздел 2] мощности 1910&gt;=1913" condition="" rule="SUM{[2][16][6][1910]}|&gt;=|SUM{[2][16][6][1913]}" tip="1" />
+    <control id="209" name="[Раздел 2] мощности 910&gt;=912+913+1910" condition="" rule="SUM{[2][16][6][910]}|&gt;=|SUM{[2][16][6][912,913,1910]}" tip="1" />
+    <control id="210" name="[Раздел 2] мощности 930&gt;=2930" condition="" rule="SUM{[2][16][6][930]}|&gt;=|SUM{[2][16][6][2930]}" tip="1" />
+    <control id="212" name="*[Раздел 2] если есть 611  то должен быть 612" condition="{[2][16][6][611][1]}|&gt;|0" rule="{[2][16][6][612][1]}|&gt;|0" tip="0" />
+    <control id="213" name="*[Раздел 2] если есть 612  то должен быть 611" condition="{[2][16][6][612][1]}|&gt;|0" rule="{[2][16][6][611][1]}|&gt;|0" tip="0" />
+    <control id="214" name="*[Раздел 2] если есть 1260  то должен быть 1261" condition="{[2][16][6][1260][1]}|&gt;|0" rule="{[2][16][6][1261][1]}|&gt;|0" tip="0" />
+    <control id="215" name="*[Раздел 2] если есть 1261  то должен быть 1260" condition="{[2][16][6][1261][1]}|&gt;|0" rule="{[2][16][6][1260][1]}|&gt;|0" tip="0" />
+    <control id="216" name="*[Раздел 2] если есть 1270  то должен быть 1271" condition="{[2][16][6][1270][1]}|&gt;|0" rule="{[2][16][6][1271][1]}|&gt;|0" tip="0" />
+    <control id="217" name="*[Раздел 2] если есть 1271  то должен быть 1270" condition="{[2][16][6][1271][1]}|&gt;|0" rule="{[2][16][6][1270][1]}|&gt;|0" tip="0" />
+    <control id="218" name="*[Раздел 2] если есть 1473  то должен быть 1474" condition="{[2][16][6][1473][1]}|&gt;|0" rule="{[2][16][6][1474][1]}|&gt;|0" tip="0" />
+    <control id="219" name="*[Раздел 2] если есть 1474  то должен быть 1473" condition="{[2][16][6][1474][1]}|&gt;|0" rule="{[2][16][6][1473][1]}|&gt;|0" tip="0" />
+    <control id="220" name="*[Раздел 2] если есть 1576  то должен быть 1577" condition="{[2][16][6][1576][1]}|&gt;|0" rule="{[2][16][6][1577][1]}|&gt;|0" tip="0" />
+    <control id="221" name="*[Раздел 2] если есть 1577  то должен быть 1576" condition="{[2][16][6][1577][1]}|&gt;|0" rule="{[2][16][6][1576][1]}|&gt;|0" tip="0" />
+    <control id="222" name="*[Раздел 2] если есть 1578  то должен быть 1579" condition="{[2][16][6][1578][1]}|&gt;|0" rule="{[2][16][6][1579][1]}|&gt;|0" tip="0" />
+    <control id="223" name="*[Раздел 2] если есть 1579  то должен быть 1578" condition="{[2][16][6][1579][1]}|&gt;|0" rule="{[2][16][6][1578][1]}|&gt;|0" tip="0" />
+    <control id="224" name="*[Раздел 2] если есть 1595  то должен быть 1596" condition="{[2][16][6][1595][1]}|&gt;|0" rule="{[2][16][6][1596][1]}|&gt;|0" tip="0" />
+    <control id="225" name="*[Раздел 2] если есть 1596  то должен быть 1595" condition="{[2][16][6][1596][1]}|&gt;|0" rule="{[2][16][6][1595][1]}|&gt;|0" tip="0" />
+    <control id="226" name="*[Раздел 2] если есть 1645  то должен быть 1646" condition="{[2][16][6][1645][1]}|&gt;|0" rule="{[2][16][6][1646][1]}|&gt;|0" tip="0" />
+    <control id="227" name="*[Раздел 2] если есть 1646  то должен быть 1645" condition="{[2][16][6][1646][1]}|&gt;|0" rule="{[2][16][6][1645][1]}|&gt;|0" tip="0" />
+    <control id="228" name="*[Раздел 2] если есть 1647  то должен быть 2647" condition="{[2][16][6][1647][1]}|&gt;|0" rule="{[2][16][6][2647][1]}|&gt;|0" tip="0" />
+    <control id="229" name="*[Раздел 2] если есть 2647  то должен быть 1647" condition="{[2][16][6][2647][1]}|&gt;|0" rule="{[2][16][6][1647][1]}|&gt;|0" tip="0" />
+    <control id="230" name="*[Раздел 2] если есть 1648  то должен быть 1649" condition="{[2][16][6][1648][1]}|&gt;|0" rule="{[2][16][6][1649][1]}|&gt;|0" tip="0" />
+    <control id="231" name="*[Раздел 2] если есть 1649  то должен быть 1648" condition="{[2][16][6][1649][1]}|&gt;|0" rule="{[2][16][6][1648][1]}|&gt;|0" tip="0" />
+    <control id="232" name="*[Раздел 2] если есть 2650  то должен быть 2651" condition="{[2][16][6][2650][1]}|&gt;|0" rule="{[2][16][6][2651][1]}|&gt;|0" tip="0" />
+    <control id="233" name="*[Раздел 2] если есть 2651  то должен быть 2650" condition="{[2][16][6][2651][1]}|&gt;|0" rule="{[2][16][6][2650][1]}|&gt;|0" tip="0" />
+    <control id="234" name="*[Раздел 2] если есть 2900  то должен быть 3900" condition="{[2][16][6][2900][1]}|&gt;|0" rule="{[2][16][6][3900][1]}|&gt;|0" tip="0" />
+    <control id="235" name="*[Раздел 2] если есть 3900  то должен быть 2900" condition="{[2][16][6][3900][1]}|&gt;|0" rule="{[2][16][6][2900][1]}|&gt;|0" tip="0" />
+    <control id="236" name="*[Раздел 2] если есть 1901  то должен быть 1902" condition="{[2][16][6][1901][1]}|&gt;|0" rule="{[2][16][6][1902][1]}|&gt;|0" tip="0" />
+    <control id="237" name="*[Раздел 2] если есть 1902  то должен быть 1901" condition="{[2][16][6][1902][1]}|&gt;|0" rule="{[2][16][6][1901][1]}|&gt;|0" tip="0" />
+    <control id="238" name="*[Раздел 2] если есть 1910  то должен быть 2910" condition="{[2][16][6][1910][1]}|&gt;|0" rule="{[2][16][6][2910][1]}|&gt;|0" tip="0" />
+    <control id="239" name="*[Раздел 2] если есть 2910  то должен быть 1910" condition="{[2][16][6][2910][1]}|&gt;|0" rule="{[2][16][6][1910][1]}|&gt;|0" tip="0" />
+    <control id="240" name="*[Раздел 2] если есть 1913  то должен быть 1914" condition="{[2][16][6][1913][1]}|&gt;|0" rule="{[2][16][6][1914][1]}|&gt;|0" tip="0" />
+    <control id="241" name="*[Раздел 2] если есть 1914  то должен быть 1913" condition="{[2][16][6][1914][1]}|&gt;|0" rule="{[2][16][6][1913][1]}|&gt;|0" tip="0" />
+    <control id="242" name="*[Раздел 2] если есть 2930  то должен быть 2931" condition="{[2][16][6][2930][1]}|&gt;|0" rule="{[2][16][6][2931][1]}|&gt;|0" tip="0" />
+    <control id="243" name="*[Раздел 2] если есть 2931  то должен быть 2930" condition="{[2][16][6][2931][1]}|&gt;|0" rule="{[2][16][6][2930][1]}|&gt;|0" tip="0" />
+    <control id="244" name="*[Раздел 2] если есть 7111  то должен быть 7112" condition="{[2][16][6][7111][1]}|&gt;|0" rule="{[2][16][6][7112][1]}|&gt;|0" tip="0" />
+    <control id="245" name="*[Раздел 2] если есть 7112  то должен быть 7111" condition="{[2][16][6][7112][1]}|&gt;|0" rule="{[2][16][6][7111][1]}|&gt;|0" tip="0" />
+    <control id="246" name="*[Раздел 2] если есть 5931  то должен быть 5932" condition="{[2][16][6][5931][1]}|&gt;|0" rule="{[2][16][6][5932][1]}|&gt;|0" tip="0" />
+    <control id="247" name="*[Раздел 2] если есть 5932  то должен быть 5931" condition="{[2][16][6][5932][1]}|&gt;|0" rule="{[2][16][6][5931][1]}|&gt;|0" tip="0" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2007">2007г.</term>
+      <term id="2008">2008г.</term>
+      <term id="2009">2009г.</term>
+      <term id="2010">2010г.</term>
+      <term id="2011">2011г.</term>
+      <term id="2012">2012г.</term>
+      <term id="2013">2013г.</term>
+      <term id="2014">2014г.</term>
+      <term id="2015">2015г.</term>
+      <term id="2016">2016г.</term>
+      <term id="2017">2017г.</term>
+      <term id="2018">2018г.</term>
+      <term id="2019">2019г.</term>
+      <term id="2020">2020г.</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="1">январь</term>
+      <term id="2">февраль</term>
+      <term id="3">март</term>
+      <term id="4">апрель</term>
+      <term id="5">май</term>
+      <term id="6">июнь</term>
+      <term id="7">июль</term>
+      <term id="8">август</term>
+      <term id="9">сентябрь</term>
+      <term id="10">октябрь</term>
+      <term id="11">ноябрь</term>
+      <term id="12">декабрь</term>
+    </dic>
+    <dic name="Справочник мощностей" id="s_mosh">
+      <term id="6"> административные здания</term>
+      <term id="7">Нежилые здания</term>
+      <term id="8"> промышленные здания</term>
+      <term id="9"> сельскохозяйственные здания</term>
+      <term id="10"> коммерческие здания</term>
+      <term id="11"> учебные здания</term>
+      <term id="12"> здания здравоохранения</term>
+      <term id="13"> другие здания</term>
+      <term id="19">Жилые помещения в нежилых зданиях</term>
+      <term id="50">Здания - всего</term>
+      <term id="120">Автовокзал (пассажиров в час)</term>
+      <term id="121">Автомойка (моечных постов)</term>
+      <term id="122">Аквапарки закрытого типа (человек в день)</term>
+      <term id="123">Казино</term>
+      <term id="124">Торгово-выставочные комплексы</term>
+      <term id="125">Салоны красоты (парикмахерские)</term>
+      <term id="126">Музыкальные школы</term>
+      <term id="127">Ветеринарные пункты</term>
+      <term id="128">Медицинские центры</term>
+      <term id="129">Вертодром (тыс.кв.м.)</term>
+      <term id="130">Надземный (подземный) пешеходный переход</term>
+      <term id="131">Горнолыжные подъемники</term>
+      <term id="132">Инкубатор по выведению цыплят</term>
+      <term id="133">Помещения для кроликов</term>
+      <term id="134">Теплицы с покрытием из полимерных материалов (поликарбонат)</term>
+      <term id="135">Канализационные сети к производственным объектам</term>
+      <term id="136">Канализация в сельской местности</term>
+      <term id="137">Канализационные сети в сельской местности</term>
+      <term id="138">Теплоснабжение в сельской местности</term>
+      <term id="139">Тепловые сети в сельской местности</term>
+      <term id="140">Электростанции возобновляемых источников энергии</term>
+      <term id="141">Линии электропередачи напряжением до 35 кВ</term>
+      <term id="142">Линии электропередачи напряжением 0,4 кВ</term>
+      <term id="143">Трансформаторные понизительные подстанции напряжением до 35 кВ</term>
+      <term id="144">Антенно-мачтовое сооружение цифрового наземного телерадиовещания</term>
+      <term id="145">Гидроксид калия (калий едкий, кали едкое)</term>
+      <term id="146">Вертодром (единиц)</term>
+      <term id="147">Корма для домашних животных</term>
+      <term id="148">Цех убоя скота</term>
+      <term id="150">Предприятие по производству предметов гигиены</term>
+      <term id="151">Автомойка (единиц)</term>
+      <term id="152">Пункты пропуска через государственную границу</term>
+      <term id="166">Рыборазводное предприятие</term>
+      <term id="501">Жилые здания</term>
+      <term id="503">Жилые дома, построенные населением</term>
+      <term id="504">Жилые дома в сельской местности, построенные населением</term>
+      <term id="507">Общежития</term>
+      <term id="508">Жилые здания в сельской местности</term>
+      <term id="509">Отдельно стоящие здания жилого назначения квартирного типа</term>
+      <term id="510">Отдельно стоящие здания жилого назначения квартирного типа в сельской местности</term>
+      <term id="511">Жилые дома коттеджного типа</term>
+      <term id="512">Жилые здания, построенные за счет федерального бюджета</term>
+      <term id="513">Жилые здания, построенные за счет бюджетов субъектов Российской Федерации и местных бюджетов</term>
+      <term id="515">Жилые здания по ипотечному кредитованию</term>
+      <term id="518">Жилые здания многоквартирные</term>
+      <term id="520">Жилые дома и общежития в городах и поселках городского типа, включая построенные населением за свой счет и с помощью кредитов</term>
+      <term id="526">Отдельно стоящие здания жилого назначения квартирного типа в городах и поселках городского типа</term>
+      <term id="527">Жилые здания многоквартирные малоэтажные, состоящие из блок-секций</term>
+      <term id="528">Жилые здания индивидуальные (предназначенные для проживания одной семьи) блокированные</term>
+      <term id="529">Жилые здания индивидуальные (предназначенные для проживания одной семьи)</term>
+      <term id="530">Жилые здания многоквартирные малоэтажные блокированные</term>
+      <term id="531">Водопроводы</term>
+      <term id="532">Водопроводные сети</term>
+      <term id="535">Водопроводы  в сельской местности</term>
+      <term id="536">Водопроводные сети в сельской местности</term>
+      <term id="538">Канализация</term>
+      <term id="539">Канализационные сети</term>
+      <term id="545">Газовые сети</term>
+      <term id="546">Газовые сети, построенные за счет средств федерального бюджета</term>
+      <term id="547">Газовые сети, построенные за счет средств бюджетов субъектов Российской Федерации и местных бюджетов</term>
+      <term id="548">Газовые сети, построенные за счет средств населения</term>
+      <term id="550">Тепловые сети</term>
+      <term id="551">Метрополитены: единиц</term>
+      <term id="552">Метрополитены: линии в двухпутном исчислении</term>
+      <term id="553">Железнодорожные вокзалы, расчетной единовременной вместимости</term>
+      <term id="554">Автоцентр</term>
+      <term id="555">Гостиницы</term>
+      <term id="556">Газовые сети в сельской местности</term>
+      <term id="557">Трамвайные пути (одиночные)</term>
+      <term id="558">Троллейбусные линии (одиночные)</term>
+      <term id="570">Больничные организации</term>
+      <term id="572">Амбулаторно-поликлинические организации</term>
+      <term id="574">Перинатальные центры</term>
+      <term id="575">Фельдшерско-акушерские пункты в населенных пунктах с численностью от 100 человек до 2 тыс. человек</term>
+      <term id="576">Больничные организации в сельской местности</term>
+      <term id="577">Детские больницы</term>
+      <term id="578">Амбулаторно-поликлинические организации в сельской местности</term>
+      <term id="579">Врачебные амбулатории в населенных пунктах с численностью от 100 человек до 2 тыс. человек</term>
+      <term id="580">Родильные дома</term>
+      <term id="584">Детские поликлиники</term>
+      <term id="586">Женские консультации</term>
+      <term id="587">Дома ребенка</term>
+      <term id="595">Санатории</term>
+      <term id="598">Жилые здания, в сельской местности, всего</term>
+      <term id="599">Жилые здания, жилые помещения в нежилых зданиях и жилые дома, построенные населением за счет собственных и заемных средств</term>
+      <term id="610">Дома отдыха</term>
+      <term id="611">Дома отдыха, с материалом стен из дерева (мест)</term>
+      <term id="612">Дома отдыха, с материалом стен из дерева (кв. м)</term>
+      <term id="620">Стадионы</term>
+      <term id="629">Плавательные бассейны (с длиной дорожек 25 и 50 м),единиц</term>
+      <term id="630">Площадь зеркала воды плавательных бассейнов              (с длиной дорожек 25 и 50 м),кв.м.</term>
+      <term id="640">Плоскостные спортивные сооружения (футбольные поля, игровые площадки и др.)</term>
+      <term id="643">Спортивные сооружения с искусственным льдом, единиц</term>
+      <term id="644">Площадь спортивных сооружений с искусственным льдом</term>
+      <term id="645">Туристские базы</term>
+      <term id="647">Мотели</term>
+      <term id="648">Кемпинги</term>
+      <term id="649">Спортивные залы</term>
+      <term id="650">Физкультурно-оздоровительные комплексы</term>
+      <term id="651">Горнолыжные трассы</term>
+      <term id="652">Санно-бобслейная трасса</term>
+      <term id="660">Дома интернаты для престарелых,инвалидов (взрослых и детей)</term>
+      <term id="661">Дома интернаты для ветеранов труда</term>
+      <term id="680">Образовательные организации высшего  образования</term>
+      <term id="681">Профессиональные образовательные организации</term>
+      <term id="900">Общеобразовательные организации  в сельской местности</term>
+      <term id="901">Общеобразовательные организации</term>
+      <term id="903">Общеобразовательные организации, построенные за счет софинансирования из федерального бюджета</term>
+      <term id="910">Дошкольные образовательные организации</term>
+      <term id="912">Дошкольные образовательные организации  в сельской местности</term>
+      <term id="913">Дошкольные образовательные организации для детей в возрасте до трех лет</term>
+      <term id="914">Дошкольные образовательные организации для детей в возрасте до трех лет в сельской местности</term>
+      <term id="915">Детские дома</term>
+      <term id="916">Детские оздоровительные лагеря</term>
+      <term id="929">Учреждения культуры клубного типа</term>
+      <term id="930">Учреждения культуры клубного типа в сельской местности</term>
+      <term id="940">Библиотеки</term>
+      <term id="943">Театры</term>
+      <term id="944">Концертные и киноконцертные залы</term>
+      <term id="945">Культовые сооружения</term>
+      <term id="946">Торгово-развлекательные центры</term>
+      <term id="947">Торгово-офисные центры</term>
+      <term id="961">Комбинаты бытового обслуживания населения и дома быта</term>
+      <term id="966">Бани</term>
+      <term id="1110">Электростанции турбинные</term>
+      <term id="1111">Электростанции тепловые</term>
+      <term id="1112">Электростанции атомные</term>
+      <term id="1115">Гидроэлектростанции</term>
+      <term id="1117">Дизельные электростанции в районах Крайнего Севера</term>
+      <term id="1120">Линии электропередачи напряжением   35 кВ   и   выше</term>
+      <term id="1121">Линии электропередачи напряжением 35 кВ и выше для  электрификации сельского хозяйства</term>
+      <term id="1122">Линии электропередачи напряжением 35-110 кВ</term>
+      <term id="1123">Линии электропередачи напряжением 220 кВ</term>
+      <term id="1124">Линии электропередачи напряжением 500 кВ и выше</term>
+      <term id="1125">Стекло оконное, 2-х мм исчислении</term>
+      <term id="1126">Конструкции  сборные деревянные строительные (здания сборные деревянные)</term>
+      <term id="1127">Изделия деревянные строительные</term>
+      <term id="1128">Ящики и коробки картонные</term>
+      <term id="1129">Присадки к смазочным материалам</term>
+      <term id="1130">Материалы смазочные</term>
+      <term id="1131">Линии электропередачи для электрификации сельского хозяйства напряжением 6-20 кВ</term>
+      <term id="1132">Линии электропередачи для электрификации сельского хозяйства напряжением 0,4 кВ</term>
+      <term id="1133">Волокна и нити синтетические и искусственные</term>
+      <term id="1134">Пластмассовые изделия для упаковки</term>
+      <term id="1135">Здания  сборные из бетона</term>
+      <term id="1136">Магнитофоны и другие звукозаписывающие устройства</term>
+      <term id="1137">Предприятия по ремонту судов</term>
+      <term id="1138">Инструменты, оборудование, приспособления, применяемые в медицинских целях</term>
+      <term id="1140">Трансформаторные понизительные подстанции напряжением 35 кВ и выше</term>
+      <term id="1141">Трансформаторные понизительные подстанции для электрификации сельского хозяйства</term>
+      <term id="1151">Котлы паровые на теплоэлектроцентралях</term>
+      <term id="1161">Сети тепловые магистральные</term>
+      <term id="1164">Котлы водогрейные на теплоэлектроцентралях</term>
+      <term id="1210">Скважины нефтяные, всего</term>
+      <term id="1211">Скважины нефтяные разведочного бурения</term>
+      <term id="1212">Скважины нефтяные эксплуатационного бурения</term>
+      <term id="1260">Музыкальные школы, с материалом стен из дерева (мест)</term>
+      <term id="1261">Музыкальные школы, с материалом стен из дерева (кв. м)</term>
+      <term id="1270">Ветеринарные пункты, с материалом стен из дерева (посещ/смен)</term>
+      <term id="1271">Ветеринарные пункты, с материалом стен из дерева (кв. м)</term>
+      <term id="1311">Первичная переработка нефти</term>
+      <term id="1321">Каталитическое крекирование сырья</term>
+      <term id="1330">Каталитическое риформирование сырья</term>
+      <term id="1343">Присадки к смазочным маслам</term>
+      <term id="1345">Масло смазочное</term>
+      <term id="1347">Гидроочистка дизельного топлива</term>
+      <term id="1351">Депарафинизация дизельных и керосиновых фракций тыс.т сырья</term>
+      <term id="1352">Депарафинизация дизельных и керосиновых фракций парафина</term>
+      <term id="1357">Нефтяной кокс</term>
+      <term id="1361">Гидрокрекинг сырья</term>
+      <term id="1375">Прокалка нефтяного кокса</term>
+      <term id="1410">Скважины газовые</term>
+      <term id="1411">Скважины газовые разведочного бурения</term>
+      <term id="1412">Скважины газовые эксплуатационного бурения</term>
+      <term id="1421">Газопроводы магистральные и отводы от них</term>
+      <term id="1431">Мощность по переработке газа</term>
+      <term id="1441">Компрессорные станции на магистральных газопроводах, газовых промыслах и подземных хранилищах газа</term>
+      <term id="1442">Компрессорные станции на магистральных газопроводах, газовых промыслах и подземных хранилищах газа</term>
+      <term id="1451">Хранилища газа подземные</term>
+      <term id="1471">Автомобильные газозаправочные станции сжиженного нефтяного газа</term>
+      <term id="1472">Автозаправочные станции</term>
+      <term id="1473">Капитальные гаражи</term>
+      <term id="1474"> количество машиномест</term>
+      <term id="1510">Мощность по добыче угля</term>
+      <term id="1511">Шахты</term>
+      <term id="1512">Разрезы</term>
+      <term id="1531">Фабрики углеобогатительные</term>
+      <term id="1549">Теплоснабжение</term>
+      <term id="1560">Торф</term>
+      <term id="1576">Больничные организации в сельской местности, с материалом стен из дерева (коек)</term>
+      <term id="1577">Больничные организации в сельской местности, с материалом стен из дерева (кв. м)</term>
+      <term id="1578">Амбулаторно-поликлинические организации в сельской местности, с материалом стен из дерева (посещ/смен)</term>
+      <term id="1579">Амбулаторно-поликлинические организации в сельской местности, с материалом стен из дерева (кв. м)</term>
+      <term id="1595">Санатории, с материалом стен из дерева (коек)</term>
+      <term id="1596">Санатории, с материалом стен из дерева (кв. м)</term>
+      <term id="1611">Руда железная</term>
+      <term id="1615">Концентрат железной руды</term>
+      <term id="1645">Туристские базы, с материалом стен из дерева (мест)</term>
+      <term id="1646">Туристские базы, с материалом стен из дерева (кв. м)</term>
+      <term id="1647">Мотели, с материалом стен из дерева (мест)</term>
+      <term id="1648">Кемпинги, с материалом стен из дерева (мест)</term>
+      <term id="1649">Кемпинги, с материалом стен из дерева (кв. м)</term>
+      <term id="1650">Чугун /в пересчете на предельный/, количество доменных печей</term>
+      <term id="1651">Чугун /в пересчете на предельный/, мощность доменных печей</term>
+      <term id="1660">Сталь конвертерная</term>
+      <term id="1661">Сталь конверторная (количество конвертеров)</term>
+      <term id="1662">Сталь конвенторная (мощность конвертеров)</term>
+      <term id="1665">Сталь электропечная (количество электрических печей)</term>
+      <term id="1666">Сталь электропечная (мощность электрических печей)</term>
+      <term id="1670">Машины непрерывного литья заготовок</term>
+      <term id="1671">Машины непрерывного литья заготовок (количество машин)</term>
+      <term id="1672">Машины непрерывного литья заготовок (мощность машин)</term>
+      <term id="1690">Прокат черных металлов /готовый/</term>
+      <term id="1691">Количество прокатных станов,шт</term>
+      <term id="1692">Мощность прокатных станов</term>
+      <term id="1720">Холодный прокат листа</term>
+      <term id="1721">Количество станов холодного проката</term>
+      <term id="1722">Мощность станов холодного проката</term>
+      <term id="1730">Трубы стальные</term>
+      <term id="1731">Количество трубных станов</term>
+      <term id="1732">Мощность трубных станов</term>
+      <term id="1733">Трубы чугунные модифицированные</term>
+      <term id="1741">Количество коксовых батарей (кокс 6% влажности)</term>
+      <term id="1742">Мощность коксовых батарей (кокс 6% влажности)</term>
+      <term id="1772">Переработка металлолома</term>
+      <term id="1821">Руда марганцевая</term>
+      <term id="1901">Общеобразовательные организации, с материалом стен из дерева (учен мест)</term>
+      <term id="1902">Общеобразовательные организации, с материалом стен из дерева (кв. м)</term>
+      <term id="1910">Дошкольные образовательные организации, с материалом стен из дерева (мест)</term>
+      <term id="1911">Руда медная</term>
+      <term id="1912">Фабрики по обогащению медной руды</term>
+      <term id="1913">Дошкольные образовательные организации  в сельской местности, с материалом стен из дерева (мест)</term>
+      <term id="1914">Дошкольные образовательные организации в сельской местности, с материалом стен из дерева (кв. м)</term>
+      <term id="1915">Медь черновая</term>
+      <term id="1921">Глинозем</term>
+      <term id="1922">Алюминий первичный, включая силумин</term>
+      <term id="1930">Цинк</term>
+      <term id="1931">Руда свинцово-цинковая</term>
+      <term id="1932">Фабрики по обогащению свинцово-цинковой руды</term>
+      <term id="1938">Руда никелевая</term>
+      <term id="1951">Прокат цветных металлов</term>
+      <term id="1961">Алюминий вторичный</term>
+      <term id="1965">Руда вольфрамо-молибденовая</term>
+      <term id="1966">Фабрики по обогащению вольфрамо-молибденовой руды</term>
+      <term id="1985">Руда золотосодержащая</term>
+      <term id="2111">Аммиак синтетический</term>
+      <term id="2119">Комплексные удобрения</term>
+      <term id="2130">Удобрения минеральные /в перерасчете на 100% питательных веществ/</term>
+      <term id="2131">Удобрения азотные</term>
+      <term id="2132">Удобрения фосфатные</term>
+      <term id="2133">Удобрения калийные</term>
+      <term id="2134">Фосфоритная мука</term>
+      <term id="2136">Известняк</term>
+      <term id="2141">Сера природная</term>
+      <term id="2142">Кислота серная в моногидрате</term>
+      <term id="2144">Сода каустическая 100-процентная</term>
+      <term id="2146">Сода кальцинированная 100-процентная</term>
+      <term id="2151">Средства защиты растений химические /в 100% исчислении по действующему веществу/</term>
+      <term id="2160">Волокна и нити химические</term>
+      <term id="2170">Смолы синтетические и пластические массы</term>
+      <term id="2251">Лаки и краски</term>
+      <term id="2254">Красители синтетические</term>
+      <term id="2268">Йод и йодопродукты</term>
+      <term id="2290">Катализаторы</term>
+      <term id="2291">Полиизобутилен</term>
+      <term id="2302">Бутадиен</term>
+      <term id="2307">Шины радиальные с металлокордом, сверхкрупногабаритные</term>
+      <term id="2308">Шины легковые</term>
+      <term id="2311">Каучуки синтетические</term>
+      <term id="2312">Шины автомобильные, для сельскохозяйственных машин, мотоциклов и мотороллеров</term>
+      <term id="2313">Лента конвейерная резинотканевая /транспортерная лента/</term>
+      <term id="2314">Ремни приводные прорезиненные клиновые</term>
+      <term id="2316">Резинотехнические изделия формовые и неформовые</term>
+      <term id="2345">Пленка поливинилхлоридная</term>
+      <term id="2348">Пленка полимерная</term>
+      <term id="2354">Колодки и накладки тормозные асбестовые</term>
+      <term id="2361">Средства синтетические моющие</term>
+      <term id="2647">Мотели, с материалом стен из дерева (кв. м)</term>
+      <term id="2650">Физкультурно-оздоровительные комплексы, с материалом стен из дерева (ед.)</term>
+      <term id="2651">Физкультурно-оздоровительные комплексы, с материалом стен из дерева (кв. м)</term>
+      <term id="2900">Общеобразовательные организации в сельской местности, с материалом стен из дерева (учен мест)</term>
+      <term id="2910">Дошкольные образовательные организации, с материалом стен из дерева (кв. м)</term>
+      <term id="2930">Учреждения культуры клубного типа в сельской местности, с материалом стен из дерева (мест)</term>
+      <term id="2931">Учреждения культуры клубного типа в сельской местности, с материалом стен из дерева (кв. м)</term>
+      <term id="3011">Турбины паровые</term>
+      <term id="3012">Турбины газовые</term>
+      <term id="3014">Реакторы энергетические</term>
+      <term id="3032">Дизели и дизель-генераторы</term>
+      <term id="3035">Дизель-генераторы высокоэффективные, дизели тепловозные и для судостроения</term>
+      <term id="3036">Подъемно-транспортное оборудование</term>
+      <term id="3040">Оборудование металлургическое</term>
+      <term id="3042">Оборудование прокатное /включая машины и оборудование непрерывного литья заготовок/</term>
+      <term id="3049">Вагоны грузовые магистральные восьмиосные, вагоны для метрополитена, электропоездов и пассажирские</term>
+      <term id="3050">Машины путевые</term>
+      <term id="3051">Вагоны грузовые магистралььные</term>
+      <term id="3052">Вагоны пассажирские магистральные</term>
+      <term id="3053">Вагоны для метрополитена</term>
+      <term id="3054">Вагоны для электропоездов</term>
+      <term id="3061">Тепловозы магистральные секций</term>
+      <term id="3062">Тепловозы магистральные</term>
+      <term id="3149">Краны башенные грузоподъемностью 8 тонн и выше</term>
+      <term id="3151">Электродвигатели переменного тока с высотой оси вращения 63-450 мм</term>
+      <term id="3161">Трансформаторы силовые</term>
+      <term id="3162">Электровозы магистральные /в восьмиосном исчислении/ штук</term>
+      <term id="3163">Электровозы магистральные /в восьмиосном исчислении/,тыс.л.с.</term>
+      <term id="3165">Преобразователи силовые полупроводниковые мощностью 5 кВт и выше</term>
+      <term id="3166">Приборы силовые полупроводниковые тыс. штук</term>
+      <term id="3167">Приборы силовые полупроводниковые,млн.руб.</term>
+      <term id="3170">Электролампы осветительные</term>
+      <term id="3171">Электролампы люминисцентные</term>
+      <term id="3194">Аккумуляторы и аккумуляторные батареи свинцовые</term>
+      <term id="3210">Изделия кабельные</term>
+      <term id="3214">Кабели дальней и городской телефонной связи,волоконнооптические кабели и провода для воздушных линий электропередачи сечением 120 кв.мм и выше</term>
+      <term id="3221">Аппаратура низковольтная электрическая</term>
+      <term id="3225">Аппаратура высоковольная электрическая</term>
+      <term id="3231">Электромашины крупные</term>
+      <term id="3235">Электродвигатели переменного тока малой мощности для комплектования электробытовых приборов</term>
+      <term id="3237">Оборудование электротермическое промышленное</term>
+      <term id="3238">Оборудование электросварочное</term>
+      <term id="3242">Электропогрузчики</term>
+      <term id="3251">Оборудование химическое и запасные части к нему</term>
+      <term id="3255">Оборудование для переработки полимерных материалов</term>
+      <term id="3257">Оборудование нефтегазоперерабатывающее</term>
+      <term id="3258">Оборудование газоочистное</term>
+      <term id="3265">Оборудование бумагоделательное и запасные части к нему</term>
+      <term id="3266">Оборудование нефтепромысловое, буровое геологоразведочное и запасные части к нему</term>
+      <term id="3271">Арматура промышленная трубопроводная, задвижки и затворы</term>
+      <term id="3311">Станки металлорежущие штук</term>
+      <term id="3312">Станки металлорежущие, млн.руб.</term>
+      <term id="3321">Машины кузнечно-прессовые, штук</term>
+      <term id="3322">Машины кузнечно-прессовые, млн.руб.</term>
+      <term id="3331">Инструмент металлообрабатывающий</term>
+      <term id="3342">Линии автоматические и полуавтоматические станочные</term>
+      <term id="3343">Линии автоматические и полуавтоматические кузнечно-штамповочные</term>
+      <term id="3344">Автоматические линии и комплекты деревообрабатывающего оборудования для производства столярных строительных изделий и мебели</term>
+      <term id="3366">Дорожные и коммунальные машины</term>
+      <term id="3411">Компьютеры, периферийные устройства к ним, средства связи и подобная электронная прдукция</term>
+      <term id="3421">Приборы контроля и регулирования технологических процессов</term>
+      <term id="3431">Приборы электроизмерительные</term>
+      <term id="3445">Приборы для физических исследований</term>
+      <term id="3511">Автомобили грузовые</term>
+      <term id="3514">Автосамосвалы</term>
+      <term id="3521">Автомобили легковые</term>
+      <term id="3531">Автобусы</term>
+      <term id="3541">Двигатели к автомобилям</term>
+      <term id="3543">Дизельные двигатели</term>
+      <term id="3545">Запасные части к автомобилям /детали механической обработки/</term>
+      <term id="3551">Прицепы и полуприцепы автомобильные и тракторные</term>
+      <term id="3561">Подшипники качения /без велосипедных/</term>
+      <term id="3571">Краны на автомобильном ходу</term>
+      <term id="3610">Тракторы /без минитракторов/</term>
+      <term id="3611">Промышленные тракторы</term>
+      <term id="3613">Двигатели к тракторам и комбайнам</term>
+      <term id="3614">Тракторы трелевочные</term>
+      <term id="3615">Запасные части к тракторам /детали механической обработки/</term>
+      <term id="3616">Тракторы сельскохозяйственного назначения</term>
+      <term id="3617">Комбайны зерноуборочные</term>
+      <term id="3621">Машины сельскохозяйственные и запасные части к ним</term>
+      <term id="3632">Автопогрузчики</term>
+      <term id="3641">Лифты</term>
+      <term id="3642">Лифты пассажирские</term>
+      <term id="3653">Минитракторы</term>
+      <term id="3671">Машины и оборудование для животноводства и кормопроизводства</term>
+      <term id="3711">Экскаваторы одноковшовые с ковшом от 0,25 куб.м. и до 2,5 куб.м.</term>
+      <term id="3713">Экскаваторы с ковшом емкостью от 4 куб.м. и более /включая шагающие/ штук</term>
+      <term id="3714">Экскаваторы с ковшом емкостью от 4 куб.м. и более /включая шагающие/,куб.м.</term>
+      <term id="3726">Инструмент строительно-монтажный механизированный,включая бытовой,тыс.ш.</term>
+      <term id="3727">Инструмент строительно-монтажный механизированный,включая бытовой,млн.руб.</term>
+      <term id="3735">Краны стреловые самоходные автомобильного типа на спецшасси грузоподъемностью 25-63 тонн</term>
+      <term id="3736">Скреперы штук</term>
+      <term id="3737">Скреперы,тыс.куб..м.</term>
+      <term id="3754">Оборудование технологическое для перерабатывающих отраслей агропромышленного комплекса и запасные части к нему</term>
+      <term id="3756">Оборудование технологическое для предприятий строительной индустриии и строительных материалов</term>
+      <term id="3761">Оборудование технологическое и запасные части к нему для мукомольных комбикормовых предприятий и зернохранилищ</term>
+      <term id="3771">Оборудование технологическое и запасные части к нему для предприятий торговли, общественного питания и пищеблоков</term>
+      <term id="3775">Оборудование полиграфическое и запасные части к нему</term>
+      <term id="3781">Машины стиральные (бытовые)</term>
+      <term id="3783">Холодильное оборудование</term>
+      <term id="3900">Общеобразовательные организации в сельской местности, с материалом стен из дерева (кв. м)</term>
+      <term id="4111">Предприятия лесозаготовительные, вывозка древесины</term>
+      <term id="4121">Пиломатериалы</term>
+      <term id="4122">Фанера</term>
+      <term id="4131">Плиты древесностружечные</term>
+      <term id="4132">Плиты древесноволокнистые</term>
+      <term id="4139">Смола</term>
+      <term id="4141">Мебель</term>
+      <term id="4211">Целлюлоза /по варке/</term>
+      <term id="4221">Бумага</term>
+      <term id="4225">Картон</term>
+      <term id="4316">Песчано-гравийная смесь</term>
+      <term id="4317">Песок</term>
+      <term id="4318">Гравий</term>
+      <term id="4319">Щебень</term>
+      <term id="4320">Теплоизоляционные материалы</term>
+      <term id="4321">Цемент</term>
+      <term id="4322">Листы асбоцементные /шифер/</term>
+      <term id="4325">Черепица</term>
+      <term id="4327">Сухие смеси</term>
+      <term id="4328">Полимерные кровельные материалы /мастичные и рулонные/</term>
+      <term id="4330">Рулонные кровельные материалы</term>
+      <term id="4331">Радиаторы и конвекторы отопительные</term>
+      <term id="4335">Ванны</term>
+      <term id="4343">Асбестоцементные изделия</term>
+      <term id="4354">Плитки керамические</term>
+      <term id="4355">Плитки керамические облицовочные</term>
+      <term id="4357">Плитки керамические фасадные</term>
+      <term id="4358">Плитки керамические для полов</term>
+      <term id="4369">Конструкции легкие металлические</term>
+      <term id="4371">Линолеум</term>
+      <term id="4372">Линолеум на теплозвукоизолирующей подоснове</term>
+      <term id="4375">Известняковая и доломитовая мука</term>
+      <term id="4396">Минераловатные изделия</term>
+      <term id="4410">Стеновые материалы (без стеновых железобетонных панелей)</term>
+      <term id="4411">Кирпич строительный</term>
+      <term id="4412">Кирпич глиняный</term>
+      <term id="4413">Изделие (блоки) из ячеистого бетона</term>
+      <term id="4414">Кирпич силикатный</term>
+      <term id="4415">Блоки</term>
+      <term id="4416">Блоки мелкие (без блоков из ячеистого бетона)</term>
+      <term id="4417">Блоки из естественного камня</term>
+      <term id="4418">Блоки крупные</term>
+      <term id="4419">Кирпич керамический</term>
+      <term id="4421">Керамзитовые блоки</term>
+      <term id="4434">Нерудные материалы</term>
+      <term id="4455">Трубы керамические</term>
+      <term id="4461">Трубы чугунные канализационные и фасонные части к ним</term>
+      <term id="4491">Асбестовая руда</term>
+      <term id="4531">Слюда - обогащенный сырец</term>
+      <term id="4550">Изделия санитарные керамические и из полимербетона</term>
+      <term id="4555">Раковины и мойки (кроме керамических)</term>
+      <term id="4557">Краны-смесители</term>
+      <term id="4559">Предприятия домостроения на основе ячеистых бетонов</term>
+      <term id="4621">Конструкции и изделия строительные из алюминия и алюминиевых сплавов</term>
+      <term id="4640">Конструкции и изделия сборные железобетонные</term>
+      <term id="4643">Панели и другие конструкции для крупнопанельных домов</term>
+      <term id="4644">Панели и другие конструкции для крупнопанельных зданий социального и культурно-бытового назначения</term>
+      <term id="4645">Трубы железобетонные напорные</term>
+      <term id="4676">Цементно-стружечные плиты</term>
+      <term id="4681">Паркетная доска, щитовой паркет</term>
+      <term id="4689">Гипсостружечные плиты</term>
+      <term id="4690">Изделия столярные</term>
+      <term id="4691">Комплекты усадебных деревянных домов заводского изготовления</term>
+      <term id="4692">Конструкции деревянные клееные</term>
+      <term id="4710">Установка прядильных веретен</term>
+      <term id="4731">Установка прядильных мест</term>
+      <term id="4740">Установка ткацких станков</term>
+      <term id="4761">Нетканые материалы типа тканей</term>
+      <term id="4763">Полотно трикотажное</term>
+      <term id="4765">Чулочно-носочные изделия</term>
+      <term id="4770">Изделия трикотажные</term>
+      <term id="4781">Обувь</term>
+      <term id="4782">Обувь кожаная</term>
+      <term id="4791">Кожи мягкие</term>
+      <term id="4811">Изделия фарфоро-фаянсовые</term>
+      <term id="4821">Изделия швейные /в нормативной стоимости обработки/</term>
+      <term id="4831">Ткани готовые</term>
+      <term id="4951">Телевизоры</term>
+      <term id="4953">Холодильники и морозильники /бытовые/</term>
+      <term id="4955">Мотоциклы и мотороллеры</term>
+      <term id="4957">Велосипеды /без детских/</term>
+      <term id="4959">Машины швейные (бытовые)</term>
+      <term id="4961">Гальванические элементы и батареи для электробытовых изделий</term>
+      <term id="4963">Посуда стальная эмалированная</term>
+      <term id="4965">Товары бытовой химии /в мелкой расфасовке/</term>
+      <term id="4967">Обои</term>
+      <term id="4971">Сборные здания /модули/  (из металла), количество</term>
+      <term id="4972">Сборные здания /модули/  (из металла), площадь</term>
+      <term id="5008">Сыр плавленый</term>
+      <term id="5009">Масло животное</term>
+      <term id="5011">Сахар-песок</term>
+      <term id="5021">Изделия кондитерские</term>
+      <term id="5031">Масло растительное методом экстракции</term>
+      <term id="5041">Предприятия и цехи по производству консервов овощных и фруктовых</term>
+      <term id="5095">Продукция быстрозамороженная плодоовощная</term>
+      <term id="5111">Крахмал картофельный</term>
+      <term id="5121">Хлебобулочные изделия</term>
+      <term id="5124">Макаронные изделия</term>
+      <term id="5127">Хлебопекарные дрожжи</term>
+      <term id="5129">Маргариновая продукция</term>
+      <term id="5133">Картофелепродукты</term>
+      <term id="5158">Продукция быстрозамороженная из картофеля</term>
+      <term id="5159">Быстрозамороженные мясные блюда</term>
+      <term id="5160">Пищевые концентраты</term>
+      <term id="5190">Соль пищевая</term>
+      <term id="5310">Мясо</term>
+      <term id="5321">Колбасные изделия</term>
+      <term id="5331">Консервы мясные</term>
+      <term id="5350">Вода минеральная</term>
+      <term id="5351">Цельномолочная продукция</term>
+      <term id="5352">Безалкогольные напитки</term>
+      <term id="5353">Пиво</term>
+      <term id="5354">Молоко сухое обезжиренное, заменители цельного молока и сухая сыворотка</term>
+      <term id="5355">Винные изделия</term>
+      <term id="5356">Водка  и ликеро-водочные изделия</term>
+      <term id="5360">Спирт</term>
+      <term id="5361">Консервы молочные</term>
+      <term id="5381">Сыр твердых сортов /без плавленых/</term>
+      <term id="5382">Производство сыра /без плавленых/</term>
+      <term id="5490">Холодильники для мясных и молочных продуктов</term>
+      <term id="5493">Сырохранилища</term>
+      <term id="5511">Консервы рыбные</term>
+      <term id="5520">Мощности рыбоводных хозяйств по выращиванию рыбы товарнаой</term>
+      <term id="5521">Холодильники для рыбообрабатывающих производств</term>
+      <term id="5551">Предприятия по ремонту судов рыбной промышленности</term>
+      <term id="5555">Предприятия рыбоперерабатывающие</term>
+      <term id="5631">Средства защиты растений и животных микробиологические</term>
+      <term id="5641">Препараты ферментные</term>
+      <term id="5651">Аминокислоты</term>
+      <term id="5661">Премиксы</term>
+      <term id="5681">Белок кормовой микробиологический</term>
+      <term id="5712">Антибиотики</term>
+      <term id="5721">Провитамины, витамины и их производные</term>
+      <term id="5731">Медицинская техника и запасные части к ней</term>
+      <term id="5741">Синтетические лекарственные препараты</term>
+      <term id="5743">Готовые лекарственные препараты</term>
+      <term id="5750">Шприцы однократного применения</term>
+      <term id="5751">Зубная паста</term>
+      <term id="5752">Косметические  и парфюмерные средства</term>
+      <term id="5760">Биопрепараты</term>
+      <term id="5811">Элеваторы</term>
+      <term id="5815">Зерносклады механизированные</term>
+      <term id="5821">Зерносушилки стационарные</term>
+      <term id="5831">Предприятия мельничные сортового помола</term>
+      <term id="5841">Предприятия комбикормовые</term>
+      <term id="5851">Предприятия крупяные</term>
+      <term id="5911">Предприятия полиграфические</term>
+      <term id="5931">Типографии районные единиц</term>
+      <term id="5932">Типографии районные</term>
+      <term id="6211">Новые железнодорожные линии</term>
+      <term id="6221">Вторые пути</term>
+      <term id="6231">Электрификация железных дорог</term>
+      <term id="6250">Причалы морских портов (включая перегрузочные комплексы морских портов)</term>
+      <term id="6251">Причалы морских портов</term>
+      <term id="6252">Перегрузочные комплексы морских портов погон. м. причалов</term>
+      <term id="6253">Перегрузочные комплексы морских портов млн. т. груза в год</term>
+      <term id="6254">Механизированные причалы речных портов пог. м.</term>
+      <term id="6255">Механизированные причалы речных портов млн. т. груза в год</term>
+      <term id="6271">Взлетно-посадочные полосы с твердым покрытием количество полос</term>
+      <term id="6272">Взлетно-посадочные полосы с твердым покрытием тыс. кв. м.</term>
+      <term id="6310">Нефтепроводы магистральные и нефтепродуктопроводы  магистральные региональные</term>
+      <term id="6311">Нефтепроводы магистральные</term>
+      <term id="6321">Нефтепродуктопроводы магистральные региональные</term>
+      <term id="6331">Станции насосные на магистральных нефтепроводах и  нефтепродуктопроводах</term>
+      <term id="6432">Аэровокзалы, пропускная способность (пассажиров в час)</term>
+      <term id="6510">Автомобильные дороги с твердым покрытием</term>
+      <term id="6511">Автомобильные дороги с твердым покрытием необщего пользования</term>
+      <term id="6512">Автомобильные дороги с твердым покрытием общего пользования</term>
+      <term id="6513">Автомобильные дороги общего пользования цементобетонные</term>
+      <term id="6514">Автомобильные дороги общего пользования асфальтобетонные</term>
+      <term id="6515">Автомобильные дороги общего пользования щебеночные и гравийные</term>
+      <term id="6516">Автомобильные дороги общего пользования из щебеночных, гравийных и других материалов, обработанных вяжущими материалами</term>
+      <term id="6517">Автомобильные дороги общего пользования регионального или межмуниципального значения</term>
+      <term id="6520">Автомобильные дороги общего пользования федерального значения</term>
+      <term id="6540">Автомобильные дороги общего пользования местного значения</term>
+      <term id="6581">Станции технического обслуживания легковых автомобилей</term>
+      <term id="6582">Комплексы дорожного сервиса</term>
+      <term id="6583">Мосты, единиц</term>
+      <term id="6584">Мосты,  (пог.м.)</term>
+      <term id="6611">Нефтеемкости</term>
+      <term id="6710">Телевизионные станции мощностью 1 квт и выше</term>
+      <term id="6711">Спутниковые наземные станции</term>
+      <term id="6715">Междугородные телефонные станции</term>
+      <term id="6721">Городские АТС</term>
+      <term id="6722">АТС в сельской местности</term>
+      <term id="6725">Подвижная радиотелефонная связь</term>
+      <term id="6730">Узловые предприятия почтовой связи</term>
+      <term id="6731">Радиовещательные станции</term>
+      <term id="6740">Космические аппараты</term>
+      <term id="6741">Радиорелейные линии связи</term>
+      <term id="6751">Междугородные кабельные линии связи</term>
+      <term id="6752">Антенно-матчевые сооружения для сотовой связи</term>
+      <term id="6753">Башня сотовой связи</term>
+      <term id="6754">Волоконно-оптические линии связи (передачи)</term>
+      <term id="6786">Маломощные ретрансляторы УКВ</term>
+      <term id="7110">Помещения для крупного рогатого скота</term>
+      <term id="7111">Помещения для крупного рогатого скота, с материалом стен из дерева (тыс мест)</term>
+      <term id="7112">помещения для крупного рогатого скота, с материалом стен из дерева (кв. м)</term>
+      <term id="7120">Помещения для свиней</term>
+      <term id="7130">Помещения для овец</term>
+      <term id="7140">Помещение для птицы</term>
+      <term id="7161">Птицефабрики яичного направления тыс. кур-несушек</term>
+      <term id="7162">Птицефабрики мясного направления млн.голов мясной птицы в год</term>
+      <term id="7163">Птицефабрики яичного направления</term>
+      <term id="7164">Птицефабрики мясного направления</term>
+      <term id="7180">Кормоцехи для животноводства</term>
+      <term id="7181">Цехи комбикормовые</term>
+      <term id="7211">Зерносеменохранилища</term>
+      <term id="7212">Семенохранилища</term>
+      <term id="7220">Хранилища для картофеля, овощей и фруктов для организаций   сельского хозяйства</term>
+      <term id="7222">Корнеплодохранилища (для кормов)</term>
+      <term id="7223">Хранилища для травяной муки</term>
+      <term id="7224">Хранилища для брикетированных и гранулированных кормосмесей</term>
+      <term id="7225">Сенохранилища</term>
+      <term id="7226">Картофелехранилища для организаций сельского хозяйства</term>
+      <term id="7227">Овощехранилища для организаций сельского хозяйства</term>
+      <term id="7228">Смешанные картофеле- и овощехранилища для организаций сельского хозяйства</term>
+      <term id="7229">Плодохранилища для организаций сельского хозяйства</term>
+      <term id="7250">Силосные и сенажные сооружения</term>
+      <term id="7265">Комбинаты тепличные</term>
+      <term id="7266">Теплицы под стеклом</term>
+      <term id="7267">Теплицы пленочные</term>
+      <term id="7270">Склады механизированные для хранения минеральных удобрений, ядохимикатов, микробиологических средств и известковых материалов</term>
+      <term id="7279">Прирельсовые (пристанционные) склады</term>
+      <term id="7304">Склады для хранения пылевидных, известковых удобрений и фосфоритной муки</term>
+      <term id="7307">Глубинные склады</term>
+      <term id="7312">Ремонтные мастерские</term>
+      <term id="7321">Станции технического обслуживания грузовых автомобилей</term>
+      <term id="7451">Мельницы-крупорушки</term>
+      <term id="7510">Орошение земель</term>
+      <term id="7513">Орошение сенокосов и пастбищ</term>
+      <term id="7525">Комплексная реконструкция орошаемых земель</term>
+      <term id="7526">Замена вышедших из строя трубопроводов на оросительной сети</term>
+      <term id="7541">Обводнение пастбищ</term>
+      <term id="7545">Реконструкция водохозяйственных сооружений на ранее обводненных пастбищах</term>
+      <term id="7550">Осушение земель</term>
+      <term id="7551">Реконструкция и восстановление осушительных систем</term>
+      <term id="7553">Осушение болот для заготовки торфа</term>
+      <term id="7555">Осушено закрытым дренажем</term>
+      <term id="7557">Строительство и переустройство коллекторно-дренажной сети на землях, не требующих комплексной реконструкции оросительных систем</term>
+      <term id="7560">Культуртехнические работы на сельскохозяйственных угодьях, не требующих осушения</term>
+      <term id="7620">Международные телефонные станции</term>
+      <term id="7721">Водопроводные магистральные сельскохозяйственного назначения</term>
+      <term id="7723">Внутрихозяйственный водопровод</term>
+      <term id="7741">Буровые колодцы</term>
+      <term id="7751">Колодцы шахтные</term>
+      <term id="7777">Газопроводы-отводы высокого давления для газификации села</term>
+      <term id="7781">Автомобильные дороги с твердым покрытием необщего пользования в сельском хозяйстве</term>
+      <term id="7783">Газовые сети к производственным объектам сельскохозяйственного назначения</term>
+      <term id="7830">Автомобильные дороги с твердым покрытием необщего пользования для фермерских хозяйств</term>
+      <term id="7832">Линии электропередачи напряжением 0,4 кв для фермерских хозяйств</term>
+      <term id="7833">Орошение земель для фермерских хозяйств</term>
+      <term id="7834">Осушение земель для фермерских хозяйств</term>
+      <term id="7835">Культуртехнические работы на землях, не требующих осушения для фермерских хозяйств</term>
+      <term id="7881">Газовые сети для фермерских хозяйств</term>
+      <term id="8120">Хранилища для картофеля, овощей и фруктов</term>
+      <term id="8121">Хранилища для картофеля, овощей и фруктов для организаций торговли</term>
+      <term id="8122">Картофелехранилища для организаций торговли</term>
+      <term id="8123">Овощехранилища для организаций торговли</term>
+      <term id="8124">Смешанные картофеле- и овощехранилища для организаций торговли</term>
+      <term id="8125">Плодохранилища для организаций торговли</term>
+      <term id="8132">Торговые предприятия торговая площадь</term>
+      <term id="8142">Предприятия общественного питания</term>
+      <term id="8160">Холодильники, всего</term>
+      <term id="8161">Холодильники для организаций торговли</term>
+      <term id="8180">Рынки и павильоны</term>
+      <term id="8190">Общетоварные склады</term>
+      <term id="8712">Гофрокартон</term>
+      <term id="8735">Тара деревянная</term>
+      <term id="8751">Бочки стальные тонкостенные для нефтебитума в 200- литровом исчислении</term>
+      <term id="8771">Фляги стальные</term>
+      <term id="8781">Ящики и лотки из полиэтилена</term>
+      <term id="9001">Известь</term>
+      <term id="9002">Гипс</term>
+      <term id="9003">Тугоплавкие глины</term>
+      <term id="9005">Электрические утюги</term>
+      <term id="9006">Мотоблоки</term>
+      <term id="9010">Аппаратура видеозаписи и воспроизведения бытовая</term>
+      <term id="9011">Плиты газовые бытовые</term>
+      <term id="20300">Магний</term>
+      <term id="20350">Титан</term>
+      <term id="20700">Никель</term>
+      <term id="65880">Линии электропередачи напряжением 6-20 кВ</term>
+      <term id="927001">  из них:</term>
+      <term id="927002">  в том числе:</term>
+      <term id="927003">Из осушенных земель:</term>
+      <term id="927004">  из них:</term>
+      <term id="927005">  из них:</term>
+      <term id="927006">  в том числе:</term>
+      <term id="927007">  в том числе:</term>
+      <term id="927008">Депарафинизация дизельных и керосиновых фракций</term>
+      <term id="927010">  в том числе</term>
+      <term id="927011">  в том числе</term>
+      <term id="927012">  в том числе:</term>
+      <term id="927013">  в том числе:</term>
+      <term id="927014">  в том числе:</term>
+      <term id="927015">  в том числе:</term>
+      <term id="927016">Чугун /в пересчете на передельный/</term>
+      <term id="927017">Сталь конвертерная</term>
+      <term id="927018">Сталь электропечная</term>
+      <term id="927019">Машины непрерывного литья заготовок</term>
+      <term id="927020">Прокат черных металлов /готовый/</term>
+      <term id="927021">Холодный прокат листа</term>
+      <term id="927022">Трубы стальные</term>
+      <term id="927023">  в том числе:</term>
+      <term id="927024">  в том числе:</term>
+      <term id="927025">  в том числе:</term>
+      <term id="927026">  в том числе:</term>
+      <term id="927027">  в том числе:</term>
+      <term id="927028">  из них:</term>
+      <term id="927029">  из них:</term>
+      <term id="927030">  в том числе:</term>
+      <term id="927031">  из них:</term>
+      <term id="927032">  из линий электропередачи напряжением 35кВ и выше:</term>
+      <term id="927033">    из них:</term>
+      <term id="927034">  из них:</term>
+      <term id="927035">Газификация (газовые сети) за счет средств:</term>
+      <term id="927036">  из них:</term>
+      <term id="927037"> в том числе в сельской местности:</term>
+      <term id="927038">Сбор и обработка сточных вод:</term>
+      <term id="927039">  в том числе:</term>
+      <term id="927040">  в том числе:</term>
+      <term id="927041"> Из автомобильных дорог общего пользования:</term>
+      <term id="927042">  в том числе:</term>
+      <term id="927043">  в том числе:</term>
+      <term id="927044">  в том числе:</term>
+      <term id="927045">  из них:</term>
+      <term id="927046">  в том числе:</term>
+      <term id="927047">  в том числе:</term>
+      <term id="927049">Водопровод и водопроводные сети:</term>
+      <term id="927050">Теплоснабжение и тепловые сети:</term>
+      <term id="927051"> в том числе в сельской местности:</term>
+      <term id="927052"> в том числе в сельской местности:</term>
+      <term id="927053">  из них:</term>
+      <term id="927054">   в том числе:</term>
+      <term id="927055">   в том числе:</term>
+      <term id="927056">   в том числе:</term>
+      <term id="927057">   в том числе:</term>
+      <term id="990001">[1]Мощности по добыче и переработке:</term>
+      <term id="990002">[1]Скважины:</term>
+      <term id="990003">[1]Мощности по производству:</term>
+      <term id="990004">[1]Построено:</term>
+      <term id="990005">[1]Электрифицировано:</term>
+      <term id="990006">[1]Проведены работы:</term>
+      <term id="0">Нет кода</term>
+    </dic>
+    <dic name="Приложение по мощностям для ЭВФ раздел 1 стр 01  с кодом 501" id="pril_mosh_2" parent="s_mosh">
+      <term id="501" />
+      <term id="0" />
+    </dic>
+    <dic name="Справочник видов характера строительства" id="s_xarst">
+      <term id="0">Всего</term>
+      <term id="1"> Строительство</term>
+      <term id="3"> Реконструкция действующих предприятий</term>
+    </dic>
+    <dic name="Приложение по кодам характера строительства для ЭВФ раздел 1 стр 1, раздел 2" id="pril_xarst_1" parent="s_xarst">
+      <term id="1" />
+      <term id="3" />
+    </dic>
+    <dic name="Приложение по мощностям для ЭВФ раздел 1 стр 02)" id="pril_mosh_1" parent="s_mosh">
+      <term id="507" />
+      <term id="508" />
+      <term id="509" />
+      <term id="510" />
+      <term id="511" />
+      <term id="512" />
+      <term id="513" />
+      <term id="515" />
+      <term id="518" />
+      <term id="527" />
+      <term id="528" />
+      <term id="529" />
+      <term id="530" />
+    </dic>
+    <dic name="Виртуальный справочник мощностей для ввода раздела 2 (наименования с ед.измерения)" id="s_mosh2">
+      <term id="120">Автовокзал (пассажиров в час) - чел</term>
+      <term id="121">Автомойка (моечных постов) - мест</term>
+      <term id="122">Аквапарки закрытого типа (человек в день) - чел</term>
+      <term id="123">Казино - мест</term>
+      <term id="124">Торгово-выставочные комплексы - м2общ пл</term>
+      <term id="125">Салоны красоты (парикмахерские) - посад. мест</term>
+      <term id="126">Музыкальные школы - мест</term>
+      <term id="127">Ветеринарные пункты - посещ/смен</term>
+      <term id="128">Медицинские центры - м2</term>
+      <term id="129">Вертодром (тыс.кв.м.) - тыс м2</term>
+      <term id="130">Надземный (подземный) пешеходный переход - пог м</term>
+      <term id="131">Горнолыжные подъемники - м</term>
+      <term id="132">Инкубатор по выведению цыплят - тыс шт</term>
+      <term id="133">Помещения для кроликов - тыс мест</term>
+      <term id="134">Теплицы с покрытием из полимерных материалов (поликарбонат) - тыс м2</term>
+      <term id="135">Канализационные сети к производственным объектам - км</term>
+      <term id="136">Канализация в сельской местности - тыс м3/сут</term>
+      <term id="137">Канализационные сети в сельской местности - км</term>
+      <term id="138">Теплоснабжение в сельской местности - Гигакал/час</term>
+      <term id="139">Тепловые сети в сельской местности - км</term>
+      <term id="140">Электростанции возобновляемых источников энергии - тыс.кВТ</term>
+      <term id="141">Линии электропередачи напряжением до 35 кВ - км</term>
+      <term id="142">Линии электропередачи напряжением 0,4 кВ - км</term>
+      <term id="143">Трансформаторные понизительные подстанции напряжением до 35 кВ - тыс кВ.А</term>
+      <term id="144">Антенно-мачтовое сооружение цифрового наземного телерадиовещания - шт</term>
+      <term id="145">Гидроксид калия (калий едкий, кали едкое) - тыс т</term>
+      <term id="146">Вертодром (единиц) - единиц</term>
+      <term id="147">Корма для домашних животных - т/смену</term>
+      <term id="148">Цех убоя скота - т/смену</term>
+      <term id="150">Предприятие по производству предметов гигиены - млн шт</term>
+      <term id="151">Автомойка (единиц) - единиц</term>
+      <term id="152">Пункты пропуска через государственную границу - единиц</term>
+      <term id="166">Рыборазводное предприятие - млн шт</term>
+      <term id="531">Водопроводы - тыс м3 воды в сутки</term>
+      <term id="532">Водопроводные сети - км</term>
+      <term id="535">Водопроводы  в сельской местности - тыс м3 воды в сутки</term>
+      <term id="536">Водопроводные сети в сельской местности - км</term>
+      <term id="538">Канализация - тыс м3 воды в сутки</term>
+      <term id="539">Канализационные сети - км</term>
+      <term id="545">Газовые сети - км</term>
+      <term id="546">Газовые сети, построенные за счет средств федерального бюджета - км</term>
+      <term id="547">Газовые сети, построенные за счет средств бюджетов субъектов Российской Федерации и местных бюджетов - км</term>
+      <term id="548">Газовые сети, построенные за счет средств населения - км</term>
+      <term id="550">Тепловые сети - км</term>
+      <term id="551">Метрополитены: единиц - единиц</term>
+      <term id="552">Метрополитены: линии в двухпутном исчислении - км</term>
+      <term id="553">Железнодорожные вокзалы, расчетной единовременной вместимости - чел</term>
+      <term id="554">Автоцентр - м2</term>
+      <term id="555">Гостиницы - мест</term>
+      <term id="556">Газовые сети в сельской местности - км</term>
+      <term id="557">Трамвайные пути (одиночные) - км</term>
+      <term id="558">Троллейбусные линии (одиночные) - км</term>
+      <term id="570">Больничные организации - коек</term>
+      <term id="572">Амбулаторно-поликлинические организации - посещений в смену</term>
+      <term id="574">Перинатальные центры - коек</term>
+      <term id="575">Фельдшерско-акушерские пункты в населенных пунктах с численностью от 100 человек до 2 тыс. человек - посещений в смену</term>
+      <term id="576">Больничные организации в сельской местности - коек</term>
+      <term id="577">Детские больницы - коек</term>
+      <term id="578">Амбулаторно-поликлинические организации в сельской местности - посещений в смену</term>
+      <term id="579">Врачебные амбулатории в населенных пунктах с численностью от 100 человек до 2 тыс. человек - посещений в смену</term>
+      <term id="580">Родильные дома - коек</term>
+      <term id="584">Детские поликлиники - посещений в смену</term>
+      <term id="586">Женские консультации - посещений в смену</term>
+      <term id="587">Дома ребенка - мест</term>
+      <term id="595">Санатории - коек</term>
+      <term id="610">Дома отдыха - мест</term>
+      <term id="611">Дома отдыха, с материалом стен из дерева (мест) - мест</term>
+      <term id="612">Дома отдыха, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="620">Стадионы - мест</term>
+      <term id="629">Плавательные бассейны (с длиной дорожек 25 и 50 м),единиц - единиц</term>
+      <term id="630">Площадь зеркала воды плавательных бассейнов              (с длиной дорожек 25 и 50 м),кв.м. - м2</term>
+      <term id="640">Плоскостные спортивные сооружения (футбольные поля, игровые площадки и др.) - м2</term>
+      <term id="643">Спортивные сооружения с искусственным льдом, единиц - единиц</term>
+      <term id="644">Площадь спортивных сооружений с искусственным льдом - м2</term>
+      <term id="645">Туристские базы - мест</term>
+      <term id="647">Мотели - мест</term>
+      <term id="648">Кемпинги - мест</term>
+      <term id="649">Спортивные залы - м2</term>
+      <term id="650">Физкультурно-оздоровительные комплексы - единиц</term>
+      <term id="651">Горнолыжные трассы - м</term>
+      <term id="652">Санно-бобслейная трасса - м</term>
+      <term id="660">Дома интернаты для престарелых,инвалидов (взрослых и детей) - мест</term>
+      <term id="661">Дома интернаты для ветеранов труда - мест</term>
+      <term id="680">Образовательные организации высшего  образования - м2 общей площали учебно-лабораторных зданий</term>
+      <term id="681">Профессиональные образовательные организации - м2 общей площали учебно-лабораторных зданий</term>
+      <term id="900">Общеобразовательные организации  в сельской местности - ученических мест</term>
+      <term id="901">Общеобразовательные организации - ученических мест</term>
+      <term id="903">Общеобразовательные организации, построенные за счет софинансирования из федерального бюджета - ученических мест</term>
+      <term id="910">Дошкольные образовательные организации - мест</term>
+      <term id="912">Дошкольные образовательные организации  в сельской местности - мест</term>
+      <term id="913">Дошкольные образовательные организации для детей в возрасте до трех лет - мест</term>
+      <term id="914">Дошкольные образовательные организации для детей в возрасте до трех лет в сельской местности - мест</term>
+      <term id="915">Детские дома - мест</term>
+      <term id="916">Детские оздоровительные лагеря - мест</term>
+      <term id="929">Учреждения культуры клубного типа - мест</term>
+      <term id="930">Учреждения культуры клубного типа в сельской местности - мест</term>
+      <term id="940">Библиотеки - тыс томов книжного фонда</term>
+      <term id="943">Театры - мест</term>
+      <term id="944">Концертные и киноконцертные залы - мест</term>
+      <term id="945">Культовые сооружения - единиц</term>
+      <term id="946">Торгово-развлекательные центры - м2 общей площади</term>
+      <term id="947">Торгово-офисные центры - м2 общей площади</term>
+      <term id="961">Комбинаты бытового обслуживания населения и дома быта - рабочих мест</term>
+      <term id="966">Бани - мест</term>
+      <term id="1111">Электростанции тепловые - тыс кВТ</term>
+      <term id="1112">Электростанции атомные - тыс кВТ</term>
+      <term id="1115">Гидроэлектростанции - тыс кВТ</term>
+      <term id="1117">Дизельные электростанции в районах Крайнего Севера - тыс кВТ</term>
+      <term id="1120">Линии электропередачи напряжением   35 кВ   и   выше - км</term>
+      <term id="1121">Линии электропередачи напряжением 35 кВ и выше для  электрификации сельского хозяйства - км</term>
+      <term id="1122">Линии электропередачи напряжением 35-110 кВ - км</term>
+      <term id="1123">Линии электропередачи напряжением 220 кВ - км</term>
+      <term id="1124">Линии электропередачи напряжением 500 кВ и выше - км</term>
+      <term id="1125">Стекло оконное, 2-х мм исчислении - млн м2</term>
+      <term id="1126">Конструкции  сборные деревянные строительные (здания сборные деревянные) - тыс м2 общей площади</term>
+      <term id="1127">Изделия деревянные строительные - тыс м3</term>
+      <term id="1128">Ящики и коробки картонные - млн м2</term>
+      <term id="1129">Присадки к смазочным материалам - тыс т</term>
+      <term id="1130">Материалы смазочные - тыс т</term>
+      <term id="1131">Линии электропередачи для электрификации сельского хозяйства напряжением 6-20 кВ - км</term>
+      <term id="1132">Линии электропередачи для электрификации сельского хозяйства напряжением 0,4 кВ - км</term>
+      <term id="1133">Волокна и нити синтетические и искусственные - тыс т</term>
+      <term id="1134">Пластмассовые изделия для упаковки - тыс шт</term>
+      <term id="1135">Здания  сборные из бетона - тыс м2 общей площади</term>
+      <term id="1136">Магнитофоны и другие звукозаписывающие устройства - тыс шт</term>
+      <term id="1137">Предприятия по ремонту судов - млн руб</term>
+      <term id="1138">Инструменты, оборудование, приспособления, применяемые в медицинских целях - млн.руб</term>
+      <term id="1140">Трансформаторные понизительные подстанции напряжением 35 кВ и выше - тыс кВ.А</term>
+      <term id="1141">Трансформаторные понизительные подстанции для электрификации сельского хозяйства - тыс кВ.А</term>
+      <term id="1151">Котлы паровые на теплоэлектроцентралях - т/ч</term>
+      <term id="1161">Сети тепловые магистральные - км</term>
+      <term id="1164">Котлы водогрейные на теплоэлектроцентралях - Гигакал/час</term>
+      <term id="1211">Скважины нефтяные разведочного бурения - единиц</term>
+      <term id="1212">Скважины нефтяные эксплуатационного бурения - единиц</term>
+      <term id="1260">Музыкальные школы, с материалом стен из дерева (мест) - мест</term>
+      <term id="1261">Музыкальные школы, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1270">Ветеринарные пункты, с материалом стен из дерева (посещ/смен) - посещ/смен</term>
+      <term id="1271">Ветеринарные пункты, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1311">Первичная переработка нефти - тыс т</term>
+      <term id="1321">Каталитическое крекирование сырья - тыс т</term>
+      <term id="1330">Каталитическое риформирование сырья - тыс т</term>
+      <term id="1343">Присадки к смазочным маслам - тыс т</term>
+      <term id="1345">Масло смазочное - тыс т</term>
+      <term id="1347">Гидроочистка дизельного топлива - тыс т</term>
+      <term id="1351">Депарафинизация дизельных и керосиновых фракций тыс.т сырья - тыс т</term>
+      <term id="1352">Депарафинизация дизельных и керосиновых фракций парафина - тыс т</term>
+      <term id="1357">Нефтяной кокс - тыс т</term>
+      <term id="1361">Гидрокрекинг сырья - тыс т</term>
+      <term id="1375">Прокалка нефтяного кокса - тыс т</term>
+      <term id="1411">Скважины газовые разведочного бурения - единиц</term>
+      <term id="1412">Скважины газовые эксплуатационного бурения - единиц</term>
+      <term id="1421">Газопроводы магистральные и отводы от них - км</term>
+      <term id="1431">Мощность по переработке газа - млн м3 перераб газа</term>
+      <term id="1441">Компрессорные станции на магистральных газопроводах, газовых промыслах и подземных хранилищах газа - шт</term>
+      <term id="1442">Компрессорные станции на магистральных газопроводах, газовых промыслах и подземных хранилищах газа - тыс.кВТ</term>
+      <term id="1451">Хранилища газа подземные - млрд м3</term>
+      <term id="1471">Автомобильные газозаправочные станции сжиженного нефтяного газа - единиц</term>
+      <term id="1472">Автозаправочные станции - единиц</term>
+      <term id="1473">Капитальные гаражи - единиц</term>
+      <term id="1474"> количество машиномест - единиц</term>
+      <term id="1511">Шахты - тыс т</term>
+      <term id="1512">Разрезы - тыс т</term>
+      <term id="1531">Фабрики углеобогатительные - тыс т перераб угля</term>
+      <term id="1549">Теплоснабжение - Гигакал/час</term>
+      <term id="1560">Торф - тыс т</term>
+      <term id="1576">Больничные организации в сельской местности, с материалом стен из дерева (коек) - коек</term>
+      <term id="1577">Больничные организации в сельской местности, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1578">Амбулаторно-поликлинические организации в сельской местности, с материалом стен из дерева (посещ/смен) - посещений в смену</term>
+      <term id="1579">Амбулаторно-поликлинические организации в сельской местности, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1595">Санатории, с материалом стен из дерева (коек) - коек</term>
+      <term id="1596">Санатории, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1611">Руда железная - тыс т</term>
+      <term id="1615">Концентрат железной руды - тыс т</term>
+      <term id="1645">Туристские базы, с материалом стен из дерева (мест) - мест</term>
+      <term id="1646">Туристские базы, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1647">Мотели, с материалом стен из дерева (мест) - мест</term>
+      <term id="1648">Кемпинги, с материалом стен из дерева (мест) - мест</term>
+      <term id="1649">Кемпинги, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1650">Чугун /в пересчете на предельный/, количество доменных печей - шт</term>
+      <term id="1651">Чугун /в пересчете на предельный/, мощность доменных печей - тыс т</term>
+      <term id="1661">Сталь конверторная (количество конвертеров) - шт</term>
+      <term id="1662">Сталь конвенторная (мощность конвертеров) - тыс т</term>
+      <term id="1665">Сталь электропечная (количество электрических печей) - шт</term>
+      <term id="1666">Сталь электропечная (мощность электрических печей) - тыс т</term>
+      <term id="1670"></term>
+      <term id="1671">Машины непрерывного литья заготовок (количество машин) - шт</term>
+      <term id="1672">Машины непрерывного литья заготовок (мощность машин) - тыс т</term>
+      <term id="1690"></term>
+      <term id="1691">Количество прокатных станов,шт - шт</term>
+      <term id="1692">Мощность прокатных станов - тыс т</term>
+      <term id="1720"></term>
+      <term id="1721">Количество станов холодного проката - шт</term>
+      <term id="1722">Мощность станов холодного проката - тыс т</term>
+      <term id="1730"></term>
+      <term id="1731">Количество трубных станов - шт</term>
+      <term id="1732">Мощность трубных станов - тыс т</term>
+      <term id="1733">Трубы чугунные модифицированные - тыс т</term>
+      <term id="1741">Количество коксовых батарей (кокс 6% влажности) - шт</term>
+      <term id="1742">Мощность коксовых батарей (кокс 6% влажности) - тыс т</term>
+      <term id="1772">Переработка металлолома - тыс т</term>
+      <term id="1821">Руда марганцевая - тыс т</term>
+      <term id="1901">Общеобразовательные организации, с материалом стен из дерева (учен мест) - ученических мест</term>
+      <term id="1902">Общеобразовательные организации, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1910">Дошкольные образовательные организации, с материалом стен из дерева (мест) - мест</term>
+      <term id="1911">Руда медная - тыс т</term>
+      <term id="1912">Фабрики по обогащению медной руды - тыс т</term>
+      <term id="1913">Дошкольные образовательные организации  в сельской местности, с материалом стен из дерева (мест) - мест</term>
+      <term id="1914">Дошкольные образовательные организации в сельской местности, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="1915">Медь черновая - тыс т</term>
+      <term id="1921">Глинозем - тыс т</term>
+      <term id="1922">Алюминий первичный, включая силумин - тыс т</term>
+      <term id="1930">Цинк - тыс т</term>
+      <term id="1931">Руда свинцово-цинковая - тыс т</term>
+      <term id="1932">Фабрики по обогащению свинцово-цинковой руды - тыс т</term>
+      <term id="1938">Руда никелевая - тыс т</term>
+      <term id="1951">Прокат цветных металлов - тыс т</term>
+      <term id="1961">Алюминий вторичный - тыс т</term>
+      <term id="1965">Руда вольфрамо-молибденовая - тыс т</term>
+      <term id="1966">Фабрики по обогащению вольфрамо-молибденовой руды - тыс т</term>
+      <term id="1985">Руда золотосодержащая - тыс т</term>
+      <term id="2111">Аммиак синтетический - тыс т</term>
+      <term id="2119">Комплексные удобрения - тыс т</term>
+      <term id="2131">Удобрения азотные - тыс т</term>
+      <term id="2132">Удобрения фосфатные - тыс т</term>
+      <term id="2133">Удобрения калийные - тыс т</term>
+      <term id="2134">Фосфоритная мука - тыс т</term>
+      <term id="2136">Известняк - млн.т</term>
+      <term id="2141">Сера природная - тыс т</term>
+      <term id="2142">Кислота серная в моногидрате - тыс т</term>
+      <term id="2144">Сода каустическая 100-процентная - тыс т</term>
+      <term id="2146">Сода кальцинированная 100-процентная - тыс т</term>
+      <term id="2151">Средства защиты растений химические /в 100% исчислении по действующему веществу/ - тыс т</term>
+      <term id="2160">Волокна и нити химические - тыс т</term>
+      <term id="2170">Смолы синтетические и пластические массы - тыс т</term>
+      <term id="2251">Лаки и краски - тыс т</term>
+      <term id="2254">Красители синтетические - тыс т</term>
+      <term id="2268">Йод и йодопродукты - т</term>
+      <term id="2290">Катализаторы - тыс т</term>
+      <term id="2291">Полиизобутилен - тыс т</term>
+      <term id="2302">Бутадиен - тыс т</term>
+      <term id="2307">Шины радиальные с металлокордом, сверхкрупногабаритные - тыс шт</term>
+      <term id="2308">Шины легковые - тыс шт</term>
+      <term id="2311">Каучуки синтетические - тыс т</term>
+      <term id="2312">Шины автомобильные, для сельскохозяйственных машин, мотоциклов и мотороллеров - тыс шт</term>
+      <term id="2313">Лента конвейерная резинотканевая /транспортерная лента/ - тыс м2</term>
+      <term id="2314">Ремни приводные прорезиненные клиновые - тыс усл единиц</term>
+      <term id="2316">Резинотехнические изделия формовые и неформовые - т</term>
+      <term id="2345">Пленка поливинилхлоридная - тыс т</term>
+      <term id="2348">Пленка полимерная - тыс т</term>
+      <term id="2354">Колодки и накладки тормозные асбестовые - млн шт</term>
+      <term id="2361">Средства синтетические моющие - тыс т</term>
+      <term id="2647">Мотели, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="2650">Физкультурно-оздоровительные комплексы, с материалом стен из дерева (ед.) - единиц</term>
+      <term id="2651">Физкультурно-оздоровительные комплексы, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="2900">Общеобразовательные организации в сельской местности, с материалом стен из дерева (учен мест) - ученических мест</term>
+      <term id="2910">Дошкольные образовательные организации, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="2930">Учреждения культуры клубного типа в сельской местности, с материалом стен из дерева (мест) - мест</term>
+      <term id="2931">Учреждения культуры клубного типа в сельской местности, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="3011">Турбины паровые - тыс кВТ</term>
+      <term id="3012">Турбины газовые - тыс кВТ</term>
+      <term id="3014">Реакторы энергетические - тыс кВТ</term>
+      <term id="3032">Дизели и дизель-генераторы - тыс лс</term>
+      <term id="3035">Дизель-генераторы высокоэффективные, дизели тепловозные и для судостроения - тыс лс</term>
+      <term id="3036">Подъемно-транспортное оборудование - млн руб</term>
+      <term id="3040">Оборудование металлургическое - млн руб</term>
+      <term id="3042">Оборудование прокатное /включая машины и оборудование непрерывного литья заготовок/ - млн руб</term>
+      <term id="3050">Машины путевые - шт</term>
+      <term id="3051">Вагоны грузовые магистралььные - шт</term>
+      <term id="3052">Вагоны пассажирские магистральные - шт</term>
+      <term id="3053">Вагоны для метрополитена - шт</term>
+      <term id="3054">Вагоны для электропоездов - шт</term>
+      <term id="3061">Тепловозы магистральные секций - секций</term>
+      <term id="3062">Тепловозы магистральные - тыс лс</term>
+      <term id="3149">Краны башенные грузоподъемностью 8 тонн и выше - шт</term>
+      <term id="3151">Электродвигатели переменного тока с высотой оси вращения 63-450 мм - тыс шт</term>
+      <term id="3161">Трансформаторы силовые - млн кВ.А</term>
+      <term id="3162">Электровозы магистральные /в восьмиосном исчислении/ штук - шт</term>
+      <term id="3163">Электровозы магистральные /в восьмиосном исчислении/,тыс.л.с. - тыс лс</term>
+      <term id="3165">Преобразователи силовые полупроводниковые мощностью 5 кВт и выше - тыс кВТ</term>
+      <term id="3166">Приборы силовые полупроводниковые тыс. штук - тыс шт</term>
+      <term id="3167">Приборы силовые полупроводниковые,млн.руб. - млн руб</term>
+      <term id="3170">Электролампы осветительные - млн шт</term>
+      <term id="3171">Электролампы люминисцентные - млн шт</term>
+      <term id="3194">Аккумуляторы и аккумуляторные батареи свинцовые - тыс т</term>
+      <term id="3210">Изделия кабельные - млн руб</term>
+      <term id="3214">Кабели дальней и городской телефонной связи,волоконнооптические кабели и провода для воздушных линий электропередачи сечением 120 кв.мм и выше - млн руб</term>
+      <term id="3221">Аппаратура низковольтная электрическая - млн руб</term>
+      <term id="3225">Аппаратура высоковольная электрическая - млн руб</term>
+      <term id="3231">Электромашины крупные - шт</term>
+      <term id="3235">Электродвигатели переменного тока малой мощности для комплектования электробытовых приборов - тыс шт</term>
+      <term id="3237">Оборудование электротермическое промышленное - млн руб</term>
+      <term id="3238">Оборудование электросварочное - млн руб</term>
+      <term id="3242">Электропогрузчики - шт</term>
+      <term id="3251">Оборудование химическое и запасные части к нему - млн руб</term>
+      <term id="3255">Оборудование для переработки полимерных материалов - млн руб</term>
+      <term id="3257">Оборудование нефтегазоперерабатывающее - млн руб</term>
+      <term id="3258">Оборудование газоочистное - млн руб</term>
+      <term id="3265">Оборудование бумагоделательное и запасные части к нему - млн руб</term>
+      <term id="3266">Оборудование нефтепромысловое, буровое геологоразведочное и запасные части к нему - млн руб</term>
+      <term id="3271">Арматура промышленная трубопроводная, задвижки и затворы - тыс шт</term>
+      <term id="3311">Станки металлорежущие штук - шт</term>
+      <term id="3312">Станки металлорежущие, млн.руб. - млн руб</term>
+      <term id="3321">Машины кузнечно-прессовые, штук - шт</term>
+      <term id="3322">Машины кузнечно-прессовые, млн.руб. - млн руб</term>
+      <term id="3331">Инструмент металлообрабатывающий - млн руб</term>
+      <term id="3342">Линии автоматические и полуавтоматические станочные - компл</term>
+      <term id="3343">Линии автоматические и полуавтоматические кузнечно-штамповочные - компл</term>
+      <term id="3344">Автоматические линии и комплекты деревообрабатывающего оборудования для производства столярных строительных изделий и мебели - млн руб</term>
+      <term id="3366">Дорожные и коммунальные машины - млн руб</term>
+      <term id="3411">Компьютеры, периферийные устройства к ним, средства связи и подобная электронная прдукция - млн руб</term>
+      <term id="3421">Приборы контроля и регулирования технологических процессов - млн руб</term>
+      <term id="3431">Приборы электроизмерительные - млн руб</term>
+      <term id="3445">Приборы для физических исследований - млн руб</term>
+      <term id="3511">Автомобили грузовые - тыс шт</term>
+      <term id="3514">Автосамосвалы - тыс шт</term>
+      <term id="3521">Автомобили легковые - тыс шт</term>
+      <term id="3531">Автобусы - тыс шт</term>
+      <term id="3541">Двигатели к автомобилям - тыс шт</term>
+      <term id="3543">Дизельные двигатели - тыс шт</term>
+      <term id="3545">Запасные части к автомобилям /детали механической обработки/ - млн руб</term>
+      <term id="3551">Прицепы и полуприцепы автомобильные и тракторные - тыс шт</term>
+      <term id="3561">Подшипники качения /без велосипедных/ - млн шт</term>
+      <term id="3571">Краны на автомобильном ходу - шт</term>
+      <term id="3611">Промышленные тракторы - тыс шт</term>
+      <term id="3613">Двигатели к тракторам и комбайнам - тыс шт</term>
+      <term id="3614">Тракторы трелевочные - тыс шт</term>
+      <term id="3615">Запасные части к тракторам /детали механической обработки/ - млн руб</term>
+      <term id="3616">Тракторы сельскохозяйственного назначения - тыс шт</term>
+      <term id="3617">Комбайны зерноуборочные - тыс шт</term>
+      <term id="3621">Машины сельскохозяйственные и запасные части к ним - млн руб</term>
+      <term id="3632">Автопогрузчики - шт</term>
+      <term id="3641">Лифты - шт</term>
+      <term id="3642">Лифты пассажирские - шт</term>
+      <term id="3653">Минитракторы - тыс шт</term>
+      <term id="3671">Машины и оборудование для животноводства и кормопроизводства - млн руб</term>
+      <term id="3711">Экскаваторы одноковшовые с ковшом от 0,25 куб.м. и до 2,5 куб.м. - шт</term>
+      <term id="3713">Экскаваторы с ковшом емкостью от 4 куб.м. и более /включая шагающие/ штук - шт</term>
+      <term id="3714">Экскаваторы с ковшом емкостью от 4 куб.м. и более /включая шагающие/,куб.м. - м3</term>
+      <term id="3726">Инструмент строительно-монтажный механизированный,включая бытовой,тыс.ш. - тыс шт</term>
+      <term id="3727">Инструмент строительно-монтажный механизированный,включая бытовой,млн.руб. - млн руб</term>
+      <term id="3735">Краны стреловые самоходные автомобильного типа на спецшасси грузоподъемностью 25-63 тонн - шт</term>
+      <term id="3736">Скреперы штук - шт</term>
+      <term id="3737">Скреперы,тыс.куб..м. - тыс м3</term>
+      <term id="3754">Оборудование технологическое для перерабатывающих отраслей агропромышленного комплекса и запасные части к нему - млн руб</term>
+      <term id="3756">Оборудование технологическое для предприятий строительной индустриии и строительных материалов - млн руб</term>
+      <term id="3761">Оборудование технологическое и запасные части к нему для мукомольных комбикормовых предприятий и зернохранилищ - млн руб</term>
+      <term id="3771">Оборудование технологическое и запасные части к нему для предприятий торговли, общественного питания и пищеблоков - млн руб</term>
+      <term id="3775">Оборудование полиграфическое и запасные части к нему - млн руб</term>
+      <term id="3781">Машины стиральные (бытовые) - тыс шт</term>
+      <term id="3783">Холодильное оборудование - млн руб</term>
+      <term id="3900">Общеобразовательные организации в сельской местности, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="4111">Предприятия лесозаготовительные, вывозка древесины - тыс м3</term>
+      <term id="4121">Пиломатериалы - тыс м3</term>
+      <term id="4122">Фанера - тыс м3</term>
+      <term id="4131">Плиты древесностружечные - тыс м3</term>
+      <term id="4132">Плиты древесноволокнистые - млн м2</term>
+      <term id="4139">Смола - тыс т</term>
+      <term id="4141">Мебель - млрд руб</term>
+      <term id="4211">Целлюлоза /по варке/ - тыс т</term>
+      <term id="4221">Бумага - тыс т</term>
+      <term id="4225">Картон - тыс т</term>
+      <term id="4316">Песчано-гравийная смесь - тыс м3</term>
+      <term id="4317">Песок - тыс м3</term>
+      <term id="4318">Гравий - тыс м3</term>
+      <term id="4319">Щебень - тыс м3</term>
+      <term id="4320">Теплоизоляционные материалы - тыс м3</term>
+      <term id="4321">Цемент - тыс т</term>
+      <term id="4322">Листы асбоцементные /шифер/ - млн усл плиток</term>
+      <term id="4325">Черепица - млн шт</term>
+      <term id="4327">Сухие смеси - тыс т</term>
+      <term id="4328">Полимерные кровельные материалы /мастичные и рулонные/ - тыс т</term>
+      <term id="4330">Рулонные кровельные материалы - млн м2</term>
+      <term id="4331">Радиаторы и конвекторы отопительные - тыс эквивалент м2</term>
+      <term id="4335">Ванны - тыс шт</term>
+      <term id="4343">Асбестоцементные изделия - км усл труб</term>
+      <term id="4354">Плитки керамические - тыс м2</term>
+      <term id="4355">Плитки керамические облицовочные - тыс м2</term>
+      <term id="4357">Плитки керамические фасадные - тыс м2</term>
+      <term id="4358">Плитки керамические для полов - тыс м2</term>
+      <term id="4369">Конструкции легкие металлические - тыс м2</term>
+      <term id="4371">Линолеум - млн м2</term>
+      <term id="4372">Линолеум на теплозвукоизолирующей подоснове - млн м2</term>
+      <term id="4375">Известняковая и доломитовая мука - тыс т</term>
+      <term id="4396">Минераловатные изделия - тыс м3</term>
+      <term id="4412">Кирпич глиняный - млн усл кирп</term>
+      <term id="4413">Изделие (блоки) из ячеистого бетона - млн усл кирп</term>
+      <term id="4414">Кирпич силикатный - млн усл кирп</term>
+      <term id="4416">Блоки мелкие (без блоков из ячеистого бетона) - млн усл кирп</term>
+      <term id="4417">Блоки из естественного камня - млн усл кирп</term>
+      <term id="4418">Блоки крупные - млн усл кирп</term>
+      <term id="4419">Кирпич керамический - млн усл кирп</term>
+      <term id="4421">Керамзитовые блоки - тыс м3</term>
+      <term id="4455">Трубы керамические - тыс т</term>
+      <term id="4461">Трубы чугунные канализационные и фасонные части к ним - тыс т</term>
+      <term id="4491">Асбестовая руда - млн т</term>
+      <term id="4531">Слюда - обогащенный сырец - т</term>
+      <term id="4550">Изделия санитарные керамические и из полимербетона - тыс шт</term>
+      <term id="4555">Раковины и мойки (кроме керамических) - тыс шт</term>
+      <term id="4557">Краны-смесители - млн шт</term>
+      <term id="4559">Предприятия домостроения на основе ячеистых бетонов - тыс м2 общей площади</term>
+      <term id="4621">Конструкции и изделия строительные из алюминия и алюминиевых сплавов - тыс т</term>
+      <term id="4640">Конструкции и изделия сборные железобетонные - тыс м3</term>
+      <term id="4643">Панели и другие конструкции для крупнопанельных домов - тыс м2 общей площади</term>
+      <term id="4644">Панели и другие конструкции для крупнопанельных зданий социального и культурно-бытового назначения - тыс м2 общей площади</term>
+      <term id="4645">Трубы железобетонные напорные - тыс м3</term>
+      <term id="4676">Цементно-стружечные плиты - тыс м3</term>
+      <term id="4681">Паркетная доска, щитовой паркет - тыс м2</term>
+      <term id="4689">Гипсостружечные плиты - тыс м3</term>
+      <term id="4690">Изделия столярные - тыс м2</term>
+      <term id="4691">Комплекты усадебных деревянных домов заводского изготовления - тыс м2 общей площади</term>
+      <term id="4692">Конструкции деревянные клееные - тыс м3</term>
+      <term id="4710">Установка прядильных веретен - тыс шт</term>
+      <term id="4731">Установка прядильных мест - тыс мест</term>
+      <term id="4740">Установка ткацких станков - шт</term>
+      <term id="4761">Нетканые материалы типа тканей - млн м2</term>
+      <term id="4763">Полотно трикотажное - тыс т</term>
+      <term id="4765">Чулочно-носочные изделия - млн пар</term>
+      <term id="4770">Изделия трикотажные - млн шт</term>
+      <term id="4781">Обувь - млн пар</term>
+      <term id="4782">Обувь кожаная - млн пар</term>
+      <term id="4791">Кожи мягкие - млн дм2</term>
+      <term id="4811">Изделия фарфоро-фаянсовые - млн шт</term>
+      <term id="4821">Изделия швейные /в нормативной стоимости обработки/ - млн руб</term>
+      <term id="4831">Ткани готовые - млн м2</term>
+      <term id="4951">Телевизоры - тыс шт</term>
+      <term id="4953">Холодильники и морозильники /бытовые/ - тыс шт</term>
+      <term id="4955">Мотоциклы и мотороллеры - тыс шт</term>
+      <term id="4957">Велосипеды /без детских/ - тыс шт</term>
+      <term id="4959">Машины швейные (бытовые) - тыс шт</term>
+      <term id="4961">Гальванические элементы и батареи для электробытовых изделий - млн шт</term>
+      <term id="4963">Посуда стальная эмалированная - млн руб</term>
+      <term id="4965">Товары бытовой химии /в мелкой расфасовке/ - млн руб</term>
+      <term id="4967">Обои - млн усл кус</term>
+      <term id="4971">Сборные здания /модули/  (из металла), количество - единиц</term>
+      <term id="4972">Сборные здания /модули/  (из металла), площадь - м2</term>
+      <term id="5008">Сыр плавленый - т/смену</term>
+      <term id="5009">Масло животное - т/смену</term>
+      <term id="5011">Сахар-песок - тыс ц перераб/сут</term>
+      <term id="5021">Изделия кондитерские - тыс т</term>
+      <term id="5031">Масло растительное методом экстракции - т перераб/сут</term>
+      <term id="5041">Предприятия и цехи по производству консервов овощных и фруктовых - млн усл банок</term>
+      <term id="5095">Продукция быстрозамороженная плодоовощная - тыс т</term>
+      <term id="5111">Крахмал картофельный - тыс т</term>
+      <term id="5121">Хлебобулочные изделия - т/сут</term>
+      <term id="5124">Макаронные изделия - тыс т</term>
+      <term id="5127">Хлебопекарные дрожжи - тыс т</term>
+      <term id="5129">Маргариновая продукция - тыс т</term>
+      <term id="5133">Картофелепродукты - тыс т</term>
+      <term id="5158">Продукция быстрозамороженная из картофеля - тыс т</term>
+      <term id="5159">Быстрозамороженные мясные блюда - т/смену</term>
+      <term id="5160">Пищевые концентраты - тыс т</term>
+      <term id="5190">Соль пищевая - тыс т</term>
+      <term id="5310">Мясо - т/смену</term>
+      <term id="5321">Колбасные изделия - т/смену</term>
+      <term id="5331">Консервы мясные - тыс усл банк/смен</term>
+      <term id="5350">Вода минеральная - млн пол л</term>
+      <term id="5351">Цельномолочная продукция - т/смену</term>
+      <term id="5352">Безалкогольные напитки - млн дкл</term>
+      <term id="5353">Пиво - млн дкл</term>
+      <term id="5354">Молоко сухое обезжиренное, заменители цельного молока и сухая сыворотка - т/смену</term>
+      <term id="5355">Винные изделия - млн дкл</term>
+      <term id="5356">Водка  и ликеро-водочные изделия - млн дкл</term>
+      <term id="5360">Спирт - млн дкл</term>
+      <term id="5361">Консервы молочные - тыс усл банк/смен</term>
+      <term id="5381">Сыр твердых сортов /без плавленых/ - т/смену</term>
+      <term id="5382">Производство сыра /без плавленых/ - т/смену</term>
+      <term id="5490">Холодильники для мясных и молочных продуктов - тыс т единовр хран</term>
+      <term id="5493">Сырохранилища - тыс т единовр хран</term>
+      <term id="5511">Консервы рыбные - млн усл банок</term>
+      <term id="5520">Мощности рыбоводных хозяйств по выращиванию рыбы товарнаой - тыс т</term>
+      <term id="5521">Холодильники для рыбообрабатывающих производств - тыс т единовр хран</term>
+      <term id="5551">Предприятия по ремонту судов рыбной промышленности - млн руб</term>
+      <term id="5555">Предприятия рыбоперерабатывающие - тыс т</term>
+      <term id="5631">Средства защиты растений и животных микробиологические - тыс т</term>
+      <term id="5641">Препараты ферментные - усл т</term>
+      <term id="5651">Аминокислоты - тыс т</term>
+      <term id="5661">Премиксы - тыс т</term>
+      <term id="5681">Белок кормовой микробиологический - тыс т</term>
+      <term id="5712">Антибиотики - т</term>
+      <term id="5721">Провитамины, витамины и их производные - т</term>
+      <term id="5731">Медицинская техника и запасные части к ней - млн руб</term>
+      <term id="5741">Синтетические лекарственные препараты - т</term>
+      <term id="5743">Готовые лекарственные препараты - млн шт</term>
+      <term id="5750">Шприцы однократного применения - млн шт</term>
+      <term id="5751">Зубная паста - тыс усл туб</term>
+      <term id="5752">Косметические  и парфюмерные средства - млн руб</term>
+      <term id="5760">Биопрепараты - тыс л</term>
+      <term id="5811">Элеваторы - тыс т единовр хран</term>
+      <term id="5815">Зерносклады механизированные - тыс т единовр хран</term>
+      <term id="5821">Зерносушилки стационарные - т/ч</term>
+      <term id="5831">Предприятия мельничные сортового помола - т перераб/сут</term>
+      <term id="5841">Предприятия комбикормовые - т/сут</term>
+      <term id="5851">Предприятия крупяные - т перераб/сут</term>
+      <term id="5911">Предприятия полиграфические - млн краско-оттиск</term>
+      <term id="5931">Типографии районные единиц - единиц</term>
+      <term id="5932">Типографии районные - млн лист-оттиск</term>
+      <term id="6211">Новые железнодорожные линии - км</term>
+      <term id="6221">Вторые пути - км</term>
+      <term id="6231">Электрификация железных дорог - км</term>
+      <term id="6251">Причалы морских портов - пог м</term>
+      <term id="6252">Перегрузочные комплексы морских портов погон. м. причалов - пог м</term>
+      <term id="6253">Перегрузочные комплексы морских портов млн. т. груза в год - млн т/год</term>
+      <term id="6254">Механизированные причалы речных портов пог. м. - пог м</term>
+      <term id="6255">Механизированные причалы речных портов млн. т. груза в год - млн т/год</term>
+      <term id="6271">Взлетно-посадочные полосы с твердым покрытием количество полос - единиц</term>
+      <term id="6272">Взлетно-посадочные полосы с твердым покрытием тыс. кв. м. - тыс м2</term>
+      <term id="6311">Нефтепроводы магистральные - км</term>
+      <term id="6321">Нефтепродуктопроводы магистральные региональные - км</term>
+      <term id="6331">Станции насосные на магистральных нефтепроводах и  нефтепродуктопроводах - единиц</term>
+      <term id="6432">Аэровокзалы, пропускная способность (пассажиров в час) - чел</term>
+      <term id="6511">Автомобильные дороги с твердым покрытием необщего пользования - км</term>
+      <term id="6513">Автомобильные дороги общего пользования цементобетонные - км</term>
+      <term id="6514">Автомобильные дороги общего пользования асфальтобетонные - км</term>
+      <term id="6515">Автомобильные дороги общего пользования щебеночные и гравийные - км</term>
+      <term id="6516">Автомобильные дороги общего пользования из щебеночных, гравийных и других материалов, обработанных вяжущими материалами - км</term>
+      <term id="6517">Автомобильные дороги общего пользования регионального или межмуниципального значения - км</term>
+      <term id="6520">Автомобильные дороги общего пользования федерального значения - км</term>
+      <term id="6540">Автомобильные дороги общего пользования местного значения - км</term>
+      <term id="6581">Станции технического обслуживания легковых автомобилей - единиц</term>
+      <term id="6582">Комплексы дорожного сервиса - единиц</term>
+      <term id="6583">Мосты, единиц - единиц</term>
+      <term id="6584">Мосты,  (пог.м.) - пог м</term>
+      <term id="6611">Нефтеемкости - тыс м3</term>
+      <term id="6710">Телевизионные станции мощностью 1 квт и выше - шт</term>
+      <term id="6711">Спутниковые наземные станции - шт</term>
+      <term id="6715">Междугородные телефонные станции - канал</term>
+      <term id="6721">Городские АТС - тыс ном</term>
+      <term id="6722">АТС в сельской местности - тыс ном</term>
+      <term id="6725">Подвижная радиотелефонная связь - тыс ном</term>
+      <term id="6730">Узловые предприятия почтовой связи - шт</term>
+      <term id="6731">Радиовещательные станции - кВТ</term>
+      <term id="6740">Космические аппараты - шт</term>
+      <term id="6741">Радиорелейные линии связи - км</term>
+      <term id="6751">Междугородные кабельные линии связи - км</term>
+      <term id="6752">Антенно-матчевые сооружения для сотовой связи - шт</term>
+      <term id="6753">Башня сотовой связи - шт</term>
+      <term id="6754">Волоконно-оптические линии связи (передачи) - км</term>
+      <term id="6786">Маломощные ретрансляторы УКВ - компл</term>
+      <term id="7110">Помещения для крупного рогатого скота - тыс мест</term>
+      <term id="7111">Помещения для крупного рогатого скота, с материалом стен из дерева (тыс мест) - тыс мест</term>
+      <term id="7112">помещения для крупного рогатого скота, с материалом стен из дерева (кв. м) - м2</term>
+      <term id="7120">Помещения для свиней - тыс мест</term>
+      <term id="7130">Помещения для овец - тыс мест</term>
+      <term id="7140">Помещение для птицы - тыс птицемест</term>
+      <term id="7161">Птицефабрики яичного направления тыс. кур-несушек - тыс кур несуш</term>
+      <term id="7162">Птицефабрики мясного направления млн.голов мясной птицы в год - млн гол/год</term>
+      <term id="7163">Птицефабрики яичного направления - т/смену</term>
+      <term id="7164">Птицефабрики мясного направления - т/смену</term>
+      <term id="7180">Кормоцехи для животноводства - т/сут</term>
+      <term id="7181">Цехи комбикормовые - т/сут</term>
+      <term id="7211">Зерносеменохранилища - тыс т единовр хран</term>
+      <term id="7212">Семенохранилища - тыс т единовр хран</term>
+      <term id="7220">Хранилища для картофеля, овощей и фруктов для организаций   сельского хозяйства - тыс т единовр хран</term>
+      <term id="7222">Корнеплодохранилища (для кормов) - тыс т единовр хран</term>
+      <term id="7223">Хранилища для травяной муки - тыс т единовр хран</term>
+      <term id="7224">Хранилища для брикетированных и гранулированных кормосмесей - тыс т единовр хран</term>
+      <term id="7225">Сенохранилища - тыс т единовр хран</term>
+      <term id="7226">Картофелехранилища для организаций сельского хозяйства - тыс т единовр хран</term>
+      <term id="7227">Овощехранилища для организаций сельского хозяйства - тыс т единовр хран</term>
+      <term id="7228">Смешанные картофеле- и овощехранилища для организаций сельского хозяйства - тыс т единовр хран</term>
+      <term id="7229">Плодохранилища для организаций сельского хозяйства - тыс т единовр хран</term>
+      <term id="7250">Силосные и сенажные сооружения - тыс м3</term>
+      <term id="7265">Комбинаты тепличные - га</term>
+      <term id="7266">Теплицы под стеклом - тыс м2</term>
+      <term id="7267">Теплицы пленочные - тыс м2</term>
+      <term id="7270">Склады механизированные для хранения минеральных удобрений, ядохимикатов, микробиологических средств и известковых материалов - тыс т единовр хран</term>
+      <term id="7279">Прирельсовые (пристанционные) склады - тыс т единовр хран</term>
+      <term id="7304">Склады для хранения пылевидных, известковых удобрений и фосфоритной муки - тыс т единовр хран</term>
+      <term id="7307">Глубинные склады - тыс т единовр хран</term>
+      <term id="7312">Ремонтные мастерские - усл рем/год</term>
+      <term id="7321">Станции технического обслуживания грузовых автомобилей - единиц</term>
+      <term id="7451">Мельницы-крупорушки - т перераб/сут</term>
+      <term id="7510">Орошение земель - тыс га</term>
+      <term id="7513">Орошение сенокосов и пастбищ - тыс га</term>
+      <term id="7525">Комплексная реконструкция орошаемых земель - тыс га</term>
+      <term id="7526">Замена вышедших из строя трубопроводов на оросительной сети - км</term>
+      <term id="7541">Обводнение пастбищ - тыс га</term>
+      <term id="7545">Реконструкция водохозяйственных сооружений на ранее обводненных пастбищах - тыс га</term>
+      <term id="7550">Осушение земель - тыс га</term>
+      <term id="7551">Реконструкция и восстановление осушительных систем - тыс га</term>
+      <term id="7553">Осушение болот для заготовки торфа - тыс га</term>
+      <term id="7555">Осушено закрытым дренажем - тыс га</term>
+      <term id="7557">Строительство и переустройство коллекторно-дренажной сети на землях, не требующих комплексной реконструкции оросительных систем - тыс га</term>
+      <term id="7560">Культуртехнические работы на сельскохозяйственных угодьях, не требующих осушения - тыс га</term>
+      <term id="7620">Международные телефонные станции - канал</term>
+      <term id="7721">Водопроводные магистральные сельскохозяйственного назначения - км</term>
+      <term id="7723">Внутрихозяйственный водопровод - км</term>
+      <term id="7741">Буровые колодцы - единиц</term>
+      <term id="7751">Колодцы шахтные - единиц</term>
+      <term id="7777">Газопроводы-отводы высокого давления для газификации села - км</term>
+      <term id="7781">Автомобильные дороги с твердым покрытием необщего пользования в сельском хозяйстве - км</term>
+      <term id="7783">Газовые сети к производственным объектам сельскохозяйственного назначения - км</term>
+      <term id="7830">Автомобильные дороги с твердым покрытием необщего пользования для фермерских хозяйств - км</term>
+      <term id="7832">Линии электропередачи напряжением 0,4 кв для фермерских хозяйств - км</term>
+      <term id="7833">Орошение земель для фермерских хозяйств - га</term>
+      <term id="7834">Осушение земель для фермерских хозяйств - га</term>
+      <term id="7835">Культуртехнические работы на землях, не требующих осушения для фермерских хозяйств - га</term>
+      <term id="7881">Газовые сети для фермерских хозяйств - км</term>
+      <term id="8121">Хранилища для картофеля, овощей и фруктов для организаций торговли - тыс т единовр хран</term>
+      <term id="8122">Картофелехранилища для организаций торговли - тыс т единовр хран</term>
+      <term id="8123">Овощехранилища для организаций торговли - тыс т единовр хран</term>
+      <term id="8124">Смешанные картофеле- и овощехранилища для организаций торговли - тыс т единовр хран</term>
+      <term id="8125">Плодохранилища для организаций торговли - тыс т единовр хран</term>
+      <term id="8132">Торговые предприятия торговая площадь - тыс м2</term>
+      <term id="8142">Предприятия общественного питания - посадочных мест</term>
+      <term id="8161">Холодильники для организаций торговли - тыс т единовр хран</term>
+      <term id="8180">Рынки и павильоны - мест</term>
+      <term id="8190">Общетоварные склады - тыс м2 общей площади</term>
+      <term id="8712">Гофрокартон - млн м2</term>
+      <term id="8735">Тара деревянная - тыс м3</term>
+      <term id="8751">Бочки стальные тонкостенные для нефтебитума в 200- литровом исчислении - тыс шт</term>
+      <term id="8771">Фляги стальные - тыс шт</term>
+      <term id="8781">Ящики и лотки из полиэтилена - тыс шт</term>
+      <term id="9001">Известь - тыс т</term>
+      <term id="9002">Гипс - тыс т</term>
+      <term id="9003">Тугоплавкие глины - тыс т</term>
+      <term id="9005">Электрические утюги - тыс шт</term>
+      <term id="9006">Мотоблоки - тыс шт</term>
+      <term id="9010">Аппаратура видеозаписи и воспроизведения бытовая - тыс шт</term>
+      <term id="9011">Плиты газовые бытовые - тыс шт</term>
+      <term id="20300">Магний - тыс т</term>
+      <term id="20350">Титан - тыс т</term>
+      <term id="20700">Никель - тыс т</term>
+      <term id="65880">Линии электропередачи напряжением 6-20 кВ - км</term>
+    </dic>
+  </dics>
+</metaForm>

@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="609204002001" idp="01" idf="2" shifr="jx_1pu" name="1-ПУ (ЖКХ).СВЕДЕНИЯ О ПРИБОРАХ УЧЕТА ПОТРЕБЛЕНИЯ КОММУНАЛЬНЫХ УСЛУГ В ЖИЛИЩНОМ ФОНДЕ" obj="okpo" OKUD="0609204" version="23-01-2019" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>true</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail:" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1" nb="1">
+      <columns>
+        <column code="1" type="B" name="Наименование показателя">
+          <default-cell column="1" format="C(250)" inputType="0" />
+        </column>
+        <column code="2" type="B" name="№ строки">
+          <default-cell column="2" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Потребность в оснащении приборами учета на конец отчетного периода">
+          <default-cell column="3" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Фактически оснащено приборами учета на конец года отчетного периода">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Фактически оснащено приборами учета за отчетный период">
+          <default-cell column="5" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Число многоквартирных домов, оснащенных коллективными (общедомовыми) приборами учета потребляемых коммунальных рессурсов, ед.: холодной воды">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="     горячей воды">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="03" type="F" name="     отопления">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="04" type="F" name="     электрической энергии">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="05" type="F" name="     газа">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="06" type="F" name="Число квартир в многоквартирных домах, оснащенных индивидуальными, общими (квартирными) приборами учета потребляемых коммунальных ресурсов, ед.: холодной воды">
+          <cell column="4" format="N(18,0)" inputType="2" />
+          <cell column="3" format="N(18,0)" inputType="2" />
+          <cell column="5" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="07" type="F" name="     горячей воды">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="08" type="F" name="     отопления">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="09" type="F" name="     электрической энергии">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="10" type="F" name="     газа">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="11" type="F" name="Число жилых домов (индивидуальных домов), оснащенных индивидуальными приборами учета потребляемых коммунальных ресурсов, ед.: холодной воды">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="12" type="F" name="     горячей воды">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="13" type="F" name="     отопления">
+          <cell column="3" format="N(18,2)" inputType="2" />
+          <cell column="5" format="N(18,2)" inputType="2" />
+          <cell column="4" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="14" type="F" name="     электрической энергии">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="15" type="F" name="     газа">
+          <cell column="3" format="N(15,0)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="гр 4 &gt;= гр 5 по всем строкам" condition="" rule="{[1][*][4]}|&gt;=|{[1][*][5]}" tip="0" />
+    <control id="2" name="гр 3 &gt;= 0 по всем строкам" condition="" rule="{[1][*][3]}|&gt;=|0" tip="1" />
+    <control id="3" name="гр 4 &gt;=0 по всем строкам" condition="" rule="{[1][*][4]}|&gt;=|0" tip="1" />
+    <control id="4" name="гр 5 &gt;=0 по всем строкам" condition="" rule="{[1][*][5]}|&gt;=|0" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2017">2017</term>
+      <term id="2018">2018 год</term>
+      <term id="2019">2019 год</term>
+      <term id="2020">2020 год</term>
+      <term id="2021">2021 год</term>
+      <term id="2022">2022 год</term>
+      <term id="2023">2023 год</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="1">год</term>
+    </dic>
+  </dics>
+</metaForm>

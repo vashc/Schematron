@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="602004001001" idp="01" idf="1" shifr="ns_11na" name="11-НА.СВЕДЕНИЯ О НАЛИЧИИ, ДВИЖЕНИИ И СОСТАВЕ КОНТРАКТОВ, ДОГОВОРОВ АРЕНДЫ, ЛИЦЕНЗИЙ, МАРКЕТИНГОВЫХ АКТИВОВ И ГУДВИЛЛА (деловой репутации организации)" obj="okpo" OKUD="0602004" version="13-11-2018" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>true</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="email" name="E-mail:" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел I. Наличие, движение и состав контрактов, договоров аренды, лицензий, маркетинговых активов и гудвилла (деловой репутации организации)" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование показателей">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Наличие по остаточной балансовой стоимости (первоначальной стоимости, с учетом ее изменения за счет амортизации (износа), переоценок и обесценения), на начало года">
+          <default-cell column="3" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Приобретено за год: на первичном рынке">
+          <default-cell column="4" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Приобретено за год: на вторичном рынке">
+          <default-cell column="5" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Выбыло за год за счет: окончания действия или списания вследствие морального износа">
+          <default-cell column="6" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="Выбыло за год за счет: реализации на вторичном рынке - фактическая стоимость реализации">
+          <default-cell column="7" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Выбыло за год за счет: реализации на вторичном рынке - остаточная балансовая стоимость активов, учтенных в графе 7">
+          <default-cell column="8" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="Начисленная за отчетный год амортизиция (износ), отражаемые в бухгалтерском учете и отчетности">
+          <default-cell column="9" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="Изменение остаточной балансовой стоимости за счет переоценки(+,-) или обесценения (-) по текущей рыночной стоимости">
+          <default-cell column="10" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="11" type="Z" name="Наличие по остаточной балансовой стоимости (первоначальной стоимости, с учетом ее изменения за счет амортизации (износа), переоценок и обесценения), на конец года (сумма граф 3,4,5,10 минус сумма граф 6,8,9)">
+          <default-cell column="11" format="N(15,2)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Всего экономических активов (сумма строк 02, 07, 08)">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="   из них:">
+          <cell column="10" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="обращающиеся контракты, договора аренды, лицензии-всего (сумма строк 03,04,05,06)">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="     в том числе:">
+          <cell column="10" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="03" type="F" name="       договора операционного лизинга">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="04" type="F" name="      разрешения на использование природных ресурсов">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="05" type="F" name="     разрешения на занятие определенными видами деятельности">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="06" type="F" name="     права на получение в будущем товаров и услуг на исключительной основе">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="07" type="F" name="Маркетинговые активы">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,0)" inputType="2" />
+          <cell column="6" format="N(15,0)" inputType="2" />
+          <cell column="7" format="N(15,0)" inputType="2" />
+          <cell column="8" format="N(15,0)" inputType="2" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="08" type="F" name="Приобретенный гудвилл (деловая репутация организации)">
+          <cell column="3" format="N(15,0)" inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+          <cell column="9" format="N(15,0)" inputType="2" />
+          <cell column="10" format="N(15,0)" inputType="2" />
+          <cell column="11" format="N(15,0)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+    <section code="2" name="Справочно. Определение года, в ценах которого учтены отдельные виды экономических активов, имеющихся  в организации на конец года" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="В" type="S" fld="s1" name="№ по порядку" />
+        <column code="1" type="S" fld="s2" name="Наименование строки в разделе I (в соответствии с видом актива указываются договора операционного лизинга, разрешения на использование природных ресурсов, разрешения на занятие определенными видами деятельности, права на получение в будущем товаров и услуг на исключительной основе, маркетинговые активы или приобретенный гудвилл (деловая репутация организации))**" />
+        <column code="3" type="Z" name="Год приобретения : на первичном рынке*" />
+        <column code="4" type="Z" name="Год приобретения : на вторичном рынке" />
+        <column code="5" type="Z" name="Год последней переоценки или обесценения по текущей рыночной стоимости, проведенных в отчитывающейся организации" />
+        <column code="6" type="Z" name="Наличие по остаточной балансовой стоимости (первоначальной стоимости, с учетом ее изменения за счет амортизации (износа), переоценок и обесценения), на конец года (сумма строк равна сумме строк 2,7,8 графы 11 раздела 1)" />
+      </columns>
+      <rows>
+        <row code="09" type="M" grv="В,1" name="Строка 03,04,05,06,07 или 08">
+          <cell column="В" format="N(2,0)" inputType="1" />
+          <cell column="1" dic="s_nemakt" format="N(2,0)" inputType="1" vldType="4" vld="1000012993" />
+          <cell column="3" dic="s_godotch" format="N(4,0)" inputType="1" vldType="4" vld="1000012990" />
+          <cell column="4" dic="s_godotch" format="N(4,0)" inputType="1" vldType="4" vld="1000012990" />
+          <cell column="5" dic="s_godotch" format="N(15,0)" inputType="1" vldType="4" vld="1000012990" />
+          <cell column="6" format="N(15,0)" inputType="1" />
+        </row>
+        <row code="" type="C" name="*) Для гудвилла учитывается год его образования">
+          <cell column="В" format="N(18,2)" inputType="2" />
+          <cell column="1" format="N(2,0)" inputType="2" />
+          <cell column="3" format="N(4,0)" inputType="2" />
+          <cell column="4" format="N(4,0)" inputType="2" />
+          <cell column="5" format="N(4,0)" inputType="2" />
+          <cell column="6" format="N(15,2)" inputType="2" />
+        </row>
+        <row code="" type="C" name="**) При наличии нескольких активов одного вида с отличающимися показателями граф 3-5 они учитываются в отдельных строках">
+          <cell column="В" format="N(18,2)" inputType="2" />
+          <cell column="1" format="N(2,0)" inputType="2" />
+          <cell column="3" format="N(4,0)" inputType="2" />
+          <cell column="4" format="N(4,0)" inputType="2" />
+          <cell column="5" format="N(15,2)" inputType="2" />
+          <cell column="6" format="N(15,2)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="Раздел 1 №1: гр.3-9,11&gt;=0 по стр.1-8" condition="" rule="{[1][*][3,4,5,6,7,8,9,11]}|&gt;=|0" precision="0" tip="1" />
+    <control id="9" name="Раздел 1 № 2.1:  гр.3+гр.4+гр.5-гр.6-гр.8-гр.9+гр.10 =гр.11 по стр.1-8" condition="" rule=" {[1][*][3]}+{[1][*][4]}+{[1][*][5]}-{[1][*][6]}-{[1][*][8]}-{[1][*][9]}+{[1][*][10]}|=| {[1][*][11]}" precision="0" tip="1" />
+    <control id="12" name="Раздел 1  №2.2 :  стр.1 = стр.2 + стр.7 + стр.8" condition="" rule="{[1][1][*]}|=|{[1][2][*]}+{[1][7][*]}+{[1][8][*]}" precision="0" tip="1" />
+    <control id="10" name=" Раздел 1 № 2.3:   стр.2=стр.3+стр.4+стр.5+стр.6" condition="" rule=" {[1][2][3,4,5,6,7,8,9,10,11]}|=|SUM{[1][3,4,5,6][3,4,5,6,7,8,9,10,11]}" precision="0" tip="1" />
+    <control id="30" name="Раздел 1 №3:  по стр.1-7- если   гр.8 &lt;&gt;0, то гр.7&lt;&gt;0" condition="{[1][1,2,3,4,5,6,7][8]}|&lt;&gt;|0" rule=" {[1][1,2,3,4,5,6,7][7]}|&lt;&gt;|0" precision="0" tip="1" />
+    <control id="17" name="Раздел &quot;Справочно&quot; №7:Сумма строк по гр.6 раздела Справочно =сумме строк 02, 07, 08 гр.11 раздела 1" condition="" rule="SUM{[2][9][6][*][*][*]}|=|SUM{[1][2,7,8][11]}" precision="0" tip="1" />
+    <control id="48" name=" Раздел &quot;Справочно&quot; №5:  гр.6&gt;=0" condition="" rule="{[2][9][6][*][*][*]}|&gt;=|0" precision="0" tip="1" />
+    <control id="31" name="Раздел &quot;Справочно&quot; №6.1: Если гр. 5 &gt; 0, то гр. 5 ≥ гр. 4 (по всем строкам)." condition="{[2][*][5][*][*][*]}|&gt;|0" rule="{[2][*][5][*][*][*]}|&gt;=|{[2][*][4][*][*][*]}" tip="1" />
+    <control id="32" name=" Раздел &quot;Справочно&quot; №6.2: Если гр. 5 &gt; 0, то гр. 5 ≥ гр. 3 (по всем строкам)." condition="{[2][*][5][*][*][*]}|&gt;|0" rule="{[2][*][5][*][*][*]}|&gt;=|{[2][*][3][*][*][*]}" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+      <term id="2021">2021</term>
+      <term id="2022">2022</term>
+      <term id="2023">2023</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="17">год</term>
+    </dic>
+    <dic name="Справочник годов отчетных" id="s_godotch">
+      <term id="0">Не указан</term>
+      <term id="1983">1983</term>
+      <term id="1984">1984</term>
+      <term id="1985">1985</term>
+      <term id="1986">1986</term>
+      <term id="1987">1987</term>
+      <term id="1988">1988</term>
+      <term id="1989">1989</term>
+      <term id="1990">1990</term>
+      <term id="1991">1991</term>
+      <term id="1992">1992</term>
+      <term id="1993">1993</term>
+      <term id="1994">1994</term>
+      <term id="1995">1995</term>
+      <term id="1996">1996</term>
+      <term id="1997">1997</term>
+      <term id="1998">1998</term>
+      <term id="1999">1999</term>
+      <term id="2000">2000</term>
+      <term id="2001">2001</term>
+      <term id="2002">2002</term>
+      <term id="2003">2003</term>
+      <term id="2004">2004</term>
+      <term id="2005">2005</term>
+      <term id="2006">2006</term>
+      <term id="2007">2007</term>
+      <term id="2008">2008</term>
+      <term id="2009">2009</term>
+      <term id="2010">2010</term>
+      <term id="2011">2011</term>
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+      <term id="2021">2021</term>
+      <term id="2022">2022</term>
+      <term id="2023">2023</term>
+      <term id="1.АГ">Всего</term>
+    </dic>
+    <dic name="Справочник нематериальных активов" id="s_nemakt">
+      <term id="1">Объекты интеллектуальной собственности (исключительное право на результаты интелектуальной деятельности)</term>
+      <term id="2">Исключительное право патентообладателя на изобретениие,промышленный образец,полезную модель</term>
+      <term id="3">Исключительное авторское право на программы для ЭВМ, базы данных</term>
+      <term id="4">Имущественное право автора или иного правообладателя на топологии интегральных микросхем</term>
+      <term id="5">Исключительное право владельца на товарный знак и знак обслуживания, наименование места происхождения товара</term>
+      <term id="6">Исключительное право патентообладателя на селекционные достижения</term>
+      <term id="7">Деловая репутация организации (гудвилл) и маркетинговые активы</term>
+      <term id="8">Организационные расходы</term>
+      <term id="9">Квартиры,приобретенные организациями в объектах жилого фонда для использования в качестве жилых помещений</term>
+      <term id="10">Прочие нематериальные активы</term>
+      <term id="11">Контракты, договора, лицензии, непроизведенные нематериальеые активы</term>
+      <term id="12">Маркетинговые активы</term>
+      <term id="13">Приобретенный гудвилл (деловая репутация организации)</term>
+      <term id="14">Контракты, договора аренды, лицензии</term>
+      <term id="15">Обращающиеся контракты, договора аренды, лицензии</term>
+      <term id="16">Разрешения на использование природных ресурсов</term>
+      <term id="17">Разрешения на занятие определенными видами деятельности</term>
+      <term id="18">Права на получение в будущем товаров и услуг на исключительной основе</term>
+      <term id="19">Договора операционного лизинга</term>
+      <term id="20">Всего экономических активов</term>
+    </dic>
+    <dic name="Виды нематериальных активов" id="1000012993" parent="s_nemakt">
+      <term id="20">Всего экономических активов</term>
+      <term id="15">Обращающиеся контракты, договора аренды, лицензии</term>
+      <term id="19">Договора операционного лизинга</term>
+      <term id="16">Разрешения на использование природных ресурсов</term>
+      <term id="17">Разрешения на занятие определенными видами деятельности</term>
+      <term id="18">Права на получение в будущем товаров и услуг на исключительной основе</term>
+      <term id="12">Маркетинговые активы</term>
+      <term id="13">Приобретенный гудвилл (деловая репутация организации)</term>
+    </dic>
+    <dic name="Отчетный год" id="1000012990" parent="s_godotch">
+      <term id="1983">1983</term>
+      <term id="1984">1984</term>
+      <term id="1985">1985</term>
+      <term id="1986">1986</term>
+      <term id="1987">1987</term>
+      <term id="1988">1988</term>
+      <term id="1989">1989</term>
+      <term id="1990">1990</term>
+      <term id="1991">1991</term>
+      <term id="1992">1992</term>
+      <term id="1993">1993</term>
+      <term id="1994">1994</term>
+      <term id="1995">1995</term>
+      <term id="1996">1996</term>
+      <term id="1997">1997</term>
+      <term id="1998">1998</term>
+      <term id="1999">1999</term>
+      <term id="2000">2000</term>
+      <term id="2001">2001</term>
+      <term id="2002">2002</term>
+      <term id="2003">2003</term>
+      <term id="2004">2004</term>
+      <term id="2005">2005</term>
+      <term id="2006">2006</term>
+      <term id="2007">2007</term>
+      <term id="2008">2008</term>
+      <term id="2009">2009</term>
+      <term id="2010">2010</term>
+      <term id="2011">2011</term>
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+      <term id="2021">2021</term>
+      <term id="2022">2022</term>
+      <term id="2023">2023</term>
+      <term id="0">Не указан</term>
+    </dic>
+  </dics>
+</metaForm>

@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="617008001001" idp="01" idf="1" shifr="18-КС" name="18-КС.Сведения об инвестициях в основной капитал, направленных на охрану окружающей среды и рациональное использование природных ресурсов" obj="okpo" OKUD="0617008" version="24-12-2018" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>true</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код ОКПО" dic="s_okpo" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="name" name="Наименование организации" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="mail" name="E-mail:" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="В" type="B" name="Единица измерения" />
+        <column code="1" type="Z" name="Ввод в действие мощностей и объектов за счет всех источников финансирования" />
+        <column code="2" type="Z" name="Инвестиции в основной капитал (за счет всех источников финансирования) - тысяча рублей" />
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Охрана окружающей среды и рациональное использование природных ресурсов - всего (сумма стр. 02, 25, 35, 56, 58, 65, 67, 69, 70, 75)">
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="в том числе:">
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="02" type="F" name="Охрана и рациональное использование водных ресурсов - всего">
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="в том числе:">
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="04" type="F" name="станции для очистки сточных вод - всего (сумма стр. 05, 06, 07)">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+        </row>
+        <row code="" type="C" name="из них:">
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="05" type="F" name="станции для биологической очистки">
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="06" type="F" name="станции для физико-химической очистки">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+        </row>
+        <row code="07" type="F" name="станции для механической очистки">
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Из строки 04:">
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="08" type="F" name="станции для очистки сточных вод на действующих предприятиях">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="09" type="F" name="станции для очистки коммунальных сточных вод - всего">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="10" type="F" name="из них станции для биологической очистки">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="11" type="F" name="другие сооружения для очистки сточных вод">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+        </row>
+        <row code="17" type="F" name="береговые станции очистки балластных и льяльных (подсланевых) вод">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+        </row>
+        <row code="18" type="F" name="установки по сбору нефти, мазута, мусора и других жидких и твердых отходов с акваторий рек, водоемов, портов и внутренних морей">
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="19" type="F" name="системы оборотного водоснабжения - всего">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+        </row>
+        <row code="20" type="F" name="из них на действующих предприятиях">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(35)" default="тысяча кубических метров в сутки" inputType="0" />
+        </row>
+        <row code="25" type="F" name="Охрана атмосферного воздуха - всего">
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="в том числе:">
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="26" type="F" name="установки для улавливания и обезвреживания вредных веществ из отходящих газов - всего">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(18)" default="тысяча тонн в год" inputType="0" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="27" type="F" name="установки для улавливания и обезвреживания вредных веществ из отходящих газов - всего">
+          <cell column="В" format="C(35)" default="тысяча метров кубических в час" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="28" type="F" name="из них на действующих предприятиях">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="В" format="C(18)" default="тысяча тонн в год" inputType="0" />
+        </row>
+        <row code="29" type="F" name="из них на действующих предприятиях">
+          <cell column="В" format="C(35)" default="тысяча метров кубических в час" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="30" type="F" name="контрольно-регулировочные пункты по проверке и снижению токсичности выхлопных газов автомобилей">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+        </row>
+        <row code="35" type="F" name="Охрана и рациональное использование земель - всего">
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="в том числе:">
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="36" type="F" name="противоэрозионные гидротехнические сооружения">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="37" type="F" name="противоселевые, противооползневые и противолавинные сооружения">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+        </row>
+        <row code="38" type="F" name="береговые сооружения">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+        </row>
+        <row code="41" type="F" name="террасирование крутых склонов">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+        </row>
+        <row code="42" type="F" name="валы">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(18)" default="погонный метр" inputType="0" />
+        </row>
+        <row code="43" type="F" name="плотины">
+          <cell column="В" format="C(18)" default="штука" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="45" type="F" name="водонаправляющие сооружения">
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(25)" default="тысяча погонных метров" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="46" type="F" name="водосбросные сооружения">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="штука" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="47" type="F" name="донные сооружения">
+          <cell column="В" format="C(18)" default="штука" inputType="0" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="48" type="F" name="дамбы-перемычки">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(30)" default="тысяча погонных метров" inputType="0" />
+        </row>
+        <row code="49" type="F" name="выполаживание склонов, оврагов, промоин">
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="50" type="F" name="создание защитных лесных насаждений">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+        </row>
+        <row code="51" type="F" name="из них создание полезащитных лесных полос">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="52" type="F" name="рекультивация земель (включая приведение земель, нарушенных торфоразработками, в состояние, пригодное для использования по назначению)">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+        </row>
+        <row code="53" type="F" name="защита от затопления и подтопления территорий и объектов">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="гектар" inputType="0" />
+        </row>
+        <row code="56" type="F" name="Охрана и рациональное использование лесных ресурсов">
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="58" type="F" name="Охрана и воспроизводство рыбных запасов - всего">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="в том числе:">
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="59" type="F" name="рыбоводные предприятия">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="60" type="F" name="рыбоводные предприятия">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="В" format="C(18)" default="миллион штук" inputType="0" />
+        </row>
+        <row code="61" type="F" name="рыбозащитные устройства">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+        </row>
+        <row code="64" type="F" name="                        Установки (производства) для утилизации и переработки отходов производства (исключая мусороперерабатывающие, мусоросжигательные заводы, предприятия и полигоны по утилизации, обезвреживанию и захоронению токсичных промышленных, бытовых и др. отходов)">
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="65" type="F" name="Установки (производства) для утилизации и переработки отходов производства (исключая мусороперерабатывающие, мусоросжигательные заводы, предприятия и полигоны по утилизации, обезвреживанию и захоронению токсичных промышленных, бытовых и др. отходов)">
+          <cell column="В" format="C(18)" default="тысяча тонн в год" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="66" type="F" name="Предприятия и полигоны по утилизации, обезвреживанию и захоронению токсичных промышленных, бытовых и иных отходов">
+          <cell column="2" format="N(18,2)" inputType="0" />
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+          <cell column="1" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="67" type="F" name="Предприятия и полигоны по утилизации, обезвреживанию и захоронению токсичных промышленных, бытовых и иных отходов">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="тысяча тонн в год" inputType="0" />
+          <cell column="1" format="N(18,2)" inputType="2" />
+        </row>
+        <row code="69" type="F" name="Организация заповедников и других природоохранных территорий">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="70" type="F" name="Охрана недр и рациональное использование минеральных ресурсов">
+          <cell column="1" format="N(18,0)" inputType="2" />
+          <cell column="В" format="C(18)" default="единица" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="75" type="F" name="Охрана и воспроизводство диких зверей и птиц">
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="76" type="F" name="Из строки 01 - новое строительство">
+          <cell column="1" format="N(18,2)" inputType="0" />
+          <cell column="2" format="N(18,0)" inputType="2" />
+          <cell column="В" format="N(18,2)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+    <section code="2" name="Раздел 2" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="4" type="Z" name="Использовано за отчетный год из средств федерального бюджета, тысяча рублей" />
+        <column code="5" type="Z" name="Использовано за отчетный год из средств бюджетов субъектов Российской Федерации и местных бюджетов, тысяча рублей" />
+        <column code="6" type="Z" name="Использовано за отчетный год из  собственных средств предприятий, тысяча рублей" />
+        <column code="7" type="Z" name="Из граф 4 и 5 средства экологических фондов, тысяча рублей" />
+      </columns>
+      <rows>
+        <row code="80" type="F" name="Охрана окружающей среды и рациональное использование природных ресурсов - всего">
+          <cell column="5" format="N(18,0)" inputType="2" />
+          <cell column="4" format="N(18,0)" inputType="2" />
+          <cell column="6" format="N(18,0)" inputType="2" />
+          <cell column="7" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="" type="C" name="из них:">
+          <cell column="4" format="N(18,2)" inputType="0" />
+          <cell column="5" format="N(18,2)" inputType="0" />
+          <cell column="6" format="N(18,2)" inputType="0" />
+          <cell column="7" format="N(18,2)" inputType="0" />
+        </row>
+        <row code="81" type="F" name="Охрана и рациональное использование водных ресурсов">
+          <cell column="7" format="N(18,0)" inputType="2" />
+          <cell column="4" format="N(18,0)" inputType="2" />
+          <cell column="5" format="N(18,0)" inputType="2" />
+          <cell column="6" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="82" type="F" name="Охрана атмосферного воздуха">
+          <cell column="7" format="N(18,0)" inputType="2" />
+          <cell column="6" format="N(18,0)" inputType="2" />
+          <cell column="5" format="N(18,0)" inputType="2" />
+          <cell column="4" format="N(18,0)" inputType="2" />
+        </row>
+        <row code="83" type="F" name="Охрана и рациональное использование земель">
+          <cell column="7" format="N(18,0)" inputType="2" />
+          <cell column="5" format="N(18,0)" inputType="2" />
+          <cell column="4" format="N(18,0)" inputType="2" />
+          <cell column="6" format="N(18,0)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="строка 01=сумме строк 02+25+35+56+58+65+67+69+70+75 по графе 2" condition="" rule="{[1][1][2]}|=|SUM{[1][2,25,35,56,58,65,67,69,70,75][2]}" tip="1" />
+    <control id="2" name="строка 01&gt;= строки 76 по графе 2" condition="" rule="{[1][1][2]}|&gt;=|{[1][76][2]}" tip="1" />
+    <control id="3" name="строка 02&gt;=сумме строк 04+11+17+18+19 по графе 2" condition="" rule="{[1][2][2]}|&gt;=|SUM{[1][4,11,17,18,19][2]}" tip="1" />
+    <control id="4" name="строка 04=сумме строк 05+06+07 по графам 1,2" condition="" rule="{[1][4][1,2]}|=|SUM{[1][5,6,7][1,2]}" tip="1" />
+    <control id="5" name="строка 04&gt;=сумме строк 08+09" condition="" rule="{[1][4][1,2]}|&gt;=|SUM{[1][8,9][1,2]}" tip="1" />
+    <control id="6" name="строка 09&gt;=строки 10" condition="" rule="{[1][9][1,2]}|&gt;=|{[1][10][1,2]}" tip="1" />
+    <control id="7" name="строка 19&gt;= строки 20" condition="" rule="{[1][19][1,2]}|&gt;=|{[1][20][1,2]}" tip="1" />
+    <control id="8" name="строка 25&gt;=сумме строк 27 + 30 по графе 2" condition="" rule="{[1][25][2]}|&gt;=|SUM{[1][27,30][2]}" tip="1" />
+    <control id="9" name="строка 26&gt;=строки 28 по графе 1" condition="" rule="{[1][26][1]}|&gt;=|{[1][28][1]}" tip="1" />
+    <control id="10" name="строка 27&gt;=строки 29" condition="" rule="{[1][27][1,2]}|&gt;=|{[1][29][1,2]}" tip="1" />
+    <control id="11" name="строка 35&gt;= сумме строк 36 + 37 + 38 + 41 + 42 + 43 + 45 + 46 + 47 + 48 + 49 + 50 + 52 + 53 по графе 2" condition="" rule="{[1][35][2]}|&gt;=|SUM{[1][36,37,38,41,42,43,45,46,47,48,49,50,52,53][2]}" tip="1" />
+    <control id="12" name="строка 50&gt;=строки 51 по графам 1,2" condition="" rule="{[1][50][1,2]}|&gt;=|{[1][51][1,2]}" tip="1" />
+    <control id="13" name="строка 58&gt;=сумме строк 60 + 61 по графе 2" condition="" rule="{[1][58][2]}|&gt;=|SUM{[1][60,61][2]}" tip="1" />
+    <control id="15" name="строка 01 графа 2 &gt;= строке 80 по сумме граф 4 + 5 + 6" condition="" rule="{[1][1][2]}|&gt;=|SUM{[2][80][4,5,6]}" tip="1" />
+    <control id="16" name="строка 02 графа 2&gt;=строке 81 по сумме граф 4 + 5 + 6" condition="" rule="{[1][2][2]}|&gt;=|SUM{[2][81][4,5,6]}" tip="1" />
+    <control id="17" name="строка 25 графа 2&gt;=строке 82 по сумме граф 4 + 5 + 6" condition="" rule="{[1][25][2]}|&gt;=|SUM{[2][82][4,5,6]}" tip="1" />
+    <control id="18" name="строка 35 графа 2&gt;=строке 83 по сумме граф 4 + 5 + 6" condition="" rule="{[1][35][2]}|&gt;=|SUM{[2][83][4,5,6]}" tip="1" />
+    <control id="20" name="стр.80 гр.7 &lt;= стр.80(гр.4+гр.5)" condition="" rule="{[2][80][7]}|&lt;=|SUM{[2][80][4,5]}" tip="1" />
+    <control id="21" name="стр.81 гр.7 &lt;= стр.81(гр.4+гр.5)" condition="" rule="{[2][81][7]}|&lt;=|SUM{[2][81][4,5]}" tip="1" />
+    <control id="22" name="стр.82 гр.7 &lt;= стр.82(гр.4+гр.5)" condition="" rule="{[2][82][7]}|&lt;=|SUM{[2][82][4,5]}" tip="1" />
+    <control id="23" name="стр.83 гр.7 &lt;= стр.83(гр.4+гр.5)" condition="" rule="{[2][83][7]}|&lt;=|SUM{[2][83][4,5]}" tip="1" />
+    <control id="24" name="Все показатели раздела 1 не отрицательные числа" condition="" rule="{[1][*][*]}|&gt;=|0" tip="1" />
+    <control id="25" name="строка 80 по графе 4&gt;= сумме строк(81+82+83) по графе 4" condition="" rule="{[2][80][4]}|&gt;=|SUM{[2][81,82,83][4]}" tip="1" />
+    <control id="26" name="строка 80 по графе 5&gt;= сумме строк(81+82+83) по графе 5" condition="" rule="{[2][80][5]}|&gt;=|SUM{[2][81,82,83][5]}" tip="1" />
+    <control id="27" name="строка 80 по графе 6&gt;= сумме строк(81+82+83) по графе 6" condition="" rule="{[2][80][6]}|&gt;=|SUM{[2][81,82,83][6]}" tip="1" />
+    <control id="28" name="строка 80 по графе 7&gt;= сумме строк(81+82+83) по графе 7" condition="" rule="{[2][80][7]}|&gt;=|SUM{[2][81,82,83][7]}" tip="1" />
+    <control id="29" name="Если гр.1&gt;0, то гр.2&gt;0" condition="{[1][4,5,6,7,8,9,10,11,17,18,19,20,27,29,30,37,38,41,42,43,45,46,47,48,49,50,51,52,53,60,61,65,67,70][1]}|&gt;|0" rule="{[1][4,5,6,7,8,9,10,11,17,18,19,20,27,29,30,37,38,41,42,43,45,46,47,48,49,50,51,52,53,60,61,65,67,70][2]}|&gt;|0" tip="0" />
+    <control id="30" name="Если строка 59&gt;0, то строка 60&gt;0 по графе 1" condition="{[1][59][1]}|&gt;|0" rule="{[1][60][1]}|&gt;|0" tip="0" />
+    <control id="31" name="Если строка 60&gt;0, то строка 59&gt;0 по графе 1" condition="{[1][60][1]}|&gt;|0" rule="{[1][59][1]}|&gt;|0" tip="0" />
+    <control id="32" name="Если строка 64&gt;0, то строка 65&gt;0 по графе 1" condition="{[1][64][1]}|&gt;|0" rule="{[1][65][1]}|&gt;|0" tip="0" />
+    <control id="33" name="Если строка 65&gt;0, то строка 64&gt;0 по графе 1" condition="{[1][65][1]}|&gt;|0" rule="{[1][64][1]}|&gt;|0" tip="0" />
+    <control id="34" name="Если строка 66&gt;0, то строка 67&gt;0 по графе 1" condition="{[1][66][1]}|&gt;|0" rule="{[1][67][1]}|&gt;|0" tip="0" />
+    <control id="35" name="Если строка 67&gt;0, то строка 66&gt;0 по графе 1" condition="{[1][67][1]}|&gt;|0" rule="{[1][66][1]}|&gt;|0" tip="0" />
+    <control id="36" name="Если строка 26&gt;0, то строка 27&gt;0 по графе 1" condition="{[1][26][1]}|&gt;|0" rule="{[1][27][1]}|&gt;|0" tip="0" />
+    <control id="37" name="Если строка 27&gt;0, то строка 26&gt;0 по графе 1" condition="{[1][27][1]}|&gt;|0" rule="{[1][26][1]}|&gt;|0" tip="0" />
+    <control id="38" name="Если строка 28&gt;0, то строка 29&gt;0 по графе 1" condition="{[1][28][1]}|&gt;|0" rule="{[1][29][1]}|&gt;|0" tip="0" />
+    <control id="39" name="Если строка 29&gt;0, то строка 28&gt;0 по графе 1" condition="{[1][29][1]}|&gt;|0" rule="{[1][28][1]}|&gt;|0" tip="0" />
+    <control id="40" name="Если строка 1&gt;0 по графе 2, то строка 80&gt;0 по сумме граф 4+5+6" condition="{[1][1][2]}|&gt;|0" rule="SUM{[2][80][4,5,6]}|&gt;|0" tip="0" />
+  </controls>
+  <dics>
+    <dic name="Справочник периодов" id="s_time">
+      <term id="0101">За год</term>
+    </dic>
+  </dics>
+</metaForm>

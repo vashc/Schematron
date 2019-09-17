@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="609304002001" idp="1" idf="2" shifr="z_7tvn" name="Форма 7-травматизм" obj="okpo" OKUD="0609304" format-version="1.3" version="22-12-2016">
+  <settings>
+    <validation>always</validation>
+  </settings>
+  <title>
+    <item field="okpo" name="ОКПО" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел А" nb="1">
+      <columns>
+        <column code="1" type="B" name="Наименование показателя">
+          <default-cell column="1" format="C(250)" inputType="0" />
+        </column>
+        <column code="2" type="B" name="№ строки">
+          <default-cell column="2" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="V" name="Ед.изм.">
+          <default-cell column="3" format="C(8)" inputType="0" />
+        </column>
+        <column code="4" type="Z" name="За отчетный год">
+          <default-cell column="4" format="N(15,1)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Численность пострадавших при несчастных случаях на производстве с утратой трудоспособности на 1 рабочий день и более и со смертельным исходом">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="   из них: женщин">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="03" type="F" name="               лиц до 18 лет">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="04" type="F" name="               иностранных граждан">
+          <cell column="3" format="C(8)" default="чел." inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="05" type="F" name="Из стр.01 численность пострадавших со смертельным исходом">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="06" type="F" name="   из них: женщин">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="07" type="F" name="               лиц до 18 лет">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="08" type="F" name="               иностранных граждан">
+          <cell column="3" format="C(8)" default="чел." inputType="2" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="09" type="F" name="Число человеко-дней нетрудоспособности у пострадавших с утратой трудоспособности на 1 рабочий день и более, временная нетрудоспособность которых закончилась в отчетном году">
+          <cell column="3" format="C(8)" default="чел.-дн." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="10" type="F" name="Численность пострадавших частично утративших трудоспособность и переведенных с основной работы на другую на 1 рабочий день и более в соответствии с медицинским заключением">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="11" type="F" name="   из них: женщин">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="12" type="F" name="Численность лиц с впервые установленным профессиональным заболеванием">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="13" type="F" name="Израсходовано на мероприятия по охране труда - всего">
+          <cell column="3" format="C(8)" default="тыс.руб." inputType="0" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Справочно:" />
+        <row code="14" type="F" name="Средняя численность работников (работники списочного состава и внешние совместители) за отчетный год">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="1" />
+        </row>
+        <row code="15" type="F" name="     из них: женщин">
+          <cell column="3" format="C(8)" default="чел." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="16" type="F" name="Наличие на предприятии здравпункта (врачебного кабинета, медико-санитарной части и т.п.) 1-ДА, 0 - НЕТ">
+          <cell column="3" format="C(8)" default="ед." inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="1" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="[А]  Стр 01 &gt;= Стр 02" condition="" rule="{[1][01][4]}|&gt;=|{[1][02][4]}" tip="1" />
+    <control id="2" name="[А]  Стр 01 &gt;= Стр 03" condition="" rule="{[1][01][4]}|&gt;=|{[1][03][4]}" tip="1" />
+    <control id="3" name="[А]  Стр 01 &gt;= Стр 04" condition="" rule="{[1][01][4]}|&gt;=|{[1][04][4]}" tip="1" />
+    <control id="4" name="[А]  Стр 01 &gt;= Стр 05" condition="" rule="{[1][01][4]}|&gt;=|{[1][05][4]}" tip="1" />
+    <control id="5" name="[А]  Стр 02 &gt;= Стр 06" condition="" rule="{[1][02][4]}|&gt;=|{[1][06][4]}" tip="1" />
+    <control id="6" name="[А]  Стр 03 &gt;= Стр 07" condition="" rule="{[1][03][4]}|&gt;=|{[1][07][4]}" tip="1" />
+    <control id="7" name="[А]  Стр 04 &gt;= Стр 08" condition="" rule="{[1][04][4]}|&gt;=|{[1][08][4]}" tip="1" />
+    <control id="8" name="[А]  Стр 05 &gt;= Стр 06" condition="" rule="{[1][05][4]}|&gt;=|{[1][06][4]}" tip="1" />
+    <control id="9" name="[А]  Стр 05 &gt;= Стр 07" condition="" rule="{[1][05][4]}|&gt;=|{[1][07][4]}" tip="1" />
+    <control id="10" name="[А]  Стр 05 &gt;= Стр 08" condition="" rule="{[1][05][4]}|&gt;=|{[1][08][4]}" tip="1" />
+    <control id="11" name="[А]  Стр 10 &gt;= Стр 11" condition="" rule="{[1][10][4]}|&gt;=|{[1][11][4]}" tip="1" />
+    <control id="12" name="[А]  Стр 14 &gt;= Стр 15" condition="" rule="{[1][14][4]}|&gt;=|{[1][15][4]}" tip="1" />
+    <control id="13" name="[А]  Стр 13 &gt; 0" condition="" rule="{[1][13][4]}|&gt;|0" tip="0" />
+    <control id="14" name="[А]  Стр 14 &gt; 0" condition="" rule="{[1][14][4]}|&gt;|0" tip="1" />
+    <control id="15" name="[А]  Если Стр 05 # 0, то Стр 01 # 0" condition="{[1][05][4]}|&lt;&gt;|0" rule="{[1][01][4]}|&lt;&gt;|0" tip="1" />
+    <control id="16" name="[А]  Если Стр 01 # 0, то Стр 09 # 0" condition="{[1][01][4]}|&lt;&gt;|0" rule="{[1][09][4]}|&lt;&gt;|0" tip="0" />
+    <control id="17" name="[А]  Если Стр 09 # 0, то Стр 01 # 0" condition="{[1][09][4]}|&lt;&gt;|0" rule="{[1][01][4]}|&lt;&gt;|0" tip="0" />
+    <control id="18" name="[А]  Если Стр 01 &gt; 0, то 1&lt;= Стр.09/ Стр.01&lt;=80" condition="{[1][01][4]}|&gt;|0" rule="1|&lt;=|{[1][09][4]}/{[1][01][4]}|&lt;=|80" tip="0" />
+    <control id="19" name="[А]  Если Стр.01 = 0 и Стр.09 &gt; 0, то  Стр.09&lt;=80" condition="{[1][01][4]}|=|0 AND {[1][09][4]}|&gt;|0" rule="{[1][09][4]}|&lt;=|80" tip="0" />
+    <control id="20" name="[А]  Стр.13/Стр.14*1000 &lt;= 50000" condition="" rule="{[1][13][4]}/{[1][14][4]}*1000|&lt;=|50000" tip="0" />
+    <control id="21" name="[А]  Стр 14 &gt;= Стр 12" condition="" rule="{[1][14][4]}|&gt;=|{[1][12][4]}" tip="1" />
+  </controls>
+  <dics>
+    <dic name="S_GOD - Справочник годов" id="s_god">
+      <term id="2009">2009</term>
+      <term id="2010">2010</term>
+      <term id="2011">2011</term>
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="12">годовая</term>
+    </dic>
+  </dics>
+</metaForm>

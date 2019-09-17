@@ -1,0 +1,814 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="617002002001" idp="1" idf="2" shifr="iap" name="Форма ИАП" obj="okpo" OKUD="0617002" format-version="1.3" version="27-08-2018">
+  <settings>
+    <validation>always</validation>
+  </settings>
+  <title>
+    <item field="okpo" name="код организации (предприятия)" dic="s_okpo" />
+    <item field="name" name="Наименование" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail:" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1.1" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="В текущем году | использовались">
+          <default-cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="В текущем году | не использовались">
+          <default-cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="В текущем году по сравнению с предыдущим годом | выше уровня предыдущего года">
+          <default-cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="6" type="Z" name="В текущем году по сравнению с предыдущим годом | на уровне предыдущего года">
+          <default-cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="7" type="Z" name="В текущем году по сравнению с предыдущим годом | ниже уровня предыдущего года">
+          <default-cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="8" type="Z" name="В следующем году по сравнению с текущим годом | увеличение">
+          <default-cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="9" type="Z" name="В следующем году по сравнению с текущим годом | без изменений">
+          <default-cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="10" type="Z" name="В следующем году по сравнению с текущим годом | уменьшение">
+          <default-cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="1. Инвестиционная деятельность" />
+        <row code="" type="C" name="1.1.Оценка использования инвестиций в основной капитал" />
+        <row code="1" type="F" name="Инвестиций в основной капитал:всего">
+          <cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="" type="C" name="   в том числе:создание новых основных средств:" />
+        <row code="2" type="F" name="   здания и сооружения">
+          <cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="   транспортные средства">
+          <cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="   информационное,компьютерное и телекоммуникационное (ИКТ) оборудование">
+          <cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="   прочие машины и оборудование">
+          <cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="6" type="F" name="затраты на реконструкцию и модернизацию основных средств">
+          <cell column="10" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(10,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="2" name="Раздел 1.2" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="В текущем году">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="В следующем году">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="1.2. Цели инвестирования в основной капитал" />
+        <row code="" type="C" name="Увеличение производственной мощности:" />
+        <row code="1" type="F" name="   с неизменной номенклатурой продукции">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="   с расширением номенклатуры продукции">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="" type="C" name="Повышение эффективности производства:" />
+        <row code="3" type="F" name="   автоматизация или механизация существующего производственного процесса">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="   внедрение новых производственных технологий">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="   снижение себестоимости продукции">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="6" type="F" name="   экономия энергоресурсов">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="7" type="F" name="Замена изношенной техники и оборудования">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="8" type="F" name="Создание новых рабочих мест">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="9" type="F" name="Охрана окружающей среды">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="10" type="F" name="Другие">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="3" name="Раздел 1.3" nb="3">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="В текущем году">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="В следующем году">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="1.3. Источники инвестиций в основной капитал" />
+        <row code="1" type="F" name="Собственные средства">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Кредитные и заемные средства">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="Бюджетные средства">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="Инвестиции из-за рубежа">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="Другие">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="4" name="Раздел 1.4" nb="4">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Ограничивает">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="Не влияет">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="Стимулирует">
+          <default-cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="1.4. Факторы, влияющие на  инвестиционную деятельность в Вашей организации" />
+        <row code="1" type="F" name="Спрос на продукцию организации">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Объем собственных финансовых средств">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="Количество квалифицированных работников для использования нового оборудования">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="Инвестиционные риски">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="Состояние технической базы  организации">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="6" type="F" name="Прибыльность инвестиций в основной капитал">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="7" type="F" name="Инфляционная политика в стране">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="8" type="F" name="Процент коммерческого кредита">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="9" type="F" name="Механизм получения кредитов для реализации инвестиционных проектов">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="10" type="F" name="Существующий налоговый режим для инвестиционной деятельности">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="11" type="F" name="Доступ к внешним рынкам">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="12" type="F" name="Колебания цен на мировом рынке энергоносителей">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="" type="C" name="Экономическая ситуация:" />
+        <row code="13" type="F" name="   внутренняя (в стране)">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="14" type="F" name="   внешняя (на мировых рынках)">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="15" type="F" name="Нормативно-правовая база, регулирующая инвестиционные процессы">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="16" type="F" name="Параметры курсовой политики в стране">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="5" name="Раздел 1.5" nb="5">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Значение 0 или 1">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="1.5. Оценка общей экономической ситуации в Вашей организации" />
+        <row code="" type="C" name="Ситуация в текущем году:" />
+        <row code="1" type="F" name="   Благоприятная">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="   Удовлетворительная">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="   Неблагоприятная">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="" type="C" name="Изменения в текущем году по сравнению с предыдущим:" />
+        <row code="4" type="F" name="   Улучшение">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="   Без изменений">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="6" type="F" name="   Ухудшение">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="" type="C" name="Ожидаемые изменения в следующем году по сравнению с текущим:" />
+        <row code="7" type="F" name="   Улучшение">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="8" type="F" name="   Без изменений">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="9" type="F" name="   Ухудшение">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="6" name="Раздел 1.6" nb="6">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Изменения в текущем году по сравнению с предыдущим годом | увеличение">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="Изменения в текущем году по сравнению с предыдущим годом | без изменений">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="Изменения в текущем году по сравнению с предыдущим годом | уменьшение">
+          <default-cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="6" type="Z" name="Ожидаемые изменения в следующем году по сравнению с текущим годом | увеличение">
+          <default-cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="7" type="Z" name="Ожидаемые изменения в следующем году по сравнению с текущим годом | без изменений">
+          <default-cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="8" type="Z" name="Ожидаемые изменения в следующем году по сравнению с текущим годом | уменьшение">
+          <default-cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="1.6. Оценка влияния инвестиций в основной капитал на изменение показателей деятельности в Вашей организации" />
+        <row code="1" type="F" name="Конкурентоспособность">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Производительность труда">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="7" name="Раздел 2.1" nb="7">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="до 3 лет">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="свыше 3 до 5 лет">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="свыше 5 до 10 лет">
+          <default-cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="6" type="Z" name="свыше 10 до 15 лет">
+          <default-cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="7" type="Z" name="свыше 15 до 20 лет">
+          <default-cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="8" type="Z" name="свыше 20 до 30 лет">
+          <default-cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="9" type="Z" name="свыше 30 до 50 лет">
+          <default-cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="10" type="Z" name="свыше 50 до 80 лет">
+          <default-cell column="10" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="11" type="Z" name="свыше 80 лет">
+          <default-cell column="11" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="2. Состояние основных средств" />
+        <row code="" type="C" name="2.1. Средний возраст основных средств" />
+        <row code="1" type="F" name="Здания">
+          <cell column="10" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="11" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Сооружения">
+          <cell column="10" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="11" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="Транспортные средства">
+          <cell column="10" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="11" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="Информационное, компьютерное и телекоммуникационное (ИКТ) оборудование">
+          <cell column="10" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="11" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="Прочие машины и оборудование">
+          <cell column="10" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="11" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="8" name="Раздел 2.2" nb="8">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="0">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="свыше 0 до 20">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="свыше 20 до 40">
+          <default-cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="6" type="Z" name="свыше 40 до 60">
+          <default-cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="7" type="Z" name="свыше 60 до 80">
+          <default-cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="8" type="Z" name="свыше 80">
+          <default-cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="2.2. Ввод и выбытие основных средств в текущем году" />
+        <row code="1" type="F" name="Доля вновь введенных основ-ных средств к их наличию на конец года, процентов">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Доля выбывших основных средств к их наличию на начало года, процентов">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="9" name="Раздел 2.3" nb="9">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Здания и сооружения">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="Машины, оборудование (включая ИКТ), транспортные средства">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="2.3. Выбытие основных средств в текущем году" />
+        <row code="" type="C" name="Ликвидировано (списано) по причинам:" />
+        <row code="1" type="F" name="   физической изношенности">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="   экономической неэффективности эксплуатации">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="   стихийных бедствий, катастроф и военных действий">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="Продано на вторичном рынке">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="10" name="Раздел 2.4" nb="10">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="В текущем году | здания и сооружения">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="В текущем году | машины, оборудование (включая ИКТ), транспортные средства">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="В следующем году | здания и сооружения">
+          <default-cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="6" type="Z" name="В следующем году | машины, оборудование (включая ИКТ), транспортные средства">
+          <default-cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="2.4. Ввод в действие новых, реконструируемых, модернизированных  и приобретенных основных средств" />
+        <row code="1" type="F" name="Новые основные средства (новое строительство, расширение, приобретение) - всего">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="   из них импортные">
+          <cell column="3" format="N(15,0)" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="3" type="F" name="Основные средства, бывшие в употреблении у других организаций - всего">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="   из них импортные">
+          <cell column="3" format="N(15,0)" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="0" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="Основные средства, приобретенные на условиях финансового лизинга">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="6" type="F" name="Реконструкция  и модернизация основных средств">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="11" name="Раздел 2.5" nb="11">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="В текущем году">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="В следующем году">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="2.5. Виды введенных в действие и приобретенных основных средств" />
+        <row code="1" type="F" name="Здания">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Сооружения">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="" type="C" name="Машины и оборудование:" />
+        <row code="3" type="F" name="   комплексы и технологические линии">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="4" type="F" name="   отдельные установки">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="5" type="F" name="Транспортные средства">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="6" type="F" name="Информационное, компьютерное и телекоммуникационное (ИКТ) оборудование">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="7" type="F" name="Другие">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+    <section code="12" name="Раздел 2.6" nb="12">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="0">
+          <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="4" type="Z" name="свыше 0 до 10">
+          <default-cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="5" type="Z" name="свыше 10 до 30">
+          <default-cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="6" type="Z" name="свыше 30 до 50">
+          <default-cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="7" type="Z" name="свыше 50 до 75">
+          <default-cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="8" type="Z" name="свыше 75 до 100">
+          <default-cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+        <column code="9" type="Z" name="100">
+          <default-cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="2.6.  Неиспользуемые основные средства" />
+        <row code="" type="C" name="Доля основных средств, не использовавшихся в отчетном году непрерывно в течение полугода и более, в стоимости соответствующих видов основных средств  к концу года,  процентов" />
+        <row code="1" type="F" name="Здания и сооружения">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+        <row code="2" type="F" name="Машины, оборудование (включая ИКТ), транспортные средства">
+          <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="5" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="6" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="7" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="8" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+          <cell column="9" format="N(15,0)" inputType="2" vldType="3" vld="0,1" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="[p.1 п.1] по всем строкам в графах 3, 4  может быть только один вариант ответа или нет меток" condition="" rule="isnull({[1][*][3]},0)+isnull({[1][*][4]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="2" name="[p.1 п.1] по всем строкам в графах 5-7 быть только один вариант ответа или нет меток" condition="" rule="isnull({[1][*][5]},0)+isnull({[1][*][6]},0)+isnull({[1][*][7]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="3" name="[p.1 п.1] по всем строкам в графах 8-10 может быть только один вариант ответа или нет меток" condition="" rule="isnull({[1][*][8]},0)+isnull({[1][*][9]},0)+isnull({[1][*][10]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="4" name="[p.1 п.1] если в строке 1 по графе 4 есть метка, то не заполняются строки 2-6 по графе 4" condition="{[1][1][4]}|=|1" rule="SUM{[1][2-6][4]}|=|0" tip="1" />
+    <control id="5" name="[p.1 п.1] если в строке 1 по графе 4 есть метка, то не заполняются графы 5-7 по всем строкам" condition="{[1][1][4]}|=|1" rule="SUM{[1][1-6][5-7]}|=|0" tip="1" />
+    <control id="6" name="[p.1 п.2] в графах 3,4 по строкам 1, 2 может быть только один вариант ответа или нет меток" condition="" rule="isnull({[2][1][3,4]},0)+isnull({[2][2][3,4]},0)|&lt;=|1" tip="1" />
+    <control id="7" name="[p.1 п.4] по всем строкам в графах 3-5 может быть только один вариант ответа" condition="" rule="isnull({[4][1-16][3]},0)+isnull({[4][1-16][4]},0)+isnull({[4][1-16][5]},0)|=|1" precision="0" tip="1" />
+    <control id="8" name="[p.1 п.5] по стр.1, 2, 3 гр.3 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[5][1][3]},0)+isnull({[5][2][3]},0)+isnull({[5][3][3]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="9" name="[p.1 п.5] по стр.4, 5,6 гр.3 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[5][4][3]},0)+isnull({[5][5][3]},0)+isnull({[5][6][3]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="10" name="[p.1 п.5] по стр.7, 8, 9 гр.3 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[5][7][3]},0)+isnull({[5][8][3]},0)+isnull({[5][9][3]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="11" name="[p.1 п.6] по стр.1 гр.3-5 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[6][1][3]},0)+isnull({[6][1][4]},0)+isnull({[6][1][5]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="12" name="[p.1 п.6] по стр.2 гр.3-5 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[6][2][3]},0)+isnull({[6][2][4]},0)+isnull({[6][2][5]},0)|&lt;=|1" tip="1" />
+    <control id="13" name="[p.1 п.6] по стр.1 гр.6-8 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[6][1][6]},0)+isnull({[6][1][7]},0)+isnull({[6][1][8]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="14" name="[p.1 п.6] по стр.2 гр.6-8 возможен только один вариант ответа или нет меток" condition="" rule="isnull({[6][2][6]},0)+isnull({[6][2][7]},0)+isnull({[6][2][8]},0)|&lt;=|1" precision="0" tip="1" />
+    <control id="15" name="[p.2 п.1] по стр.1 гр.3-11 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[7][1][3-11]}|&lt;=|1" precision="0" tip="1" />
+    <control id="16" name="[p.2 п.1] по стр.2 гр.3-11 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[7][2][3-11]}|&lt;=|1" precision="0" tip="1" />
+    <control id="17" name="[p.2 п.1] по стр.3 гр.3-11 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[7][3][3-11]}|&lt;=|1" precision="0" tip="1" />
+    <control id="18" name="[p.2 п.1] по стр.4 гр.3-11 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[7][4][3-11]}|&lt;=|1" precision="0" tip="1" />
+    <control id="19" name="[p.2 п.1] по стр.5 гр.3-11 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[7][5][3-11]}|&lt;=|1" tip="1" />
+    <control id="20" name="[p.2 п.2] по стр.1 гр.3-8 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[8][1][3-8]}|&lt;=|1" precision="0" tip="1" />
+    <control id="21" name="[p.2 п.2] по стр.2 гр.3-8 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[8][2][3-8]}|&lt;=|1" precision="0" tip="1" />
+    <control id="22" name="[p.2 п.6] по стр.1 гр.3-9 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[12][1][3-9]}|&lt;=|1" precision="0" tip="1" />
+    <control id="23" name="[p.2 п.6] по стр.2 гр.3-9 возможен только один вариант ответа или нет меток" condition="" rule="SUM{[12][2][3-9]}|&lt;=|1" precision="0" tip="1" />
+    <control id="24" name="[р.1 п.1] если р.1 п.1 стр.2 гр.3 не пусто, то р.2 п.4 стр.1 гр.3 не пусто" condition="{[1][2][3]}|&gt;|0" rule="{[10][1][3]}|&gt;|0" tip="1" />
+    <control id="25" name="[р.1 п.1] если р.2 п.4 стр.1 гр.3 не пусто, то р.1 п.1 стр.2 гр.3 не пусто" condition="{[10][1][3]}|&gt;|0" rule="{[1][2][3]}|&gt;|0" precision="0" tip="1" />
+    <control id="26" name="[р.1 п.1] если р.1 п.1 стр.3,4,5 гр.3 не пусто, то р.2 п.4 стр.1,2 гр.4 не пусто" condition="SUM{[1][3-5][3]}|&gt;|0" rule="SUM{[10][1-2][4]}|&gt;|0" precision="0" tip="1" />
+    <control id="27" name="[р.1 п.1] если р.2 п.4 стр.1,2 гр.4 не пусто, то р.1 п.1 стр.3,4,5 гр.3 не пусто" condition="SUM{[10][1-2][4]}|&gt;|0" rule="SUM{[1][3-5][3]}|&gt;|0" precision="0" tip="1" />
+    <control id="28" name="[р.1 п.1] если р.1 п.1 стр.6 гр.3 не пусто, то р.2 п.4 стр.6 гр.3-4 не пусто" condition="{[1][6][3]}|&gt;|0" rule="SUM{[10][6][3,4]}|&gt;|0" precision="0" tip="1" />
+    <control id="29" name="[р.1 п.1] если р.2 п.4 стр.6 гр.3-4 не пусто, то р.1 п.1 стр.6 гр.3 не пусто" condition="SUM{[10][6][3,4]}|&gt;|0" rule="{[1][6][3]}|&gt;|0" precision="0" tip="1" />
+    <control id="30" name="[р.1 п.1] если р.1 п.1 стр.2 гр.3 не пусто, то р.2 п.5 стр.1,2 гр.3 не пусто" condition="{[1][2][3]}|&gt;|0" rule="SUM{[11][1-2][3]}|&gt;|0" precision="0" tip="1" />
+    <control id="31" name="[р.1 п.1] если р.1 п.1 стр.3-5 гр.3 не пусто, то р.2 п.5 стр.3-7 гр.3 не пусто" condition="SUM{[1][3-5][3]}|&gt;|0" rule="SUM{[11][3-7][3]}|&gt;|0" precision="0" tip="1" />
+    <control id="32" name="[р.1 п.1] если р.1 п.1 стр.1 гр.3 не пусто, то р.1 п.2 стр.1-10 гр.3 не пусто" condition="{[1][1][3]}|&gt;|0" rule="SUM{[2][1-10][3]}|&gt;|0" tip="1" />
+    <control id="33" name="[р.1 п.1] если р.1 п.2 стр.1-10 гр.3 не пусто, то р.1 п.1 стр.1 гр.3 не пусто" condition="SUM{[2][1-10][3]}|&gt;|0" rule="{[1][1][3]}|&gt;|0" tip="1" />
+    <control id="34" name="[р.1 п.1] если р.1 п.1 стр.1 гр.8-10 не пусто, то р.1 п.2 стр.1-10 гр.4 не пусто" condition="SUM{[1][1][8-10]}|&gt;|0" rule="SUM{[2][1-10][4]}|&gt;|0" tip="1" />
+    <control id="35" name="[р.1 п.1] если р.1 п.2 стр.1-10 гр.4 не пусто, то р.1 п.1 стр.1 гр.8-10 не пусто" condition="SUM{[2][1-10][4]}|&gt;|0" rule="SUM{[1][1][8-10]}|&gt;|0" tip="1" />
+    <control id="36" name="[р.1 п.1] если р.1 п.1 стр.1 гр.3 не пусто, то р.1 п.3 стр.1-5 гр.3 не пусто" condition="{[1][1][3]}|&gt;|0" rule="SUM{[3][1-5][3]}|&gt;|0" tip="1" />
+    <control id="37" name="[р.1 п.1] если р.1 п.3 стр.1-5 гр.3 не пусто, то р.1 п.1 стр.1 гр.3 не пусто" condition="SUM{[3][1-5][3]}|&gt;|0" rule="{[1][1][3]}|&gt;|0" tip="1" />
+    <control id="38" name="[р.1 п.1] если р.1 п.1 стр.1 гр.8-10 не пусто, то р.1 п.3 стр.1-5 гр.4 не пусто" condition="SUM{[1][1][8-10]}|&gt;|0" rule="SUM{[3][1-5][4]}|&gt;|0" tip="1" />
+    <control id="39" name="[р.1 п.1] если р.1 п.3 стр.1-5 гр.4 не пусто, то р.1 п.1 стр.1 гр.8-10 не пусто" condition="SUM{[3][1-5][4]}|&gt;|0" rule="SUM{[1][1][8-10]}|&gt;|0" tip="1" />
+    <control id="40" name="[р.2 п.4] если р.2 п.4 стр.1,3,5,6 гр.3 не пусто, то р.2 п.5 стр.1-2 гр.3 не пусто" condition="SUM{[10][1,3,5,6][3]}|&gt;|0" rule="SUM{[11][1,2][3]}|&gt;|0" tip="1" />
+    <control id="41" name="[р.2 п.4] если р.2 п.5 стр.1-2 гр.3 не пусто, то р.2 п.4 стр.1,3,5,6 гр.3 не пусто" condition="SUM{[11][1,2][3]}|&gt;|0" rule="SUM{[10][1,3,5,6][3]}|&gt;|0" tip="1" />
+    <control id="42" name="[р.2 п.4] если р.2 п.4 стр.1-6 гр.4 не пусто, то р.2 п.5 стр.3-7 гр.3 не пусто" condition="SUM{[10][1-6][4]}|&gt;|0" rule="SUM{[11][3-7][3]}|&gt;|0" tip="1" />
+    <control id="43" name="[р.2 п.4] если р.2 п.5 стр.3-7 гр.3 не пусто, то р.2 п.4 стр.1-6 гр.4 не пусто" condition="SUM{[11][3-7][3]}|&gt;|0" rule="SUM{[10][1-6][4]}|&gt;|0" tip="1" />
+    <control id="44" name="[р.2 п.4] если р.2 п.4 стр.1,3,5,6 гр.5 не пусто, то р.2 п.5 стр.1-2 гр.4 не пусто" condition="SUM{[10][1,3,5,6][5]}|&gt;|0" rule="SUM{[11][1,2][4]}|&gt;|0" tip="1" />
+    <control id="45" name="[р.2 п.4] если р.2 п.5 стр.1-2 гр.4 не пусто, то р.2 п.4 стр.1,3,5,6 гр.5 не пусто" condition="SUM{[11][1,2][4]}|&gt;|0" rule="SUM{[10][1,3,5,6][5]}|&gt;|0" tip="1" />
+    <control id="46" name="[р.2 п.4] если р.2 п.4 стр.1-6 гр.6 не пусто, то р.2 п.5 стр.3-7 гр.4 не пусто" condition="SUM{[10][1-6][6]}|&gt;|0" rule="SUM{[11][3-7][4]}|&gt;|0" tip="1" />
+    <control id="47" name="[р.2 п.4] если р.2 п.5 стр.3-7 гр.4 не пусто, то р.2 п.4 стр.1-6 гр.6 не пусто" condition="SUM{[11][3-7][4]}|&gt;|0" rule="SUM{[10][1-6][6]}|&gt;|0" tip="1" />
+    <control id="48" name="[р.2 п.4] если р.2 п.4 стр.5 гр.3 не пусто, то р.1 п.1 стр.2 гр.3,5-7 не пусто" condition="{[10][5][3]}|&gt;|0" rule="SUM{[1][2][3,5,6,7]}|&gt;|0" tip="1" />
+    <control id="49" name="[р.2 п.4] если р.2 п.4 стр.5 гр.4 не пусто, то р.1 п.1 стр.3-5 гр.3,5-7 не пусто" condition="{[10][5][4]}|&gt;|0" rule="SUM{[1][3-5][3,5,6,7]}|&gt;|0" tip="1" />
+    <control id="50" name="[р.2 п.4] если р.2 п.4 стр.5 гр.5 не пусто, то р.1 п.1 стр.2 гр.8-10 не пусто" condition="{[10][5][5]}|&gt;|0" rule="SUM{[1][2][8-10]}|&gt;|0" tip="1" />
+    <control id="51" name="[р.2 п.4] если р.2 п.4 стр.5 гр.6 не пусто, то р.1 п.1 стр.3-5 гр.8-10 не пусто" condition="{[10][5][6]}|&gt;|0" rule="SUM{[1][3-5][8-10]}|&gt;|0" tip="1" />
+  </controls>
+  <dics>
+    <dic name="s_god Справочник годов" id="s_god">
+      <term id="2018">2018 год</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="12">годовая</term>
+    </dic>
+  </dics>
+</metaForm>

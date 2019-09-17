@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="607080002001" idp="01" idf="2" shifr="p_14lom" name="14-мет(лом).Сведения об образовании и использовании лома черных и цветных металлов" obj="okpo" OKUD="0607080" version="14-01-2019" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>true</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="email" name="Адрес электронной почты" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1 Образование лома и отходов черных и цветных металлов" nb="1">
+      <columns>
+        <column code="1" type="B" name="Наименование">
+          <default-cell column="1" format="C(250)" inputType="0" />
+        </column>
+        <column code="2" type="B" name="код строки">
+          <default-cell column="2" format="C(6)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Остаток на 01.01">
+          <default-cell column="3" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Образовалось лома и отходов за отчетный год всего">
+          <default-cell column="4" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Образовалось лома и отходов за отчетный год в том числе при производстве металлопродукции">
+          <default-cell column="5" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Образовалось лома и отходов за отчетный год в том числе при металлообработке продукции">
+          <default-cell column="6" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="Образовалось лома и отходов за отчетный год в том числе приобретерно у населения">
+          <default-cell column="7" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Образовалось лома и отходов за отчетный год в том числе приобретерно у др организаций (амортиз лом) всего">
+          <default-cell column="8" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="Образовалось лома и отходов за отчетный год в том числе приобретерно у др организаций (амортиз лом) в том числе на тер-рии данного субъекта РФ">
+          <default-cell column="9" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="10" type="Z" name="Образовалось лома и отходов за отчетный год в том числе приобретерно по импорту">
+          <default-cell column="10" format="N(15,1)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="10000" type="F" name="Отходы и лом черных металлов, всего" />
+        <row code="" type="C" name="     в том числе:" />
+        <row code="10100" type="F" name="    чугуна" />
+        <row code="10200" type="F" name="    легированной стали, всего" />
+        <row code="" type="C" name="        из нее:" />
+        <row code="10201" type="F" name="       нержавеющей" />
+        <row code="10202" type="F" name="      прочей легированной" />
+        <row code="10300" type="F" name="   оборотный лом" />
+        <row code="10400" type="F" name="   токарная стружка,обрезки,ломанная стружка,отходы фрезерной обработки,опилки,отходы обрезки и штампов" />
+        <row code="10500" type="F" name="   слитки для переплавки(шихтовые слитки),полученные из лома" />
+        <row code="10600" type="F" name="   прочие отходы и лом" />
+        <row code="20000" type="F" name="Отходы и лом цветных металлов, всего" />
+        <row code="" type="C" name="     в том числе:" />
+        <row code="20100" type="F" name="   медные, всего" />
+        <row code="" type="C" name="        из них:" />
+        <row code="20101" type="F" name="      рафинированной меди" />
+        <row code="20102" type="F" name="     сплавов медных" />
+        <row code="20103" type="F" name="     сплавов медно-цинковых и прочих" />
+        <row code="20200" type="F" name="   никелевые, всего" />
+        <row code="" type="C" name="       из них:" />
+        <row code="20201" type="F" name="     никеля нелегированного" />
+        <row code="20202" type="F" name="     из никелевых сплавов" />
+        <row code="20300" type="F" name="  алюминиевые, всего" />
+        <row code="" type="C" name="      в том числе:" />
+        <row code="20301" type="F" name="    отходы алюминиевые, всего" />
+        <row code="" type="C" name="     из них:" />
+        <row code="20302" type="F" name="  токарная стружка,обрезки,ломаная стружка,отходы фрезерной обработки,опилки и отходы от обрезк" />
+        <row code="20303" type="F" name="  прочие(включая забракованные изделия)" />
+        <row code="20304" type="F" name="  лом алюминиевый, всего" />
+        <row code="20400" type="F" name="  свинцовые, всего" />
+        <row code="20500" type="F" name="  цинковые, всего" />
+        <row code="20600" type="F" name="  оловянные, всего" />
+        <row code="20700" type="F" name="  других металлов" />
+      </rows>
+    </section>
+    <section code="2" name="Раздел 2  Использование лома и отходов черных и цветных металлов" nb="2">
+      <columns>
+        <column code="1" type="B" name="Наименование">
+          <default-cell column="1" format="C(250)" inputType="0" />
+        </column>
+        <column code="2" type="B" name="код строки">
+          <default-cell column="2" format="C(6)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Использовано лома и отходов в отчетном году - всего">
+          <default-cell column="3" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Использовано лома и отходов в отчетном году в том числе для собственного производства, всего">
+          <default-cell column="4" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Использовано лома и отходов в отчетном году в т.ч.для собств.произ-ва из него:для произв-ва металла">
+          <default-cell column="5" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Использовано лома и отходов в отчетном году в том числе: отгружено другим организациям, всего">
+          <default-cell column="6" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="Использовано лома и отх. в отчет.году в т.ч.отгружено др. орган. в т.ч.:орган,осуществ.опт торговлю">
+          <default-cell column="7" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Использовано лома и отходов в отчетном году в том числе: отгружено на экспорт">
+          <default-cell column="8" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="9" type="Z" name="остаток">
+          <default-cell column="9" format="N(15,1)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="10000" type="F" name="Отходы и лом черных металлов, всего" />
+        <row code="" type="C" name="       в том числе:" />
+        <row code="10100" type="F" name="   чугуна" />
+        <row code="10200" type="F" name="  легированной стали, всего" />
+        <row code="" type="C" name="      из нее:" />
+        <row code="10201" type="F" name="   нержавеющей" />
+        <row code="10202" type="F" name="   прочей легированной" />
+        <row code="10300" type="F" name="  оборотный лом" />
+        <row code="10400" type="F" name="  токарная стружка,обрезки,ломанная стружка,отходы фрезерной обработки,опилки,отходы обрезки и штампов" />
+        <row code="10500" type="F" name="  слитки для переплавки(шихтовые слитки),полученные из лома" />
+        <row code="10600" type="F" name="  прочие отходы и лом" />
+        <row code="20000" type="F" name="Отходы и лом цветных металлов, всего" />
+        <row code="" type="C" name="     в том числе:" />
+        <row code="20100" type="F" name="  медные, всего" />
+        <row code="" type="C" name="      из них:" />
+        <row code="20101" type="F" name="     рафинированной меди" />
+        <row code="20102" type="F" name="     сплавов медных" />
+        <row code="20103" type="F" name="     сплавов медно-цинковых и прочих" />
+        <row code="20200" type="F" name=" никелевые, всего" />
+        <row code="" type="C" name="      из них:" />
+        <row code="20201" type="F" name="     никеля нелегированного" />
+        <row code="20202" type="F" name="     из никелевых сплавов" />
+        <row code="20300" type="F" name="  алюминиевые, всего" />
+        <row code="" type="C" name="       в том числе:" />
+        <row code="20301" type="F" name="    отходы алюминиевые, всего" />
+        <row code="" type="C" name="         из них:" />
+        <row code="20302" type="F" name="       токарная стружка,обрезки,ломаная стружка,отходы фрезерной обработки,опилки и отходы от обрезкв том числе: иевые, всего" />
+        <row code="20303" type="F" name="  прочие (включая забракованные изделия)" />
+        <row code="20304" type="F" name=" лом алюминиевый, всего" />
+        <row code="20400" type="F" name=" свинцовые, всего" />
+        <row code="20500" type="F" name=" цинковые, всего" />
+        <row code="20600" type="F" name=" оловянные, всего" />
+        <row code="20700" type="F" name=" других металлов" />
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="Раздел 1 гр4&gt;=сумме гр 5, 6, 7, 8, 10" condition="" rule=" {[1][*][4]}|&gt;=|{[1][*][5]}+{[1][*][6]}+{[1][*][7]}+{[1][*][8]}+{[1][*][10]}" tip="1" />
+    <control id="2" name="Раздел 1 гр8&gt;= гр9" condition="" rule=" {[1][*][8]}|&gt;=|{[1][*][9]}" tip="1" />
+    <control id="3" name="Раздел 1стр10000=сумме стр 10100 10200, 10300, 10400, 10500, 10600" condition="" rule="{[1][10000][*]}|=|{[1][10100][*]}+{[1][10200][*]}+{[1][10300][*]}+{[1][10400][*]}+{[1][10500][*]}+{[1][10600][*]}" tip="1" />
+    <control id="4" name="Раздел1 стр 10200=стр10201+стр10202" condition="" rule="{[1][10200][*]}|=|{[1][10201][*]}+{[1][10202][*]}" tip="1" />
+    <control id="5" name="Раздел 2 гр3=гр4+гр6+гр8" condition="" rule="{[2][*][3]}|=|{[2][*][4]}+{[2][*][6]}+{[2][*][8]}" tip="1" />
+    <control id="6" name="Раздел2 гр4&gt;= гр5" condition="" rule=" {[2][*][4]}|&gt;=|{[2][*][5]}" tip="1" />
+    <control id="7" name="Раздел 2 гр6&gt;=гр7 " condition=" " rule=" {[2][*][6]}|&gt;=|{[2][*][7]}" tip="1" />
+    <control id="8" name="Раздел2 гр9=Раздел1 гр3+раздел 1 гр4-раздел2 гр3" condition=" " rule=" {[2][*][9]}|=|{[1][*][3]}+{[1][*][4]}-{[2][*][3]}" tip="1" />
+    <control id="9" name="Раздел1стр 20000=сумме стр 20100,20200,20300,20400,20500,20600,20700" condition="" rule="{[1][20000][*]}|=|{[1][20100][*]}+{[1][20200][*]}+{[1][20300][*]}+{[1][20400][*]}+&#xD;&#xA;{[1][20500][*]}+{[1][20600][*]}+{[1][20700][*]}" tip="1" />
+    <control id="10" name="раздел 1 стр 20100=сумме стр20101,20102,20103" condition="" rule="{[1][20100][*]}|=|{[1][20101][*]}+{[1][20102][*]}+{[1][20103][*]}" tip="1" />
+    <control id="11" name="Раздел 2 стр10000=сумме стр 10100 10200, 10300, 10400, 10500, 10600" condition="" rule=" {[2][10000][*]}|=|{[2][10200][*]}+{[2][10100][*]}+{[2][10300][*]}+{[2][10400][*]}+&#xD;&#xA;{[2][10500][*]}+{[2][10600][*]}" tip="1" />
+    <control id="12" name=" Раздел1стр20300=сумме стр20301,20304" condition="" rule="{[1][20300][*]}|=|{[1][20301][*]}+{[1][20304][*]}" tip="1" />
+    <control id="13" name="Раздел 2 стр20301=сумме стр20302,20303" condition="" rule="{[2][20301][*]}|=|{[2][20302][*]}+{[2][20303][*]}" tip="1" />
+    <control id="14" name="раздел 1 стр 20200=сумме стр20201,20202" condition="" rule="{[1][20200][*]}|=|{[1][20201][*]}+{[1][20202][*]}" tip="1" />
+    <control id="15" name="Раздел2 стр 10200=стр10201+стр10202" condition="" rule="{[2][10200][*]}|=|{[2][10201][*]}+{[2][10202][*]}" tip="1" />
+    <control id="16" name="Раздел 2 стр 20000=сумме стр 20100,20200,20300,20400,20500,20600,20700" condition="" rule="{[2][20000][*]}|=|{[2][20100][*]}+{[2][20200][*]}+{[2][20300][*]}+{[2][20400][*]}+{[2][20500][*]}+{[2][20600][*]}+{[2][20700][*]}" tip="1" />
+    <control id="17" name="Раздел 2 стр 20100=сумме стр20101,20102,20103" condition="" rule="{[2][20100][*]}|=|{[2][20101][*]}+{[2][20102][*]}+{[2][20103][*]}" tip="1" />
+    <control id="18" name="Раздел 2 стр 20200=сумме стр20201,20202" condition="" rule="{[2][20200][*]}|=|{[2][20201][*]}+{[2][20202][*]}" tip="1" />
+    <control id="19" name="Раздел 2 стр20300=сумме стр20301,20304" condition="" rule="{[2][20300][*]}|=|{[2][20301][*]}+{[2][20304][*]}" tip="1" />
+    <control id="20" name=" Раздел 1 стр20301=сумме  стр20302,20303" condition="" rule="{[1][20301][*]}|=|{[1][20302][*]}+{[1][20303][*]}" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2007">2007</term>
+      <term id="2008">2008</term>
+      <term id="2009">2009</term>
+      <term id="2010">2010</term>
+      <term id="2011">2011</term>
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="12">годовая</term>
+    </dic>
+  </dics>
+</metaForm>

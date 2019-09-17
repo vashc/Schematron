@@ -1,0 +1,319 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="601013005004" idp="4" idf="5" shifr="p_pmobsl"
+          name="форма № ПМ.«СВЕДЕНИЯ ОБ ОСНОВНЫХ ПОКАЗАТЕЛЯХ ДЕЯТЕЛЬНОСТИ МАЛОГО ПРЕДПРИЯТИЯ»" obj="okpo" OKUD="0601013"
+          format-version="1.3" version="20-03-2019">
+    <settings>
+        <validation>always</validation>
+    </settings>
+    <title>
+        <item field="okpo" name="Код отчитывающейся организации по ОКПО" dic="s_okpo"/>
+        <item field="okved" name="Код вида деятельности по ОКВЭД2" dic="s_okved2"/>
+        <item field="name" name="Наименование отчитывающейся организации"/>
+        <item field="leader_fio" name="Руководитель организации (ФИО)"/>
+        <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)"/>
+        <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)"/>
+        <item field="phone" name="Контактный телефон"/>
+        <item name="E-mail:" field="mail"/>
+    </title>
+    <sections>
+        <section code="1" name="РАЗДЕЛ 1" nb="8">
+            <columns>
+                <column code="1" type="B" name="Наименование">
+                    <default-cell column="1" format="C(250)" inputType="0"/>
+                </column>
+                <column code="2" type="B" name="№ строки">
+                    <default-cell column="2" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="нужное отметьте знаком «1»">
+                    <default-cell column="3" format="N(15,0)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C" name="РАЗДЕЛ 1. АНКЕТА"/>
+                <row code="" type="C" name="Применяете ли Вы упрощённую систему налогообложения?"/>
+                <row code="01" type="F" name="ДА">
+                    <cell column="3" dic="s_metka" format="N(1,0)" default="0" inputType="2" vldType="1"/>
+                </row>
+                <row code="02" type="F" name="НЕТ">
+                    <cell column="3" dic="s_metka" format="N(1,0)" default="0" inputType="2" vldType="1"/>
+                </row>
+            </rows>
+        </section>
+        <section code="2" name="РАЗДЕЛ 2" nb="9">
+            <columns>
+                <column code="1" type="B" name="Наименование">
+                    <default-cell column="1" format="C(250)" inputType="0"/>
+                </column>
+                <column code="2" type="B" name="№ строки">
+                    <default-cell column="2" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="за период с начала года">
+                    <default-cell column="3" format="N(15,1)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C" name="РАЗДЕЛ 2"/>
+                <row code="" type="C" name="Численность, начисленная заработная плата работников и отработанное время"/>
+                <row code="" type="C" name="Коды по ОКЕИ: человек - 792 (с одним десятичным знаком);"/>
+                <row code="" type="C"
+                     name="                            тысяча рублей - 384 (с одним десятичным знаком);"/>
+                <row code="" type="C" name="                            человеко-час - 539 (в целых числах)."/>
+                <row code="03" type="F" name="Средняя численность - всего, человек">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="" type="C" name="   в том числе:"/>
+                <row code="04" type="F" name="     работники списочного состава (без внешних совместителей) (1)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="05" type="F" name="     внешние совместители (2)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="06" type="F"
+                     name="     работники, выполнявшие работы по договорам гражданско-правового характера (3)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="07" type="F" name="Фонд начисленной заработной платы, тысяча рублей">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="" type="C" name="   в том числе:"/>
+                <row code="08" type="F" name="     работников списочного состава (без внешних совместителей)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="09" type="F" name="     внешних совместителей">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="10" type="F"
+                     name="     работников, выполнявшие работы по договорам гражданско-правового характера">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="11" type="F" name="     других лиц несписочного состава">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="12" type="F" name="Выплаты социального характера, тысяча рублей">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="" type="C" name="   в том числе:"/>
+                <row code="13" type="F" name="     работникам списочного состава (без внешних совместителей)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="14" type="F" name="     внешним совместителей">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="15" type="F"
+                     name="     работникам, выполнявшие работы по договорам гражданско-правового характера">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="16" type="F" name="     другим лицам несписочного состава">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="17" type="F"
+                     name="Количество отработанных работниками списочного состава человеко-часов, человеко-часов">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="" type="C" name=""/>
+                <row code="" type="C" name="(1) Показывается среднесписочная численность работников."/>
+                <row code="" type="C"
+                     name="(2) Средняя численность совместителей исчисляется пропорционально фактически отработанному времени."/>
+                <row code="" type="C"
+                     name="(3) Средняя численность исчисляется, исходя из учета этих работников за каждый календарный день как целых единиц в течение всего срока действия договора."/>
+            </rows>
+        </section>
+        <section code="3" name="РАЗДЕЛ 3" nb="10">
+            <columns>
+                <column code="1" type="B" name="Наименование">
+                    <default-cell column="1" format="C(250)" inputType="0"/>
+                </column>
+                <column code="2" type="B" name="№ строки">
+                    <default-cell column="2" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="за период с начала года">
+                    <default-cell column="3" format="N(15,1)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C" name="РАЗДЕЛ 3"/>
+                <row code="" type="C" name="Общие экономические показатели"/>
+                <row code="" type="C" name="(без НДС, акцизов и аналогичных обязательных платежей)"/>
+                <row code="" type="C" name="Коды по ОКЕИ: тысяча рублей - 384 (с одним десятичным знаком);"/>
+                <row code="18" type="F"
+                     name="Отгружено товаров собственного производства, выполнено работ и услуг собственными силами">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="19" type="F" name="   из них в порядке розничной торговли">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="20" type="F" name="Продано товаров несобственного производства">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="21" type="F" name="   из них в порядке розничной торговли">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="22" type="F" name="Из строки 18 - продукция общественного питания">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="23" type="F" name="Расходы на приобретение товаров для перепродажи">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="24" type="F"
+                     name="Инвестиции в основной капитал (в части новых и приобретённых по импорту основных средств)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="25" type="F" name="   из них за счёт бюджетных средств">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="26" type="F" name="Внутренние затраты на исследования и разработки">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="27" type="F"
+                     name="Стоимость проданных объектов недвижимости, приобретённых для перепродажи (без НДС и аналогичных обязательных платежей)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="28" type="F"
+                     name="Расходы на приобретение объектов недвижимости, приобретённых для перепродажи (без НДС и аналогичных обязательных платежей)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+            </rows>
+        </section>
+    </sections>
+    <controls>
+        <control id="1" name="Данные строк с 03 по 17 - неотрицательные" condition=""
+                 rule="{[2][3,4,5,6,7,8,9,10,11,12,13,14,15,16,17][3]}|=|ABS({[2][3,4,5,6,7,8,9,10,11,12,13,14,15,16,17][3]})"
+                 tip="1"/>
+        <control id="2" name="Данные строк с 18 по 28 - неотрицательные" condition=""
+                 rule="{[3][18,19,20,21,22,23,24,25,26,27,28][3]}|=|ABS({[3][18,19,20,21,22,23,24,25,26,27,28][3]})"
+                 tip="1"/>
+        <control id="1010" name="стр.03 = стр.04 + стр.05 + стр.06" condition=""
+                 rule="isnull({[2][3][3]},0)|=|isnull({[2][4][3]},0)+isnull({[2][5][3]},0)+isnull({[2][6][3]},0)"
+                 tip="1"/>
+        <control id="1020" name="стр.07 = стр.08 + стр.09 + стр.10 + стр.11" condition=""
+                 rule="isnull({[2][7][3]},0)|=|isnull({[2][8][3]},0)+isnull({[2][9][3]},0)+isnull({[2][10][3]},0)+isnull({[2][11][3]},0)"
+                 tip="1"/>
+        <control id="1030" name="стр.12 = стр.13 + стр.14 + стр.15 + стр.16" condition=""
+                 rule="isnull({[2][12][3]},0)|=|isnull({[2][13][3]},0)+isnull({[2][14][3]},0)+isnull({[2][15][3]},0)+isnull({[2][16][3]},0)"
+                 tip="1"/>
+        <control id="1040" name="стр.18 &gt;= стр.19" condition=""
+                 rule="isnull({[3][18][3]},0)|&gt;=|isnull({[3][19][3]},0)" tip="1"/>
+        <control id="1050" name="стр.20 &gt;= стр.21" condition=""
+                 rule="isnull({[3][20][3]},0)|&gt;=|isnull({[3][21][3]},0)" tip="1"/>
+        <control id="1060" name="стр.18 &gt;= стр.22" condition=""
+                 rule="isnull({[3][18][3]},0)|&gt;=|isnull({[3][22][3]},0)" tip="1"/>
+        <control id="1070" name="стр.24 &gt;= стр.25" condition=""
+                 rule="isnull({[3][24][3]},0)|&gt;=|isnull({[3][25][3]},0)" tip="1"/>
+        <control id="1080" name="стр.27 &lt;= стр.20" condition=""
+                 rule="isnull({[3][27][3]},0)|&lt;=|isnull({[3][20][3]},0)" tip="1"/>
+        <control id="1090" name="стр.28 &lt;= стр.23" condition=""
+                 rule="isnull({[3][28][3]},0)|&lt;=|isnull({[3][23][3]},0)" tip="1"/>
+        <control id="1100" name="должен стоять знак «1» или в стр.01 или в стр.02" condition=""
+                 rule="isnull({[1][1][3]},0)+isnull({[1][2][3]},0)|=|1" tip="1"/>
+        <control id="1110" name="Данные по строкам с 03 по 06 могут быть с одним десятичным знаком" condition=""
+                 rule="isnull({[2][3,4,5,6][3]},0)|=|ROUND(isnull({[2][3,4,5,6][3]},0),1,0)" tip="1"/>
+        <control id="1121" name="Данные по строкам с 07 по 11 могут быть с одним десятичным знаком" condition=""
+                 rule="isnull({[2][7,8,9,10,11][3]},0)|=|ROUND(isnull({[2][7,8,9,10,11][3]},0),1,0)" tip="1"/>
+        <control id="1122" name="Данные по строкам с 12 по 16 могут быть с одним десятичным знаком" condition=""
+                 rule="isnull({[2][12,13,14,15,16][3]},0)|=|ROUND(isnull({[2][12,13,14,15,16][3]},0),1,0)" tip="1"/>
+        <control id="1130" name="Данные по строке 17 в целых единицах" condition=""
+                 rule="isnull({[2][17][3]},0)|=|ROUND(isnull({[2][17][3]},0),0)" tip="1"/>
+        <control id="1140" name="Данные по строкам с 18 по 28 могут быть с одним десятичным знаком" condition=""
+                 rule="isnull({[3][18,19,20,21,22,24,25,26,27,28][3]},0)|=|ROUND(isnull({[3][18,19,20,21,22,24,25,26,27,28][3]},0),1,0)"
+                 tip="1"/>
+        <control id="1150" name="стр.03 должна быть заполнена, если заполнена хотя бы одна из строк с 04 по 06"
+                 condition="isnull({[2][4][3]},0)+isnull({[2][5][3]},0)+isnull({[2][6][3]},0)|&gt;|0"
+                 rule="isnull({[2][3][3]},0)|&gt;|0" tip="1"/>
+        <control id="1160" name="стр.07 должна быть заполнена, если заполнена хотя бы одна из строк с 08 по 11"
+                 condition="isnull({[2][8][3]},0)+isnull({[2][9][3]},0)+isnull({[2][10][3]},0)+isnull({[2][11][3]},0)|&gt;|0"
+                 rule="isnull({[2][7][3]},0)|&gt;|0" tip="1"/>
+        <control id="1170" name="стр.12 должна быть заполнена, если заполнена хотя бы одна из строк с 13 по 16"
+                 condition="isnull({[2][13][3]},0)+isnull({[2][14][3]},0)+isnull({[2][15][3]},0)+isnull({[2][16][3]},0)|&gt;|0"
+                 rule="isnull({[2][12][3]},0)|&gt;|0" tip="1"/>
+        <control id="1180" name="если заполнена стр.07, то должны быть данные по стр.03"
+                 condition="isnull({[2][7][3]},0)|&gt;|0" rule="isnull({[2][3][3]},0)|&gt;|0" tip="1"/>
+        <control id="1190" name="если заполнена стр.17, то должны быть данные по стр.04"
+                 condition="isnull({[2][17][3]},0)|&gt;|0" rule="isnull({[2][4][3]},0)|&gt;|0" tip="1"/>
+        <control id="1200" name="если заполнена стр.19, то должны быть данные по стр.18"
+                 condition="isnull({[3][19][3]},0)|&gt;|0" rule="isnull({[3][18][3]},0)|&gt;|0" tip="1"/>
+        <control id="1210" name="если заполнена стр.21, то должны быть данные по стр.20"
+                 condition="isnull({[3][21][3]},0)|&gt;|0" rule="isnull({[3][20][3]},0)|&gt;|0" tip="1"/>
+        <control id="1220" name="если заполнена стр.22, то должны быть данные по стр.18"
+                 condition="isnull({[3][22][3]},0)|&gt;|0" rule="isnull({[3][18][3]},0)|&gt;|0" tip="1"/>
+        <control id="1230" name="если заполнена стр.25, то должны быть данные по стр.24"
+                 condition="isnull({[3][25][3]},0)|&gt;|0" rule="isnull({[3][24][3]},0)|&gt;|0" tip="1"/>
+        <control id="1240" name="если заполнена стр.27, то должны быть данные по стр.20"
+                 condition="isnull({[3][27][3]},0)|&gt;|0" rule="isnull({[3][20][3]},0)|&gt;|0" tip="1"/>
+        <control id="1250" name="если заполнена стр.28, то должны быть данные по стр.23"
+                 condition="isnull({[3][28][3]},0)|&gt;|0" rule="isnull({[3][23][3]},0)|&gt;|0" tip="1"/>
+        <control id="2040" name="если заполнена стр.03, то должны быть данные по стр.07"
+                 condition="isnull({[2][3][3]},0)|&gt;|0" rule="isnull({[2][7][3]},0)|&gt;|0" tip="0"/>
+        <control id="2050" name="если заполнена стр.04, то должны быть данные по стр.17"
+                 condition="isnull({[2][04][3]},0)|&gt;|0" rule="isnull({[2][17][3]},0)|&gt;|0" tip="0"/>
+        <control id="2060" name="если заполнена стр.12, то должна быть заполнена стр.03"
+                 condition="isnull({[2][12][3]},0)|&gt;|0" rule="isnull({[2][3][3]},0)|&gt;|0" tip="0"/>
+        <control id="2080" name="если заполнена стр.17, то должны быть данные по стр.08"
+                 condition="isnull({[2][17][3]},0)|&gt;|0" rule="isnull({[2][8][3]},0)|&gt;|0" tip="0"/>
+        <control id="2110" name="если заполнена стр.23, то должна быть заполнена стр.20"
+                 condition="isnull({[3][23][3]},0)|&gt;|0" rule="isnull({[3][20][3]},0)|&gt;|0" tip="0"/>
+        <control id="2130" name="если заполнена стр.28, то должна быть заполнена стр.27"
+                 condition="isnull({[3][28][3]},0)|&gt;|0" rule="isnull({[3][27][3]},0)|&gt;|0" tip="0"/>
+        <control id="2311" name="для отчёта за январь-март : [стр.17 / стр.04 / 3] &lt;= 230 часов"
+                 condition="isnull({[2][17][3]},0)*isnull({[2][4][3]},0)|&gt;|0"
+                 rule="isnull({[2][17][3]},0)/isnull({[2][4][3]},0)/3|&lt;=|230.0" periodClause="(&amp;NP=1)" tip="0"/>
+        <control id="2312" name="для отчёта за январь-июнь : [стр.17 / стр.04 / 6] &lt;= 230 часов"
+                 condition="isnull({[2][17][3]},0)*isnull({[2][4][3]},0)|&gt;|0"
+                 rule="isnull({[2][17][3]},0)/isnull({[2][4][3]},0)/6|&lt;=|230.0" periodClause="(&amp;NP=2)" tip="0"/>
+        <control id="2313" name="для отчёта за январь-сентябрь : [стр.17 / стр.04 / 9] &lt;= 230 часов"
+                 condition="isnull({[2][17][3]},0)*isnull({[2][4][3]},0)|&gt;|0"
+                 rule="isnull({[2][17][3]},0)/isnull({[2][4][3]},0)/9|&lt;=|230.0" periodClause="(&amp;NP=3)" tip="0"/>
+        <control id="2314" name="для отчёта за январь-декабрь : [стр.17 / стр.04 / 12] &lt;= 230 часов"
+                 condition="isnull({[2][17][3]},0)*isnull({[2][4][3]},0)|&gt;|0"
+                 rule="isnull({[2][17][3]},0)/isnull({[2][4][3]},0)/12|&lt;=|230.0" periodClause="(&amp;NP=4)" tip="0"/>
+        <control id="2321" name="для отчёта за январь-март : [ стр.12 * 1000 / стр.03 / 3 ] &lt; 4 000 (рублей)"
+                 condition="{[2][12][3]}*{[2][3][3]}|&lt;&gt;|0" rule="{[2][12][3]}*1000.0/{[2][3][3]}/3|&lt;|4000.0"
+                 periodClause="(&amp;NP=1)" tip="0"/>
+        <control id="2322" name="для отчёта за январь-июнь : [ стр.12 * 1000 / стр.03 / 6 ] &lt; 4 000 (рублей)"
+                 condition="{[2][12][3]}*{[2][3][3]}|&lt;&gt;|0" rule="{[2][12][3]}*1000.0/{[2][3][3]}/6|&lt;|4000.0"
+                 periodClause="(&amp;NP=2)" tip="0"/>
+        <control id="2323" name="для отчёта за январь-сентябрь : [ стр.12 * 1000 / стр.03 / 9 ] &lt; 4 000 (рублей)"
+                 condition="{[2][12][3]}*{[2][3][3]}|&lt;&gt;|0" rule="{[2][12][3]}*1000.0/{[2][3][3]}/9|&lt;|4000.0"
+                 periodClause="(&amp;NP=3)" tip="0"/>
+        <control id="2324" name="для отчёта за январь-декабрь : [ стр.12 * 1000 / стр.03 / 12 ] &lt; 4 000 (рублей)"
+                 condition="{[2][12][3]}*{[2][3][3]}|&lt;&gt;|0" rule="{[2][12][3]}*1000.0/{[2][3][3]}/12|&lt;|4000.0"
+                 periodClause="(&amp;NP=4)" tip="0"/>
+        <control id="2331"
+                 name="для отчёта за январь-март : 11,28 &lt;= [(стр.08 + стр.09) / 3] / стр.04 &lt;= 150,0 (тыс.рублей)"
+                 condition="isnull({[2][4][3]},0)|&gt;|0"
+                 rule="11.28|&lt;=|((isnull({[2][8][3]},0)+isnull({[2][9][3]},0))/3)/isnull({[2][4][3]},0)|&lt;=|150.0"
+                 periodClause="(&amp;NP=1)" tip="0"/>
+        <control id="2332"
+                 name="для отчёта за январь-июнь : 11,28 &lt;= [(стр.08 + стр.09) / 6] / стр.04 &lt;= 150,0 (тыс.рублей)"
+                 condition="isnull({[2][4][3]},0)|&gt;|0"
+                 rule="11.28|&lt;=|((isnull({[2][8][3]},0)+isnull({[2][9][3]},0))/6)/isnull({[2][4][3]},0)|&lt;=|150.0"
+                 periodClause="(&amp;NP=2)" tip="0"/>
+        <control id="2333"
+                 name="для отчёта за январь-сентябрь : 11,28 &lt;= [(стр.08 + стр.09) / 9] / стр.04 &lt;= 150,0 (тыс.рублей)"
+                 condition="isnull({[2][4][3]},0)|&gt;|0"
+                 rule="11.28|&lt;=|((isnull({[2][8][3]},0)+isnull({[2][9][3]},0))/9)/isnull({[2][4][3]},0)|&lt;=|150.0"
+                 periodClause="(&amp;NP=3)" tip="0"/>
+        <control id="2334"
+                 name="для отчёта за январь-декабрь : 11,28 &lt;= [(стр.08 + стр.09) / 12] / стр.04 &lt;= 150,0 (тыс.рублей)"
+                 condition="isnull({[2][4][3]},0)|&gt;|0"
+                 rule="11.28|&lt;=|((isnull({[2][8][3]},0)+isnull({[2][9][3]},0))/12)/isnull({[2][4][3]},0)|&lt;=|150.0"
+                 periodClause="(&amp;NP=4)" tip="0"/>
+    </controls>
+    <dics>
+        <dic name="Перечень отчётных годов" id="s_god">
+            <term id="2019">2019 год</term>
+            <term id="2020">2020 год</term>
+            <term id="2021">2021 год</term>
+            <term id="2022">2022 год</term>
+        </dic>
+        <dic name="Справочник периодов" id="s_mes">
+            <term id="1">январь - март</term>
+            <term id="2">январь - июнь</term>
+            <term id="3">январь - сентябрь</term>
+            <term id="4">январь - декабрь</term>
+        </dic>
+        <dic name="Ответ на анкетные вопросы" id="s_metka">
+            <term id="0">« » - метка не установлена</term>
+            <term id="1">« V » - метка установлена</term>
+        </dic>
+    </dics>
+</metaForm>

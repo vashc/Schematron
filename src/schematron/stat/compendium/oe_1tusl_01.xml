@@ -1,0 +1,186 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="606004001001" idp="01" idf="1" shifr="oe_1tusl" name="1-Т (условия труда).СВЕДЕНИЯ О СОСТОЯНИИ УСЛОВИЙ ТРУДА И КОМПЕНСАЦИЯХ НА РАБОТАХ С ВРЕДНЫМИ И (ИЛИ) ОПАСНЫМИ УСЛОВИЯМИ ТРУДА" obj="okpo" OKUD="0606004" version="18-12-2018" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>false</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail:" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1. Состояние условий труда" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Весь персонал на конец отчетного года, человек">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="  из них женщины">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="  из них лица моложе 18 лет">
+          <default-cell column="5" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Списочная численность работников (без находящихся в отпуске по беременности и родам и по уходу за ребенком)" />
+        <row code="" type="C" name="Из данных строки 01:" />
+        <row code="02" type="F" name="  занятые на работах с вредными и (или) опасными условиями труда" />
+        <row code="" type="C" name="Из данных стр. 02: занятые под воздействием  вредных факторов производственной среды:" />
+        <row code="03" type="F" name="  химического фактора" />
+        <row code="04" type="F" name="  биологического фактора" />
+        <row code="05" type="F" name="  аэрозолей преимущественно фиброгенного действия" />
+        <row code="06" type="F" name="  шума, ультразвука воздушного, инфразвука" />
+        <row code="07" type="F" name="  вибрации (общей и локальной)" />
+        <row code="08" type="F" name="  неионизирующего излучения" />
+        <row code="09" type="F" name="  ионизирующего излучения" />
+        <row code="10" type="F" name="  микроклимата" />
+        <row code="11" type="F" name="  световой среды" />
+        <row code="" type="C" name=" занятые под воздействием факторов трудового процесса:" />
+        <row code="12" type="F" name="  тяжести" />
+        <row code="13" type="F" name="  напряженности" />
+      </rows>
+    </section>
+    <section code="2" name="Раздел 2.  Гарантии и компенсации, предоставляемые работникам, занятым на работах с вредными и (или) опасными условиями труда" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Весь персонал на конец отчетного года, человек">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="  в том числе женщины">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Фактические расходы на гарантии,компенсации и средства индивидуальной защиты в отчетном году, тыс.руб.">
+          <default-cell column="5" format="N(15,1)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="Списочная численность работников, занятых на работах с вредными и (или) опасными усл.труда, имеющих право на:" />
+        <row code="20" type="F" name=" ежегодный дополнительный оплачиваемый  отпуск" />
+        <row code="21" type="F" name=" сокращенную продолжительность рабочего времени">
+          <cell column="5" format="N(15,1)" inputType="0" />
+        </row>
+        <row code="22" type="F" name=" лечебно-профилактическое питание" />
+        <row code="23" type="F" name=" молоко или другие равноценные пищевые продукты" />
+        <row code="24" type="F" name=" оплату труда в повышенном размере" />
+        <row code="25" type="F" name=" проведение медицинских осмотров" />
+        <row code="" type="C" name=" досрочное назначение страховой пенсии по старости:" />
+        <row code="26" type="F" name="   по списку N 1">
+          <cell column="5" format="N(15,1)" inputType="0" />
+        </row>
+        <row code="27" type="F" name="   по списку N 2">
+          <cell column="5" format="N(15,1)" inputType="0" />
+        </row>
+        <row code="28" type="F" name="   прочие пенсии за особые условия труда, пенсии за выслугу лет, установленные законодательством">
+          <cell column="5" format="N(15,1)" inputType="0" />
+        </row>
+        <row code="29" type="F" name="Списочная численность работников, которым установлен хотя бы один вид гарантий и компенсаций, перечисленных в стр. с 20 по 28">
+          <cell column="5" format="N(15,1)" inputType="0" />
+        </row>
+        <row code="30" type="F" name="Списочная численность работников, получающих бесплатно спецодежду, спецобувь и другие средства индивидуальной защиты -всего">
+          <cell column="4" format="N(15,0)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Из данных строки 30" />
+        <row code="31" type="F" name="Списочная численность работников, получающих бесплатно спецодежду, спецобувь и другие средства индивидуальной защиты, занятых на работах с вредными и (или) опасными условиями труда">
+          <cell column="4" format="N(15,0)" inputType="0" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="По стр. 01-13 гр.3&gt;=гр.4" condition="" rule="{[1][*][3]}|&gt;=|{[1][*][4]}" precision="0" tip="1" />
+    <control id="2" name="По стр. 01-13 гр.3&gt; гр.5" condition="{[1][*][3]}|&lt;&gt;|0 OR {[1][*][5]}|&lt;&gt;|0" rule="{[1][*][3]}|&gt;|{[1][*][5]}" precision="0" tip="1" />
+    <control id="3" name="В гр.3-5 стр.01&gt;=стр.02" condition="" rule="{[1][1][*]}|&gt;=|{[1][2][*]}" precision="0" tip="1" />
+    <control id="4" name="В гр.3-5 стр.02&gt;=стр.13" condition="" rule="{[1][2][*]}|&gt;=|{[1][13][*]}" precision="0" tip="1" />
+    <control id="6" name="В гр.3-5 стр.02&gt;=стр.10" condition="" rule="{[1][2][*]}|&gt;=|{[1][10][*]}" precision="0" tip="1" />
+    <control id="7" name="В гр.3-5 стр.02&gt;=стр.03" condition="" rule="{[1][2][*]}|&gt;=|{[1][3][*]}" precision="0" tip="1" />
+    <control id="8" name="В гр.3-5 стр.02&gt;=стр.04" condition="" rule="{[1][2][*]}|&gt;=|{[1][4][*]}" precision="0" tip="1" />
+    <control id="9" name="В гр.3-5 стр.02&gt;=стр.05" condition="" rule="{[1][2][*]}|&gt;=|{[1][5][*]}" precision="0" tip="1" />
+    <control id="10" name="В гр.3-5 стр.02&gt;=стр.06" condition="" rule="{[1][2][*]}|&gt;=|{[1][6][*]}" precision="0" tip="1" />
+    <control id="11" name="В гр.3-5 стр.02&gt;=стр.07" condition="" rule="{[1][2][*]}|&gt;=|{[1][7][*]}" precision="0" tip="1" />
+    <control id="12" name="В гр.3-5 стр.02&gt;=стр.08" condition="" rule="{[1][2][*]}|&gt;=|{[1][8][*]}" precision="0" tip="1" />
+    <control id="13" name="По стр.20-29 гр.3&gt;=гр.4" condition="" rule="{[2][20-29][3]}|&gt;=|{[2][20-29][4]}" precision="0" tip="1" />
+    <control id="14" name="В гр.3,4 стр.29 &gt;=стр.20" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][20][3,4]}" precision="0" tip="1" />
+    <control id="15" name="В гр.3,4 стр.29 &gt;=стр.21" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][21][3,4]}" precision="0" tip="1" />
+    <control id="16" name="В гр.3,4 стр.29 &gt;=стр.22" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][22][3,4]}" precision="0" tip="1" />
+    <control id="17" name="В гр.3,4 стр.29 &gt;=стр.23" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][23][3,4]}" precision="0" tip="1" />
+    <control id="18" name="В гр.3,4 стр.29 &gt;=стр.24" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][24][3,4]}" precision="0" tip="1" />
+    <control id="19" name="В гр.3,4 стр.29 &gt;=стр.25" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][25][3,4]}" precision="0" tip="1" />
+    <control id="20" name="В гр.3-5 стр.02&gt;=стр.11" condition="" rule="{[1][2][*]}|&gt;=|{[1][11][*]}" precision="0" tip="1" />
+    <control id="21" name="В гр.3-5 стр.02&gt;=стр.12" condition="" rule="{[1][2][*]}|&gt;=|{[1][12][*]}" precision="0" tip="1" />
+    <control id="22" name="В гр.3,4 стр.29 &gt;=суммы стр.26-28" condition="" rule="{[2][29][3,4]}|&gt;=|SUM{[2][26-28][3,4]}" precision="0" tip="1" />
+    <control id="23" name="В гр.3,4 стр.20&lt;=стр.01 раздела 1" condition="{[2][20][3,4]}|&lt;&gt;|0" rule="{[2][20][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="24" name="(гр.3-гр.4) стр.01 &gt;=(гр.3-гр.4) стр.02" condition="" rule="{[1][1][3]}-{[1][1][4]}|&gt;=|{[1][2][3]}-{[1][2][4]}" precision="0" tip="1" />
+    <control id="25" name="В гр.3,4 стр.21&lt;=стр.01 раздела 1" condition="{[2][21][3,4]}|&lt;&gt;|0" rule="{[2][21][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="26" name="В гр.3,4 стр.22&lt;=стр.01 раздела 1" condition="{[2][22][3,4]}|&lt;&gt;|0" rule="{[2][22][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="27" name="В гр.3,4 стр.23&lt;=стр.01 раздела 1" condition="{[2][23][3,4]}|&lt;&gt;|0" rule="{[2][23][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="28" name="В гр.3,4 стр.24&lt;=стр.01 раздела 1" condition="{[2][24][3,4]}|&lt;&gt;|0" rule="{[2][24][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="29" name="В гр.3,4 стр.25&lt;=стр.01 раздела 1" condition="{[2][25][3,4]}|&lt;&gt;|0" rule="{[2][25][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="30" name="В гр.3,4 стр.26&lt;=стр.01 раздела 1" condition="{[2][26][3,4]}|&lt;&gt;|0" rule="{[2][26][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="31" name="В гр.3,4 стр.27&lt;=стр.01 раздела 1" condition="{[2][27][3,4]}|&lt;&gt;|0" rule="{[2][27][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="33" name="В гр.3 стр.30&lt;=стр.01 раздела 1" condition="" rule="{[2][30][3]}|&lt;=|{[1][1][3]}" precision="0" tip="1" />
+    <control id="34" name="В гр.3,5 стр.30&gt;=стр.31" condition="" rule="{[2][30][3,5]}|&gt;=|{[2][31][3,5]}" precision="1" tip="1" />
+    <control id="35" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.03" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][3][3]}-{[1][3][4]}" precision="0" tip="1" />
+    <control id="36" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.04" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][4][3]}-{[1][4][4]}" precision="0" tip="1" />
+    <control id="37" name="стр.01 гр.3&lt;&gt;0" condition="" rule="{[1][1][3]}|&gt;|0" precision="0" tip="1" />
+    <control id="38" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.05" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][5][3]}-{[1][5][4]}" precision="0" tip="1" />
+    <control id="39" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.06" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][6][3]}-{[1][6][4]}" precision="0" tip="1" />
+    <control id="40" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.07" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][7][3]}-{[1][7][4]}" precision="0" tip="1" />
+    <control id="41" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.08" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][8][3]}-{[1][8][4]}" precision="0" tip="1" />
+    <control id="42" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.09" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][9][3]}-{[1][9][4]}" precision="0" tip="1" />
+    <control id="43" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.10" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][10][3]}-{[1][10][4]}" precision="0" tip="1" />
+    <control id="44" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.11" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][11][3]}-{[1][11][4]}" precision="0" tip="1" />
+    <control id="45" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.12" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][12][3]}-{[1][12][4]}" precision="0" tip="1" />
+    <control id="46" name="(гр.3-гр.4) стр.02 &gt;=(гр.3-гр.4) стр.13" condition="" rule="{[1][2][3]}-{[1][2][4]}|&gt;=|{[1][13][3]}-{[1][13][4]}" precision="0" tip="1" />
+    <control id="48" name="В гр.3,4 стр.29 &gt;=стр.28" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][28][3,4]}" precision="0" tip="1" />
+    <control id="50" name="В гр.3,4 стр.28&lt;=стр.01 раздела 1" condition="{[2][28][3,4]}|&lt;&gt;|0" rule="{[2][28][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="51" name="В гр.3,4 стр.29&lt;=стр.01 раздела 1" condition="{[2][29][3,4]}|&lt;&gt;|0" rule="{[2][29][3,4]}|&lt;=|{[1][1][3,4]}" precision="0" tip="1" />
+    <control id="52" name="(гр.3-гр.4) стр.20 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][20][3]}-{[2][20][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="53" name="(гр.3-гр.4) стр.21 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][21][3]}-{[2][21][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="54" name="(гр.3-гр.4) стр.22 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][22][3]}-{[2][22][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="55" name="(гр.3-гр.4) стр.23 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][23][3]}-{[2][23][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="56" name="(гр.3-гр.4) стр.24 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][24][3]}-{[2][24][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="57" name="(гр.3-гр.4) стр.25 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][25][3]}-{[2][25][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="58" name="(гр.3-гр.4) стр.26 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][26][3]}-{[2][26][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="59" name="(гр.3-гр.4) стр.27 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][27][3]}-{[2][27][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="60" name="В гр.3-5 стр.02&gt;=стр.09" condition="" rule="{[1][2][*]}|&gt;=|{[1][9][*]}" precision="0" tip="1" />
+    <control id="61" name="В гр.3,4 стр.29 &gt;=стр.26" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][26][3,4]}" precision="0" tip="1" />
+    <control id="62" name="(гр.3-гр.4) стр.28 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][28][3]}-{[2][28][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="63" name="(гр.3-гр.4) стр.29 &lt;=(гр.3-гр.4) стр.01 раздела 1" condition="" rule="{[2][29][3]}-{[2][29][4]}|&lt;=|{[1][1][3]}-{[1][1][4]}" precision="0" tip="1" />
+    <control id="65" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.20" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][20][3]}-{[2][20][4]}" precision="0" tip="1" />
+    <control id="66" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.21" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][21][3]}-{[2][21][4]}" precision="0" tip="1" />
+    <control id="67" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.22" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][22][3]}-{[2][22][4]}" precision="0" tip="1" />
+    <control id="68" name="В гр.3,4 стр.29 &gt;=стр.27" condition="" rule="{[2][29][3,4]}|&gt;=|{[2][27][3,4]}" precision="0" tip="1" />
+    <control id="69" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.23" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][23][3]}-{[2][23][4]}" precision="0" tip="1" />
+    <control id="70" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.24" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][24][3]}-{[2][24][4]}" precision="0" tip="1" />
+    <control id="71" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.25" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][25][3]}-{[2][25][4]}" precision="0" tip="1" />
+    <control id="72" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.26" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][26][3]}-{[2][26][4]}" precision="0" tip="1" />
+    <control id="73" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.27" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][27][3]}-{[2][27][4]}" precision="0" tip="1" />
+    <control id="74" name="(гр.3-гр.4) стр.29&gt;=(гр.3-гр.4) стр.28" condition="" rule="{[2][29][3]}-{[2][29][4]}|&gt;=|{[2][28][3]}-{[2][28][4]}" precision="0" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2017">2017</term>
+      <term id="2018">2018 год</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="1">Годовая</term>
+    </dic>
+  </dics>
+</metaForm>

@@ -1,0 +1,838 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="608029001001" idp="1" idf="1" shifr="f_1cb" name="СВЕДЕНИЯ О ДВИЖЕНИИ ЦЕННЫХ БУМАГ И ДОХОДАХ ПО НИМ ( 1-ЦБ)" obj="okpo" OKUD="0608029" format-version="1.3" version="18-07-2018">
+  <settings>
+    <validation>always</validation>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Графа 3">
+          <default-cell column="3" format="N(15,1)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="Графа 4">
+          <default-cell column="4" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="Графа 5">
+          <default-cell column="5" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="Графа 6">
+          <default-cell column="6" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="Графа 7">
+          <default-cell column="7" format="N(15,2)" inputType="2" />
+        </column>
+        <column code="8" type="Z" name="Графа 8">
+          <default-cell column="8" format="N(15,2)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="" type="C" name="Раздел I. Движение ценных бумаг, выпущенных отчитывающейся организацией" />
+        <row code="" type="C" name="1.1 Акции" />
+        <row code="" type="C" name="На начало отчетного года" />
+        <row code="01" type="F" name=" Количество акций, тыс.штук">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Общая стоимость акций" />
+        <row code="02" type="F" name="           по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="03" type="F" name="           по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="             из них:" />
+        <row code="" type="C" name="в собственности акционерного общества" />
+        <row code="04" type="F" name="           по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="05" type="F" name="           по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Размещено на первичном рынке,всего" />
+        <row code="06" type="F" name="          по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="07" type="F" name="          по цене размещения">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Приобретено (выкуплено) на вторичном рынке" />
+        <row code="08" type="F" name="           по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="09" type="F" name="           по цене приобретения">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Реализовано на вторичном рынке" />
+        <row code="10" type="F" name="            по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="11" type="F" name="            по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="12" type="F" name="Аннулировано (погашено)">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="13" type="F" name="Переоценка">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="14" type="F" name="Прочее">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="На конец отчетного года" />
+        <row code="15" type="F" name=" Количество акций, тыс.штук">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Общая стоимость акций" />
+        <row code="16" type="F" name="              по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="17" type="F" name="              по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="                  из них:" />
+        <row code="" type="C" name=" в собственности акционерного общества" />
+        <row code="18" type="F" name="             по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="19" type="F" name="            по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="1.2 Облигации" />
+        <row code="" type="C" name="На начало отчетного года" />
+        <row code="20" type="F" name=" Количество облигаций, тыс.штук">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Общая стоимость облигаций" />
+        <row code="21" type="F" name="              по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="22" type="F" name="              по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Размещено на первичном рынке,всего" />
+        <row code="23" type="F" name="             по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="24" type="F" name="             по цене размещения">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Приобретено (выкуплено) на вторичном рынке, всего" />
+        <row code="25" type="F" name="             по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="26" type="F" name="             по цене приобретения">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Реализовано на вторичном рынке" />
+        <row code="27" type="F" name="              по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="28" type="F" name="              по цене реализации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="29" type="F" name="Погашено">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="          из них;" />
+        <row code="30" type="F" name="  доход, выплачиваемый при погашении">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="31" type="F" name="Переоценка">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="32" type="F" name="Прочее">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="На конец отчетного года" />
+        <row code="33" type="F" name=" Количество облигаций, тыс.штук">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Общая стоимость облигаций" />
+        <row code="34" type="F" name="                 по номиналу">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="35" type="F" name="                 по рыночной цене">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Раздел II. Размещение ценных бумаг, выпущенных отчитывающейся организацией" />
+        <row code="" type="C" name="2.1.  Акции" />
+        <row code="" type="C" name="На начало отчетного года" />
+        <row code="36" type="F" name="Органы государственного управления">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="37" type="F" name=" Кредитные организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="38" type="F" name=" Страховые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="39" type="F" name=" Инвестиционные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="40" type="F" name=" Негосударственные пенсионные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="41" type="F" name=" Другие финансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="42" type="F" name=" Нефинансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="43" type="F" name=" Некоммерческие организации (НКОДХ)">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="44" type="F" name=" Физические лица">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="45" type="F" name=" Нерезиденты">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="46" type="F" name=" В собственности акционерного общества">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="На конец отчетного года" />
+        <row code="47" type="F" name=" Органы государственного управления">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="48" type="F" name=" Кредитные организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="49" type="F" name=" Страховые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="50" type="F" name=" Инвестиционные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="51" type="F" name=" Негосударственные пенсионные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="52" type="F" name=" Другие финансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="53" type="F" name=" Нефинансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="54" type="F" name=" Некоммерческие организации (НКОДХ)">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="55" type="F" name=" Физические лица">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="56" type="F" name=" Нерезиденты">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="57" type="F" name=" В собственности акционерного общества">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,2)" inputType="0" />
+          <cell column="5" format="N(15,2)" inputType="0" />
+          <cell column="6" format="N(15,2)" inputType="0" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="2.2 Облигации" />
+        <row code="58" type="F" name=" Кредитные организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="59" type="F" name=" Страховые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="60" type="F" name=" Инвестиционные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="61" type="F" name=" Негосударственные пенсионные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="62" type="F" name=" Другие финансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="63" type="F" name=" Нефинансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="64" type="F" name=" Некоммерческие организации (НКОДХ)">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="65" type="F" name=" Физические лица">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="66" type="F" name=" Нерезиденты">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,2)" inputType="0" />
+          <cell column="8" format="N(15,2)" inputType="0" />
+        </row>
+        <row code="" type="C" name="Раздел III. Доходы (дивиденды и проценты) по ценным бумагам" />
+        <row code="" type="C" name="3.1. По ценным бумагам, выпущенным отчитывающейся организацией" />
+        <row code="67" type="F" name=" Органы государственного управления">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="0" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="0" />
+        </row>
+        <row code="68" type="F" name=" Кредитные организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="69" type="F" name=" Страховые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="70" type="F" name=" Инвестиционные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="71" type="F" name=" Негосударственные пенсионные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="72" type="F" name=" Другие финансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="73" type="F" name=" Нефинансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="74" type="F" name=" Некоммерческие организации (НКОДХ)">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="75" type="F" name=" Физические лица">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="76" type="F" name=" Нерезиденты">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="77" type="F" name="Всего">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="" type="C" name="3.2.  По ценным бумагам других эмитентов" />
+        <row code="78" type="F" name=" Органы государственного управления">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="0" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="0" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="79" type="F" name=" Кредитные организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="80" type="F" name=" Страховые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="81" type="F" name=" Другие финансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="82" type="F" name=" Инвестиционные фонды">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="83" type="F" name=" Нефинансовые организации">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="84" type="F" name=" Нерезиденты">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+        <row code="85" type="F" name="Всего">
+          <cell column="3" format="N(15,1)" inputType="2" />
+          <cell column="4" format="N(15,1)" inputType="2" />
+          <cell column="5" format="N(15,1)" inputType="2" />
+          <cell column="6" format="N(15,1)" inputType="2" />
+          <cell column="7" format="N(15,1)" inputType="2" />
+          <cell column="8" format="N(15,1)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="стр.3 гр.3=сум строк 36-46 гр.3" condition="" rule="{[1][3][3]}|=|SUM{[1][36,37,38,39,40,41,42,43,44,45,46][3]}" precision="1" tip="1" />
+    <control id="2" name="стр.5 гр.3=стр.46 гр.3" condition="" rule="{[1][5][3]}|=|{[1][46][3]}" precision="1" tip="1" />
+    <control id="3" name="стр.17 гр.3=сумма стр.(47-57) гр.3" condition="" rule="{[1][17][3]}|=|SUM{[1][47,48,49,50,51,52,53,54,55,56,57][3]}" precision="1" tip="1" />
+    <control id="4" name="стр.19 гр.3=стр.57 гр.3" condition="" rule=" {[1][19][3]}|=|{[1][57][3]}" precision="1" tip="1" />
+    <control id="5" name="стр.24 гр.3= сум стр.(58-66) гр.3" condition="" rule="  {[1][24][3]}|=|SUM{[1][58,59,60,61,62,63,64,65,66][3]}" precision="1" tip="1" />
+    <control id="6" name="сумма стр.(58-66)гр.4=стр.26 гр.3" condition="" rule=" SUM{[1][58,59,60,61,62,63,64,65,66][4]}|=|{[1][26][3]}" precision="1" tip="1" />
+    <control id="7" name="сумма стр.(58-66)гр.5=стр.28 гр.3" condition="" rule=" SUM{[1][58,59,60,61,62,63,64,65,66][5]}|=|{[1][28][3]}" precision="1" tip="1" />
+    <control id="8" name="сумма стр.(58-66) гр.6=стр.29 гр.3" condition="" rule=" SUM{[1][58,59,60,61,62,63,64,65,66][6]}|=|{[1][29][3]}" precision="1" tip="1" />
+    <control id="9" name="сумма гр.4 и гр.5 стр.67-77 = гр.3 по стр.67-77" condition="" rule=" SUM{[1][67,68,69,70,71,72,73,74,75,76,77][4,5]}|=|{[1][67,68,69,70,71,72,73,74,75,76,77][3]}" precision="1" tip="1" />
+    <control id="10" name="стр.77 гр.3=сумма стр.(67-76) гр.3" condition="" rule="{[1][77][3]}|=|SUM{[1][67,68,69,70,71,72,73,74,75,76][3]}" precision="1" tip="1" />
+    <control id="11" name="стр.77 гр.4=сумма стр.(67-76) гр.4" condition="" rule="{[1][77][4]}|=|SUM{[1][67,68,69,70,71,72,73,74,75,76][4]}" precision="1" tip="1" />
+    <control id="12" name="стр.77 гр.5=сумма стр.(68-76) гр.5" condition="" rule="{[1][77][5]}|=|SUM{[1][68,69,70,71,72,73,74,75,76][5]}" precision="1" tip="1" />
+    <control id="13" name="сумма гр.7 и гр.8 = гр.6 по стр.67-77" condition="" rule="SUM{[1][67,68,69,70,71,72,73,74,75,76,77][7,8]}|=|{[1][67,68,69,70,71,72,73,74,75,76,77][6]}" precision="1" tip="1" />
+    <control id="14" name="стр.77 гр.6=сумме стр.(67-76) гр.6" condition="" rule="{[1][77][6]}|=|SUM{[1][67,68,69,70,71,72,73,74,75,76][6]}" precision="1" tip="1" />
+    <control id="15" name="стр.77 гр.7=сумме стр.(67-76) гр.7" condition="" rule="{[1][77][7]}|=|SUM{[1][67,68,69,70,71,72,73,74,75,76][7]}" precision="1" tip="1" />
+    <control id="16" name="стр.77 гр.8= сумме стр.(68-76) гр.8" condition="" rule="{[1][77][8]}|=|SUM{[1][68,69,70,71,72,73,74,75,76][8]}" precision="1" tip="1" />
+    <control id="17" name="сумма гр.4 и гр.5 =гр.3 по стр 78-85" condition="" rule="SUM{[1][78,79,80,81,82,83,84,85][4,5]}|=|{[1][78,79,80,81,82,83,84,85][3]}" precision="1" tip="1" />
+    <control id="18" name="стр.85 гр.3=сумме стр.(78-84) гр.3" condition="" rule="{[1][85][3]}|=|SUM{[1][78,79,80,81,82,83,84][3]}" precision="1" tip="1" />
+    <control id="19" name="стр.85 гр4= сумме стр.(79-84) гр.4" condition="" rule="{[1][85][4]}|=|SUM{[1][79,80,81,82,83,84][4]}" precision="1" tip="1" />
+    <control id="20" name="стр.85 гр.5=сумма стр.(78-84) гр.5" condition="" rule="{[1][85][5]}|=|SUM{[1][78,79,80,81,82,83,84][5]}" precision="1" tip="1" />
+    <control id="21" name="сумма гр.7 и гр.8= гр.6 по стр. 78-85" condition="" rule="SUM{[1][78,79,80,81,82,83,84,85][7,8]}|=|{[1][78,79,80,81,82,83,84,85][6]}" precision="1" tip="1" />
+    <control id="22" name="стр.85 гр.6=сумме стр.(78-84) по гр.6" condition="" rule="{[1][85][6]}|=|SUM{[1][78,79,80,81,82,83,84][6]}" precision="1" tip="1" />
+    <control id="23" name="стр.85 гр.7=сумме стр.(79-84) по гр.7" condition="" rule="{[1][85][7]}|=|SUM{[1][79,80,81,82,83,84][7]}" precision="1" tip="1" />
+    <control id="24" name="стр.85 гр.8=сумма стр.(78-84) по гр.8" condition="" rule="{[1][85][8]}|=|SUM{[1][78,79,80,81,82,83,84][8]}" precision="1" tip="1" />
+    <control id="25" name="стр.2 гр.3 &gt;=стр.12 гр.3" condition="" rule=" {[1][2][3]}|&gt;=|{[1][12][3]}" tip="1" />
+    <control id="26" name="стр.2 гр.3 &gt;=стр.4 гр.3" condition="" rule=" {[1][2][3]}|&gt;=|{[1][4][3]}" tip="1" />
+    <control id="27" name="стр.3 гр.3&gt;=стр.5 гр.3" condition="" rule=" {[1][3][3]}|&gt;=|{[1][5][3]}" tip="1" />
+    <control id="28" name="стр.17 гр.3&gt;=стр.19 гр.3" condition="" rule=" {[1][17][3]}|&gt;=|{[1][19][3]}" tip="1" />
+    <control id="29" name="стр.16 гр.3&gt;=стр.18 гр.3" condition="" rule=" {[1][16][3]}|&gt;=|{[1][18][3]}" tip="1" />
+    <control id="30" name="* если стр.1 # 0 гр. 3, то стр. 15 # 0 гр. 3" condition="{[1][1][3]}|&lt;&gt;|0" rule="{[1][15][3]}|&lt;&gt;|0" tip="0" />
+    <control id="31" name="* если стр.2 # 0 гр. 3, то стр. 16 # 0 гр. 3" condition="{[1][2][3]}|&lt;&gt;|0" rule="{[1][16][3]}|&lt;&gt;|0" tip="0" />
+    <control id="32" name="* если стр.3 # 0 гр. 3, то стр. 17 # 0 гр. 3" condition="{[1][3][3]}|&lt;&gt;|0" rule="{[1][17][3]}|&lt;&gt;|0" tip="0" />
+    <control id="33" name="* если стр.4 # 0 гр. 3, то стр. 18 # 0 гр. 3" condition="{[1][4][3]}|&lt;&gt;|0" rule="{[1][18][3]}|&lt;&gt;|0" tip="0" />
+    <control id="34" name="* если стр.5 # 0 гр. 3, то стр. 19 # 0 гр. 3" condition="{[1][5][3]}|&lt;&gt;|0" rule="{[1][19][3]}|&lt;&gt;|0" tip="0" />
+    <control id="35" name="* если стр.20 # 0 гр. 3, то стр. 33 # 0 гр. 3" condition="{[1][20][3]}|&lt;&gt;|0" rule="{[1][33][3]}|&lt;&gt;|0" tip="0" />
+    <control id="36" name="* если стр.21 # 0 гр. 3, то стр. 34 # 0 гр. 3" condition="{[1][21][3]}|&lt;&gt;|0" rule="{[1][34][3]}|&lt;&gt;|0" tip="0" />
+    <control id="37" name="* если стр.22 # 0 гр. 3, то стр. 35 # 0 гр. 3" condition="{[1][22][3]}|&lt;&gt;|0" rule="{[1][35][3]}|&lt;&gt;|0" tip="0" />
+    <control id="38" name="* если стр.36 # 0 гр. 3, то стр. 47 # 0 гр. 3" condition="{[1][36][3]}|&lt;&gt;|0" rule="{[1][47][3]}|&lt;&gt;|0" tip="0" />
+    <control id="39" name="* если стр.37 # 0 гр. 3, то стр. 48 # 0 гр. 3" condition="{[1][37][3]}|&lt;&gt;|0" rule="{[1][48][3]}|&lt;&gt;|0" tip="0" />
+    <control id="40" name="* если стр.38 # 0 гр. 3, то стр. 49 # 0 гр. 3" condition="{[1][38][3]}|&lt;&gt;|0" rule="{[1][49][3]}|&lt;&gt;|0" tip="0" />
+    <control id="41" name="* если стр.39 # 0 гр. 3, то стр. 50 # 0 гр. 3" condition="{[1][39][3]}|&lt;&gt;|0" rule="{[1][50][3]}|&lt;&gt;|0" tip="0" />
+    <control id="42" name="* если стр.40 # 0 гр. 3, то стр. 51 # 0 гр. 3" condition="{[1][40][3]}|&lt;&gt;|0" rule="{[1][51][3]}|&lt;&gt;|0" tip="0" />
+    <control id="43" name="* если стр.41 # 0 гр. 3, то стр. 52 # 0 гр. 3" condition="{[1][41][3]}|&lt;&gt;|0" rule="{[1][52][3]}|&lt;&gt;|0" tip="0" />
+    <control id="44" name="* если стр.42 # 0 гр. 3, то стр. 53 # 0 гр. 3" condition="{[1][42][3]}|&lt;&gt;|0" rule="{[1][53][3]}|&lt;&gt;|0" tip="0" />
+    <control id="45" name="* если стр.43 # 0 гр. 3, то стр. 54 # 0 гр. 3" condition="{[1][43][3]}|&lt;&gt;|0" rule="{[1][54][3]}|&lt;&gt;|0" tip="0" />
+    <control id="46" name="* если стр.44 # 0 гр. 3, то стр. 55 # 0 гр. 3" condition="{[1][44][3]}|&lt;&gt;|0" rule="{[1][55][3]}|&lt;&gt;|0" tip="0" />
+    <control id="47" name="* если стр.45 # 0 гр. 3, то стр. 56 # 0 гр. 3" condition="{[1][45][3]}|&lt;&gt;|0" rule="{[1][56][3]}|&lt;&gt;|0" tip="0" />
+    <control id="48" name="* если стр.46 # 0 гр. 3, то стр. 57 # 0 гр. 3" condition="{[1][46][3]}|&lt;&gt;|0" rule="{[1][57][3]}|&lt;&gt;|0" tip="0" />
+    <control id="49" name="* если стр.36 #0 гр. 3 и стр. 47 #0 гр. 3, то стр. 67 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][36,47][3]}|&lt;&gt;|0" rule="{[1][67][4]}|&lt;&gt;|0" tip="0" />
+    <control id="50" name="* если стр.37 #0 гр. 3 и стр. 48 #0 гр. 3, то стр. 68 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][37,48][3]}|&lt;&gt;|0" rule="{[1][68][4]}|&lt;&gt;|0" tip="0" />
+    <control id="51" name="* если стр.38 #0 гр. 3 и стр. 49 #0 гр. 3, то стр. 69 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][38,49][3]}|&lt;&gt;|0" rule="{[1][69][4]}|&lt;&gt;|0" tip="0" />
+    <control id="52" name="* если стр.39 #0 гр. 3 и стр. 50 #0 гр. 3, то стр. 70 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][39,50][3]}|&lt;&gt;|0" rule="{[1][70][4]}|&lt;&gt;|0" tip="0" />
+    <control id="53" name="* если стр.40 #0 гр. 3 и стр. 51 #0 гр. 3, то стр. 71 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][40,51][3]}|&lt;&gt;|0" rule="{[1][71][4]}|&lt;&gt;|0" tip="0" />
+    <control id="54" name="* если стр.41 #0 гр. 3 и стр. 52 #0 гр. 3, то стр. 72 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][41,52][3]}|&lt;&gt;|0" rule="{[1][72][4]}|&lt;&gt;|0" tip="0" />
+    <control id="55" name="* если стр.42 #0 гр. 3 и стр. 53 #0 гр. 3, то стр. 73 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][42,53][3]}|&lt;&gt;|0" rule="{[1][73][4]}|&lt;&gt;|0" tip="0" />
+    <control id="56" name="* если стр.43 #0 гр. 3 и стр. 54 #0 гр. 3, то стр. 74 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][43,54][3]}|&lt;&gt;|0" rule="{[1][74][4]}|&lt;&gt;|0" tip="0" />
+    <control id="57" name="* если стр.44 #0 гр. 3 и стр. 55 #0 гр. 3, то стр. 75 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][44,55][3]}|&lt;&gt;|0" rule="{[1][75][4]}|&lt;&gt;|0" tip="0" />
+    <control id="58" name="* если стр.45 #0 гр. 3 и стр. 56 #0 гр. 3, то стр. 76 гр. 4 #0 - отсутствуют дивиденды" condition="SUM{[1][45,56][3]}|&lt;&gt;|0" rule="{[1][76][4]}|&lt;&gt;|0" tip="0" />
+    <control id="59" name="* если стр.58 #0 гр. 3, то стр. 68 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][58][3]}|&lt;&gt;|0" rule="{[1][68][5]}|&lt;&gt;|0" tip="0" />
+    <control id="60" name="* если стр.59 #0 гр. 3, то стр. 69 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][59][3]}|&lt;&gt;|0" rule="{[1][69][5]}|&lt;&gt;|0" tip="0" />
+    <control id="61" name="* если стр.60 #0 гр. 3, то стр. 70 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][60][3]}|&lt;&gt;|0" rule="{[1][70][5]}|&lt;&gt;|0" tip="0" />
+    <control id="62" name="* если стр.61 #0 гр. 3, то стр. 71 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][61][3]}|&lt;&gt;|0" rule="{[1][71][5]}|&lt;&gt;|0" tip="0" />
+    <control id="63" name="* если стр.62 #0 гр. 3, то стр. 72 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][62][3]}|&lt;&gt;|0" rule="{[1][72][5]}|&lt;&gt;|0" tip="0" />
+    <control id="64" name="* если стр.63 #0 гр. 3, то стр. 73 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][63][3]}|&lt;&gt;|0" rule="{[1][73][5]}|&lt;&gt;|0" tip="0" />
+    <control id="65" name="* если стр.64 #0 гр. 3, то стр. 74 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][64][3]}|&lt;&gt;|0" rule="{[1][74][5]}|&lt;&gt;|0" tip="0" />
+    <control id="66" name="* если стр.65 #0 гр. 3, то стр. 75 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][65][3]}|&lt;&gt;|0" rule="{[1][75][5]}|&lt;&gt;|0" tip="0" />
+    <control id="67" name="* если стр.66 #0 гр. 3, то стр. 76 гр. 5 #0 - отсутствуют проценты по облигациям" condition="{[1][66][3]}|&lt;&gt;|0" rule="{[1][76][5]}|&lt;&gt;|0" tip="0" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2008">2008</term>
+      <term id="2010">2010</term>
+      <term id="2012">2012</term>
+      <term id="2014">2014</term>
+      <term id="2017">2017</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="17">За отчетный период</term>
+    </dic>
+  </dics>
+</metaForm>

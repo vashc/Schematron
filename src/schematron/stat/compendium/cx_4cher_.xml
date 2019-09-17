@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="611024002001" idp="01" idf="2" shifr="cx_4cher" name="4 (Чернобыль).СВЕДЕНИЯ О ПРОВЕДЕНИИ МЕРОПРИЯТИЙ В ХОЗЯЙСТВАХ, РАСПОЛОЖЕННЫХ НА ЗЕМЛЯХ, ЗАГРЯЗНЕННЫХ РАДИОНУКЛИДАМИ" obj="okpo" OKUD="0611024" version="05-02-2019" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>false</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+    <item field="mail" name="E-mail:" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1. Сведения о проведении мероприятий на землях, загрязненных радионуклидами" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="V" name="Единица измерения">
+          <default-cell column="3" format="C(10)" inputType="0" />
+        </column>
+        <column code="4" type="Z" name="Выполнено работ">
+          <default-cell column="4" format="N(15,2)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Внесено минеральных удобрений на площади">
+          <cell column="3" format="C(10)" default="га" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="02" type="F" name="На эту площадь внесено удобрений в действующем веществе - всего">
+          <cell column="3" format="C(10)" default="т" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="03" type="F" name="Произвестковано кислых почв на площади">
+          <cell column="3" format="C(10)" default="га" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="04" type="F" name="Внесено известковых материалов - всего">
+          <cell column="3" format="C(10)" default="т" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="05" type="F" name="Залужение естественных кормовых угодий">
+          <cell column="3" format="C(10)" default="га" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="06" type="F" name="Перезалужение улучшенных сенокосов и пастбищ">
+          <cell column="3" format="C(10)" default="га" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+        <row code="07" type="F" name="Осушение земель, включая реконструкцию и восстановление осушительных систем">
+          <cell column="3" format="C(10)" default="га" inputType="0" />
+          <cell column="4" format="N(15,0)" inputType="2" />
+        </row>
+      </rows>
+    </section>
+    <section code="2" name="Раздел 2. Сведения  о  производстве  продукции  животноводства  и  проведении  мероприятий с  поголовьем  скота  на  территории,  загрязненной   радионуклидами" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="V" name="Код по ОКПД">
+          <default-cell column="3" format="C(10)" inputType="0" />
+        </column>
+        <column code="4" type="V" name="Единица измерения">
+          <default-cell column="4" format="C(10)" inputType="0" />
+        </column>
+        <column code="5" type="Z" name="Количество">
+          <default-cell column="5" format="N(15,2)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="10" type="F" name="Произведено основных видов скота и птицы на убой в живом весе">
+          <cell column="4" format="C(10)" default="центнер" inputType="0" />
+          <cell column="5" format="N(15,3)" inputType="2" />
+        </row>
+        <row code="11" type="F" name="Надоено молока крупного рогатого скота">
+          <cell column="3" format="C(10)" default="01.21.20" inputType="0" />
+          <cell column="4" format="C(10)" default="центнер" inputType="0" />
+          <cell column="5" format="N(15,3)" inputType="2" />
+        </row>
+        <row code="" type="C" name="На конец отчетного года имелось в наличии: " />
+        <row code="12" type="F" name="  крупного рогатого скота">
+          <cell column="4" format="C(10)" default="голова" inputType="0" />
+          <cell column="5" format="N(15,3)" inputType="2" />
+        </row>
+        <row code="13" type="F" name="    из него коров">
+          <cell column="4" format="C(10)" default="голова" inputType="0" />
+          <cell column="5" format="N(15,3)" inputType="2" />
+        </row>
+        <row code="14" type="F" name="  свиней">
+          <cell column="4" format="C(10)" default="голова" inputType="0" />
+          <cell column="5" format="N(15,3)" inputType="2" />
+        </row>
+        <row code="15" type="F" name="  овец и коз">
+          <cell column="4" format="C(10)" default="голова" inputType="0" />
+          <cell column="5" format="N(15,3)" inputType="2" />
+        </row>
+        <row code="" type="C" name="Произведена замена поголовья, неблагополучного по туберкулезу:">
+          <cell column="4" format="C(0)" inputType="0" />
+        </row>
+        <row code="16" type="F" name="  крупного рогатого скота">
+          <cell column="4" format="C(0)" default="голова" inputType="0" />
+        </row>
+        <row code="17" type="F" name="    из него коров">
+          <cell column="4" format="C(0)" default="голова" inputType="0" />
+        </row>
+        <row code="18" type="F" name="Поступило телок для комплектации вновь отстроенных ферм и для ремонта выбывающего поголовья, заболевшего туберкулезом и лейкозом">
+          <cell column="4" format="C(0)" default="голова" inputType="0" />
+        </row>
+        <row code="19" type="F" name="Исследовано крупного рогатого скота на туберкулез и лейкоз">
+          <cell column="4" format="C(1)" default="голова" inputType="0" />
+        </row>
+        <row code="20" type="F" name="Произведено исследование шерстного покрова овец на уровень радиоактивного заражения">
+          <cell column="4" format="C(0)" default="голова" inputType="0" />
+        </row>
+        <row code="21" type="F" name="Произведена замена доильного оборудования на системы замкнутого типа (АДМ - 8А, АДМ - 8-2, Елочка, Тандем)">
+          <cell column="4" format="C(0)" default="единица" inputType="0" />
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="стр. 12 ≥ стр. 13" condition="{[2][13][5]}|&gt;|0" rule="{[2][12][5]}|&gt;=|{[2][13][5]}" tip="1" />
+    <control id="2" name="стр. 16 ≥ стр. 17" condition="{[2][17][5]}|&gt;|0" rule="{[2][16][5]}|&gt;=|{[2][17][5]}" tip="1" />
+    <control id="3" name="Если стр.1≠0, то стр.2≠0" condition="{[1][1][5]}|&lt;&gt;|0" rule="{[1][2][5]}|&lt;&gt;|0" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+      <term id="2021">2021 год</term>
+      <term id="2022">2022 год</term>
+      <term id="2023">2023 год</term>
+      <term id="2024">2024 год</term>
+      <term id="2025">2025 год</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="12">в целом за год</term>
+    </dic>
+  </dics>
+</metaForm>

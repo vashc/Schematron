@@ -1,0 +1,118 @@
+<metaForm code="610054003012" idp="12" idf="3" shifr="vp" name="Приложение № 2 к форме № П-1.Сведения о производстве военной (оборонной) продукции" obj="okpo" OKUD="0610054" version="11-12-2018" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>false</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo"/>
+    <item field="name" name="Наименование предприятия"/>
+    <item field="leader_fio" name="Руководитель организации (ФИО)"/>
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)"/>
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)"/>
+    <item field="phone" name="Контактный телефон"/>
+    <item field="email" name="Электронная почта"/>
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0"/>
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0"/>
+        </column>
+        <column code="1" type="Z" name="За отчетный месяц">
+          <default-cell column="1" format="N(15,1)" inputType="2"/>
+        </column>
+        <column code="2" type="Z" name="За предыдущий месяц">
+          <default-cell column="2" format="N(15,1)" inputType="2"/>
+        </column>
+        <column code="3" type="Z" name="За соответствующий  месяц прошлого года">
+          <default-cell column="3" format="N(15,1)" inputType="2"/>
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Выпуск военной (оборонной) продукции (работ, услуг) в фактических ценах - всего, тысяч рублей"/>
+        <row code="" type="C" name=" в том числе предназначено:"/>
+        <row code="02" type="F" name="   - на внутренний рынок"/>
+        <row code="03" type="F" name="  - на экспорт"/>
+        <row code="04" type="F" name="Выпуск военной (оборонной) продукции (работ, услуг) в фиксированных ценах - всего, тысяч рублей"/>
+        <row code="" type="C" name=" в том числе предназначено:"/>
+        <row code="05" type="F" name="   - на внутренний рынок"/>
+        <row code="06" type="F" name="  - на экспорт"/>
+        <row code="" type="C" name="Справочно:*)"/>
+        <row code="07" type="F" name="Выпуск гражданской продукции (работ, услуг) в фактических ценах - всего, тысяч рублей"/>
+        <row code="" type="C" name=" в том числе предназначено:"/>
+        <row code="08" type="F" name="   - на внутренний рынок"/>
+        <row code="09" type="F" name="  - на экспорт"/>
+        <row code="10" type="F" name="Выпуск гражданской продукции (работ, услуг) в фиксированных ценах - всего, тысяч рублей"/>
+        <row code="" type="C" name=" в том числе предназначено:"/>
+        <row code="11" type="F" name="   - на внутренний рынок"/>
+        <row code="12" type="F" name="  - на экспорт"/>
+        <row code="13" type="F" name="Среднесписочная численность персонала, занятого в производстве военной (оборонной) продукции, человек**)">
+          <cell column="2" format="N(15,1)" inputType="0"/>
+        </row>
+        <row code="" type="C" name="Количество человеко-часов, отработанных работниками списочного состава, занятого в производстве:">
+          <cell column="1" format="N(18,2)" inputType="2"/>
+          <cell column="3" format="N(18,2)" inputType="2"/>
+          <cell column="2" format="N(18,2)" inputType="2"/>
+        </row>
+        <row code="14" type="F" name="- военной (оборонной) продукции, человеко-часов"/>
+        <row code="15" type="F" name="- гражданской продукции (работ, услуг), человеко-часов*)"/>
+        <row code="" type="C" name="*) Заполняется организациями, включенными в Сводный реестр организаций оборонно-промышленного комплекса.">
+          <cell column="3" format="N(18,2)" inputType="2"/>
+          <cell column="1" format="N(18,2)" inputType="2"/>
+          <cell column="2" format="N(18,2)" inputType="2"/>
+        </row>
+        <row code="" type="C" name="**) Заполняется за период с начала отчетного года и за соответствующий период с начала прошлого года в отчете за последний месяц квартала.">
+          <cell column="1" format="N(18,2)" inputType="2"/>
+          <cell column="2" format="N(18,2)" inputType="2"/>
+          <cell column="3" format="N(18,2)" inputType="2"/>
+        </row>
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1000" name="5. Строка 04 по соответствующим графам = строка 05 + строка 06" condition="" rule="{[1][4][*]}|=|{[1][5][*]}+{[1][6][*]}" precision="1" tip="1"/>
+    <control id="1004" name="4. Строка 01 по соответствующим графам = строка 02 + строка 03" condition="" rule="{[1][1][*]}|=|{[1][2][*]}+{[1][3][*]}" precision="1" tip="1"/>
+    <control id="1002" name="6. Строка  07  по соответствующим графам  =  строка  08  +  строка  09" condition="" rule="{[1][7][*]}|=|{[1][8][*]}+{[1][9][*]}" precision="1" tip="1"/>
+    <control id="1003" name="7. Строка  10  по соответствующим графам  =  строка  11  +  строка 12" condition="" rule="{[1][10][*]}|=|{[1][11][*]}+{[1][12][*]}" precision="1" tip="1"/>
+    <control id="1005" name="8. Cтрока 04&gt;0, если строка 01&gt;0 " condition="{[1][1][*]}|&gt;|0" rule="{[1][4][*]}|&gt;|0" tip="0"/>
+    <control id="1006" name="9. Cтрока 01&gt;0, если строка 04&gt;0" condition="{[1][4][*]}|&gt;|0" rule="{[1][1][*]}|&gt;|0" tip="0"/>
+    <control id="1007" name="10. Cтрока 05&gt;0, если строка 02&gt;0" condition="{[1][2][*]}|&gt;|0" rule="{[1][5][*]}|&gt;|0" tip="0"/>
+    <control id="1008" name="11. Cтрока 02&gt;0, если строка 05&gt;0" condition="{[1][5][*]}|&gt;|0" rule="{[1][2][*]}|&gt;|0" tip="0"/>
+    <control id="1009" name="12. Cтрока 06&gt;0, если строка 03&gt;0" condition="{[1][3][*]}|&gt;|0" rule="{[1][6][*]}|&gt;|0" tip="0"/>
+    <control id="1010" name="13. Cтрока 03&gt;0, если строка 06&gt;0" condition="{[1][6][*]}|&gt;|0" rule="{[1][3][*]}|&gt;|0" tip="0"/>
+    <control id="1011" name="14. Cтрока 10&gt;0, если строка 07&gt;0" condition="{[1][7][*]}|&gt;|0" rule="{[1][10][*]}|&gt;|0" tip="0"/>
+    <control id="1013" name="15. Cтрока 11&gt;0, если строка 08&gt;0" condition="{[1][8][*]}|&gt;|0" rule="{[1][11][*]}|&gt;|0" tip="0"/>
+    <control id="1014" name="16. Cтрока 08&gt;0, если строка 11&gt;0" condition="{[1][11][*]}|&gt;|0" rule="{[1][8][*]}|&gt;|0" tip="0"/>
+    <control id="1015" name="17. Cтрока 12&gt;0, если строка 09&gt;0" condition="{[1][9][*]}|&gt;|0" rule="{[1][12][*]}|&gt;|0" tip="0"/>
+    <control id="1016" name="18. Cтрока 09&gt;0, если строка 12&gt;0" condition="{[1][12][*]}|&gt;|0" rule="{[1][9][*]}|&gt;|0" tip="0"/>
+    <control id="1012" name="19. Cтрока 07&gt;0, если строка 10&gt;0" condition="{[1][10][*]}|&gt;|0" rule="{[1][7][*]}|&gt;|0" tip="0"/>
+    <control id="1017" name="20. Cтрока 14&gt;0, если строка 01&gt;0" condition="{[1][1][*]}|&gt;|0" rule="{[1][14][*]}|&gt;|0" precision="1" tip="0"/>
+    <control id="1018" name="21. Cтрока 15&gt;0, если строка 07&gt;0" condition="{[1][7][*]}|&gt;|0" rule="{[1][15][*]}|&gt;|0" precision="1" tip="0"/>
+    <control id="1019" name="22. Cумма строк 7,8,9&gt;0, если строка 15&gt;0" condition="{[1][15][*]}|&gt;|0" rule="{[1][7][*]}+{[1][8][*]}+{[1][9][*]}|&gt;|0" precision="1" tip="0"/>
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="1">январь</term>
+      <term id="2">февраль</term>
+      <term id="3">март</term>
+      <term id="4">апрель</term>
+      <term id="5">май</term>
+      <term id="6">июнь</term>
+      <term id="7">июль</term>
+      <term id="8">август</term>
+      <term id="9">сентябрь</term>
+      <term id="10">октябрь</term>
+      <term id="11">ноябрь</term>
+      <term id="12">декабрь</term>
+    </dic>
+  </dics>
+</metaForm>

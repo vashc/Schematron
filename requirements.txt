@@ -3,3 +3,4 @@ pyparsing==2.3.1
 aiohttp==3.5.4
 numpy==1.16.3
 rarfile==3.0
+pytest==5.1.2

@@ -1,0 +1,1371 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="604018001001" idp="1" idf="1" shifr="3i"
+          name="Форма № 3-информ &quot;Сведения об использовании информационных и коммуникационных технологий и производстве вычислительной техники, программного обеспечения и оказании услуг в этих сферах&quot;"
+          obj="okpo" OKUD="0604018" format-version="1.3" version="08-02-2019">
+    <settings>
+        <validation>always</validation>
+    </settings>
+    <title>
+        <item field="okpo" name="Код ОКПО/Идентификационный номер ТОСП(поле 1 АС ГС ОФСН)" dic="s_okpo"/>
+        <item field="prsek" name="признак секретности" dic="s_prsek"/>
+        <item field="name" name="Наименование предприятия(поле 6 АС ГС ОФСН)"/>
+        <item field="leader_fio" name="Руководитель организации (ФИО)"/>
+        <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)"/>
+        <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)"/>
+        <item field="phone" name="Контактный телефон"/>
+        <item field="e_mail" name="E-mail респондента"/>
+    </title>
+    <sections>
+        <section code="1" name="1. Раздел 1. Использование информационных и коммуникационных технологий." nb="1">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="Использовала на конец отчетного года (да -1; нет - 2)">
+                    <default-cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C" name="                       1.Общая информация"/>
+                <row code="" type="C"
+                     name="Использует ли Ваша организация следующее оборудование и технологии (укажите по каждой строке соответствующий код)"/>
+                <row code="101" type="F" name="Персональные компьютеры">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="102" type="F" name="Серверы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="103" type="F" name="Локальные вычислительные сети">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="104" type="F" name="Электронная почта">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="105" type="F" name="Интернет">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="106" type="F"
+                     name="Экстранет (сеть, которая использует интернет-протокол для безопасного обмена информацией предприятия с деловыми партнерами. Может принимать форму дополнения к корпоративной сети или частной части своего веб-сайта)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="107" type="F"
+                     name="Интранет (распределенная корпоративная вычислительная сеть, базирующаяся на технологиях Интернета и предназначенная для обеспечения доступа сотрудников к корпоративным информационным электронным ресурсам)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="108" type="F" name="Другие глобальные информационные сети">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="109" type="F" name="Наличие веб-сайта в Интернете">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="110" type="F"
+                     name="Выделенные технические средства для мобильного доступа  к Интернету(смартфоны, планшетные компьютеры,GSM/GPRS/UMTS/CDMA/3G/LTE модемы)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="111" type="F"
+                     name="Предоставляемые третьей стороной операционные системы с открытым исходным кодом (например, Linux)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="Использует ли Ваша организация электронный обмен данными между своими и внешними  информационными системами по форматам обмена (EDIFACT, EANCOM, ANSI Х12; основанным на ХML стандарты, например ebХML, RosettaNet, UBL, papiNET;"/>
+                <row code="" type="C"
+                     name=" проприетарные стандарты, согласованные Вашей и другими организациями; др.)"/>
+                <row code="112" type="F"
+                     name="(заполняют организации, указавшие код 1 хотя бы в одной из стр. 103, 105 - 109 гр. 3)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="113" type="F"
+                     name=" из них  для отправки или получения данных в органы государственной власти, местного самоуправления (например, налоговой декларации, статистических отчетов и т.д.)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="114" type="F"
+                     name="&quot;Облачные&quot; сервисы (технологии распределенной обработки данных,в которой компьютерные ресурсы и мощности предоставляются пользователю как  Интернет-сервис(заполняют организации,указавшие код 1 хотя бы в одной из стр. 105,106 или 108 гр.3)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="115" type="F"
+                     name=" из них размещение в &quot;облаке&quot; программного обеспечения для управления взаимоотношениями с клиентами (CRM), использование вычислительных мощностей для запуска собственного программного обеспечения или как &quot;облачный&quot; вычислительный сервис">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+            </rows>
+        </section>
+        <section code="2" name="2.Электронные продажи, закупки товаров (работ, услуг) в отчетном году" nb="2">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="Продажа товаров (работ, услуг)">
+                    <default-cell column="3" format="N(15,0)" inputType="2"/>
+                </column>
+                <column code="4" type="Z" name="Закупка товаров (работ, услуг)">
+                    <default-cell column="4" format="N(15,0)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="2.Электронные продажи, закупки товаров (работ, услуг) в отчетном году (заполняют организации, указавшие код 1 хотя бы в одной из стр. 105,106,108,109 гр.3; укажите по каждой строке соответствующий код)"/>
+                <row code="" type="C"
+                     name="Ваша организация осуществляла продажи (закупки) по Интернету, другим глобальным информационным сетям методами, специально предназначенными для получения или размещения (без учета заказов, полученных по"/>
+                <row code="" type="C"
+                     name="электронной почте) с использованием (укажите по каждой строке соответствующий код: да - 1; нет - 2)"/>
+                <row code="201" type="F" name="  специальных форм, размещаемых на веб-сайте, или в Экстранете">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="202" type="F"
+                     name="  системы автоматизированного обмена сообщениями между организациями (EDI-систем)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="Оцените удельный вес стоимости закупок (продаж)  товаров (работ, услуг), по заказам,переданным (полученным) Вашей организацией по Интернету, другим глобальным информационным сетям (с"/>
+                <row code="" type="C"
+                     name="использованием веб-сайтов,системы автоматизированного обмена сообщениями между организациями (EDI-систем)), в отчетном году, укажите один из кодов:"/>
+                <row code="203" type="F"
+                     name="1 - &lt; 10%; 2 - 10%-29%;   3 - 30%-49%;  4 - 50%-69%;  5 - 70%-100%;  6 - не осуществляли">
+                    <cell column="3" dic="s_ud_v_st" format="N(15,0)" inputType="2" vldType="1"/>
+                    <cell column="4" dic="s_ud_v_st" format="N(15,0)" inputType="2" vldType="1"/>
+                </row>
+                <row code="" type="C"
+                     name="Справка 1. Направления использования веб-сайта организациями в отчетном году (заполняют организации,указавшие код 1 в стр. 109 гр3.)(Код(да - 1;нет - 2)"/>
+                <row code="204" type="F" name="Публикация каталогов товаров (работ, услуг) или прейскурантов">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="205" type="F" name="Наличие возможности отслеживания статуса заказов">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="206" type="F" name="Версии веб-сайта для пользователей мобильной связи">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="207" type="F" name="Наличие онлайновой системы платежей">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="208" type="F"
+                     name="Публикация вакансий на рабочие места или прием онлайн заявлений на работу">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+            </rows>
+        </section>
+        <section code="3" name="3.Наличие персональных компьютеров, на конец отчетного года" nb="3">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="Всего">
+                    <default-cell column="3" format="N(15,0)" inputType="2"/>
+                </column>
+                <column code="4" type="Z" name="из них российского программного обеспечения(да-1; нет-2)">
+                    <default-cell column="4" format="N(15,0)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="3.Наличие персональных компьютеров, на конец отчетного года(заполняют организации,указавшие код 1 в строке 101 гр. 3)   Код по ОКЕИ:единица - 642"/>
+                <row code="301" type="F" name="Количество персональных компьютеров">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="302" type="F" name=" из них поступило в отчетном году">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="" type="C" name="Количество персональных компьютеров(из строки 301):"/>
+                <row code="303" type="F" name="  имеющим доступ к глобальным информационным сетям">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="304" type="F" name="   в том числе к Интернету">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="305" type="F"
+                     name="Из строки 301-число ноутбуков и других портативных персональных компьютеров">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="" type="C"
+                     name="Справка 2.Максимальная скорость доступа к ИНтернету, на конец отчетного года(заполняют организации,указавшие код 1 в строке 105 гр.3; укажите по каждой строке соответствующий код)"/>
+                <row code="306" type="F"
+                     name="Максимальная скорость доступа к  Интернету (ниже 256 Кбит/сек - код 1; 256-511 Кбит/сек - код 2;512 Кбит/сек - 1.9 Мбит/сек - код 3; 2.0-30.0 Мбит/сек - код 4; 30.1-100.0 Мбит/сек - код 5; выше 100 Мбит/сек - код 6)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2,3,4,5,6"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="" type="C" name=" в том числе по типам доступа:"/>
+                <row code="" type="C"
+                     name="максимальная скорость фиксированного(проводного и беспроводного)доступа к Интернету (модемное подключение через коммутируемую телефонную линию, ISDN связь,цифровая абонентская линия(технология  xDSLи т.д.),другая кабельная связь"/>
+                <row code="307" type="F"
+                     name="(включая выделенные линии,оптоволокно и др.),спутниковая связь,фиксированная беспроводная связь, беспроводная локальная сеть и WiMAX)(ниже 256 Кбит/сек-код 1;выше 256 Кбит/сек-код 7;этот вид доступа не используется-код 8)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,7,8"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="308" type="F"
+                     name="максимальная скорость мобильного доступа к Интернету(через любое устройство:портативный компьютер или мобильный сотовый телефон и т. д)(ниже 256 Кбит/сек-код 1;выше 256 Кбит/сек код 7;этот вид доступа не используется-код 8)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,7,8"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="" type="C"
+                     name="Справка 3.Наличие специальных программных средств,кроме программных средств общего назначения,на конец отчетного года"/>
+                <row code="" type="C"
+                     name="(заполняют организации,указавшие код 1 в строке 101 и /или стр.102 гр.3; укажите по каждой строке соответствующий код: да-1; нет-2)"/>
+                <row code="" type="C" name="Специальные программные средства:"/>
+                <row code="309" type="F" name=" для научных исследований">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="310" type="F" name=" для проектирования">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="311" type="F"
+                     name=" для управления автоматизированным производством и/или отдельными техническими средствами и технологическими процессами">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="312" type="F" name=" для решения организационных, управленческих и экономических задач">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="313" type="F" name=" для управления закупками товаров (работ, услуг)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="314" type="F" name=" для управления продажами товаров (работ, услуг)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="315" type="F" name=" для осуществления финансовых расчетов в электронном виде">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="316" type="F"
+                     name=" для предоставления доступа к базам данных Вашей организации через глобальные информационные сети, включая Интернет">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="317" type="F" name=" электронные справочно-правовые системы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="318" type="F" name=" CRM-системы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="319" type="F" name=" ERP-системы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="320" type="F" name=" SCM-системы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="321" type="F" name=" редакционно-издательские системы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="322" type="F" name=" обучающие программы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="323" type="F"
+                     name=" технологии  автоматической идентификации объектов (RFID), позволяющие посредством радиосигналов считывать или записывать данные, хранящиеся в RFID-метках">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="324" type="F"
+                     name=" системы электронного документооборота (заполняют организации, указавшие код 1 хотя бы в одной из стр.103,105- 109 гр.3)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="325" type="F" name=" прочие">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C" name="Справка 4.Использование средств защиты информации,на конец отчетного года"/>
+                <row code="" type="C"
+                     name="(заполняют организации,указавшие код 1 хотя бы в одной из стр.101,102,105-108 гр.3; укажите по каждой строке код-1 при наличии соответствующих средств или код-2 при их отсутствии)"/>
+                <row code="326" type="F" name="Средства шифрования">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="327" type="F" name="Средства электронной подписи">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="328" type="F"
+                     name="Средства строгой аутентификации (например, пароли длиннее 8 символов, сменяемые не реже чем раз в 6 месяцев)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="329" type="F"
+                     name="Технические средства аутентификации пользователей (например, токены, USB-ключи или смарт-карты)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="330" type="F"
+                     name="Резервное копирование данных на носители, находящиеся физически не на территории организации">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="331" type="F" name="Биометрические средства аутентификации пользователей">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="332" type="F" name="Регулярно обновляемые антивирусные программы">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="333" type="F"
+                     name="Программные / аппаратные средства,препятствующие несанкционированному доступу из глобальных информационных/ локальных вычислительных сетей (Брандмауэр)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="334" type="F" name="Спам-фильтр">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="335" type="F" name="Системы обнаружения вторжения в компьютер или сеть">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+                <row code="336" type="F"
+                     name="Программные средства автоматизации процессов анализа и контроля защищенности компьютерных систем">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                    <cell column="4" format="N(15,0)" inputType="0"/>
+                </row>
+            </rows>
+        </section>
+        <section code="4" name="Справка 5." nb="9">
+            <columns>
+                <column code="А" type="B"
+                        name="Наименование класса программ для электронных вычислительных машин и баз данных(вне зависимости от страны происхождения программного обеспечения)">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="2" type="S" fld="s1" name="Код класса программ для ЭВМ и баз данных">
+                    <default-cell column="2" dic="s_kprogr" format="C(15)" inputType="1" vldType="4"
+                                  vld="pril_kprogr_1"/>
+                </column>
+                <column code="3" type="Z"
+                        name="Из гр.2-использование российского программного обеспечения( да-1; нет-2)">
+                    <default-cell column="3" format="N(15,0)" inputType="1" vldType="3" vld="1,2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="Справка 5.Использование программ для электронных вычислительных машин и баз данных, на конец отчетного года"/>
+                <row code="" type="C"
+                     name="перечислите наименования и коды используемых программ и баз данных в соответствии с Классификатором программ для электронных вычислительных машин и баз данных"/>
+                <row code="" type="C"
+                     name="(утвержден приказом Минкомсвязи России от 31.12.2015 № 621);( заполняют организации,указавшие код 1 в стр.101 и/или стр.102 гр.3,при стр.602 гр.3&gt;0)"/>
+                <row code="6" type="M" grv="2" name="">
+                    <cell column="2" dic="s_kprogr" format="C(15)" inputType="1" vldType="4" vld="pril_kprogr_1"/>
+                    <cell column="3" format="N(15,0)" inputType="1" vldType="3" vld="1,2"/>
+                </row>
+            </rows>
+        </section>
+        <section code="5" name="4.Цели  использования Интернета в отчетном году" nb="4">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="Код">
+                    <default-cell column="3" format="N(15,0)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="4.Цели  использования Интернета в отчетном году(заполняют организации,указавшие код 1 в строке 105 гр. 3: укажите по каждой строке соответствующий код)"/>
+                <row code="" type="C" name="I. Цели использования Вашей организацией Интернета"/>
+                <row code="" type="C"
+                     name="Цели общего характера (укажите по каждой строке соответствующий код: да - 1; нет - 2):"/>
+                <row code="401" type="F" name="   поиск информации в сети">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="402" type="F" name="   использование электронной почты">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="403" type="F" name="   профессиональная подготовка персонала">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="404" type="F" name="   внутренний или внешний наем  персонала">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="405" type="F" name="   телефонные переговоры через Интернет/Vo IP">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="406" type="F" name="   проведение видеоконференций">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="407" type="F"
+                     name="   подписка к доступу электронных баз данных, электронным библиотекам на платной основе">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="408" type="F" name="   осуществление банковских и других финансовых операций">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="Использование сети для связи с поставщиками (укажите по каждой строке соответствующий код: да - 1;  нет - 2):"/>
+                <row code="409" type="F"
+                     name="   получение сведений о необходимых товарах (работах, услугах) и их поставщиках">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="410" type="F"
+                     name="   предоставление сведений о потребностях организации в товарах (работах, услугах)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="411" type="F"
+                     name="   размещение заказов на необходимые организации  товары (работы, услуги) (без учета заказов, отправленных по электронной почте">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="412" type="F" name="   оплата поставляемых товаров (работ, услуг)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="413" type="F" name="   получение электронной продукции">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="Использование сети для связи с потребителями (укажите по каждой строке соответствующий код: да - 1;  нет - 2"/>
+                <row code="414" type="F"
+                     name="   предоставление сведений об организации, ее товарах (работах, услугах)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="415" type="F"
+                     name="   получение заказов на выпускаемые организацией товары (работы, услуги) (без учета заказов, полученных  по электронной почте)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="416" type="F" name="   осуществление электронных расчетов с потребителями">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="417" type="F" name="   распространение электронной продукции">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="418" type="F" name="   послепродажное обслуживание (сервис)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="Использование сети для взаимодействия с органами государственной власти и местного самоуправления (укажите по каждой строке соответствующий код: да - 1;  нет - 2):"/>
+                <row code="419" type="F"
+                     name="   получение информации о деятельности органов государственной власти и местного самоуправления">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="420" type="F"
+                     name="   получение бланков форм (например, статистической или налоговой отчетности, заявлений, квитанций)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="421" type="F"
+                     name="   предоставление заполненных форм (например, статистической или налоговой отчетности, заявлений, квитанций)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="422" type="F"
+                     name="   получение государственных услуг от органов государственной власти и местного самоуправления полностью в электронном виде (включая платежи, если они необходимы) без необходимости использования бумажного документооборота при получении услуги">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="423" type="F"
+                     name="   участие в закупках товаров, работ, услуг для обеспечения государственных и (или) муниципальных нужд">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="Использование сети для получения отдельных видов государственных и (или) муниципальных  услуг (укажите по каждой строке соответствующий код: да – 1; нет – 2):"/>
+                <row code="424" type="F"
+                     name="   поиск информации в сети о государственных услугах и (или) муниципальных  услугах">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="425" type="F"
+                     name="   государственная регистрация результатов интеллектуальной собственности и прав интеллектуальной собственности">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="426" type="F" name="   получение сведений из Единого государственного реестра недвижимости">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="427" type="F"
+                     name="   получение государственных услуг в сфере частной охранной деятельности">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="428" type="F" name="   получение государственных услуг в сфере социального страхования">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="429" type="F"
+                     name="   получение государственных услуг в сфере автомобильного транспорта и перевозок">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="430" type="F"
+                     name="   получение государственных услуг по предоставлению отчетности в ФНС России, ФСС России, ПФР и иные ведомства">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="431" type="F" name="   другие государственные и (или) муниципальные  услуги">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2"/>
+                </row>
+                <row code="" type="C"
+                     name="II. Удовлетворенность качеством предоставленных государственных и(или) муниципальных услуг электронных услуг"/>
+                <row code="432" type="F"
+                     name="(укажите один из кодов: 1 – полностью удовлетворены; 2 – частично удовлетворены; 3 - не удовлетворены; 4 – затрудняюсь ответить) (заполняют организации, указавшие код 1 хотя бы в одной из стр. 419-431 гр. 3)">
+                    <cell column="3" format="N(15,0)" inputType="2" vldType="3" vld="1,2,3,4"/>
+                </row>
+                <row code="" type="C"
+                     name="Справка 6. Межведомственный документооборот в органах государственной власти в отчетном году"/>
+                <row code="" type="C"
+                     name="(заполняют федеральные органы исполнительной власти, органы исполнительной власти субъектов Российской Федерации, указавшие код 1 хотя бы в одной из стр 103, 105-109 гр 3)  Код по ОКЕИ:единица -642"/>
+                <row code="433" type="F"
+                     name="Число документов (писем, распоряжений, иной ознакомительной, инструктивной корреспонденции), отправленных Вашей организацией в органы государственной власти">
+                    <cell column="3" format="N(10,0)" inputType="2"/>
+                </row>
+                <row code="434" type="F"
+                     name=" из них с использованием системы межведомственного электронного документооборота (МЭДО)">
+                    <cell column="3" format="N(10,0)" inputType="2"/>
+                </row>
+                <row code="435" type="F"
+                     name="  из них с использованием  системы межведомственного электронного документооборота с применением с применением электронной подписи">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+            </rows>
+        </section>
+        <section code="6" name="5.Затраты на информационные и коммуникационные технологии в отчетном году" nb="5">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="Всего (тыс. руб)">
+                    <default-cell column="3" format="N(15,1)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="5.Затраты на информационные и коммуникационные технологии в отчетном году  Код по ОКЕИ:тыс.рублей - 384( с одним десятичным знаком)"/>
+                <row code="501" type="F"
+                     name="Затраты на информационные и коммуникационные технологии - всего (сумма строк 502-504,506,508-509,512)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="" type="C" name="      в том числе:"/>
+                <row code="502" type="F" name=" на приобретение вычислительной техники и оргтехники">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="503" type="F" name=" на приобретение телекоммуникационного оборудования">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="504" type="F" name=" на приобретение программного обеспечения">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="505" type="F"
+                     name="  из них российского программного обеспечения(расходы на программный продукт, включенный  в единый реестр российских программ для электронных вычислительных машин и баз данных)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="506" type="F" name=" на оплату услуг электросвязи"/>
+                <row code="" type="C"
+                     name="(расходы на местную,междугороднюю,международную,внутризоновую телефонную,спутниковую,сотовую связь;службу персонального радиовызова;радио,"/>
+                <row code="" type="C"
+                     name="факсимильную и телеграфную связь; электронную почту, телеконференции, предоставление доступа к глобальным компьютерным сетям и места для размещения информации в них и др.)"/>
+                <row code="507" type="F" name="  из них на оплату доступа к Интернету">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="508" type="F"
+                     name=" на обучение сотрудников, связанное с развитием и использованием информационных и коммуникационных технологий">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="509" type="F"
+                     name=" на оплату услуг сторонних организаций и специалистов, связанных с информационными и коммуникационными технологиями (кроме услуг связи и обучения)"/>
+                <row code="" type="C"
+                     name="(услуги по техническому обслуживанию и ремонту вычислительной техники и используемого вместе с ней периферийного оборудования,услуги по наладке и обслуживанию локальных сетей,"/>
+                <row code="" type="C"
+                     name="услуги по разработке системных и прикладных программных средств,электронные информационно-справочные услуги, услуги по разработке автоматизированных информационных систем, консультационные услуги в сфере ИКТ и др.)"/>
+                <row code="" type="C" name="  из них:"/>
+                <row code="510" type="F"
+                     name="  на оплату услуг по предоставлению прав использования программного обеспечения и вычислительных ресурсов на внешних ЭВМ («облачных» сервисов)">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="511" type="F"
+                     name="  на оплату услуг сторонних организаций и специалистов,связанных с созданием,обслуживанием,адаптацией,модификацией,установкой,тестированием,сопровождением и предоставлением прав использования ПО,включ.в единый реестр российских программ для ЭВМ и БД">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="512" type="F" name=" прочие затраты на информационные и коммуникационные технологии">
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+            </rows>
+        </section>
+        <section code="7" name="6. Численность работников организации" nb="6">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="Б" type="B" name="№ строки">
+                    <default-cell column="Б" format="C(5)" inputType="0"/>
+                </column>
+                <column code="3" type="Z" name="Всего (человек)">
+                    <default-cell column="3" format="N(15,0)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C" name="6.Численность работников организации  Код по ОКЕИ:человек - 792"/>
+                <row code="601" type="F"
+                     name="Численность работников списочного состава (без внешних совместителей) на конец отчетного года">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="602" type="F"
+                     name="  из них специалистов по информационным и коммуникационным технологиям (сумма строк 603-604)">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="603" type="F" name="   специалисты высшего уровня квалификации">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="" type="C"
+                     name="(разработчики и аналитики программного обеспечения и приложений: системные аналитики; разработчики программного обеспечения; разработчики Web и мультимедийных приложений; программисты приложений;"/>
+                <row code="" type="C"
+                     name="разработчики и аналитики программного обеспечения и приложений, не входящие в другие группы; специалисты по базам данных и сетям: дизайнеры баз данных и администраторы; системные администраторы; специалисты по компьютерным сетям;"/>
+                <row code="" type="C" name="специалисты по базам данных и сетям, не входящие в другие группы)."/>
+                <row code="604" type="F" name="   специалисты среднего уровня квалификации">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="" type="C"
+                     name="(специалисты-техники по эксплуатации ИКТ и по поддержке пользователей ИКТ: специалисты-техники по эксплуатации ИКТ; специалисты-техники по поддержке пользователей ИКТ; специалисты-техники по компьютерным сетям и системам;"/>
+                <row code="" type="C"
+                     name="специалисты-техники по Web; специалисты-техники по телекоммуникациям и радиовещанию: специалисты-техники по радио- и телевещанию специалисты-техники по телекоммуникационному оборудованию)"/>
+                <row code="" type="C"
+                     name=" Из стр. 601 – численность работников, использующих не реже 1 раза в неделю:"/>
+                <row code="605" type="F" name="  персональные компьютеры">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="606" type="F" name="  Интернет">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+                <row code="607" type="F"
+                     name="  портативные устройства, обеспечивающие доступ к Интернету по мобильной связи, предоставленные организацией">
+                    <cell column="3" format="N(15,0)" inputType="2"/>
+                </row>
+            </rows>
+        </section>
+        <section code="8"
+                 name="Раздел II.Сведения о деятельности организаций,производящих вычислительную технику,ПО и оказывающие услуги в области ИКТ"
+                 nb="7">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="1" type="B" name="№ строки">
+                    <default-cell column="1" format="C(5)" inputType="0"/>
+                </column>
+                <column code="2" type="S" fld="s1" name="Код по ОКПД2">
+                    <default-cell column="2" dic="s_okpd" format="C(20)" inputType="2" vldType="1"/>
+                </column>
+                <column code="3" type="Z" name="Всего">
+                    <default-cell column="3" format="N(15,1)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="Заполняют организации, осуществлявшие следующие виды экономической деятельности:26.1;26.20;26.30;26.40;26.80;46.51;46.52;58.2;61.10;61.20;61.30;61.90;62.01;62.02;62.03;62.09;63.11;63.12;95.11;95.12"/>
+                <row code="" type="C"
+                     name="7. Отгружено товаров (услуг)  сектора информационно-коммуникационных технологий в отчетном году  Код по ОКЕИ:тыс.рублей - 384(с одним десятичным знаком)"/>
+                <row code="701" type="F"
+                     name="Отгружено товаров(услуг) собственного производства,связанных с информационными и коммуникационными технологиями (без НДС,акцизов и аналогичных обязательных платежей)">
+                    <cell column="2" format="C(20)" default="X" inputType="0"/>
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="" type="C" name=" в том числе по видам:"/>
+                <row code="7" type="M" grv="2" name="">
+                    <cell column="2" dic="s_okpd" format="C(20)" inputType="2" vldType="4" vld="pril_okpd_3"/>
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+            </rows>
+        </section>
+        <section code="9" name="8. Продано товаров сектора информационно-коммуникационных технологий в отчетном году"
+                 nb="8">
+            <columns>
+                <column code="А" type="B" name="Наименование показателя">
+                    <default-cell column="А" format="C(250)" inputType="0"/>
+                </column>
+                <column code="1" type="B" name="№ строки">
+                    <default-cell column="1" format="C(5)" inputType="0"/>
+                </column>
+                <column code="2" type="S" fld="s1" name="Код по ОКПД2">
+                    <default-cell column="2" dic="s_okpd" format="C(20)" inputType="2" vldType="1"/>
+                </column>
+                <column code="3" type="Z" name="Всего">
+                    <default-cell column="3" format="N(15,1)" inputType="2"/>
+                </column>
+            </columns>
+            <rows>
+                <row code="" type="C"
+                     name="8. Продано товаров сектора информационно-коммуникационных технологий в отчетном году  Код по ОКЕИ:тыс.рублей - 384(с одним десятичным знаком)"/>
+                <row code="801" type="F"
+                     name="Продано товаров несобственного производства, связанных с информационными и  коммуникационными  технологиями (без НДС, акцизов и аналогичных обязательных платежей)">
+                    <cell column="2" format="C(20)" default="X" inputType="0"/>
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+                <row code="" type="C" name=" в том числе по видам:"/>
+                <row code="8" type="M" grv="2" name="">
+                    <cell column="2" dic="s_okpd" format="C(20)" inputType="2" vldType="4" vld="pril_okpd_4"/>
+                    <cell column="3" format="N(15,1)" inputType="2"/>
+                </row>
+            </rows>
+        </section>
+    </sections>
+    <controls>
+        <control id="3" name="XML Подраздел 5 стр. 501 гр.3 = сумме стр. 502-504, 506, 508-509, 512 гр. 3." condition=""
+                 rule="isnull({[6][501][3]},0)|=|isnull({[6][502][3]},0)+isnull({[6][503][3]},0)+ isnull({[6][504][3]},0) + isnull({[6][506][3]},0)+isnull({[6][508][3]},0)+ isnull({[6][509][3]},0)+isnull({[6][512][3]},0)"
+                 precision="1" tip="1"/>
+        <control id="4"
+                 name="XML Подраздел 2 Если  одновременно стр. 201 гр.3 и стр.202 гр.3  = 2, то стр. 203 гр.3 = &quot;6&quot;"
+                 condition="isnull({[2][201][3]},0)*isnull({[2][202][3]},0)|=|4" rule="isnull({[2][203][3]},0)|=|6"
+                 precision="0" tip="1"/>
+        <control id="5" name="XML Подраздел 3 стр 301-305 отражаются в целых числах,единиц" condition=""
+                 rule="isnull({[3][301,302,303,304,305][3]},0)|&gt;=|0" precision="0" tip="1"/>
+        <control id="7"
+                 name="XML Справка 2 Если стр. 105 гр. 3 = 1, то стр. 307  гр. 3 должна быть заполнена одним из значений (кодов) 1,7,8  при  стр. 306 гр.3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot; или &quot;6&quot;"
+                 condition="isnull({[1][105][3]},0)|=|1 AND isnull({[3][306][3]},0)|&lt;|7"
+                 rule="isnull({[3][307][3]},0)|&gt;|0" precision="0" tip="1"/>
+        <control id="9"
+                 name="XML Подраздел 1 стр. 112 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 103, 105 - 109 гр. 3 = 1"
+                 condition="SUM(isnull({[1][103,105,106,107,108,109][3]},0))|&lt;|12"
+                 rule="1|&lt;=|isnull({[1][112][3]},0)|&lt;=|2" precision="0" tip="1"/>
+        <control id="10"
+                 name="XML Справка 2 Если стр. 105 гр. 3 = 1, то стр. 308 гр. 3 должна быть заполнена одним из значений (кодов) 1,7,8  при  стр. 306 гр.3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot; или &quot;6&quot;"
+                 condition="isnull({[1][105][3]},0)|=|1 AND isnull({[3][306][3]},0)|&lt;|7"
+                 rule="isnull({[3][308][3]},0)|&gt;|0" precision="0" tip="1"/>
+        <control id="11" name="XML Подраздел 6 если стр 101 гр3=2 ,то  стр.605 гр3 не заполняется"
+                 condition="isnull({[1][101][3]},0)|=|2" rule="isnull({[7][605][3]},0)|=|0" precision="0" tip="1"/>
+        <control id="14"
+                 name="XML Подраздел 1 стр 101-111 гр.3=&quot;1&quot; или &quot;2&quot;; обязательно (заполняются одним из кодов  1 или 2) (в ЭВФ результат смотреть в графе ОТКЛОНЕНИЕ протокола)"
+                 condition="" rule="1|&lt;=|isnull({[1][101,102,103,104,105,106,107,108,109,110,111][3]},0)|&lt;=|2"
+                 precision="0" tip="1"/>
+        <control id="15" name="XML Подраздел 1 Если стр. 113 гр. 3 = 1, то стр. 112 гр.3 = 1"
+                 condition="isnull({[1][113][3]},0)|=|1" rule=" isnull({[1][112][3]},0)|=|1" precision="0" tip="1"/>
+        <control id="17"
+                 name="XML Подраздел 1 стр. 114 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 105, 106, 108 гр.3 = 1"
+                 condition="SUM (isnull({[1][105,106,108][3]},0))|&lt;|6"
+                 rule="1|&lt;=| isnull({[1][114][3]},0)|&lt;=|2" precision="0" tip="1"/>
+        <control id="19" name="XML Подраздел 6 Если стр 105 гр3=2 ,то  стр.606 гр3 не заполняется"
+                 condition="isnull({[1][105][3]},0)|=|2" rule="isnull({[7][606][3]},0)|=|0" precision="0" tip="1"/>
+        <control id="20" name="XML Подраздел 6 Если стр 605 гр3&lt;=  стр 601 гр3" condition=""
+                 rule="isnull({[7][605][3]},0)|&lt;=|isnull({[7][601][3]},0)" precision="0" tip="1"/>
+        <control id="21"
+                 name="XML Справка 3 стр 309-323,325 гр 3=&quot;1&quot;  или &quot;2&quot;( заполняются одним из кодов  1 или 2)   при стр 101 гр3 и / или 102 гр3 =1"
+                 condition="1|&lt;=|isnull({[1][101][3]},0)+isnull({[1][102][3]},0)|&lt;=|3"
+                 rule="1|&lt;=|isnull({[3][309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,325][3]},0)|&lt;=|2"
+                 precision="0" tip="1"/>
+        <control id="24" name="XML Подраздел 6 Если стр 606 гр3&lt;=  стр.601 гр3" condition=""
+                 rule="isnull({[7][606][3]},0)|&lt;=|isnull({[7][601][3]},0)" precision="0" tip="1"/>
+        <control id="25" name="XML  Подраздел 5 стр  504&gt;=505 по гр3" condition=""
+                 rule="isnull({[6][504][3]},0)|&gt;=|isnull({[6][505][3]},0)" precision="1" tip="1"/>
+        <control id="27" name="XML Подраздел 6 Если стр 607 гр3&lt;=  стр.601 гр3" condition=""
+                 rule="isnull({[7][607][3]},0)|&lt;=|isnull({[7][601][3]},0)" precision="0" tip="1"/>
+        <control id="30"
+                 name="XML Подраздел 2 стр. 201-202 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 105,106,108,109 гр.3 = 1"
+                 condition="SUM(isnull({[1][105,106,108,109][3]},0))|&lt;|8"
+                 rule="1|&lt;=|isnull({[2][201][3]},0)*isnull({[2][202][3]},0)|&lt;=|4" precision="0" tip="1"/>
+        <control id="31"
+                 name="XML Справка 1 стр. 204 - 208 гр. 3 = &quot;1&quot; или &quot;2&quot;, при стр. 109 гр.3 = 1"
+                 condition="isnull({[1][109][3]},0)|=|1"
+                 rule="1|&lt;=|isnull({[2][204][3]},0)*isnull({[2][205][3]},0)*isnull({[2][206][3]},0)*isnull({[2][207][3]},0)*isnull({[2][208][3]},0)|&lt;=|32"
+                 precision="0" tip="1"/>
+        <control id="32"
+                 name="XML Подраздел 2 стр. 201-202 гр.4 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 105,106,108,109 гр.3 = 1"
+                 condition="SUM(isnull({[1][105,106,108,109][3]},0))|&lt;|8"
+                 rule="1|&lt;=|isnull({[2][201][4]},0)*isnull({[2][202][4]},0)|&lt;=|4" precision="0" tip="1"/>
+        <control id="33"
+                 name="XML  Подраздел 4 стр. 432  гр. 3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot; ,при стр. 105 гр. 3 = 1 и  при хотя бы одной из стр. 419-431 гр.3 = 1"
+                 condition="isnull({[1][105][3]},0)|=|1 AND  SUM(isnull({[5][419,420,421,422,423,424,425,426,427,428,429,430,431][3]},0))|&lt;|26"
+                 rule="1|&lt;=|isnull({[5][432][3]},0)|&lt;=|4" precision="0" tip="1"/>
+        <control id="34"
+                 name="XML Подраздел 1 стр. 113 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 103, 105 - 109 гр. 3 = 1"
+                 condition="SUM(isnull({[1][103,105,106,107,108,109][3]},0))|&lt;|12"
+                 rule="1|&lt;=|isnull({[1][113][3]},0)|&lt;=|2" precision="0" tip="1"/>
+        <control id="35"
+                 name="XML Подраздел 4 стр. 401-431 гр.3 = &quot;1&quot; или &quot;2&quot;, при стр. 105 гр.3 = 1"
+                 condition="isnull({[1][105][3]},0)|=|1"
+                 rule="1|&lt;=|isnull({[5][401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431][3]},0)|&lt;=|2"
+                 precision="0" tip="1"/>
+        <control id="37"
+                 name="XML Справка 3 стр. 324 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 103, 105-109 гр.3 = 1"
+                 condition="isnull({[1][103][3]}+{[1][105][3]}+{[1][106][3]}+{[1][107][3]}+{[1][108][3]}+{[1][109][3]},0)|&lt;|12"
+                 rule="1|&lt;=|isnull({[3][324][3]},0)|&lt;=|2" precision="0" tip="1"/>
+        <control id="39" name="XML Справка 2 Если стр. 306 = 1, то стр. 308 гр. 3&lt;&gt;7"
+                 condition="isnull({[3][306][3]},0)|=|1" rule="isnull({[3][308][3]},0)|&lt;&gt;|7" precision="0"
+                 tip="1"/>
+        <control id="40" name="XML Справка 2 Если стр. 307 = 7, то стр. 306 гр. 3&lt;&gt;1"
+                 condition="isnull({[3][307][3]},0)|=|7" rule="isnull({[3][306][3]},0)|&lt;&gt;|1" precision="0"
+                 tip="1"/>
+        <control id="42" name="XML Подраздел 3 стр 301 гр3&gt;= стр 305 гр3" condition="isnull({[1][101][3]},0)|=|1"
+                 rule="isnull({[3][301][3]},0)|&gt;=|isnull({[3][305][3]},0)" precision="0" tip="1"/>
+        <control id="50" name="XML Справка 2 Если стр. 306 = 1, то стр. 307 гр. 3&lt;&gt;7"
+                 condition="isnull({[3][306][3]},0)|=|1" rule="isnull({[3][307][3]},0)|&lt;&gt;|7" precision="0"
+                 tip="1"/>
+        <control id="55" name="XML Подраздел 6 в  стр 601-607 гр3   заполняется в целых числах,человек" condition=""
+                 rule="isnull({[7][601,602,603,604,605,606,607][3]},0)|&gt;=|0" precision="0" tip="1"/>
+        <control id="56" name="XML Подраздел 5 стр  509&gt;=510 по гр3" condition=""
+                 rule="isnull({[6][509][3]},0)|&gt;=|isnull({[6][510][3]},0)" precision="1" tip="1"/>
+        <control id="59" name="XML Подраздел 4  если стр. 105 гр.3 = 2, то стр. 401-432 не заполняются"
+                 condition="isnull({[1][105][3]},0)|=|2"
+                 rule="SUM(isnull({[5][401,402,403,404,405,406,407,408,409,410,411,412,413,414,415,416,417,418,419,420,421,422,423,424,425,426,427,428,429,430,431,432][3]},0))|=|0"
+                 precision="0" tip="1"/>
+        <control id="60"
+                 name="XML Подраздел 2 стр. 203 гр. 3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot;, или &quot;6&quot;, при хотя бы одной из стр. 105,106,108,109 гр.3 = 1"
+                 condition="SUM(isnull({[1][105,106,108,109][3]},0))|&lt;|8"
+                 rule=" 1|&lt;=|isnull({[2][203][3]},0)|&lt;=|6" precision="0" tip="1"/>
+        <control id="61"
+                 name="XML Подраздел 2 стр. 203 гр. 4 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot;, или &quot;6&quot;, при хотя бы одной из стр. 105,106,108,109 гр.3 = 1"
+                 condition="SUM(isnull({[1][105,106,108,109][3]},0))|&lt;|8"
+                 rule="1|&lt;=|isnull({[2][203][4]},0)|&lt;=|6" precision="0" tip="1"/>
+        <control id="62" name="XML Подраздел 6 стр 601 гр3&gt;= стр 602 гр3" condition=""
+                 rule="isnull({[7][601][3]},0)|&gt;=|isnull({[7][602][3]},0)" precision="0" tip="1"/>
+        <control id="65" name="XML Подраздел 3  стр 301 гр3&gt; =стр 302  гр3" condition="isnull({[1][101][3]},0)|=|1"
+                 rule="isnull({[3][301][3]},0)|&gt;=|isnull({[3][302][3]},0)" precision="0" tip="1"/>
+        <control id="66"
+                 name="XML Подраздел 2 Если хотя бы одна из стр. 201, 202 гр.3  = 1, то стр. 203 гр.3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot;"
+                 condition="1|&lt;|isnull({[2][201][3]},0)+isnull({[2][202][3]},0)|&lt;|4"
+                 rule=" 1|&lt;=|isnull({[2][203][3]},0)|&lt;=|5" precision="0" tip="1"/>
+        <control id="67" name="XML Подраздел 3  стр 301 гр3&gt;= стр 303  гр3" condition="isnull({[1][101][3]},0)|=|1"
+                 rule="isnull({[3][301][3]},0)|&gt;=|isnull({[3][303][3]},0)" precision="0" tip="1"/>
+        <control id="68" name="XML Подраздел 3 стр 303 гр3&gt;= стр 304 гр3" condition="isnull({[1][101][3]},0)|=|1"
+                 rule="isnull({[3][303][3]},0)|&gt;=|isnull({[3][304][3]},0)" precision="0" tip="1"/>
+        <control id="75"
+                 name="XML Справка 4 стр. 326-336 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 101, 102, 105-108 по гр. 3=1"
+                 condition="SUM(isnull({[1][101,102,105,106,107,108][3]},0))|&lt;|12"
+                 rule="0|&lt;|isnull({[3][326,327,328,329,330,331,332,333,334,335,336][3]},0)|&lt;=|2" precision="0"
+                 tip="1"/>
+        <control id="80" name="XML Справка 2 Если стр. 308= 7, то стр. 306 гр. 3&lt;&gt;1"
+                 condition="isnull({[3][308][3]},0)|=|7" rule="isnull({[3][306][3]},0)|&lt;&gt;|1" precision="0"
+                 tip="1"/>
+        <control id="83" name="XML Подраздел 6 стр 602=сумме стр( 603-604)  по гр3" condition=""
+                 rule="isnull({[7][602][3]},0)|=| isnull({[7][603][3]},0)+isnull({[7][604][3]},0)" precision="0"
+                 tip="1"/>
+        <control id="84" name="XML Подраздел 5 стр  506&gt;=507 по гр3" condition=""
+                 rule="isnull({[6][506][3]},0)|&gt;=|isnull({[6][507][3]},0)" precision="1" tip="1"/>
+        <control id="87"
+                 name="XML Подраздел 2 Если хотя бы одна из стр. 201, 202 гр.4  = 1, то стр. 203 гр.4 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot;"
+                 condition="1|&lt;|isnull({[2][201][4]},0)+isnull({[2][202][4]},0)|&lt;|4"
+                 rule="1|&lt;=|isnull({[2][203][4]},0)|&lt;=|5" precision="0" tip="1"/>
+        <control id="95" name="XML Справка 2 стр. 306-308 гр.3 заполняются, при стр. 105 гр.3 = 1"
+                 condition="isnull({[1][105][3]},0)|=|1" rule="isnull({[3][306,307,308][3]},0)|&gt;|0" precision="0"
+                 tip="1"/>
+        <control id="97"
+                 name="XML Подраздел 2 Если  одновременно стр. 201 гр.4 и стр.202 гр.4  = 2, то стр. 203 гр4 = &quot;6&quot;"
+                 condition="isnull({[2][201][4]},0)*isnull({[2][202][4]},0)|=|4" rule="isnull({[2][203][4]},0)|=|6"
+                 precision="0" tip="1"/>
+        <control id="107" name="XML Подраздел 3 Стр.301-305 гр.3 заполняются при стр.101 гр.3=1."
+                 condition="isnull({[1][101][3]},0)|=|1" rule="SUM(isnull({[3][301,302,303,304,305][3]},0))|&gt;|0"
+                 precision="0" tip="1"/>
+        <control id="115" name="XML Подраздел 3 Если стр. 303  гр. 3&gt;0, то хотя бы одна из стр. 105-108 гр. 3 = 1"
+                 condition="isnull({[3][303][3]},0)|&gt;|0"
+                 rule="isnull({[1][105][3]},0)+isnull({[1][106][3]},0)+isnull({[1][107][3]},0)+isnull({[1][108][3]},0)|&lt;|8"
+                 precision="0" tip="1"/>
+        <control id="120"
+                 name="XML Подраздел 5 стр  501-512 гр3 данные отражаются в тыс руб с одним десятичным энаком!!!!"
+                 condition=""
+                 rule="isnull({[6][501,502,503,504,505,506,507,508,509,510,511,512][3]},0)|&lt;=|99999999999999.9"
+                 precision="1" tip="1"/>
+        <control id="124" name="XML Подраздел 6 Если стр 110 гр3=2 ,то  стр.607 гр.3 не заполняется"
+                 condition="isnull({[1][110][3]},0)|=|2" rule="isnull({[7][607][3]},0)|=|0" precision="0" tip="1"/>
+        <control id="128" name="XML Подраздел 3 Если стр. 304  гр. 3&gt;0, то стр. 105 гр. 3 = 1"
+                 condition="isnull({[3][304][3]},0)|&gt;|0" rule="isnull({[1][105][3]},0)|=|1" precision="0" tip="1"/>
+        <control id="132" name="XML Справка 2 Если стр. 105 гр. 3 = 2, то стр. 306-308 не заполняются"
+                 condition="isnull({[1][105][3]},0)|=|2"
+                 rule="isnull({[3][306][3]},0)+isnull({[3][307][3]},0)+ isnull({[3][308][3]},0)|=|0" precision="0"
+                 tip="1"/>
+        <control id="142"
+                 name="XML Справка 2 если стр. 105 гр. 3 =1 , то стр. 306 гр. 3 должна быть заполнена одним из кодов: 1,2,3,4,5,6"
+                 condition="isnull({[1][105][3]},0)|=|1" rule="1|&lt;=|isnull({[3][306][3]},0)|&lt;=|6" precision="0"
+                 tip="1"/>
+        <control id="168"
+                 name="XML Подраздел 1 стр. 115 гр.3 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 105, 106, 108 гр.3 = 1"
+                 condition="SUM (isnull({[1][105,106,108][3]},0))|&lt;|6"
+                 rule="1|&lt;=| isnull({[1][115][3]},0)|&lt;=|2" precision="0" tip="1"/>
+        <control id="169" name="XML Подраздел 1 Если стр. 114 гр.3 = 2, то стр. 115 гр.3=2"
+                 condition="isnull({[1][114][3]},0)|=|2" rule=" isnull({[1][115][3]},0)|=|2" precision="0" tip="1"/>
+        <control id="175"
+                 name="XML Справка 3 стр 309-323,325 гр 4=&quot;1&quot;  или &quot;2&quot;( заполняются одним из кодов  1 или 2)   при стр 101 гр3 и / или 102 гр3 =1"
+                 condition="1|&lt;=|isnull({[1][101][3]},0)+isnull({[1][102][3]},0)|&lt;=|3"
+                 rule="1|&lt;=|isnull({[3][309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,325][4]},0)|&lt;=|2"
+                 precision="0" tip="1"/>
+        <control id="176"
+                 name="XML Справка 3 стр. 324 гр.4 = &quot;1&quot; или &quot;2&quot;, при хотя бы одной из стр. 103, 105-109 гр.3 = 1"
+                 condition="isnull({[1][103][3]}+{[1][105][3]}+{[1][106][3]}+{[1][107][3]}+{[1][108][3]}+{[1][109][3]},0)|&lt;|12"
+                 rule="1|&lt;=|isnull({[3][324][4]},0)|&lt;=|2" precision="0" tip="1"/>
+        <control id="177" name="XML Справка 3  если  по стр.309-325 гр.4=&quot;1&quot;, то  гр.3 =&quot;1&quot;"
+                 condition="isnull({[3][309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325][4]},0)|=|1&#xD;&#xA;"
+                 rule="isnull({[3][309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325][3]},0)|=|1"
+                 precision="0" tip="1"/>
+        <control id="178" name="XML Справка 3  если  по стр.309-325 гр.3=&quot;2&quot;, то  гр.4 =&quot;2&quot;"
+                 condition="1|&lt;|isnull({[3][309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325][3]},0)|&lt;|3"
+                 rule="1|&lt;|isnull({[3][309,310,311,312,313,314,315,316,317,318,319,320,321,322,323,324,325][4]},0)|&lt;|3"
+                 precision="0" tip="1"/>
+        <control id="179"
+                 name="XML Справка 2 стр. 307 гр.3&lt;&gt;8, при стр. 308 гр.3 = 8 и стр. 306 гр.3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot;, или &quot;6&quot;"
+                 condition="isnull({[3][308][3]},0)|=|8  AND  isnull({[3][306][3]},0)|&lt;|7"
+                 rule="isnull({[3][307][3]},0)|&lt;&gt;|8" precision="0" tip="1"/>
+        <control id="180"
+                 name="XML Справка 2 стр. 308 гр.3&lt;&gt;8, при стр. 307 гр.3 = 8 и стр. 306 гр.3 = &quot;1&quot; или &quot;2&quot;, или &quot;3&quot;, или &quot;4&quot;, или &quot;5&quot;, или &quot;6&quot;"
+                 condition="isnull({[3][307][3]},0)|=|8  AND  isnull({[3][306][3]},0)|&lt;|7"
+                 rule="isnull({[3][308][3]},0)|&lt;&gt;|8" precision="0" tip="1"/>
+        <control id="182" name="XML Подраздел 1 стр. 115 гр. 3 = &quot;1&quot; , то стр. 114 гр.3 = 1"
+                 condition="isnull({[1][115][3]},0)|=|1" rule="isnull({[1][114][3]},0)|=|1" precision="0" tip="1"/>
+        <control id="184" name="XML Подраздел 5 стр  509&gt;=511 по гр3" condition=""
+                 rule="isnull({[6][509][3]},0)|&gt;=|isnull({[6][511][3]},0)" precision="1" tip="1"/>
+        <control id="192"
+                 name="XML Справка 5  заполняют организации указавшие код &quot;1&quot; по стр 101 и/или 102 гр.3,при стр.602 гр.3&gt;0"
+                 condition="SUM(isnull({[1][101,102][3]},0))*{[7][602][3]}|&gt;|0 AND SUM(isnull({[1][101,102][3]},0))|&lt;&gt;|4"
+                 rule="SUM(isnull({[4][6][3]},0))|&gt;|0" precision="0" tip="1"/>
+    </controls>
+    <dics>
+        <dic name="Справочник годов" id="s_god">
+            <term id="2016">2016 г.</term>
+            <term id="2017">2017 г.</term>
+            <term id="2018">2018 г.</term>
+            <term id="2019">2019 г.</term>
+            <term id="2020">2020 г.</term>
+        </dic>
+        <dic name="Справочник периодов" id="s_mes">
+            <term id="1">Годовая</term>
+        </dic>
+        <dic name="s_ud_v_st. Удельный вес стоимости заказов сырья" id="s_ud_v_st">
+            <term id="1">&lt;10%</term>
+            <term id="2">10% - 29%</term>
+            <term id="3">30% - 49%</term>
+            <term id="4">50% - 69%</term>
+            <term id="5">70% - 100%</term>
+            <term id="6">не использовали</term>
+        </dic>
+        <dic name="Справочник Классов программ для ЭВМ и БД" id="s_kprogr">
+            <term id="01">Встроенное программное обеспечение</term>
+            <term id="01.01">BIOS и иное встроенное программное обеспечение</term>
+            <term id="01.02">Встроенное программное обеспечение телекоммуникационного оборудования</term>
+            <term id="02">Системное программное обеспечение</term>
+            <term id="02.01">Операционные системы</term>
+            <term id="02.03">Утилиты и Драйверы</term>
+            <term id="02.05">Средства обеспечения облачных и распределенных вычислений,средства виртуализации и системы
+                хранения данных
+            </term>
+            <term id="02.07">Серверное и связующее программное обеспечение</term>
+            <term id="02.09">Системы управления базами данных</term>
+            <term id="02.11">Системы мониторинга и управления</term>
+            <term id="02.13">Средства обеспечения информационной безопасности</term>
+            <term id="03">Средства разработки программного обеспечения</term>
+            <term id="03.01">Средства подготовки исполнимого кода</term>
+            <term id="03.03">Средства версионного контроля исходного кода</term>
+            <term id="03.05">Библиотеки подпрограмм (SDK)</term>
+            <term id="03.07">Среды разработки, тестирования и отладки</term>
+            <term id="03.09">Системы анализа исходного кода на закладки и уязвимости</term>
+            <term id="04">Прикладное программное обеспечение</term>
+            <term id="04.01">Прикладное программное обеспечение общего назначения</term>
+            <term id="04.03">Офисные приложения</term>
+            <term id="04.05">Поисковые системы</term>
+            <term id="04.07">Лингвистическое программное обеспечение</term>
+            <term id="04.09">Системы управления проектами, исследованиями, разработкой,проектированием и внедрением
+            </term>
+            <term id="04.11">Системы управления процессами организации</term>
+            <term id="04.13">Системы сбора, хранения, обработки, анализа, моделирования и визуализации массивов данных
+            </term>
+            <term id="04.15">Информационные системы для решения специфических отраслевых задач</term>
+            <term id="04.16">Геоинформационные и навигационные системы (GIS)</term>
+        </dic>
+        <dic name="Приложение pril_kprogr_1" id="pril_kprogr_1" parent="s_kprogr">
+            <term id="01.01"/>
+            <term id="01.02"/>
+            <term id="02.01"/>
+            <term id="02.03"/>
+            <term id="02.05"/>
+            <term id="02.07"/>
+            <term id="02.09"/>
+            <term id="02.11"/>
+            <term id="02.13"/>
+            <term id="03.01"/>
+            <term id="03.03"/>
+            <term id="03.05"/>
+            <term id="03.07"/>
+            <term id="03.09"/>
+            <term id="04.01"/>
+            <term id="04.03"/>
+            <term id="04.05"/>
+            <term id="04.07"/>
+            <term id="04.09"/>
+            <term id="04.11"/>
+            <term id="04.13"/>
+            <term id="04.15"/>
+            <term id="04.16"/>
+        </dic>
+        <dic name="Общероссийский Классификатор продукции по видам экономической деятельности ОК 034-2014 (КПЕС 2008)"
+             id="s_okpd">
+            <term id="0">-1</term>
+            <term id="X">строка 701/801 гр.3</term>
+            <term id="1324500.034.01">Товары и услуги сектора информационно-коммуникационных технологий</term>
+            <term id="26.11.1">Лампы и трубки электронные вакуумные или газонаполненные с термокатодом, холодным
+                катодом, фотокатодом, включая трубки электронно-лучевые
+            </term>
+            <term id="26.11.2">Диоды и транзисторы</term>
+            <term id="26.11.30">Схемы интегральные электронные</term>
+            <term id="26.11.40">Части электронных ламп и трубок, и прочих электронных компонентов, не включенные в
+                другие группировки
+            </term>
+            <term id="26.11.9">Услуги, связанные с производством электронных интегральных схем; отдельные операции
+                процесса производства электронных компонентов, выполняемые субподрядчиком
+            </term>
+            <term id="26.12.10">Платы печатные смонтированные</term>
+            <term id="26.12.20">Платы звуковые, видеоплаты, сетевые и аналогичные платы для машин автоматической
+                обработки информации
+            </term>
+            <term id="26.12.30">Карты со встроенными интегральными схемами (смарт-карты)</term>
+            <term id="26.12.9">Услуги, связанные с изготовлением печатных плат; отдельные операции процесса производства
+                смонтированных электронных плат, выполняемые субподрядчиком
+            </term>
+            <term id="26.20.11">Компьютеры портативные массой не более 10 кг, такие как ноутбуки, планшетные компьютеры,
+                карманные компьютеры, в том числе совмещающие функции мобильного телефонного аппарата, электронные
+                записные книжки и аналогичная компьютерная техника
+            </term>
+            <term id="26.20.12">Терминалы кассовые, банкоматы и аналогичное оборудование, подключаемое к компьютеру или
+                сети передачи данных
+            </term>
+            <term id="26.20.13">Машины вычислительные электронные цифровые, содержащие в одном корпусе центральный
+                процессор и устройство ввода и вывода, объединенные или нет для автоматической обработки данных
+            </term>
+            <term id="26.20.14">Машины вычислительные электронные цифровые, поставляемые в виде систем для
+                автоматической обработки данных
+            </term>
+            <term id="26.20.15">Машины вычислительные электронные цифровые прочие, содержащие или не содержащие в одном
+                корпусе одно или два из следующих устройств, для автоматической обработки данных: запоминающие
+                устройства, устройства ввода, устройства вывода
+            </term>
+            <term id="26.20.16">Устройства ввода или вывода, содержащие или не содержащие в одном корпусе запоминающие
+                устройства
+            </term>
+            <term id="26.20.17">Мониторы и проекторы, преимущественно используемые в системах автоматической обработки
+                данных
+            </term>
+            <term id="26.20.18">Устройства периферийные с двумя или более функциями: печать данных, копирование,
+                сканирование, прием и передача факсимильных сообщений
+            </term>
+            <term id="26.20.2">Устройства запоминающие и прочие устройства хранения данных</term>
+            <term id="26.20.30">Устройства автоматической обработки данных прочие</term>
+            <term id="26.20.40">Блоки, части и принадлежности вычислительных машин</term>
+            <term id="26.20.9">Услуги по производству компьютеров и периферийного оборудования; отдельные операции
+                процесса производства компьютеров и периферийного оборудования, выполняемые субподрядчиком
+            </term>
+            <term id="26.30.11">Аппаратура коммуникационная передающая с приемными устройствами</term>
+            <term id="26.30.12">Аппаратура коммуникационная передающая без приемных устройств</term>
+            <term id="26.30.13">Камеры телевизионные</term>
+            <term id="26.30.21">Аппараты телефонные проводные с беспроводной трубкой</term>
+            <term id="26.30.22">Аппараты телефонные для сотовых сетей связи или для прочих беспроводных сетей</term>
+            <term id="26.30.23">Аппараты телефонные прочие, устройства и аппаратура для передачи и приема речи,
+                изображений или других данных, включая оборудование коммуникационное для работы в проводных или
+                беспроводных сетях связи (например, локальных и глобальных сетях)
+            </term>
+            <term id="26.30.30">Части и комплектующие коммуникационного оборудования</term>
+            <term id="26.30.40">Антенны и антенные отражатели всех видов и их части; части передающей радио- и
+                телевизионной аппаратуры и телевизионных камер
+            </term>
+            <term id="26.30.50">Устройства охранной или пожарной сигнализации и аналогичная аппаратура</term>
+            <term id="26.30.60">Части устройств охранной или пожарной сигнализации и аналогичной аппаратуры</term>
+            <term id="26.30.99">Услуги по производству коммуникационного оборудования отдельные, выполняемые
+                субподрядчиком
+            </term>
+            <term id="26.40.1">Радиоприемники широковещательные</term>
+            <term id="26.40.20">Приемники телевизионные, совмещенные или не совмещенные с широковещательными
+                радиоприемниками или аппаратурой для записи или воспроизведения звука или изображения
+            </term>
+            <term id="26.40.31">Устройства электропроигрывающие, проигрыватели грампластинок, кассетные проигрыватели и
+                прочая аппаратура для воспроизведения звука
+            </term>
+            <term id="26.40.32">Магнитофоны и прочая аппаратура для записи звука</term>
+            <term id="26.40.33">Видеокамеры для записи и прочая аппаратура для записи или воспроизведения изображения
+            </term>
+            <term id="26.40.34">Мониторы и проекторы, без встроенной телевизионной приемной аппаратуры и в основном не
+                используемые в системах автоматической обработки данных
+            </term>
+            <term id="26.40.4">Микрофоны, громкоговорители, приемная аппаратура для радиотелефонной или радиотелеграфной
+                связи
+            </term>
+            <term id="26.40.51">Части и принадлежности звукового и видеооборудования</term>
+            <term id="26.40.52">Части радиоприемной и радиопередающей аппаратуры</term>
+            <term id="26.40.60">Приставки игровые, используемые с телевизионным приемником или оборудованные встроенным
+                экраном, и прочие коммерческие и азартные игры с электронным дисплеем
+            </term>
+            <term id="26.40.99">Услуги по производству бытовой электронной техники отдельные, выполняемые
+                субподрядчиком
+            </term>
+            <term id="26.70.13">Видеокамеры цифровые</term>
+            <term id="26.70.23">Устройства на жидких кристаллах; лазеры, кроме лазерных диодов; оптические приборы и
+                инструменты прочие, не включенные в другие группировки
+            </term>
+            <term id="26.70.25">Части и принадлежности устройств на жидких кристаллах, лазеров (кроме лазерных диодов),
+                прочих оптических приборов и инструментов, не включенных в другие группировки
+            </term>
+            <term id="26.80.11">Носители данных магнитные без записи, кроме магнитных карт</term>
+            <term id="26.80.12">Носители данных оптические без записи</term>
+            <term id="26.80.13">Носители данных прочие, включая матрицы и основы для производства дисков</term>
+            <term id="26.80.14">Карты магнитные</term>
+            <term id="26.80.99">Услуги по производству магнитных и оптических носителей отдельные, выполняемые
+                субподрядчиком
+            </term>
+            <term id="58.29.11">Системы операционные на электронном носителе</term>
+            <term id="58.29.12">Обеспечение программное сетевое на электронном носителе</term>
+            <term id="58.29.13">Обеспечение программное для администрирования баз данных на электронном носителе</term>
+            <term id="58.29.14">Средства разработки инструментальные и программное обеспечение языков программирования
+                на электронном носителе
+            </term>
+            <term id="58.29.21">Приложения общие для повышения эффективности бизнеса и приложения для домашнего
+                пользования, отдельно реализуемые
+            </term>
+            <term id="58.29.29">Обеспечение программное прикладное прочее на электронном носителе</term>
+            <term id="58.29.31">Обеспечение программное системное для загрузки</term>
+            <term id="58.29.32">Обеспечение программное прикладное для загрузки</term>
+            <term id="58.29.40">Обеспечение программное в диалоговом режиме</term>
+            <term id="58.29.50">Услуги по предоставлению лицензий на право использовать компьютерное программное
+                обеспечение
+            </term>
+            <term id="61.10.11">Услуги фиксированной телефонной связи - предоставление доступа и телефонные соединения
+            </term>
+            <term id="61.10.12">Услуги фиксированной телефонной связи дополнительные</term>
+            <term id="61.10.13">Услуги фиксированной телефонной связи в выделенных сетях связи</term>
+            <term id="61.10.20">Услуги операторов связи в сфере проводных телекоммуникаций</term>
+            <term id="61.10.30">Услуги по передаче данных по проводным телекоммуникационным сетям</term>
+            <term id="61.10.41">Услуги магистральные по информационно-коммуникационной сети Интернет</term>
+            <term id="61.10.42">Услуги по узкополосному доступу к информационно-коммуникационной сети Интернет по
+                проводным сетям
+            </term>
+            <term id="61.10.43">Услуги по широкополосному доступу к информационно-коммуникационной сети Интернет по
+                проводным сетям
+            </term>
+            <term id="61.10.49">Услуги телекоммуникационные проводные в информационно-коммуникационной сети Интернет
+                прочие
+            </term>
+            <term id="61.10.5">Услуги связи для целей кабельного вещания</term>
+            <term id="61.20.11">Услуги подвижной связи общего пользования - обеспечение доступа и поддержка
+                пользователя
+            </term>
+            <term id="61.20.12">Услуги подвижной связи дополнительные</term>
+            <term id="61.20.13">Услуги подвижной связи в выделенных радиосетях</term>
+            <term id="61.20.20">Услуги операторов связи в сфере беспроводных телекоммуникаций</term>
+            <term id="61.20.30">Услуги по передаче данных по беспроводным телекоммуникационным сетям</term>
+            <term id="61.20.41">Услуги по узкополосному доступу к информационно-коммуникационной сети Интернет по
+                беспроводным сетям
+            </term>
+            <term id="61.20.42">Услуги по широкополосному доступу к информационно-коммуникационной сети Интернет по
+                беспроводным сетям
+            </term>
+            <term id="61.20.49">Услуги телекоммуникационные беспроводные прочие в информационно-коммуникационной сети
+                Интернет
+            </term>
+            <term id="61.20.50">Услуги связи для целей эфирного вещания</term>
+            <term id="61.30.10">Услуги спутниковой связи, кроме услуг для целей телевизионного и радиовещания</term>
+            <term id="61.30.20">Услуги спутниковой связи для целей теле- и радиовещания</term>
+            <term id="61.90.10">Услуги телекоммуникационные прочие</term>
+            <term id="62.01.11">Услуги по проектированию, разработке информационных технологий для прикладных задач и
+                тестированию программного обеспечения
+            </term>
+            <term id="62.01.12">Услуги по проектированию и разработке информационных технологий для сетей и систем
+            </term>
+            <term id="62.01.29">Оригиналы программного обеспечения прочие</term>
+            <term id="62.02.10">Услуги консультативные по компьютерному оборудованию</term>
+            <term id="62.02.20">Услуги консультативные по вопросам систем и программному обеспечению</term>
+            <term id="62.02.30">Услуги по технической поддержке информационных технологий</term>
+            <term id="62.03.11">Услуги по управлению сетями</term>
+            <term id="62.03.12">Услуги по управлению компьютерными системами</term>
+            <term id="62.09.10">Услуги по установке компьютеров и периферийного оборудования</term>
+            <term id="62.09.20">Услуги в области информационных технологий и компьютерные услуги прочие, не включенные в
+                другие группировки
+            </term>
+            <term id="63.11.11">Услуги по обработке данных</term>
+            <term id="63.11.12">Услуги по размещению в информационно-коммуникационной сети Интернет</term>
+            <term id="63.11.13">Услуги по предоставлению программного обеспечения без его размещения на компьютерном
+                оборудовании пользователя
+            </term>
+            <term id="63.11.19">Услуги прочие по размещению и предоставлению инфраструктуры информационных технологий
+            </term>
+            <term id="63.11.2">Услуги по передаче потокового видео и аудио</term>
+            <term id="70.22.17">Услуги по управлению бизнес-процессами</term>
+            <term id="71.12.18">Услуги по инженерно-техническому проектированию объектов связи, телевидения и
+                радиовещания
+            </term>
+            <term id="77.29.11">Услуги по прокату телевизоров, радиоприемников, видеомагнитофонов и подобного
+                оборудования и принадлежностей
+            </term>
+            <term id="77.33.12">Услуги по аренде и лизингу вычислительной техники</term>
+            <term id="77.39.14">Услуги по аренде и лизингу телекоммуникационного оборудования</term>
+            <term id="95.11.10">Услуги по ремонту компьютеров и периферийного оборудования</term>
+            <term id="95.12.10">Услуги по ремонту коммуникационного оборудования</term>
+        </dic>
+        <dic name="Приложение pril_okpd_3 для ввода товаров Раздел 7( прил.37)" id="pril_okpd_3" parent="s_okpd">
+            <term id="26.11.1"/>
+            <term id="26.11.2"/>
+            <term id="26.11.30"/>
+            <term id="26.11.40"/>
+            <term id="26.11.9"/>
+            <term id="26.12.10"/>
+            <term id="26.12.20"/>
+            <term id="26.12.30"/>
+            <term id="26.12.9"/>
+            <term id="26.20.11"/>
+            <term id="26.20.12"/>
+            <term id="26.20.13"/>
+            <term id="26.20.14"/>
+            <term id="26.20.15"/>
+            <term id="26.20.16"/>
+            <term id="26.20.17"/>
+            <term id="26.20.18"/>
+            <term id="26.20.2"/>
+            <term id="26.20.30"/>
+            <term id="26.20.40"/>
+            <term id="26.20.9"/>
+            <term id="26.30.11"/>
+            <term id="26.30.12"/>
+            <term id="26.30.13"/>
+            <term id="26.30.21"/>
+            <term id="26.30.22"/>
+            <term id="26.30.23"/>
+            <term id="26.30.30"/>
+            <term id="26.30.40"/>
+            <term id="26.30.50"/>
+            <term id="26.30.60"/>
+            <term id="26.30.99"/>
+            <term id="26.40.1"/>
+            <term id="26.40.20"/>
+            <term id="26.40.31"/>
+            <term id="26.40.32"/>
+            <term id="26.40.33"/>
+            <term id="26.40.34"/>
+            <term id="26.40.4"/>
+            <term id="26.40.51"/>
+            <term id="26.40.52"/>
+            <term id="26.40.60"/>
+            <term id="26.40.99"/>
+            <term id="26.70.13"/>
+            <term id="26.70.23"/>
+            <term id="26.70.25"/>
+            <term id="26.80.11"/>
+            <term id="26.80.12"/>
+            <term id="26.80.13"/>
+            <term id="26.80.14"/>
+            <term id="26.80.99"/>
+            <term id="58.29.11"/>
+            <term id="58.29.12"/>
+            <term id="58.29.13"/>
+            <term id="58.29.14"/>
+            <term id="58.29.21"/>
+            <term id="58.29.29"/>
+            <term id="58.29.31"/>
+            <term id="58.29.32"/>
+            <term id="58.29.40"/>
+            <term id="58.29.50"/>
+            <term id="61.10.11"/>
+            <term id="61.10.12"/>
+            <term id="61.10.13"/>
+            <term id="61.10.20"/>
+            <term id="61.10.30"/>
+            <term id="61.10.41"/>
+            <term id="61.10.42"/>
+            <term id="61.10.43"/>
+            <term id="61.10.49"/>
+            <term id="61.10.5"/>
+            <term id="61.20.11"/>
+            <term id="61.20.12"/>
+            <term id="61.20.13"/>
+            <term id="61.20.20"/>
+            <term id="61.20.30"/>
+            <term id="61.20.41"/>
+            <term id="61.20.42"/>
+            <term id="61.20.49"/>
+            <term id="61.20.50"/>
+            <term id="61.30.10"/>
+            <term id="61.30.20"/>
+            <term id="61.90.10"/>
+            <term id="62.01.11"/>
+            <term id="62.01.12"/>
+            <term id="62.01.29"/>
+            <term id="62.02.10"/>
+            <term id="62.02.20"/>
+            <term id="62.02.30"/>
+            <term id="62.03.11"/>
+            <term id="62.03.12"/>
+            <term id="62.09.10"/>
+            <term id="62.09.20"/>
+            <term id="63.11.11"/>
+            <term id="63.11.12"/>
+            <term id="63.11.13"/>
+            <term id="63.11.19"/>
+            <term id="63.11.2"/>
+            <term id="70.22.17"/>
+            <term id="71.12.18"/>
+            <term id="77.29.11"/>
+            <term id="77.33.12"/>
+            <term id="77.39.14"/>
+            <term id="95.11.10"/>
+            <term id="95.12.10"/>
+        </dic>
+        <dic name="Приложение pril_okpd_4 для ввода товаров Раздел  8(прил.37а)" id="pril_okpd_4" parent="s_okpd">
+            <term id="26.11.1"/>
+            <term id="26.11.2"/>
+            <term id="26.11.30"/>
+            <term id="26.11.40"/>
+            <term id="26.12.10"/>
+            <term id="26.12.20"/>
+            <term id="26.12.30"/>
+            <term id="26.20.11"/>
+            <term id="26.20.12"/>
+            <term id="26.20.13"/>
+            <term id="26.20.14"/>
+            <term id="26.20.15"/>
+            <term id="26.20.16"/>
+            <term id="26.20.17"/>
+            <term id="26.20.18"/>
+            <term id="26.20.2"/>
+            <term id="26.20.30"/>
+            <term id="26.20.40"/>
+            <term id="26.20.9"/>
+            <term id="26.30.11"/>
+            <term id="26.30.12"/>
+            <term id="26.30.13"/>
+            <term id="26.30.21"/>
+            <term id="26.30.22"/>
+            <term id="26.30.23"/>
+            <term id="26.30.30"/>
+            <term id="26.30.40"/>
+            <term id="26.30.50"/>
+            <term id="26.30.60"/>
+            <term id="26.40.1"/>
+            <term id="26.40.20"/>
+            <term id="26.40.31"/>
+            <term id="26.40.32"/>
+            <term id="26.40.33"/>
+            <term id="26.40.34"/>
+            <term id="26.40.4"/>
+            <term id="26.40.51"/>
+            <term id="26.40.52"/>
+            <term id="26.40.60"/>
+            <term id="26.70.13"/>
+            <term id="26.70.23"/>
+            <term id="26.70.25"/>
+            <term id="26.80.11"/>
+            <term id="26.80.12"/>
+            <term id="26.80.13"/>
+            <term id="26.80.14"/>
+            <term id="58.29.11"/>
+            <term id="58.29.12"/>
+            <term id="58.29.13"/>
+            <term id="58.29.14"/>
+            <term id="58.29.21"/>
+            <term id="58.29.29"/>
+            <term id="58.29.31"/>
+            <term id="58.29.32"/>
+            <term id="58.29.40"/>
+            <term id="62.01.29"/>
+        </dic>
+    </dics>
+</metaForm>

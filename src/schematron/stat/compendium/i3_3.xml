@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<metaForm code="608026003001" idp="01" idf="3" shifr="i3" name="СВЕДЕНИЯ О ДЕЯТЕЛЬНОСТИ КРЕДИТНЫХ СЕЛЬСКОХОЗЯЙСТВЕННЫХ ПОТРЕБИТЕЛЬСКИХ КООПЕРАТИВОВ" obj="okpo" OKUD="0608026" version="09-01-2018" format-version="1.3">
+  <settings>
+    <sign>true</sign>
+    <validation>always</validation>
+    <notEmpty>true</notEmpty>
+  </settings>
+  <title>
+    <item field="okpo" name="Код предприятия" dic="s_okpo" />
+    <item field="name" name="Наименование предприятия" />
+    <item field="leader_fio" name="Руководитель организации (ФИО)" />
+    <item field="responsible_post" name="Должностное лицо, ответственное за составление формы (должность)" />
+    <item field="responsible_fio" name="Должностное лицо, ответственное за составление формы (ФИО)" />
+    <item field="phone" name="Контактный телефон" />
+  </title>
+  <sections>
+    <section code="1" name="Раздел 1.Общие сведения" nb="1">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Фактически">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="01" type="F" name="Паевой фонд кооператива на конец отчетного периода" />
+        <row code="02" type="F" name="    взносы ассоциированных членов" />
+        <row code="03" type="F" name="Взносы в ревизионный союз за период с начала отчетного года" />
+        <row code="04" type="F" name="Взносы в кооперативы последующего уровня за период с начала отчетного года" />
+        <row code="05" type="F" name="Резервный фонд кооператива на конец отчетного периода" />
+        <row code="06" type="F" name="Численность членов кооператива (единиц) - всего по состоянию на конец отчетного периода" />
+        <row code="" type="C" name="       в том числе:" />
+        <row code="07" type="F" name="    граждане, ведущие личное подсобное хозяйство" />
+        <row code="08" type="F" name="    индивидуальные предприниматели" />
+        <row code="09" type="F" name="       из них осуществляющие сельскохозяйственную деятельность" />
+        <row code="10" type="F" name="    главы крестьянских (фермерских) хозяйств" />
+        <row code="11" type="F" name="    крестьянские фермерские хозяйства" />
+        <row code="12" type="F" name="    юридические лица" />
+        <row code="" type="C" name="          из них:" />
+        <row code="13" type="F" name="       осуществляющие сельскохозяйственную деятельность" />
+        <row code="14" type="F" name="       сельскохозяйственные  потребительские кооперативы" />
+        <row code="15" type="F" name="            в том числе кредитные сельскохозяйственные потребительские кооперативы" />
+        <row code="16" type="F" name="Наличие основных фондов по полной учетной стоимости на конец отчетного периода" />
+        <row code="17" type="F" name="Отгружено товаров собственного производства, выполнено работ и услуг собственными силами в фактических ценах (без НДС, акцизов и аналогичных обязательных платежей)  за период с начала отчетного года" />
+        <row code="19" type="F" name="Общий объем внешних заимствований на конец отчетного года" />
+        <row code="" type="C" name="        в том числе:" />
+        <row code="" type="C" name="        в том числе:" />
+        <row code="20" type="F" name="     по кредитам банкам" />
+        <row code="21" type="F" name="     займы, полученные в кредитных сельскохозяйственных потребительских кооперативах" />
+      </rows>
+    </section>
+    <section code="2" name="Раздел 2.Деятельность кредитного с.х. потребительского кооператива" nb="2">
+      <columns>
+        <column code="А" type="B" name="Наименование">
+          <default-cell column="А" format="C(250)" inputType="0" />
+        </column>
+        <column code="Б" type="B" name="№ строки">
+          <default-cell column="Б" format="C(5)" inputType="0" />
+        </column>
+        <column code="3" type="Z" name="Все заемщики">
+          <default-cell column="3" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="4" type="Z" name="в том числе: граждане, ведущие личные подсобные хозяйства">
+          <default-cell column="4" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="5" type="Z" name="в том числе: крестьянские (фермерские) хозяйства">
+          <default-cell column="5" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="6" type="Z" name="в том числе: сельскохозяйственные потребительские кооперативы (без кредитных)">
+          <default-cell column="6" format="N(15,0)" inputType="2" />
+        </column>
+        <column code="7" type="Z" name="в том числе: сельскохозяйственные кредитные потребительские кооперативы">
+          <default-cell column="7" format="N(15,0)" inputType="2" />
+        </column>
+      </columns>
+      <rows>
+        <row code="22" type="F" name="Объем предоставленных займов" />
+        <row code="23" type="F" name="Количество договоров займа, единиц" />
+        <row code="24" type="F" name="Задолженность по предоставленным займам на конец отчетного периода" />
+        <row code="25" type="F" name="         из них  просроченная задолженность" />
+      </rows>
+    </section>
+  </sections>
+  <controls>
+    <control id="1" name="стр. 01 &gt;= стр. 02" condition="" rule="{[1][1][3]}|&gt;=|{[1][2][3]}" tip="1" />
+    <control id="2" name="стр.06  &gt;= стр.07+стр.08+ стр.10+стр.11+стр.12 " condition="" rule="{[1][6][3]}|&gt;=|SUM{[1][7,8,10,11,12][3]}" tip="1" />
+    <control id="3" name="стр.08&gt;=стр.09" condition="" rule="{[1][8][3]}|&gt;=|{[1][9][3]}" tip="1" />
+    <control id="4" name="стр.12 &gt;=  стр.13+стр.14" condition="" rule="{[1][12][3]}|&gt;=|SUM{[1][13,14][3]}" tip="1" />
+    <control id="5" name="стр.14&gt;=стр.15" condition="" rule="{[1][14][3]}|&gt;=|{[1][15][3]}" tip="1" />
+    <control id="6" name="стр.19 &gt;= стр.20+ стр.21" condition="" rule="{[1][19][3]}|&gt;=|SUM{[1][20,21][3]}" tip="1" />
+    <control id="7" name="стр. с 01 по 05, с 07  по 21 &gt;=0" condition="" rule="{[1][1,2,3,4,5,7,8,9,10,11,12,13,14,15,16,17,19,20,21][3]}|&gt;=|0" tip="1" />
+    <control id="8" name="стр.06&gt;=1" condition="" rule="{[1][6][3]}|&gt;=|1" tip="1" />
+    <control id="9" name="стр.24&gt;=стр.25 по гр.3,4,5,6,7" condition="" rule="{[2][24][3,4,5,6,7]}|&gt;=|{[2][25][3,4,5,6,7]}" tip="1" />
+    <control id="10" name="гр.3&gt;=гр.4+5+6+7 по стр. 22, 23, 24, 25" condition="" rule="{[2][22,23,24,25][3]}|&gt;=|SUM{[2][22,23,24,25][4,5,6,7]}" tip="1" />
+    <control id="11" name="стр.24&gt;=0 по графам 3,4,5,6,7" condition="" rule="{[2][24][3,4,5,6,7]}|&gt;=|0" tip="1" />
+    <control id="12" name="стр.25&gt;=0 по графам 3,4,5,6,7" condition="" rule="{[2][25][3,4,5,6,7]}|&gt;=|0" tip="1" />
+    <control id="13" name="стр.22&gt;=0 по графам 3,4,5,6,7" condition="" rule="{[2][22][3,4,5,6,7]}|&gt;=|0" tip="1" />
+    <control id="14" name="стр.23&gt;=0 по графам 3,4,5,6,7" condition="" rule="{[2][23][3,4,5,6,7]}|&gt;=|0" tip="1" />
+    <control id="15" name="Если стр.23=0, то стр.22=0  по гр.3,4,5,6,7" condition="{[2][23][3,4,5,6,7]}|=|0" rule="{[2][22][3,4,5,6,7]}|=|0" tip="1" />
+    <control id="16" name="Если стр.22 гр.3 &gt;0, то стр.17. гр.3&gt;0" condition="{[2][22][3]}|&gt;|0" rule="{[1][17][3]}|&gt;|0" tip="1" />
+    <control id="17" name="Если стр.07 гр.3=0, то стр.22,23,24,25 по  гр.4=0" condition="{[1][7][3]}|=|0" rule="{[2][22,23,24,25][4]}|=|0" tip="1" />
+    <control id="18" name="Если стр.11 гр.3=0, то стр.22,23,24,25 по  гр.5=0" condition="{[1][11][3]}|=|0" rule="{[2][22,23,24,25][5]}|=|0" tip="1" />
+    <control id="19" name="Если (стр.14 гр.3 - стр.15 гр.3) =0, то стр.22,23,24,25 по  гр.6=0" condition="isnull({[1][14][3]},0)-isnull({[1][15][3]},0)|=|0" rule="{[2][22,23,24,25][6]}|=|0" tip="1" />
+    <control id="20" name="Если стр.15 гр.3=0, то стр.22,23,24,25 по  гр.7=0" condition="{[1][15][3]}|=|0" rule="{[2][22,23,24,25][7]}|=|0" tip="1" />
+  </controls>
+  <dics>
+    <dic name="Справочник годов" id="s_god">
+      <term id="2012">2012</term>
+      <term id="2013">2013</term>
+      <term id="2014">2014</term>
+      <term id="2015">2015</term>
+      <term id="2016">2016</term>
+      <term id="2017">2017</term>
+      <term id="2018">2018</term>
+      <term id="2019">2019</term>
+      <term id="2020">2020</term>
+    </dic>
+    <dic name="Справочник периодов" id="s_mes">
+      <term id="4">январь-декабрь</term>
+    </dic>
+  </dics>
+</metaForm>
