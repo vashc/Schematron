@@ -5,9 +5,6 @@ from urllib.parse import unquote
 from atexit import register
 from struct import pack, unpack
 from .utils import Flock, Logger  # .
-from glob import glob
-from pprint import pprint
-from time import time
 
 
 class PfrChecker:
@@ -381,35 +378,3 @@ class PfrChecker:
 
         self._validate_scenario(validators, scenario_dir, nsmap,
                                 xml_file_path, input)
-
-# class Input:
-#     def __init__(self, filename, content, data):
-#         # self.parser = etree.XMLParser(encoding='utf-8',
-#         #                               recover=True,
-#         #                               remove_comments=True)
-#         self.filename = filename
-#         self.xml_obj = content
-#         self.content = data
-#
-# xsd_root = '/home/vasily/PyProjects/FLK/pfr'
-# # root = '/home/vasily/PyProjects/FLK/pfr/compendium/АДВ+АДИ+ДСВ 1.17.12д/Примеры/ВЗЛ/Входящие'
-# #root = '/home/vasily/PyProjects/FLK/pfr/_test'
-# #root = '/home/vasily/PyProjects/FLK/pfr/__test'
-# root = '/home/vasily/PyProjects/FLK/pfr/_'
-# checker = PfrChecker(root=xsd_root)
-# os.chdir(root)
-# for file in glob('*'):
-#     xml_file_path = os.path.join(root, file)
-#     print("FILE:", file)
-#     start_time = time()
-#     with open(xml_file_path, 'rb') as handler:
-#         data = handler.read()
-#         # xml_content = etree.fromstring(data, parser=checker.cp_parser)
-#         xml_content = etree.fromstring(data, parser=checker.utf_parser)
-#
-#         # etree.ElementTree(xml_content).write('/home/vasily/lol.xml', xml_declaration=True, encoding='utf-8')
-#
-#         input = Input(file, xml_content, data)
-#         checker.check_file(input, xml_file_path)
-#         pprint(input.verify_result)
-#     print("Elapsed time:", time() - start_time)

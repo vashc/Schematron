@@ -2,7 +2,7 @@ import os
 from lxml import etree
 from src.schematron.pfr.pfr_checker import PfrChecker
 from tests.utils import get_file_list
-from tests.pfr_tests.utils import Input  # .
+from tests.pfr_tests.utils import Input
 
 root = os.path.dirname(os.path.abspath(__file__))
 xsd_root = os.path.join(root, 'xsd')
