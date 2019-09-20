@@ -1,11 +1,15 @@
-from typing import List, Dict, Any, ClassVar
+import os
 import requests
+from re import compile, match
+from typing import List, Tuple, Dict, Any, ClassVar
 from lxml import etree
 from io import StringIO
 
 
 class FssChecker:
-    def __init__(self) -> None:
+    def __init__(self, *, root) -> None:
+        # Корневая директория для файлов валидации
+        self.xsd_root = os.path.join(root, 'compendium/fss/compendium/')
         # TODO: use config
         self.filename = None
         self.xml_content = None  # Bytes
@@ -20,7 +24,10 @@ class FssChecker:
         # HTML парсер
         self.parser = etree.HTMLParser()
 
-    def _parse_fss_response(self, response: str) -> List[str]:
+        # Регулярное выражение для ошибки, возвращаемой ФСС
+        self.reg = compile(r'(\[.*]): (.*)')
+
+    def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
         """
         Метод для извлечения ошибок из возвращаемого ФСС ответа
         :param response:
@@ -31,7 +38,16 @@ class FssChecker:
 
         ret_list = []
         for err in err_list:
-            ret_list.append(err.text)
+            # Разбиваем результат на код ошибки и описание
+            err_match = self.reg.match(err.text)
+            if err_match:
+                err_code = err_match.group(1)
+                err_descr = err_match.group(2)
+            # Ошибка вернулась в нестандартном формате, присвоим свой код
+            else:
+                err_code = '[F4ERR_STD]'
+                err_descr = err.text
+            ret_list.append((err_code, err_descr))
 
         return ret_list
 

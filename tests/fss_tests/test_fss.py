@@ -9,7 +9,7 @@ xsd_root = os.path.join(root, 'xsd')
 
 
 class TestFssChecker:
-    checker = FssChecker()
+    checker = FssChecker(root=xsd_root)
 
     def test_fss_checker(self):
         files = get_file_list(xml_root)
