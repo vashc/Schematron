@@ -1,6 +1,6 @@
 import os
 from time import time
-from src.schematron import StatChecker
+from src.schemachecker import StatChecker
 from lxml import etree
 from pprint import pprint
 

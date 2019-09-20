@@ -1,8 +1,8 @@
 import os
 from lxml import etree
-from src.schematron.fns.tokenizer import Tokenizer
-from src.schematron.fns.interpreter import Interpreter
-from src.schematron.fns.fns_checker import FnsChecker
+from src.schemachecker.fns.tokenizer import Tokenizer
+from src.schemachecker.fns.interpreter import Interpreter
+from src.schemachecker.fns.fns_checker import FnsChecker
 from tests.utils import assert_list_equality, get_file_list
 from tests.fns_tests.utils import Input  # .
 

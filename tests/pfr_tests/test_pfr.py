@@ -1,6 +1,6 @@
 import os
 from lxml import etree
-from src.schematron.pfr.pfr_checker import PfrChecker
+from src.schemachecker.pfr.pfr_checker import PfrChecker
 from tests.utils import get_file_list
 from tests.pfr_tests.utils import Input
 

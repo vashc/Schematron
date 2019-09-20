@@ -374,6 +374,7 @@ class PfrChecker:
 
         # Если проверка по xsd пройдена, проверяем сценарий
         # Получение всех протоколируемых проверок
+        # TODO: вынести в память, не заниматься поиском в рантайме
         validators, scenario_dir, nsmap = self._get_validators(doc_format)
 
         self._validate_scenario(validators, scenario_dir, nsmap,
