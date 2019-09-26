@@ -4,3 +4,4 @@ aiohttp==3.5.4
 numpy==1.16.3
 rarfile==3.0
 pytest==5.1.2
+requests--2.21.0

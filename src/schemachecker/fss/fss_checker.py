@@ -1,9 +1,11 @@
 import os
 import requests
+import asyncio
 from re import compile, match
 from typing import List, Tuple, Dict, Any, ClassVar
 from lxml import etree
 from io import StringIO
+from concurrent.futures import ThreadPoolExecutor
 
 
 class FssChecker:
@@ -26,6 +28,10 @@ class FssChecker:
 
         # Регулярное выражение для ошибки, возвращаемой ФСС
         self.reg = compile(r'(\[.*]): (.*)')
+
+        # Пул для распараллеливания requests
+        self.executor = ThreadPoolExecutor(max_workers=4)
+        self.loop = asyncio.get_event_loop()
 
     def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
         """
@@ -66,16 +72,29 @@ class FssChecker:
                 f'{self.filename}: {ex}.')
             return False
 
-    def _validate_sum(self, input: ClassVar[Dict[str, Any]]) -> None:
+    @staticmethod
+    def _post_dict(kwargs: Dict[str, Any]) -> requests.Response:
+        """
+        Вспомогательный метод для запуска requests.post в executor
+        с ключевыми аргументами
+        :param kwargs:
+        :return:
+        """
+        response = requests.post(**kwargs)
+        return response
+
+    async def _validate_sum(self, input: ClassVar[Dict[str, Any]]) -> None:
         """
         Метод для проверки контрольных соотношений на портале ФСС
         :param input:
         :return:
         """
-        upload_url = f'{self.url}f4upload?auth=false&type=F4_INPUT&current_org=&current_period=&rstate='
-        files = {self.filename: self.xml_content}
+        post_kwargs = dict(
+            url=f'{self.url}f4upload?auth=false&type=F4_INPUT&current_org=&current_period=&rstate=',
+            files={self.filename: self.xml_content}
+        )
 
-        response = requests.post(upload_url, files=files)
+        response = await self.loop.run_in_executor(self.executor, self._post_dict, post_kwargs)
         self.cookie = response.cookies  # .get('JSESSIONID')
 
         if self.cookie:
@@ -92,7 +111,7 @@ class FssChecker:
             # TODO: возвращать что-нибудь полезное пользователю
             pass
 
-    def check_file(self, input: ClassVar[Dict[str, Any]]) -> None:
+    async def check_file(self, input: ClassVar[Dict[str, Any]]) -> None:
         self.filename = input.filename
         self.xml_content = input.content
         self.xml_obj = input.xml_obj
@@ -109,4 +128,4 @@ class FssChecker:
             return
 
         # Првоерка контрольных сумм (прокси на портал ФСС)
-        self._validate_sum(input)
+        await self._validate_sum(input)
