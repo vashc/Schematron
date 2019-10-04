@@ -131,7 +131,10 @@ class PfrChecker:
         :param prefix:
         :return:
         """
-        return self.compendium[self.directions[direction]].get(prefix).get('schemes')
+        try:
+            return self.compendium[self.directions[direction]].get(prefix).get('schemes')
+        except AttributeError:
+            raise SchemesNotFound(prefix)
 
     async def _get_compendium_queries(self, direction: int, prefix: str) -> Dict[str, Any]:
         """
@@ -140,7 +143,10 @@ class PfrChecker:
         :param prefix:
         :return:
         """
-        return self.compendium[self.directions[direction]].get(prefix).get('queries')
+        try:
+            return self.compendium[self.directions[direction]].get(prefix).get('queries')
+        except AttributeError:
+            raise QueriesNotFound(prefix)
 
     async def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
         """
