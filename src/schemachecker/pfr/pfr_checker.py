@@ -10,6 +10,24 @@ from .exceptions import *
 
 
 class PfrChecker:
+    """
+    Компендиум проверочных схем и скриптов имеет следующую структуру:
+        {
+            'АДВ+АДИ+ДСВ 1.17.12д': {  # Направление
+                'СЗВ-М': {  # Префикс проверяемого файла
+                    'schemes': {  # Словарь проверочных XSD схем
+                        'name.xsd': etree.ElementTree,
+                        ...
+                    },
+                    'queries': {  # Словарь содержимого xquery скриптов
+                        'name.xquery': str,
+                        ...
+                    },
+                    'definiton': str  # Определение документа, нода "ОпределениеДокумента" в ПФР_КСАФ
+                }
+            }
+        }
+    """
     def __init__(self, *, root):
         self.root = root
         # Корневая директория для файлов валидации
@@ -49,23 +67,8 @@ class PfrChecker:
                                           remove_comments=True)
         # Текущий парсер
         self.parser = self.utf_parser
-        # Текущее пространство имён
-        self.nsmap = None
-        # Достаём информацию из компендиумов
+        # Компендиум проверочных схем и скриптов
         self.compendium = dict()
-        # for direction in self.directions:
-        #     with open(os.path.join(self.xsd_root, direction, self.comp_file),
-        #               'rb') as handler:
-        #         try:
-        #             self.compendium.append(
-        #                 etree.fromstring(handler.read(),
-        #                                  parser=self.utf_parser)
-        #             )
-        #         except etree.XMLSyntaxError as ex:
-        #             print(f'Error xml file parsing: {ex}')
-
-        # Компендиум проверочных XSD схем
-        self.xsd_compendium = dict()
 
         self.session = BaseXClient.Session('localhost', 1984, 'admin', 'admin')
 
@@ -102,10 +105,44 @@ class PfrChecker:
         if self.session:
             self.session.close()
 
-    async def _set_prefix(self) -> None:
+    async def _get_compendium_definitions(self, direction: int) -> Dict[str, str]:
         """
-        Метод для установки префикса файла для поиска в компендиуме и
-        направления файла (0 - АДВ, 1 - СЗВ, 2 - ЗНП).
+        Метод для получения из компендиума словаря {definition: prefix}.
+        :param direction:
+        :return:
+        """
+        definitions = dict()
+        for prefix, prefix_dict in self.compendium[self.directions[direction]].items():
+            definitions.update({prefix_dict['definition']: prefix})
+
+        return definitions
+
+    async def _get_adv_prefix(self) -> str:
+        """
+        Метод для определения префикса файлов АДВ направлений.
+        """
+        nsmap = self.xml_content.nsmap
+        if nsmap.get(None):
+            nsmap['d'] = nsmap.pop(None)
+
+        try:
+            doc_type = self.xml_content.find('.//d:ТипДокумента', namespaces=nsmap).text
+        except AttributeError:
+            raise DocTypeNotFound()
+
+        prefix = None
+
+        definitions = await self._get_compendium_definitions(self.direction)
+        for definition, _prefix in definitions.items():
+            if doc_type in definition:
+                prefix = _prefix
+                break
+
+        return prefix
+
+    async def _get_nonadv_prefix(self) -> str:
+        """
+        Метод для определения префикса файлов НЕ АДВ направлений.
         :return:
         """
         # Префикс файла (СЗВ-М, СТАЖ и т.д.). None для АДВ направлений
@@ -121,6 +158,21 @@ class PfrChecker:
         elif 'ЗНП' in self.xml_file or 'ЗДП' in self.xml_file:
             prefix = prefix_list[2]
             self.direction = 2
+
+        return prefix
+
+    async def _set_prefix(self) -> None:
+        """
+        Метод для установки префикса файла для поиска в компендиуме и
+        направления файла (0 - АДВ, 1 - СЗВ, 2 - ЗНП).
+        :return:
+        """
+        prefix = await self._get_nonadv_prefix()
+        if prefix is None:
+            if self.direction == 0:
+                prefix = await self._get_adv_prefix()
+            if prefix is None:
+                raise PrefixNotFound()
 
         self.prefix = prefix
 
@@ -299,6 +351,17 @@ class PfrChecker:
 
         return doc_types
 
+    def _get_definition(self, doc_type: etree.ElementTree, nsmap: Dict[str, Any]) -> str:
+        """
+        Метод для получения содержимого ноды "ОпределениеДокумента".
+        :return:
+        """
+        try:
+            return doc_type.xpath(f'.//d:Валидация/d:ОпределениеДокумента/text()', namespaces=nsmap)[0]
+        # У некоторых направлений нет определения документа, возвращаем пустую строку
+        except IndexError:
+            return ''
+
     def _get_schemes(self, doc_type: etree.ElementTree,
                      direction: str,
                      nsmap: Dict[str, Any]) -> Dict[str, etree.ElementTree]:
@@ -423,6 +486,9 @@ class PfrChecker:
                 # Получение протоколируемых проверок в сценарии
                 queries_dict = self._get_query_validators(doc_type, direction, nsmap)
                 prefix_dict[prefix].update({'queries': queries_dict})
+
+                definition = self._get_definition(doc_type, nsmap)
+                prefix_dict[prefix].update({'definition': definition})
 
             self.compendium.update({direction: prefix_dict})
 

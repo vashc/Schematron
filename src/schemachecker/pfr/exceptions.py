@@ -11,6 +11,21 @@ class EmptyScenarioError(InternalPfrError):
         self.message = 'Не найден сценарий проверки'
 
 
+class DocTypeNotFound(InternalPfrError):
+    def __init__(self):
+        self.message = 'Не удалось определить тип документа по направлению АДВ'
+
+
+class DocDefinitionNotFound(InternalPfrError):
+    def __init__(self):
+        self.message = 'Не найдено определение документа'
+
+
+class PrefixNotFound(InternalPfrError):
+    def __init__(self) -> None:
+        self.message = 'Не удалось определить префикс файла'
+
+
 class SchemesNotFound(InternalPfrError):
     def __init__(self, prefix: str) -> None:
         self.message = f'Не найдены проверочные схемы для файла с префиксом {prefix}'

@@ -47,7 +47,7 @@ async def _test_new():
     for file in files:
         with open(os.path.join(szv_root, file), 'rb') as fd:
             xml_data = fd.read()
-            xml_content = etree.fromstring(xml_data, parser=p.utf_parser)
+            xml_content = etree.fromstring(xml_data, parser=p.cp_parser)
             input = Input(file, xml_data, xml_content)
             await p.check_file(input, os.path.join(szv_root, file))
             pprint(input.verify_result)
@@ -60,7 +60,7 @@ if __name__ == '__main__':
     p = PfrChecker(root=xsd_root)
     p.db_num = 1
     p.setup_compendium()
-    szv_root = os.path.join(xml_root, 'СЗВ')
+    szv_root = os.path.join(xml_root, 'АДВ')
     files = get_file_list(szv_root)
 
     start_time = time()
