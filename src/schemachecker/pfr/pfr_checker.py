@@ -1,5 +1,6 @@
 import os
 import BaseXClient
+from typing import List, Dict, Tuple, Any, ClassVar
 from lxml import etree
 from urllib.parse import unquote
 from atexit import register
@@ -20,6 +21,8 @@ class PfrChecker:
         # Направление xml файла:
         # 0 - АДВ, 1 - СЗВ, 2 - ЗНП
         self.direction = 0
+        # Префикс файла (Атрибут "Код" в компендиуме)
+        self.prefix: str = None
         # Справочники для проверок КОРР файлов
         # (нужны для передачи в переменную $dictFile)
         self.dict_file = os.path.join(self.xsd_root,
@@ -49,24 +52,26 @@ class PfrChecker:
         # Текущее пространство имён
         self.nsmap = None
         # Достаём информацию из компендиумов
-        self.compendium = list()
-        for direction in self.directions:
-            with open(os.path.join(self.xsd_root, direction, self.comp_file),
-                      'rb') as handler:
-                try:
-                    self.compendium.append(
-                        etree.fromstring(handler.read(),
-                                         parser=self.utf_parser)
-                    )
-                except etree.XMLSyntaxError as ex:
-                    print(f'Error xml file parsing: {ex}')
+        self.compendium = dict()
+        # for direction in self.directions:
+        #     with open(os.path.join(self.xsd_root, direction, self.comp_file),
+        #               'rb') as handler:
+        #         try:
+        #             self.compendium.append(
+        #                 etree.fromstring(handler.read(),
+        #                                  parser=self.utf_parser)
+        #             )
+        #         except etree.XMLSyntaxError as ex:
+        #             print(f'Error xml file parsing: {ex}')
+
+        # Компендиум проверочных XSD схем
+        self.xsd_compendium = dict()
 
         self.session = BaseXClient.Session('localhost', 1984, 'admin', 'admin')
 
         # Корневая директория BaseX
         self.db_data = os.path.join(root, 'basex/data/')
-        # Синхронизация записи в базы данных BaseX
-        # для избежания write lock
+        # Синхронизация записи в базы данных BaseX для избежания write lock
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
             self.db_num = unpack('I', os.read(fd, 4))[0]
             if self.db_num < os.cpu_count():
@@ -97,52 +102,11 @@ class PfrChecker:
         if self.session:
             self.session.close()
 
-    async def _get_nonadv_scheme(self, prefix, nsmap):
+    async def _set_prefix(self) -> None:
         """
-        Метод для возврата схем для НЕ АДВ направлений
-        """
-        # Нужен действующий формат со статусом "ПоУмолчанию"
-        doc_format = self.compendium[self.direction].xpath(
-            f'//d:ТипДокумента[@Код="{prefix}"]//d:Формат'
-            f'[@Статус="Действующий" and @ПоУмолчанию="true"]',
-            namespaces=nsmap)[0]
-        # Путь к валидационной схеме
-        schemes = doc_format.xpath('.//d:Валидация/d:Схема/text()',
-                                   namespaces=nsmap)
-
-        return schemes, doc_format
-
-    async def _get_adv_scheme(self):
-        """
-        Метод для возврата схем для АДВ направлений
-        """
-        nsmap = self.xml_content.nsmap
-        nsmap['d'] = nsmap.pop(None)
-
-        try:
-            self.doc_type = self.xml_content.find('.//d:ТипДокумента',
-                                                  namespaces=nsmap).text
-        except AttributeError as ex:
-            raise Exception('Не определён тип документа')
-
-        try:
-            doc_format = self.compendium[self.direction].xpath(
-                f'.//d:Валидация[contains(d:ОпределениеДокумента, "{self.doc_type}")]',
-                namespaces=self.nsmap)[0]
-        except IndexError as ex:
-            #TODO: make logger belong to class instance
-            logger = Logger(os.path.join(self.root, 'logs/'))
-            log = logger.get_logger('pfr_checker')
-            log.exception(ex)
-            raise
-
-        # Путь к валидационной схеме
-        schemes = doc_format.xpath('.//d:Схема/text()', namespaces=self.nsmap)
-        return schemes, doc_format
-
-    async def _get_schemes(self):
-        """
-        Метод для получения проверочной схемы для xml файла
+        Метод для установки префикса файла для поиска в компендиуме и
+        направления файла (0 - АДВ, 1 - СЗВ, 2 - ЗНП).
+        :return:
         """
         # Префикс файла (СЗВ-М, СТАЖ и т.д.). None для АДВ направлений
         prefix_list = self.xml_file.split('_')
@@ -158,97 +122,58 @@ class PfrChecker:
             prefix = prefix_list[2]
             self.direction = 2
 
-        self.nsmap = self.compendium[self.direction].nsmap
-        self.nsmap['d'] = self.nsmap.pop(None)
+        self.prefix = prefix
 
-        # Не АДВ направление, используем префикс для поиска в компендиуме
-        if prefix:
-            schemes, doc_format = await self._get_nonadv_scheme(prefix, self.nsmap)
-        # АДВ направление, ищем тип документа в xml файле
-        else:
-            schemes, doc_format = await self._get_adv_scheme()
-
-        for idx, scheme in enumerate(schemes):
-            schemes[idx] = unquote(scheme).replace('\\', '/')
-        return schemes, doc_format
-
-    async def _validate_scheme(self, schemes, input):
+    async def _get_compendium_schemes(self, direction: int, prefix: str) -> Dict[str, Any]:
         """
-        Метод для проверки xml файла по xsd схеме
+        Метод для получения словаря проверочных схем по направлению и префиксу файла.
+        :param direction:
+        :param prefix:
+        :return:
         """
-        # Определение типа используемого парсера, для АДВ - cp1251
-        if not self.direction:
-            self.parser = self.cp_parser
-        else:
-            self.parser = self.utf_parser
+        return self.compendium[self.directions[direction]].get(prefix).get('schemes')
 
-        # Пробегаем по всем .xsd схемам и проверяем файл
-        #TODO: вынести в компендиум в памяти
-        for scheme in schemes:
-            with open(os.path.join(self.xsd_root,
-                                   self.directions[self.direction],
-                                   scheme.lstrip('/')), 'rb') as xsd_handler:
-                try:
-                    xsd_content = etree.parse(xsd_handler, self.parser).getroot()
-                    xsd_scheme = etree.XMLSchema(xsd_content)
-                except etree.XMLSyntaxError as ex:
-                    # TODO: logger
-                    raise Exception(f'Error xsd file parsing: {ex}')
+    async def _get_compendium_queries(self, direction: int, prefix: str) -> Dict[str, Any]:
+        """
+        Метод для получения словаря проверочных xquery скриптов по направлению и префиксу файла.
+        :param direction:
+        :param prefix:
+        :return:
+        """
+        return self.compendium[self.directions[direction]].get(prefix).get('queries')
 
+    async def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
+        """
+        Метод для валидации файла по XSD.
+        :return:
+        """
+        success = True
+        schemes = await self._get_compendium_schemes(self.direction, self.prefix)
+        if schemes is None:
+            raise SchemesNotFound(self.prefix)
+
+        for scheme in schemes.values():
             try:
-                xsd_scheme.assertValid(self.xml_content)
-            except etree.DocumentInvalid as ex:
-                for error in xsd_scheme.error_log:
-                    input.verify_result['xsd_asserts'] \
-                        .append(f'{error.message} (строка {error.line})')
+                scheme.assertValid(self.xml_content)
+            except etree.DocumentInvalid:
+                for error in scheme.error_log:
+                    input.verify_result['xsd_asserts'].append(f'{error.message} (строка {error.line})')
 
                 input.verify_result['result'] = 'failed_xsd'
                 input.verify_result['description'] = (
                     f'Ошибка при валидации по xsd схеме файла '
                     f'{self.xml_file}.')
-                return
-            except Exception as ex:
-                logger = Logger(os.path.join(self.root, 'logs/'))
-                log = logger.get_logger('pfr_misc')
-                log.exception(ex)
+                success = False
 
-    async def _get_validators(self, doc_format):
-        """
-        Метод для получения протоколируемых проверок в сценарии
-        """
-        scenario_file = doc_format.xpath('.//d:Сценарий/text()',
-                                         namespaces=self.nsmap)
-        # Сценарий проверки не всегда присутствует
-        if scenario_file:
-            scenario_file = scenario_file[0]
-        else:
-            raise EmptyScenarioError()
+        return success
 
-        # Замена слэшей в пути
-        scenario_dir = scenario_file.split('\\')[-1].split('.')[0]
-        scenario_file = scenario_file[1:].replace('\\', '/')
+    async def _execute_query(self, query_file: str, binds: Dict[str, str]) -> str:
+        query = self.session.query(query_file)
 
-        # Получение содержимого сценария
-        with open(os.path.join(self.xsd_root,
-                               self.directions[self.direction],
-                               scenario_file), 'rb') as handler:
-            try:
-                scenario = etree.fromstring(handler.read(),
-                                            parser=self.utf_parser)
-            except etree.XMLSyntaxError as ex:
-                #TODO: raise exception
-                print(f'Error scenario file parsing: {ex}')
-                return
+        for key, value in binds.items():
+            query.bind(key, value)
 
-        nsmap = scenario.nsmap
-        nsmap['d'] = nsmap.pop(None)
-
-        # Получение всех протоколируемых проверок
-        validators = scenario.xpath(
-            '//d:Проверки/d:Проверка[not(@Протоколируемая="0")]',
-            namespaces=nsmap
-        )
-        return validators, scenario_dir, nsmap
+        return query.execute()
 
     async def _checkup_adv(self, checkups, q_nsmap, input):
         """
@@ -300,36 +225,21 @@ class PfrChecker:
                 code, prot_code, description, element_objs
             ))
 
-    async def _execute_query(self, query_file, binds):
-        with open(query_file, 'r', encoding="utf-8") as handler:
-            query = self.session.query(handler.read())
-
-        for key, value in binds.items():
-            query.bind(key, value)
-
-        return query.execute()
-
-    async def _validate_scenario(self, validators, scenario_dir,
-                           nsmap, xml_file_path, input):
+    async def _validate_xquery(self, input: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
         """
-        Метод для проверки xml файла по протоколируемым проверкам из сценария
+        Метод для валидации файла по xquery выражениям.
+        :return:
         """
-        for validator in validators:
-            validator_file = validator.xpath('./d:Файл/text()',
-                                             namespaces=nsmap)[0]
-            # Используем не .xml файл для проверки, а сразу сырой .xquery
-            validator_file = validator_file.split('\\')[-1].split('.')[0] + '.xquery'
+        binds = {'$doc': f'{xml_file_path}'}
+        if self.direction == 1:
+            binds.update({'$dictFile': f'{self.dict_file}'})
 
-            query_file = os.path.join(self.xsd_root,
-                                      self.directions[self.direction],
-                                      f'XQuery/{scenario_dir}',
-                                      validator_file)
+        queries = await self._get_compendium_queries(self.direction, self.prefix)
+        if queries is None:
+            raise QueriesNotFound(self.prefix)
 
-            binds = {'$doc': f'{xml_file_path}'}
-            if self.direction == 1:
-                binds.update({'$dictFile': f'{self.dict_file}'})
-
-            query_result = await self._execute_query(query_file, binds)
+        for query in queries.values():
+            query_result = await self._execute_query(query, binds)
 
             if query_result:
                 check_result = etree.fromstring(query_result, parser=self.parser)
@@ -352,7 +262,163 @@ class PfrChecker:
                     input.verify_result['description'] = (
                         f'Ошибка при валидации по xquery выражению файла '
                         f'{self.xml_file}.')
-            #TODO: check if no result has been returned
+            else:
+                raise QueryResultError()
+
+    def _get_comp_file(self, direction: str) -> Tuple[etree.ElementTree, Dict[str, Any]]:
+        """
+        Метод для получения дерева файла компендиума и простанства имён для указанного направления.
+        :param direction:
+        :return:
+        """
+        with open(os.path.join(self.xsd_root, direction, self.comp_file), 'rb') as handler:
+            comp_file = etree.fromstring(handler.read(), parser=self.utf_parser)
+
+        nsmap = comp_file.nsmap
+        if nsmap.get(None):
+            nsmap['d'] = nsmap.pop(None)
+
+        return comp_file, nsmap
+
+    def _get_doc_types(self, comp_file: etree.ElementTree, nsmap: Dict[str, Any]) -> List[etree.ElementTree]:
+        """
+        Метод для получения списка всех действующих проверочных документов.
+        :param comp_file:
+        :param nsmap:
+        :return:
+        """
+        # Нужен действующий формат со статусом "ПоУмолчанию"
+        doc_types_xpath = f'//d:ТипДокумента[d:Форматы/d:Формат[@Статус="Действующий" and @ПоУмолчанию="true"]]'
+        doc_types = comp_file.xpath(doc_types_xpath, namespaces=nsmap)
+
+        return doc_types
+
+    def _get_schemes(self, doc_type: etree.ElementTree,
+                     direction: str,
+                     nsmap: Dict[str, Any]) -> Dict[str, etree.ElementTree]:
+        """
+        Метод для получения словаря проверочных XSD схем:
+            {
+                'name.xsd': etree.ElementTree,
+                ...
+            }
+        :return:
+        """
+        schemes_dict = dict()
+        schemes = doc_type.xpath('.//d:Валидация/d:Схема/text()', namespaces=nsmap)
+        for scheme in schemes:
+            scheme = unquote(scheme).replace('\\', '/')
+            with open(os.path.join(self.xsd_root, direction, scheme.lstrip('/')), 'rb') as xsd_handler:
+                parser = self.utf_parser
+                try:
+                    xsd_content = etree.parse(xsd_handler, parser).getroot()
+                except etree.XMLSyntaxError:
+                    parser = self.cp_parser
+                    xsd_handler.seek(0, 0)
+                    try:
+                        xsd_content = etree.parse(xsd_handler, parser).getroot()
+                    except etree.XMLSyntaxError as ex:
+                        raise Exception(f'Ошибка при разборе XSD схемы: {ex}')
+                xsd_scheme = etree.XMLSchema(xsd_content)
+
+            schemes_dict.update({scheme: xsd_scheme})
+
+        return schemes_dict
+
+    def _get_scenario(self, direction: str, scenario_file: str) -> Tuple[etree.ElementTree, Dict[str, Any]]:
+        """
+        Метод для получения содержимого сценария и пространства имён.
+        :return:
+        """
+        with open(os.path.join(self.xsd_root, direction, scenario_file), 'rb') as handler:
+            try:
+                scenario = etree.fromstring(handler.read(), parser=self.utf_parser)
+            except etree.XMLSyntaxError as ex:
+                raise Exception(f'Ошибка при разборе файла сценария: {ex}')
+
+        s_nsmap = scenario.nsmap
+        if s_nsmap.get(None):
+            s_nsmap['d'] = s_nsmap.pop(None)
+
+        return scenario, s_nsmap
+
+    def _get_query_file(self, validator: etree.ElementTree,
+                        direction: str,
+                        s_nsmap: Dict[str, Any],
+                        scenario_dir: str) -> Tuple[str, str]:
+        """
+        Метод для получения имени и пути xquery скрипта по валидатору - протоколируемой проверке.
+        :return:
+        """
+        validator_file = validator.xpath('./d:Файл/text()', namespaces=s_nsmap)[0]
+        # Используем не .xml файл для проверки, а сразу сырой .xquery
+        validator_file = validator_file.split('\\')[-1].split('.')[0] + '.xquery'
+        query_file = os.path.join(self.xsd_root, direction, f'XQuery/{scenario_dir}', validator_file)
+
+        return query_file, validator_file
+
+    def _get_query_validators(self, doc_type: etree.ElementTree,
+                              direction: str,
+                              nsmap: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Метод для получения словаря проверочных xquery скриптов:
+            {
+                'name.xquery': str,
+                ...
+            }
+        :param doc_type:
+        :param direction:
+        :param nsmap:
+        :return:
+        """
+        queries_dict = dict()
+        scenario_file = doc_type.xpath('.//d:Сценарий/text()', namespaces=nsmap)
+        # Сценарий проверки не всегда присутствует
+        if scenario_file:
+            scenario_file = scenario_file[0]
+            # Замена слэшей в пути
+            scenario_dir = scenario_file.split('\\')[-1].split('.')[0]
+            scenario_file = scenario_file[1:].replace('\\', '/')
+
+            # Получение содержимого сценария
+            scenario, s_nsmap = self._get_scenario(direction, scenario_file)
+
+            # Получение всех протоколируемых проверок
+            validators = scenario.xpath('//d:Проверки/d:Проверка[not(@Протоколируемая="0")]',
+                                        namespaces=s_nsmap)
+            for validator in validators:
+                query_file, validator_file = self._get_query_file(validator, direction, s_nsmap, scenario_dir)
+                with open(query_file, 'r', encoding="utf-8") as q_handler:
+                    queries_dict.update({validator_file: q_handler.read()})
+
+        return queries_dict
+
+    def setup_compendium(self) -> None:
+        # TODO: отлов исключений?
+        self.compendium = dict()
+
+        for direction in self.directions:
+            comp_file, nsmap = self._get_comp_file(direction)
+
+            doc_types = self._get_doc_types(comp_file, nsmap)
+
+            prefix_dict = dict()
+
+            for doc_type in doc_types:
+                prefix = doc_type.get('Код')
+                if prefix is None:
+                    raise Exception('Не найден код для типа документа')
+
+                prefix_dict.update({prefix: dict()})
+
+                schemes_dict = self._get_schemes(doc_type, direction, nsmap)
+                prefix_dict[prefix].update({'schemes': schemes_dict})
+
+                # Получение протоколируемых проверок в сценарии
+                queries_dict = self._get_query_validators(doc_type, direction, nsmap)
+                prefix_dict[prefix].update({'queries': queries_dict})
+
+            self.compendium.update({direction: prefix_dict})
 
     async def check_file(self, input, xml_file_path):
         self.xml_file = input.filename
@@ -365,19 +431,14 @@ class PfrChecker:
         input.verify_result['xsd_asserts'] = []
         input.verify_result['xqr_asserts'] = []
 
-        # Получение списка проверочных схем и формата документа
-        schemes, doc_format = await self._get_schemes()
-
         # Открытие сессии BaseX
         self.session.execute(f'open xml_db{self.db_num}')
 
-        # Проверка по xsd схеме
-        await self._validate_scheme(schemes, input)
+        await self._set_prefix()
 
-        # Если проверка по xsd пройдена, проверяем сценарий
-        # Получение всех протоколируемых проверок
-        # TODO: вынести в память, не заниматься поиском в рантайме
-        validators, scenario_dir, nsmap = await self._get_validators(doc_format)
+        # Проверка по XSD
+        if not await self._validate_xsd(input):
+            return
 
-        await self._validate_scenario(validators, scenario_dir, nsmap,
-                                      xml_file_path, input)
+        # Проверка по xquery выражениям
+        await self._validate_xquery(input, xml_file_path)
