@@ -33,7 +33,7 @@ class FssChecker:
         self.executor = ThreadPoolExecutor(max_workers=4)
         self.loop = asyncio.get_event_loop()
 
-    def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
+    async def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
         """
         Метод для извлечения ошибок из возвращаемого ФСС ответа
         :param response:
@@ -57,7 +57,7 @@ class FssChecker:
 
         return ret_list
 
-    def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
+    async def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
         try:
             self.xsd_scheme.assertValid(self.xml_obj)
             return True
@@ -101,7 +101,7 @@ class FssChecker:
             check_url = f'{self.url}fss/f4validation?type=f4_input'
             response = requests.get(check_url, cookies=self.cookie)
 
-            err_list = self._parse_fss_response(response.text)
+            err_list = await self._parse_fss_response(response.text)
             if err_list:
                 input.verify_result['result'] = 'failed_sum'
                 input.verify_result['sum_asserts'].extend(err_list)
@@ -111,10 +111,17 @@ class FssChecker:
             # TODO: возвращать что-нибудь полезное пользователю
             pass
 
-    async def check_file(self, input: ClassVar[Dict[str, Any]]) -> None:
+    async def check_file(self, input: ClassVar[Dict[str, Any]], validate_sum: bool) -> None:
+        """
+        Метод для валидации файла по xsd и контрольным суммам
+        :param input:
+        :param validate_sum: флаг, показывающий, нужно ли проверять контрольные суммы.
+            Проверка выоплняется только для поднаправлений, производных от 4ФСС.
+        :return:
+        """
         self.filename = input.filename
         self.xml_content = input.content
-        self.xml_obj = input.xml_obj
+        self.xml_obj = input.xml_tree
         self.xsd_content = input.xsd_schema
         self.xsd_scheme = etree.XMLSchema(self.xsd_content)
 
@@ -124,8 +131,10 @@ class FssChecker:
         input.verify_result['sum_asserts'] = []
 
         # Проверка по xsd, если не прошла - возвращаем
-        if not self._validate_xsd(input):
+        if not await self._validate_xsd(input):
             return
 
         # Првоерка контрольных сумм (прокси на портал ФСС)
-        await self._validate_sum(input)
+        # для форм, производных от 4ФСС
+        if validate_sum:
+            await self._validate_sum(input)

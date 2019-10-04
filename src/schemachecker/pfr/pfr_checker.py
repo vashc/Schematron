@@ -5,6 +5,7 @@ from urllib.parse import unquote
 from atexit import register
 from struct import pack, unpack
 from .utils import Flock, Logger  # .
+from .exceptions import *
 
 
 class PfrChecker:
@@ -96,7 +97,7 @@ class PfrChecker:
         if self.session:
             self.session.close()
 
-    def _get_nonadv_scheme(self, prefix, nsmap):
+    async def _get_nonadv_scheme(self, prefix, nsmap):
         """
         Метод для возврата схем для НЕ АДВ направлений
         """
@@ -111,7 +112,7 @@ class PfrChecker:
 
         return schemes, doc_format
 
-    def _get_adv_scheme(self):
+    async def _get_adv_scheme(self):
         """
         Метод для возврата схем для АДВ направлений
         """
@@ -139,7 +140,7 @@ class PfrChecker:
         schemes = doc_format.xpath('.//d:Схема/text()', namespaces=self.nsmap)
         return schemes, doc_format
 
-    def _get_schemes(self):
+    async def _get_schemes(self):
         """
         Метод для получения проверочной схемы для xml файла
         """
@@ -162,16 +163,16 @@ class PfrChecker:
 
         # Не АДВ направление, используем префикс для поиска в компендиуме
         if prefix:
-            schemes, doc_format = self._get_nonadv_scheme(prefix, self.nsmap)
+            schemes, doc_format = await self._get_nonadv_scheme(prefix, self.nsmap)
         # АДВ направление, ищем тип документа в xml файле
         else:
-            schemes, doc_format = self._get_adv_scheme()
+            schemes, doc_format = await self._get_adv_scheme()
 
         for idx, scheme in enumerate(schemes):
             schemes[idx] = unquote(scheme).replace('\\', '/')
         return schemes, doc_format
 
-    def _validate_scheme(self, schemes, input):
+    async def _validate_scheme(self, schemes, input):
         """
         Метод для проверки xml файла по xsd схеме
         """
@@ -211,7 +212,7 @@ class PfrChecker:
                 log = logger.get_logger('pfr_misc')
                 log.exception(ex)
 
-    def _get_validators(self, doc_format):
+    async def _get_validators(self, doc_format):
         """
         Метод для получения протоколируемых проверок в сценарии
         """
@@ -221,8 +222,7 @@ class PfrChecker:
         if scenario_file:
             scenario_file = scenario_file[0]
         else:
-            #TODO: raise exception
-            return
+            raise EmptyScenarioError()
 
         # Замена слэшей в пути
         scenario_dir = scenario_file.split('\\')[-1].split('.')[0]
@@ -250,7 +250,7 @@ class PfrChecker:
         )
         return validators, scenario_dir, nsmap
 
-    def _checkup_adv(self, checkups, q_nsmap, input):
+    async def _checkup_adv(self, checkups, q_nsmap, input):
         """
         Метод для получения результатов проверки (ошибок) для АДВ направлений
         """
@@ -271,7 +271,7 @@ class PfrChecker:
                 code, prot_code, description, element_objs
             ))
 
-    def _checkup_nonadv(self, checkups, q_nsmap, block_code, input):
+    async def _checkup_nonadv(self, checkups, q_nsmap, block_code, input):
         """
         Метод для получения результатов проверки (ошибок) для НЕ АДВ направлений
         """
@@ -300,7 +300,16 @@ class PfrChecker:
                 code, prot_code, description, element_objs
             ))
 
-    def _validate_scenario(self, validators, scenario_dir,
+    async def _execute_query(self, query_file, binds):
+        with open(query_file, 'r', encoding="utf-8") as handler:
+            query = self.session.query(handler.read())
+
+        for key, value in binds.items():
+            query.bind(key, value)
+
+        return query.execute()
+
+    async def _validate_scenario(self, validators, scenario_dir,
                            nsmap, xml_file_path, input):
         """
         Метод для проверки xml файла по протоколируемым проверкам из сценария
@@ -316,18 +325,11 @@ class PfrChecker:
                                       f'XQuery/{scenario_dir}',
                                       validator_file)
 
-            with open(query_file, 'r', encoding="utf-8") as handler:
-                query = self.session.query(handler.read())
-
-            # Передача external переменных в xquery запрос
-            query.bind('$doc', f'{xml_file_path}')
-            #file_content = open(xml_file_path, 'rb').read().decode('utf8')
-            #query.bind('$doc', file_content)
-            # Внешняя переменная dictFile присутствует только в СЗВ направлениях
+            binds = {'$doc': f'{xml_file_path}'}
             if self.direction == 1:
-                query.bind('$dictFile', f'{self.dict_file}')
+                binds.update({'$dictFile': f'{self.dict_file}'})
 
-            query_result = query.execute()
+            query_result = await self._execute_query(query_file, binds)
 
             if query_result:
                 check_result = etree.fromstring(query_result, parser=self.parser)
@@ -341,9 +343,9 @@ class PfrChecker:
                     namespaces=q_nsmap
                 )
                 if self.direction:
-                    self._checkup_nonadv(checkups, q_nsmap, block_code, input)
+                    await self._checkup_nonadv(checkups, q_nsmap, block_code, input)
                 else:
-                    self._checkup_adv(checkups, q_nsmap, input)
+                    await self._checkup_adv(checkups, q_nsmap, input)
                 # Обнаружили ошибки
                 if checkups:
                     input.verify_result['result'] = 'failed_xqr'
@@ -352,10 +354,10 @@ class PfrChecker:
                         f'{self.xml_file}.')
             #TODO: check if no result has been returned
 
-    def check_file(self, input, xml_file_path):
+    async def check_file(self, input, xml_file_path):
         self.xml_file = input.filename
         self.content = input.content
-        self.xml_content = input.xml_obj
+        self.xml_content = input.xml_tree
 
         input.verify_result = dict()
 
@@ -364,18 +366,18 @@ class PfrChecker:
         input.verify_result['xqr_asserts'] = []
 
         # Получение списка проверочных схем и формата документа
-        schemes, doc_format = self._get_schemes()
+        schemes, doc_format = await self._get_schemes()
 
         # Открытие сессии BaseX
         self.session.execute(f'open xml_db{self.db_num}')
 
         # Проверка по xsd схеме
-        self._validate_scheme(schemes, input)
+        await self._validate_scheme(schemes, input)
 
         # Если проверка по xsd пройдена, проверяем сценарий
         # Получение всех протоколируемых проверок
         # TODO: вынести в память, не заниматься поиском в рантайме
-        validators, scenario_dir, nsmap = self._get_validators(doc_format)
+        validators, scenario_dir, nsmap = await self._get_validators(doc_format)
 
-        self._validate_scenario(validators, scenario_dir, nsmap,
-                                xml_file_path, input)
+        await self._validate_scenario(validators, scenario_dir, nsmap,
+                                      xml_file_path, input)

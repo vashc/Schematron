@@ -20,7 +20,7 @@ class FnsChecker:
         self.interpreter = Interpreter()
 
     @staticmethod
-    def _get_error(node: etree.Element) -> Dict[str, Any]:
+    async def _get_error(node: etree.Element) -> Dict[str, Any]:
         error = {}
         replacing = []
         error['code'] = node.get('code')
@@ -46,10 +46,10 @@ class FnsChecker:
         return error
 
     @staticmethod
-    def _return_error(text: Union[str, Exception]) -> str:
+    async def _return_error(text: Union[str, Exception]) -> str:
         return f'Error. {text}.'
 
-    def _get_error_text(self, assertion: Dict[str, Any]) -> str:
+    async def _get_error_text(self, assertion: Dict[str, Any]) -> str:
         error = assertion['error']
         error_text = error['text']
         for replacement in error['replacing']:
@@ -63,7 +63,7 @@ class FnsChecker:
             )
         return error_text
 
-    def _get_asserts(self, content: etree.ElementTree) -> List[Dict[str, Any]]:
+    async def _get_asserts(self, content: etree.ElementTree) -> List[Dict[str, Any]]:
         """
         Получение списка проверок Schematron-выражений
         """
@@ -101,7 +101,7 @@ class FnsChecker:
 
                     for sch_assert in rule:
                         for error_node in sch_assert:
-                            error = self._get_error(error_node)
+                            error = await self._get_error(error_node)
 
                             assert_list.append({
                                 'name':     name,
@@ -112,7 +112,7 @@ class FnsChecker:
 
         return assert_list
 
-    def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
+    async def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
         try:
             self.xsd_scheme.assertValid(self.xml_content)
             return True
@@ -127,12 +127,12 @@ class FnsChecker:
                 f'{self.xml_file}: {ex}.')
             return False
 
-    def _validate_schematron(self, input: ClassVar[Dict[str, Any]]) -> None:
+    async def _validate_schematron(self, input: ClassVar[Dict[str, Any]]) -> None:
         try:
-            asserts = self._get_asserts(self.xsd_content)
+            asserts = await self._get_asserts(self.xsd_content)
         except Exception as ex:
             input.verify_result['result'] = 'failed_sch'
-            input.verify_result['description'] = self._return_error(ex)
+            input.verify_result['description'] = await self._return_error(ex)
             return
 
             # Нет выражений для проверки
@@ -149,7 +149,7 @@ class FnsChecker:
                     input.verify_result['sch_asserts'] \
                         .append((assertion['name'],
                                  assertion['error']['code'],
-                                 self._get_error_text(assertion)))
+                                 await self._get_error_text(assertion)))
             except ParserError:
                 # FIXME (ParserError)
                 pass
@@ -162,9 +162,9 @@ class FnsChecker:
             input.verify_result['result'] = 'failed_sch'
             input.verify_result['description'] = 'Ошибки при проверке fns'
 
-    def check_file(self, input: ClassVar[Dict[str, Any]]) -> None:
+    async def check_file(self, input: ClassVar[Dict[str, Any]]) -> None:
         self.xml_file = input.filename
-        self.xml_content = input.xml_obj
+        self.xml_content = input.xml_tree
         self.xsd_content = input.xsd_schema
         self.xsd_scheme = etree.XMLSchema(self.xsd_content)
 
@@ -175,8 +175,8 @@ class FnsChecker:
         input.verify_result['sch_asserts'] = []
 
         # Проверка по xsd
-        if not self._validate_xsd(input):
+        if not await self._validate_xsd(input):
             return
 
         # Проверка выражений fns
-        self._validate_schematron(input)
+        await self._validate_schematron(input)
