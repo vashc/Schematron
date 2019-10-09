@@ -5,29 +5,12 @@ from lxml import etree
 from urllib.parse import unquote
 from atexit import register
 from struct import pack, unpack
-from .utils import Flock, Logger  # .
+from .utils import Flock  # .
+from .xquery import Query
 from .exceptions import *
 
 
 class PfrChecker:
-    """
-    Компендиум проверочных схем и скриптов имеет следующую структуру:
-        {
-            'АДВ+АДИ+ДСВ 1.17.12д': {  # Направление
-                'СЗВ-М': {  # Префикс проверяемого файла
-                    'schemes': {  # Словарь проверочных XSD схем
-                        'name.xsd': etree.ElementTree,
-                        ...
-                    },
-                    'queries': {  # Словарь содержимого xquery скриптов
-                        'name.xquery': str,
-                        ...
-                    },
-                    'definiton': str  # Определение документа, нода "ОпределениеДокумента" в ПФР_КСАФ
-                }
-            }
-        }
-    """
     def __init__(self, *, root):
         self.root = root
         # Корневая директория для файлов валидации
@@ -84,6 +67,9 @@ class PfrChecker:
                 os.write(fd, pack('I', self.db_num))
             else:
                 raise Exception('Too many BaseX workers')
+
+        # Сборщик xquery запросов
+        self.query = Query()
 
         # Регистрируем метод финализации
         register(self._finalize)
@@ -164,7 +150,7 @@ class PfrChecker:
     async def _set_prefix(self) -> None:
         """
         Метод для установки префикса файла для поиска в компендиуме и
-        направления файла (0 - АДВ, 1 - СЗВ, 2 - ЗНП).
+        определения направления файла (0 - АДВ, 1 - СЗВ, 2 - ЗНП).
         :return:
         """
         prefix = await self._get_nonadv_prefix()
@@ -243,16 +229,19 @@ class PfrChecker:
                 code = code_presence.text
             else:
                 code = 50
-            prot_code = self.doc_type
-            description = checkup.find('./d:Описание', namespaces=q_nsmap).text
+            prot_code = self.doc_type or ''
+            description = checkup.find('./d:Описание', namespaces=q_nsmap).text or ''
             results = checkup.findall('.//d:Результат', namespaces=q_nsmap)
             element_objs = []
             for result in results:
-                element_path = result.text
-                element_objs.append(element_path)
-            input.verify_result['xqr_asserts'].append((
-                code, prot_code, description, element_objs
-            ))
+                element_path = result.text or ''
+                element_objs.append({'Путь до элемента': element_path})
+            input.verify_result['xqr_asserts'].append({
+                'Код ошибки': code,
+                'Код проверки': prot_code,
+                'Описание': description,
+                'Объекты': element_objs
+            })
 
     async def _checkup_nonadv(self, checkups, q_nsmap, block_code, input):
         """
@@ -261,8 +250,8 @@ class PfrChecker:
         for checkup in checkups:
             check_code = checkup.attrib['ID']
             prot_code = '.'.join((block_code, check_code))
-            code = checkup.find('./d:КодРезультата', namespaces=q_nsmap).text
-            description = checkup.find('./d:Описание', namespaces=q_nsmap).text
+            code = checkup.find('./d:КодРезультата', namespaces=q_nsmap).text or '50'
+            description = checkup.find('./d:Описание', namespaces=q_nsmap).text or ''
             results = checkup.findall('.//d:Результат', namespaces=q_nsmap)
             element_objs = []
             for result in results:
@@ -274,14 +263,17 @@ class PfrChecker:
                                            namespaces=q_nsmap).text
                 element_value = result.find('./d:Объект/d:Значение',
                                             namespaces=q_nsmap).text
-                element_objs.append((element_path,
-                                     expected_value,
-                                     element_name,
-                                     element_value))
+                element_objs.append({'Путь до элемента': element_path,
+                                     'Ожидаемое значение': expected_value or '',
+                                     'Наименование': element_name or '',
+                                     'Значение': element_value or ''})
 
-            input.verify_result['xqr_asserts'].append((
-                code, prot_code, description, element_objs
-            ))
+            input.verify_result['xqr_asserts'].append({
+                'Код ошибки': code,
+                'Код проверки': prot_code,
+                'Описание': description,
+                'Объекты': element_objs
+            })
 
     async def _validate_xquery(self, input: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
         """
@@ -426,6 +418,22 @@ class PfrChecker:
 
         return query_file, validator_file
 
+    def _makeup_queries(self, queries: Dict[str, str]) -> str:
+        """
+        Метод собирает единый запрос для переданного словаря xquery выражений.
+        :param queries:
+        :return:
+        """
+        self.query.reset_query()
+        # TODO: добавить общую обработку ошибок при сборке компендиума
+        for query in queries.values():
+            try:
+                self.query.tokenize_query(query)
+            except Exception as ex:
+                pass
+
+        return self.query.makeup_query()
+
     def _get_query_validators(self, doc_type: etree.ElementTree,
                               direction: str,
                               nsmap: Dict[str, Any]) -> Dict[str, Any]:
@@ -460,9 +468,38 @@ class PfrChecker:
                 with open(query_file, 'r', encoding="utf-8") as q_handler:
                     queries_dict.update({validator_file: q_handler.read()})
 
+            queries_dict = {'query.xquery': self._makeup_queries(queries_dict)}
+
         return queries_dict
 
     def setup_compendium(self) -> None:
+        """
+        Сборка компендиума в памяти. Для каждого из трёх направлений:
+            - Получение etree.ElementTree для файла компендиума ПФР_КСАФ.xml и пространства имён;
+            - Получение списка всех деуствующих проверочных документов (@Статус="Действующий" и @ПоУмолчанию="true")
+            - Для каждого префикса в направлении:
+                - Получение словаря проверочных XSD схем;
+                - Получение словаря проверочных xquery скриптов;
+                - Получение содержимого ноды "ОпределениеДокумента" для АДВ направлений;
+
+        Компендиум проверочных схем и скриптов имеет следующую структуру:
+        {
+            'АДВ+АДИ+ДСВ 1.17.12д': {  # Направление
+                'СЗВ-М': {  # Префикс проверяемого файла
+                    'schemes': {  # Словарь проверочных XSD схем
+                        'name.xsd': etree.ElementTree,
+                        ...
+                    },
+                    'queries': {  # Словарь содержимого xquery скриптов
+                        'name.xquery': str,
+                        ...
+                    },
+                    'definiton': str  # Определение документа, нода "ОпределениеДокумента" в ПФР_КСАФ
+                }
+            }
+        }
+        :return:
+        """
         # TODO: отлов исключений?
         self.compendium = dict()
 

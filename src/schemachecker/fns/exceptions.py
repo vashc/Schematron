@@ -2,7 +2,11 @@ from typing import List
 
 
 class InternalSchemaError(Exception):
-    pass
+    def __init__(self) -> None:
+        self.message = None
+
+    def __str__(self):
+        return self.message
 
 
 class ContextError(InternalSchemaError):
