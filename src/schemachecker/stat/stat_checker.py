@@ -35,7 +35,7 @@ class StatChecker:
         self.tokenizer = Tokenizer()
         self.condition, self.log_expr, self.period_cond = self.tokenizer.create_tokenizer()
 
-    async def process_input(self, filename, content):
+    def process_input(self, filename, content):
         self.filename = filename
         self.content = content
         # Убираем расширение
@@ -297,7 +297,7 @@ class StatChecker:
                 else:
                     raise OkudError(self.filename)
 
-    async def check_file(self, input):
+    def check_file(self, input):
         self.filename = input.filename
         self.content = input.xml_tree
 
@@ -307,7 +307,7 @@ class StatChecker:
         input.verify_result['asserts'] = []
 
         try:
-            await self.process_input(self.filename, self.content)
+            self.process_input(self.filename, self.content)
         except InputError as ex:
             input.verify_result['result'] = 'failed'
             input.verify_result['description'] = ex

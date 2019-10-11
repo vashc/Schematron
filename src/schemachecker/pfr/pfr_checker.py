@@ -1,17 +1,18 @@
 import os
 import BaseXClient
-from typing import List, Dict, Tuple, Any, ClassVar
+# noinspection PyUnresolvedReferences
 from lxml import etree
 from urllib.parse import unquote
 from atexit import register
 from struct import pack, unpack
+from typing import List, Dict, Tuple, Any, ClassVar
 from .utils import Flock  # .
 from .xquery import Query
 from .exceptions import *
 
 
 class PfrChecker:
-    def __init__(self, *, root):
+    def __init__(self, *, root: str):
         self.root = root
         # Корневая директория для файлов валидации
         self.xsd_root = os.path.join(root, 'compendium/pfr/compendium/')
@@ -91,22 +92,16 @@ class PfrChecker:
         if self.session:
             self.session.close()
 
-    async def _get_compendium_definitions(self, direction: int) -> Dict[str, str]:
-        """
-        Метод для получения из компендиума словаря {definition: prefix}.
-        :param direction:
-        :return:
-        """
+    def _get_compendium_definitions(self, direction: int) -> Dict[str, str]:
+        """ Метод для получения из компендиума словаря {definition: prefix}. """
         definitions = dict()
         for prefix, prefix_dict in self.compendium[self.directions[direction]].items():
             definitions.update({prefix_dict['definition']: prefix})
 
         return definitions
 
-    async def _get_adv_prefix(self) -> str:
-        """
-        Метод для определения префикса файлов АДВ направлений.
-        """
+    def _get_adv_prefix(self) -> str:
+        """ Метод для определения префикса файлов АДВ направлений. """
         nsmap = self.xml_content.nsmap
         if nsmap.get(None):
             nsmap['d'] = nsmap.pop(None)
@@ -118,7 +113,7 @@ class PfrChecker:
 
         prefix = None
 
-        definitions = await self._get_compendium_definitions(self.direction)
+        definitions = self._get_compendium_definitions(self.direction)
         for definition, _prefix in definitions.items():
             if doc_type in definition:
                 prefix = _prefix
@@ -126,11 +121,8 @@ class PfrChecker:
 
         return prefix
 
-    async def _get_nonadv_prefix(self) -> str:
-        """
-        Метод для определения префикса файлов НЕ АДВ направлений.
-        :return:
-        """
+    def _get_nonadv_prefix(self) -> str:
+        """ Метод для определения префикса файлов НЕ АДВ направлений. """
         # Префикс файла (СЗВ-М, СТАЖ и т.д.). None для АДВ направлений
         prefix_list = self.xml_file.split('_')
         prefix = None
@@ -147,52 +139,39 @@ class PfrChecker:
 
         return prefix
 
-    async def _set_prefix(self) -> None:
+    def _set_prefix(self) -> None:
         """
         Метод для установки префикса файла для поиска в компендиуме и
         определения направления файла (0 - АДВ, 1 - СЗВ, 2 - ЗНП).
         :return:
         """
-        prefix = await self._get_nonadv_prefix()
+        prefix = self._get_nonadv_prefix()
         if prefix is None:
             if self.direction == 0:
-                prefix = await self._get_adv_prefix()
+                prefix = self._get_adv_prefix()
             if prefix is None:
                 raise PrefixNotFound()
 
         self.prefix = prefix
 
-    async def _get_compendium_schemes(self, direction: int, prefix: str) -> Dict[str, Any]:
-        """
-        Метод для получения словаря проверочных схем по направлению и префиксу файла.
-        :param direction:
-        :param prefix:
-        :return:
-        """
+    def _get_compendium_schemes(self, direction: int, prefix: str) -> Dict[str, Any]:
+        """ Метод для получения словаря проверочных схем по направлению и префиксу файла. """
         try:
             return self.compendium[self.directions[direction]].get(prefix).get('schemes')
         except AttributeError:
             raise SchemesNotFound(prefix)
 
-    async def _get_compendium_queries(self, direction: int, prefix: str) -> Dict[str, Any]:
-        """
-        Метод для получения словаря проверочных xquery скриптов по направлению и префиксу файла.
-        :param direction:
-        :param prefix:
-        :return:
-        """
+    def _get_compendium_queries(self, direction: int, prefix: str) -> Dict[str, Any]:
+        """ Метод для получения словаря проверочных xquery скриптов по направлению и префиксу файла. """
         try:
             return self.compendium[self.directions[direction]].get(prefix).get('queries')
         except AttributeError:
             raise QueriesNotFound(prefix)
 
-    async def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
-        """
-        Метод для валидации файла по XSD.
-        :return:
-        """
+    def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
+        """ Метод для валидации файла по XSD. """
         success = True
-        schemes = await self._get_compendium_schemes(self.direction, self.prefix)
+        schemes = self._get_compendium_schemes(self.direction, self.prefix)
         if schemes is None:
             raise SchemesNotFound(self.prefix)
 
@@ -211,7 +190,7 @@ class PfrChecker:
 
         return success
 
-    async def _execute_query(self, query_file: str, binds: Dict[str, str]) -> str:
+    def _execute_query(self, query_file: str, binds: Dict[str, str]) -> str:
         query = self.session.query(query_file)
 
         for key, value in binds.items():
@@ -219,10 +198,8 @@ class PfrChecker:
 
         return query.execute()
 
-    async def _checkup_adv(self, checkups, q_nsmap, input):
-        """
-        Метод для получения результатов проверки (ошибок) для АДВ направлений
-        """
+    def _checkup_adv(self, checkups, q_nsmap, input):
+        """ Метод для получения результатов проверки (ошибок) для АДВ направлений """
         for checkup in checkups:
             code_presence = checkup.find('./d:КодРезультата', namespaces=q_nsmap)
             if len(code_presence):
@@ -243,10 +220,12 @@ class PfrChecker:
                 'Объекты': element_objs
             })
 
-    async def _checkup_nonadv(self, checkups, q_nsmap, block_code, input):
-        """
-        Метод для получения результатов проверки (ошибок) для НЕ АДВ направлений
-        """
+    @staticmethod
+    def _checkup_nonadv(checkups: etree.ElementTree,
+                        q_nsmap: Dict[str, str],
+                        block_code: str,
+                        file: ClassVar[Dict[str, Any]]) -> None:
+        """ Метод для получения результатов проверки (ошибок) для НЕ АДВ направлений """
         for checkup in checkups:
             check_code = checkup.attrib['ID']
             prot_code = '.'.join((block_code, check_code))
@@ -268,28 +247,25 @@ class PfrChecker:
                                      'Наименование': element_name or '',
                                      'Значение': element_value or ''})
 
-            input.verify_result['xqr_asserts'].append({
+            file.verify_result['xqr_asserts'].append({
                 'Код ошибки': code,
                 'Код проверки': prot_code,
                 'Описание': description,
                 'Объекты': element_objs
             })
 
-    async def _validate_xquery(self, input: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
-        """
-        Метод для валидации файла по xquery выражениям.
-        :return:
-        """
+    def _validate_xquery(self, file: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
+        """ Метод для валидации файла по xquery выражениям. """
         binds = {'$doc': f'{xml_file_path}'}
         if self.direction == 1:
             binds.update({'$dictFile': f'{self.dict_file}'})
 
-        queries = await self._get_compendium_queries(self.direction, self.prefix)
+        queries = self._get_compendium_queries(self.direction, self.prefix)
         if queries is None:
             raise QueriesNotFound(self.prefix)
 
         for query in queries.values():
-            query_result = await self._execute_query(query, binds)
+            query_result = self._execute_query(query, binds)
 
             if query_result:
                 check_result = etree.fromstring(query_result, parser=self.parser)
@@ -297,30 +273,28 @@ class PfrChecker:
                 q_nsmap['d'] = q_nsmap.pop(None)
                 # Запрос возвращает ответ в xml формате, проверяем,
                 # вернулась ли ошибка (Результат != 0)
+                # blocks = check_result.xpath('//БлокПроверок')
+                # for block in blocks:
                 block_code = check_result.attrib['ID']
                 checkups = check_result.xpath(
                     '//d:Проверка[d:РезультатЗапроса/d:Результат[text()!=0]]',
                     namespaces=q_nsmap
                 )
                 if self.direction:
-                    await self._checkup_nonadv(checkups, q_nsmap, block_code, input)
+                    self._checkup_nonadv(checkups, q_nsmap, block_code, file)
                 else:
-                    await self._checkup_adv(checkups, q_nsmap, input)
+                    self._checkup_adv(checkups, q_nsmap, file)
                 # Обнаружили ошибки
                 if checkups:
-                    input.verify_result['result'] = 'failed_xqr'
-                    input.verify_result['description'] = (
+                    file.verify_result['result'] = 'failed_xqr'
+                    file.verify_result['description'] = (
                         f'Ошибка при валидации по xquery выражению файла '
                         f'{self.xml_file}.')
             else:
                 raise QueryResultError()
 
     def _get_comp_file(self, direction: str) -> Tuple[etree.ElementTree, Dict[str, Any]]:
-        """
-        Метод для получения дерева файла компендиума и простанства имён для указанного направления.
-        :param direction:
-        :return:
-        """
+        """ Метод для получения дерева файла компендиума и простанства имён для указанного направления. """
         with open(os.path.join(self.xsd_root, direction, self.comp_file), 'rb') as handler:
             comp_file = etree.fromstring(handler.read(), parser=self.utf_parser)
 
@@ -330,24 +304,18 @@ class PfrChecker:
 
         return comp_file, nsmap
 
-    def _get_doc_types(self, comp_file: etree.ElementTree, nsmap: Dict[str, Any]) -> List[etree.ElementTree]:
-        """
-        Метод для получения списка всех действующих проверочных документов.
-        :param comp_file:
-        :param nsmap:
-        :return:
-        """
+    @staticmethod
+    def _get_doc_types(comp_file: etree.ElementTree, nsmap: Dict[str, Any]) -> List[etree.ElementTree]:
+        """ Метод для получения списка всех действующих проверочных документов. """
         # Нужен действующий формат со статусом "ПоУмолчанию"
         doc_types_xpath = f'//d:ТипДокумента[d:Форматы/d:Формат[@Статус="Действующий" and @ПоУмолчанию="true"]]'
         doc_types = comp_file.xpath(doc_types_xpath, namespaces=nsmap)
 
         return doc_types
 
-    def _get_definition(self, doc_type: etree.ElementTree, nsmap: Dict[str, Any]) -> str:
-        """
-        Метод для получения содержимого ноды "ОпределениеДокумента".
-        :return:
-        """
+    @staticmethod
+    def _get_definition(doc_type: etree.ElementTree, nsmap: Dict[str, Any]) -> str:
+        """ Метод для получения содержимого ноды "ОпределениеДокумента". """
         try:
             return doc_type.xpath(f'.//d:Валидация/d:ОпределениеДокумента/text()', namespaces=nsmap)[0]
         # У некоторых направлений нет определения документа, возвращаем пустую строку
@@ -387,10 +355,7 @@ class PfrChecker:
         return schemes_dict
 
     def _get_scenario(self, direction: str, scenario_file: str) -> Tuple[etree.ElementTree, Dict[str, Any]]:
-        """
-        Метод для получения содержимого сценария и пространства имён.
-        :return:
-        """
+        """ Метод для получения содержимого сценария и пространства имён. """
         with open(os.path.join(self.xsd_root, direction, scenario_file), 'rb') as handler:
             try:
                 scenario = etree.fromstring(handler.read(), parser=self.utf_parser)
@@ -407,10 +372,7 @@ class PfrChecker:
                         direction: str,
                         s_nsmap: Dict[str, Any],
                         scenario_dir: str) -> Tuple[str, str]:
-        """
-        Метод для получения имени и пути xquery скрипта по валидатору - протоколируемой проверке.
-        :return:
-        """
+        """ Метод для получения имени и пути xquery скрипта по валидатору - протоколируемой проверке. """
         validator_file = validator.xpath('./d:Файл/text()', namespaces=s_nsmap)[0]
         # Используем не .xml файл для проверки, а сразу сырой .xquery
         validator_file = validator_file.split('\\')[-1].split('.')[0] + '.xquery'
@@ -419,18 +381,14 @@ class PfrChecker:
         return query_file, validator_file
 
     def _makeup_queries(self, queries: Dict[str, str]) -> str:
-        """
-        Метод собирает единый запрос для переданного словаря xquery выражений.
-        :param queries:
-        :return:
-        """
+        """ Метод собирает единый запрос для переданного словаря xquery выражений. """
         self.query.reset_query()
         # TODO: добавить общую обработку ошибок при сборке компендиума
         for query in queries.values():
             try:
                 self.query.tokenize_query(query)
             except Exception as ex:
-                pass
+                raise
 
         return self.query.makeup_query()
 
@@ -468,7 +426,7 @@ class PfrChecker:
                 with open(query_file, 'r', encoding="utf-8") as q_handler:
                     queries_dict.update({validator_file: q_handler.read()})
 
-            queries_dict = {'query.xquery': self._makeup_queries(queries_dict)}
+            # queries_dict = {'query.xquery': self._makeup_queries(queries_dict)}
 
         return queries_dict
 
@@ -529,25 +487,25 @@ class PfrChecker:
 
             self.compendium.update({direction: prefix_dict})
 
-    async def check_file(self, input, xml_file_path):
-        self.xml_file = input.filename
-        self.content = input.content
-        self.xml_content = input.xml_tree
+    def check_file(self, file: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
+        self.xml_file = file.filename
+        self.content = file.content
+        self.xml_content = file.xml_tree
 
-        input.verify_result = dict()
+        file.verify_result = dict()
 
-        input.verify_result['result'] = 'passed'
-        input.verify_result['xsd_asserts'] = []
-        input.verify_result['xqr_asserts'] = []
+        file.verify_result['result'] = 'passed'
+        file.verify_result['xsd_asserts'] = []
+        file.verify_result['xqr_asserts'] = []
 
         # Открытие сессии BaseX
         self.session.execute(f'open xml_db{self.db_num}')
 
-        await self._set_prefix()
+        self._set_prefix()
 
         # Проверка по XSD
-        if not await self._validate_xsd(input):
+        if not self._validate_xsd(file):
             return
 
         # Проверка по xquery выражениям
-        await self._validate_xquery(input, xml_file_path)
+        self._validate_xquery(file, xml_file_path)

@@ -100,13 +100,13 @@ class Query:
         element = Word(alphabet + alphabet.upper() + alphanums + '$@/:._-()?*')
 
         var_name = Word(alphanums + '$')
-        var_value = Word(alphabet + alphabet.upper() + alphanums + '$@/:._-()?*"\'')
+        var_value = Word(alphabet + alphabet.upper() + alphanums + '$@/:._-()[]?*"\'= ')
 
         func_name = Word(alphanums + '-_')
         func_args = Word(alphanums + '$:()?*,' + whitespace)
         func_body = Word(alphabet + alphabet.upper() + ''.join(c for c in printable if c != ';'))
 
-        block = Word(alphabet + alphabet.upper() + printable + '–№')
+        block = Word(alphabet + alphabet.upper() + printable + '–№«»≤')
 
         default_ns_decl = Group(decl_l + default_ns_l + any_quote + element + any_quote + semicolon)\
             .setParseAction(self._push_default_ns)
@@ -166,9 +166,11 @@ class Query:
             for func_name, func_descr in self.functions.items():
                 buffer.write(f'declare function local:{func_name}{func_descr[0]}{func_descr[1]};\n')
 
-            # Добавляем блоки проверок
+            # Добавляем блоки (необходима обёртка <БлокПроверок></БлокПроверок>)
+            buffer.write('<БлокПроверок>\n')
             for block in self.blocks:
                 buffer.write(f'{block}\n')
+            buffer.write('</БлокПроверок>')
 
             query = buffer.getvalue()
 

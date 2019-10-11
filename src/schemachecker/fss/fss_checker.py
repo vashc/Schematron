@@ -1,11 +1,13 @@
 import os
 import requests
 import asyncio
-from re import compile, match
+from re import compile
 from typing import List, Tuple, Dict, Any, ClassVar
+# noinspection PyUnresolvedReferences
 from lxml import etree
 from io import StringIO
 from concurrent.futures import ThreadPoolExecutor
+from .exceptions import *
 
 
 class FssChecker:
@@ -31,14 +33,10 @@ class FssChecker:
 
         # Пул для распараллеливания requests
         self.executor = ThreadPoolExecutor(max_workers=4)
-        self.loop = asyncio.get_event_loop()
+        self.loop = asyncio.new_event_loop()
 
-    async def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
-        """
-        Метод для извлечения ошибок из возвращаемого ФСС ответа
-        :param response:
-        :return:
-        """
+    def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
+        """ Метод для извлечения ошибок из возвращаемого ФСС ответа. """
         tree = etree.parse(StringIO(response), self.parser)
         err_list = tree.findall('.//li')
 
@@ -57,84 +55,80 @@ class FssChecker:
 
         return ret_list
 
-    async def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
+    def _validate_xsd(self, file: ClassVar[Dict[str, Any]]) -> bool:
         try:
             self.xsd_scheme.assertValid(self.xml_obj)
             return True
         except etree.DocumentInvalid as ex:
             for error in self.xsd_scheme.error_log:
-                input.verify_result['xsd_asserts'] \
+                file.verify_result['xsd_asserts'] \
                     .append(f'{error.message} (строка {error.line})')
 
-            input.verify_result['result'] = 'failed_xsd'
-            input.verify_result['description'] = (
+            file.verify_result['result'] = 'failed_xsd'
+            file.verify_result['description'] = (
                 f'Ошибка при валидации по xsd схеме файла '
                 f'{self.filename}: {ex}.')
             return False
 
     @staticmethod
     def _post_dict(kwargs: Dict[str, Any]) -> requests.Response:
-        """
-        Вспомогательный метод для запуска requests.post в executor
-        с ключевыми аргументами
-        :param kwargs:
-        :return:
-        """
-        response = requests.post(**kwargs)
-        return response
+        """ Вспомогательный метод для запуска requests.post в executor с ключевыми аргументами. """
+        # TODO: добавить внутренние коды ошибок
+        try:
+            response = requests.post(**kwargs)
+            return response
+        except requests.exceptions.RequestException:
+            raise ChecksumError()
 
-    async def _validate_sum(self, input: ClassVar[Dict[str, Any]]) -> None:
-        """
-        Метод для проверки контрольных соотношений на портале ФСС
-        :param input:
-        :return:
-        """
+    def _validate_sum(self, file: ClassVar[Dict[str, Any]]) -> None:
+        """ Метод для проверки контрольных соотношений на портале ФСС. """
         post_kwargs = dict(
             url=f'{self.url}f4upload?auth=false&type=F4_INPUT&current_org=&current_period=&rstate=',
-            files={self.filename: self.xml_content}
+            files={self.filename: self.xml_content},
+            timeout=10
         )
 
-        response = await self.loop.run_in_executor(self.executor, self._post_dict, post_kwargs)
+        response = self.loop.run_until_complete(
+            self.loop.run_in_executor(self.executor, self._post_dict, post_kwargs)
+        )
         self.cookie = response.cookies  # .get('JSESSIONID')
 
         if self.cookie:
             check_url = f'{self.url}fss/f4validation?type=f4_input'
             response = requests.get(check_url, cookies=self.cookie)
 
-            err_list = await self._parse_fss_response(response.text)
+            err_list = self._parse_fss_response(response.text)
             if err_list:
-                input.verify_result['result'] = 'failed_sum'
-                input.verify_result['sum_asserts'].extend(err_list)
+                file.verify_result['result'] = 'failed_sum'
+                file.verify_result['sum_asserts'].extend(err_list)
 
         # Не получили sessionid, выполнить проверку не удастся
         else:
-            # TODO: возвращать что-нибудь полезное пользователю
-            pass
+            raise ChecksumError()
 
-    async def check_file(self, input: ClassVar[Dict[str, Any]], validate_sum: bool) -> None:
+    def check_file(self, file: ClassVar[Dict[str, Any]], validate_sum: bool) -> None:
         """
-        Метод для валидации файла по xsd и контрольным суммам
-        :param input:
-        :param validate_sum: флаг, показывающий, нужно ли проверять контрольные суммы.
-            Проверка выоплняется только для поднаправлений, производных от 4ФСС.
+        Метод для валидации файла по xsd и контрольным суммам.
+            validate_sum: флаг, показывающий, нужно ли проверять контрольные суммы.
+        Проверка выполняется только для поднаправлений, производных от 4ФСС.
         :return:
         """
-        self.filename = input.filename
-        self.xml_content = input.content
-        self.xml_obj = input.xml_tree
-        self.xsd_content = input.xsd_schema
+        self.filename = file.filename
+        self.xml_content = file.content
+        self.xml_obj = file.xml_tree
+        self.xsd_content = file.xsd_scheme
         self.xsd_scheme = etree.XMLSchema(self.xsd_content)
 
-        input.verify_result = dict()
-        input.verify_result['result'] = 'passed'
-        input.verify_result['xsd_asserts'] = []
-        input.verify_result['sum_asserts'] = []
+        file.verify_result = dict()
+        file.verify_result['result'] = 'passed'
+        file.verify_result['xsd_asserts'] = []
+        file.verify_result['sum_asserts'] = []
 
         # Проверка по xsd, если не прошла - возвращаем
-        if not await self._validate_xsd(input):
+        if not self._validate_xsd(file):
             return
 
         # Првоерка контрольных сумм (прокси на портал ФСС)
         # для форм, производных от 4ФСС
         if validate_sum:
-            await self._validate_sum(input)
+            self._validate_sum(file)

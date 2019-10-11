@@ -32,7 +32,7 @@ class EdoChecker:
                     except etree.XMLSyntaxError as ex:
                         raise XsdSchemeError(ex)
 
-    async def check_file(self, input):
+    def check_file(self, input):
         self.filename = input.filename
         self.xml_content = input.xml_tree
 
