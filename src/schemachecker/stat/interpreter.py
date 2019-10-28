@@ -17,8 +17,8 @@ class PeriodInterpreter:
             '>':    operator.gt,
             '>=':   operator.ge,
             '<>':   operator.ne,
-            'and': operator.and_,
-            'or': operator.or_
+            'and':  operator.and_,
+            'or':   operator.or_
         }
 
         self.stack = []

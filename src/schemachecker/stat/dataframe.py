@@ -1,7 +1,7 @@
 import operator
 import numpy as np
 from pprint import pformat
-from .utils import Dict
+from .utils import DotDict
 
 
 class DataFrame:
@@ -34,9 +34,9 @@ class DataFrame:
         """
         # Выборочная структура, только данные
         if struct is None:
-            struct = Dict()
-            struct['rows'] = Dict()
-            struct['cols'] = Dict()
+            struct = DotDict()
+            struct['rows'] = DotDict()
+            struct['cols'] = DotDict()
             struct['specs'] = list()
             struct['d_rows'] = list()
             struct['d_cols'] = list()

@@ -208,7 +208,8 @@ class FnsChecker:
                 xsd_schema = etree.parse(file, self.parser).getroot()
                 return xsd_schema
         except (IOError, Exception) as ex:
-            raise XsdParseError(xsd_name, ex)
+            # raise XsdParseError(xsd_name, ex)
+            pass
 
     def _get_versions(self, format_node: etree.ElementTree) -> Dict[str, Dict[str, Any]]:
         """ Метод формирует словарь версий для заданного КНД. """

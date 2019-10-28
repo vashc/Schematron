@@ -1,4 +1,4 @@
-class Dict(dict):
+class DotDict(dict):
     #TODO: implement working with list as attribute
     def __getattr__(self, item):
         value = self.get(item)

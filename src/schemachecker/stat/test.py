@@ -1,6 +1,6 @@
 import os
 from time import time
-from src.schemachecker import StatChecker
+from src.schemachecker.stat import StatChecker
 from lxml import etree
 from pprint import pprint
 
@@ -13,7 +13,7 @@ class Input:
                                       recover=True,
                                       remove_comments=True)
         self.filename = filename
-        self.xml_obj = etree.fromstring(content, parser=self.parser)
+        self.xml_tree = etree.fromstring(content, parser=self.parser)
 
 
 if __name__ == "__main__":

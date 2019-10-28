@@ -1,14 +1,16 @@
 import os
-from collections import OrderedDict
+# noinspection PyUnresolvedReferences
 from lxml import etree
-from .utils import Dict
+from collections import OrderedDict
+from typing import List, Dict, Any, Tuple, Union
+from .utils import DotDict
 from .interpreter import Interpreter, PeriodInterpreter
 from .tokenizer import Tokenizer
 from .dataframe import DataFrame
 from .exceptions import *
 
 
-#TODO: make its own class errors
+# TODO: make its own class errors
 class StatChecker:
     def __init__(self, *, root):
         self.root = root
@@ -16,18 +18,18 @@ class StatChecker:
                                       recover=True,
                                       remove_comments=True)
         # Содержимое xml файла
-        self.xml_report = Dict()
-        self.xml_title = Dict()
-        self.xml_sections = Dict()
+        self.xml_report = DotDict()
+        self.xml_title = DotDict()
+        self.xml_sections = DotDict()
         self.filename = None
         self.content = None
         self.okud = None
 
         # Содержимое компендиума проверочных схем
-        self.compendium = Dict()
+        self.compendium = DotDict()
 
         # Словарь датафреймов, ключи - id секций
-        self.frames = Dict()
+        self.frames = DotDict()
 
         # Подготовка лексера и интерпретатора
         self.interpreter = Interpreter()
@@ -62,7 +64,7 @@ class StatChecker:
                              'Формат названия файла не распознан')
 
         # Данные о статистическом отчёте
-        self.xml_report = Dict(self.content.items())
+        self.xml_report = DotDict(self.content.items())
 
         # Данные титульной страницы отчёта
         try:
@@ -86,13 +88,13 @@ class StatChecker:
                 raise InputError(self.filename,
                                  f'Не найден обязательный атрибут в разделе sections: {ex}')
 
-    #TODO: clear up the method
-    def _parse_elements(self, rule, condition):
+    @staticmethod
+    def _parse_elements(rule, condition):
         """
         Вспомогательный метод для получения списка секций/строк/колонок/специфик
-        для каждого правила и условия в компендиуме
+        для каждого правила и условия в компендиуме.
         """
-        element_map = Dict()
+        element_map = DotDict()
 
         # Определение секций для правила/условия
         r_sec, c_sec = None, None
@@ -114,12 +116,13 @@ class StatChecker:
 
         return element_map
 
-    def _create_df_structure(self, section):
+    @staticmethod
+    def _create_df_structure(section: Dict[str, Any]) -> Dict[str, Any]:
         """
         Метод для инициализации структуры датафрейма в каждой секции
-        при построении компендиума
+        при построении компендиума.
         """
-        df_struct = Dict()
+        df_struct = DotDict()
         # Формирование структуры датафрейма по xml шаблону
         _section = int(section.code)
         # Словарь строк, ключ - номер строки, значение - массив индексов
@@ -127,9 +130,9 @@ class StatChecker:
         # Словарь граф, ключ - номер графы, значение - индекс
         df_struct['cols'] = OrderedDict()
         # Двумерный массив специфик
-        df_struct['specs'] = list()
+        df_struct['specs'] = []
         # Двумерный массив данных, построчный
-        df_struct['data'] = list()
+        df_struct['data'] = []
         # Вспомогательные массивы для быстрого поиска диапазонов
         df_struct['d_specs'] = [set(), set(), set()]
 
@@ -141,6 +144,7 @@ class StatChecker:
                 _col = int(col.code)
                 df_struct['cols'][_col] = idx
                 idx += 1
+        # Список кодов колонок
         df_struct['d_cols'] = list(df_struct['cols'].keys())
 
         # Добавление строк
@@ -153,8 +157,229 @@ class StatChecker:
 
         return df_struct
 
-    def setup_compendium(self):
-        self.compendium = Dict()
+    @staticmethod
+    def _get_title_data(content: etree.ElementTree) -> Dict[str, Tuple[str, Union[str, None]]]:
+        """" Метод получения данных раздела metaForm/title. """
+        title_items = content.xpath('/metaForm/title//item')
+        title = DotDict()
+
+        try:
+            for item in title_items:
+                item_attribs = (item.attrib['name'], item.get('dic'))
+                title[item.attrib['field']] = item_attribs
+        except KeyError as ex:
+            raise CompendiumAttributeError('item', ex)
+
+        return title
+
+    @staticmethod
+    def _get_columns_data(section: etree.ElementTree) -> Dict[str, Dict[str, Any]]:
+        """ Метод получения данных о графах в разделе section/columns. """
+        columns_items = section.xpath('./columns//column')
+        columns = DotDict()
+
+        for col in columns_items:
+            _col = DotDict(col.items())
+            default_cell = col.find('./default-cell')
+            if default_cell is not None:
+                _col['default-cell'] = DotDict(default_cell.items())
+
+            columns[col.attrib['code']] = _col
+
+        return columns
+
+    @staticmethod
+    def _get_rows_data(section: etree.ElementTree,
+                       section_dict: Dict[str, Any]) -> Dict[str, Dict[str, str]]:
+        """ Метод получения данных о строках в разделе section/rows. Устанавливает значения по умолчанию. """
+        rows_items = section.xpath('./rows//row')
+        rows = DotDict()
+
+        for row in rows_items:
+            _row = DotDict(row.items())
+
+            cells = row.xpath('./cell')
+            for cell in cells:
+                # Заполнение значения по умолчанию
+                if 'default' in cell.keys():
+                    col_code = cell.attrib['column']
+                    cell_default = cell.attrib['default']
+                    section_dict['columns'][col_code]['default'] = cell_default
+
+            if _row.type != 'C':
+                rows[row.attrib['code']] = _row
+
+        return rows
+
+    def _get_sections_data(self, content: etree.ElementTree) -> Dict[str, Any]:
+        """ Метод получения данных раздела metaForm/sections (список разделов формы). """
+        sections_items = content.xpath('/metaForm/sections//section')
+        sections = DotDict()
+
+        for section in sections_items:
+            _section = DotDict()
+            _section['code'] = section.attrib['code']
+            _section['name'] = section.attrib['name']
+
+            _section['columns'] = self._get_columns_data(section)
+            _section['rows'] = self._get_rows_data(section, _section)
+
+            # Создание структуры для датафрейма
+            _section['df_struct'] = self._create_df_structure(_section)
+
+            sections[section.attrib['code']] = _section
+
+        return sections
+
+    def _get_controls_data(self, content: etree.ElementTree) -> List[Dict[str, Any]]:
+        """ Метод получения контрольных проверок раздела metaForm/controls. """
+        controls_items = content.xpath('/metaForm/controls//control')
+        controls = []
+
+        for control in controls_items:
+            _control = DotDict(control.items())
+            # Нет информации о предыдущем периоде,
+            # пропускаем такие проверки
+            if '{{' in _control.rule.lower():
+                continue
+
+            # Парсинг и сохранение выражения
+            ex_rule = _control.rule
+            try:
+                _rule = self.tokenizer.tokenize_expression(
+                    _control.rule.lower(), self.log_expr)
+                _control.rule = _rule
+            except Exception:
+                raise TokenizerError(ex_rule)
+
+            # Парсинг и сохранение условия
+            # Могут попадаться условия, содержащие только пробелы
+            if _control.condition and not _control.condition.isspace():
+                if '{{' in _control.condition.lower():
+                    continue
+                ex_condition = _control.condition
+                try:
+                    _condition = self.tokenizer.tokenize_expression(
+                        _control.condition.lower(), self.condition)
+                    _control.condition = _condition
+                except Exception:
+                    raise TokenizerError(ex_condition)
+            else:
+                _control.condition = ''
+
+            # Парсинг и сохранение условия на период
+            if _control.periodClause and not _control.periodClause.isspace():
+                ex_period = _control.periodClause
+                try:
+                    _period = self.tokenizer.tokenize_expression(
+                        _control.periodClause.lower(), self.period_cond)
+                    _control.period = _period
+                except Exception:
+                    raise TokenizerError(ex_period)
+            else:
+                _control.period = ''
+
+            # Парсинг и получение списка строк/колонок/специфик
+            # для правила и условия
+            element_map = self._parse_elements(_control.rule,
+                                               _control.condition)
+            _control['section'] = element_map.section
+            _control['rows'] = element_map.rows
+            _control['cols'] = element_map.cols
+            _control['specs'] = element_map.specs
+
+            controls.append(_control)
+
+        return controls
+
+    @staticmethod
+    def _get_dics_data(content: etree.ElementTree) -> Dict[str, Dict[str, Any]]:
+        """ Метод получения данных проверочных словарей раздела metaForm/dics. """
+        dics_items = content.xpath('/metaForm/dics//dic')
+        dics = DotDict()
+
+        for dic in dics_items:
+            _dic = DotDict(dic.items())
+            _dic['terms'] = DotDict()
+            terms = dic.xpath('.//term')
+            for term in terms:
+                _dic['terms'][term.attrib['id']] = term.text
+
+            dics[dic.attrib['id']] = _dic
+
+        return dics
+
+    def setup_compendium(self) -> None:
+        """
+        Сборка комепендиума в памяти. Для каждой проверочной формы:
+            - Получение метаинформации из атрибутов корневого элемента metaForm;
+            -
+
+        Компендиум имеет следующую структуру:
+        {
+            "0606010": {  # ОКУД проверочной формы
+                'title': {  # Данные раздела 'title'
+                    "okpo": (  # Идентификатор поля, атрибут field
+                        "Код предприятия": str,  # Атрибут name
+                        "s_okpo": Union[str, None]  # Атрибут dic, опциональный
+                    )
+                },
+                'sections': {  # Данные о разделах формы, 'sections'
+                    'code': {
+                        'code': str,
+                        'name': str,
+                        'columns': {  # Данные о колонках (графах) формы
+                            "11": {  # Код графы
+                                'type': str,
+                                'name': str,
+                                ...
+                                'default-cell': Union[None, {
+                                    'column': str,
+                                    'format': str,
+                                    'inputType': str
+                                }],
+                                'default': str  # Значение графы по умолчанию
+                            }
+                        },
+                        'rows': {  # Данные о строках формы
+                            "01": {  # Код строки
+                                'code': str,
+                                'type': str,
+                                'name': str,
+                                ...
+
+                            }
+                        },
+                        'df_struct': {  # Словарь стркутуры датафрейма
+                            ...
+                        }
+                    }
+                },
+                'controls': [  # Список контрольных выражений
+                    {
+                        'rule': List[str],
+                        'condition': List[str],
+                        'period': List[str],
+                        'section',
+                        'rows',
+                        'cols',
+                        'specs'
+                    }
+                ],
+                'dics': {  # Проверочные словари
+                    "s_god": {  # ID словаря
+                        'name': str,
+                        'id': str,
+                        'terms': {  # Словарь определений
+                            "2019": "за март",  # Term ID: term text
+                            ...
+                        }
+                    }
+                }
+            }
+        }
+        """
+        self.compendium = DotDict()
 
         comp_root = os.path.join(self.root, 'compendium')
         for root, dirs, files in os.walk(comp_root):
@@ -163,133 +388,23 @@ class StatChecker:
                     try:
                         content = etree.fromstring(handler.read(), parser=self.parser)
                     except etree.XMLSyntaxError as ex:
-                        print(f'Ошибка при разборе .xml файла шаблона: {ex}')
-                        continue
+                        raise XmlParseError(file, ex)
 
-                scheme = Dict()
+                scheme = DotDict()
                 # Данные раздела metaForm
-                scheme['metaForm'] = Dict(content.items())
+                scheme['metaForm'] = DotDict(content.items())
 
                 # Данные раздела title
-                title_items = content.xpath('/metaForm/title//item')
-                title = Dict()
-                try:
-                    for item in title_items:
-                        item_attribs = (item.attrib['name']) if not item.get('dic')\
-                            else (item.attrib['name'], item.attrib['dic'])
-                        title[item.attrib['field']] = item_attribs
-
-                    scheme['title'] = title
-                except KeyError as ex:
-                    print(f'Не найден обязательный атрибут в элементе item: {ex}')
+                scheme['title'] = self._get_title_data(content)
 
                 # Данные раздела sections
-                scheme['sections'] = Dict()
-                sections = content.xpath('/metaForm/sections//section')
-                for section in sections:
-                    _section = Dict(section.items())
-
-                    _section['columns'] = Dict()
-                    _section['rows'] = Dict()
-
-                    cols = section.xpath('./columns//column')
-                    for col in cols:
-                        _col = Dict(col.items())
-                        default_cell = col.find('./default-cell')
-                        if default_cell is not None:
-                            _col['default-cell'] = Dict(default_cell.items())
-
-                        _section['columns'][col.attrib['code']] = _col
-
-                    rows = section.xpath('./rows//row')
-
-                    for row in rows:
-                        _row = Dict(row.items())
-
-                        cells = row.xpath('./cell')
-                        for cell in cells:
-                            # Заполнение значения по умолчанию
-                            if 'default' in cell.keys():
-                                col_code = cell.attrib['column']
-                                cell_default = cell.attrib['default']
-                                _section['columns'][col_code]['default'] = cell_default
-
-                        if _row.type != 'C':
-                            _section['rows'][row.attrib['code']] = _row
-
-                    # Создание структуры для датафрейма
-                    _section['df_struct'] = self._create_df_structure(_section)
-
-                    scheme['sections'][section.attrib['code']] = _section
+                scheme['sections'] = self._get_sections_data(content)
 
                 # Данные раздела controls
-                scheme['controls'] = list()
-                controls = content.xpath('/metaForm/controls//control')
-                for control in controls:
-                    _control = Dict(control.items())
-                    # Нет информации о предыдущем периоде,
-                    # пропускаем такие проверки
-                    if '{{' in _control.rule.lower():
-                        continue
-
-                    # Парсинг и сохранение выражения
-                    ex_rule = _control.rule
-                    try:
-                        _rule = self.tokenizer.tokenize_expression(
-                            _control.rule.lower(), self.log_expr)
-                        _control.rule = _rule
-                    except Exception:
-                        raise TokenizerError(ex_rule)
-
-                    # Парсинг и сохранение условия
-                    # Могут попадаться условия, содержащие только пробелы
-                    if _control.condition and not _control.condition.isspace():
-                        if '{{' in _control.condition.lower():
-                            continue
-                        ex_condition = _control.condition
-                        try:
-                            _condition = self.tokenizer.tokenize_expression(
-                                _control.condition.lower(), self.condition)
-                            _control.condition = _condition
-                        except Exception:
-                            raise TokenizerError(ex_condition)
-                    else:
-                        _control.condition = ''
-
-                    # Парсинг и сохранение условия на период
-                    if _control.periodClause and not _control.periodClause.isspace():
-                        ex_period = _control.periodClause
-                        try:
-                            _period = self.tokenizer.tokenize_expression(
-                                _control.periodClause.lower(), self.period_cond)
-                            _control.period = _period
-                        except Exception:
-                            raise TokenizerError(ex_period)
-                    else:
-                        _control.period = ''
-
-                    # Парсинг и получение списка строк/колонок/специфик
-                    # для правила и условия
-                    element_map = self._parse_elements(_control.rule,
-                                                       _control.condition)
-                    _control['section'] = element_map.section
-                    _control['rows'] = element_map.rows
-                    _control['cols'] = element_map.cols
-                    _control['specs'] = element_map.specs
-
-                    scheme['controls'].append(_control)
+                scheme['controls'] = self._get_controls_data(content)
 
                 # Данные справочников
-                scheme['dics'] = Dict()
-                dics = content.xpath('/metaForm/dics//dic')
-                for dic in dics:
-                    _dic = Dict(dic.items())
-                    _dic['terms'] = Dict()
-                    terms = dic.xpath('.//term')
-                    for term in terms:
-                        _dic['terms'][term.attrib['id']] = term.text
-
-                    scheme['dics'][dic.attrib['id']] = _dic
+                scheme['dics'] = self._get_dics_data(content)
 
                 _okud = content.get('OKUD')
                 if _okud:
@@ -313,6 +428,7 @@ class StatChecker:
             input.verify_result['description'] = ex
             return
 
+        num = 0
         for control in self.compendium[self.okud].controls:
             # Секция, для которой выполняется проверка
             r_sec = str(control.section[0])
@@ -321,6 +437,7 @@ class StatChecker:
                 period_cond = True
                 condition = True
                 try:
+                    num += 1
                     if control.period:
                         period_cond = self.period_interpreter\
                             .evaluate_expr(control.period)
@@ -338,6 +455,8 @@ class StatChecker:
                     input.verify_result['result'] = 'failed'
                     input.verify_result['description'] = ex
                     return
+
+        print('NUM of control expressions:', num)
 
         if input.verify_result['asserts']:
             input.verify_result['result'] = 'failed'

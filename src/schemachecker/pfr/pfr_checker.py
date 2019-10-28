@@ -30,6 +30,9 @@ class PfrChecker:
         self.dict_file = os.path.join(self.xsd_root,
                                       self.directions[1],
                                       'Справочники/Справочники.xml')
+        # Содержимое файла спровчников
+        self.dict_file_content = None
+
         # Название основного валидационного файла
         self.comp_file = 'ПФР_КСАФ.xml'
 
@@ -76,10 +79,7 @@ class PfrChecker:
         register(self._finalize)
 
     def _finalize(self):
-        """
-        Метод для синхронизации процессов через .sync файл
-        при завершении/рестарте
-        """
+        """ Метод для синхронизации процессов через .sync файл при завершении/рестарте. """
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
             num = unpack('I', os.read(fd, 4))[0]
             if num > 0:
@@ -254,9 +254,9 @@ class PfrChecker:
                 'Объекты': element_objs
             })
 
-    def _validate_xquery(self, file: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
+    def _validate_xquery(self, file: ClassVar[Dict[str, Any]]) -> None:
         """ Метод для валидации файла по xquery выражениям. """
-        binds = {'$doc': f'{xml_file_path}'}
+        binds = {'$doc': f'{file.content}'}
         if self.direction == 1:
             binds.update({'$dictFile': f'{self.dict_file}'})
 
@@ -430,6 +430,11 @@ class PfrChecker:
 
         return queries_dict
 
+    def _set_dict_file_content(self) -> None:
+        """ Устанавливает содержимое файла справочников. """
+        with open(self.dict_file) as fd:
+            self.dict_file_content = fd.read()
+
     def setup_compendium(self) -> None:
         """
         Сборка компендиума в памяти. Для каждого из трёх направлений:
@@ -442,24 +447,25 @@ class PfrChecker:
 
         Компендиум проверочных схем и скриптов имеет следующую структуру:
         {
-            'АДВ+АДИ+ДСВ 1.17.12д': {  # Направление
-                'СЗВ-М': {  # Префикс проверяемого файла
+            "АДВ+АДИ+ДСВ 1.17.12д": {  # Направление
+                "СЗВ-М": {  # Префикс проверяемого файла
                     'schemes': {  # Словарь проверочных XSD схем
-                        'name.xsd': etree.ElementTree,
+                        "name.xsd": etree.ElementTree,
                         ...
                     },
                     'queries': {  # Словарь содержимого xquery скриптов
-                        'name.xquery': str,
+                        "name.xquery": str,
                         ...
                     },
-                    'definiton': str  # Определение документа, нода "ОпределениеДокумента" в ПФР_КСАФ
+                    'definition': str  # Определение документа, нода "ОпределениеДокумента" в ПФР_КСАФ
                 }
             }
         }
-        :return:
         """
         # TODO: отлов исключений?
         self.compendium = dict()
+
+        self._set_dict_file_content()
 
         for direction in self.directions:
             comp_file, nsmap = self._get_comp_file(direction)
@@ -487,7 +493,7 @@ class PfrChecker:
 
             self.compendium.update({direction: prefix_dict})
 
-    def check_file(self, file: ClassVar[Dict[str, Any]], xml_file_path: str) -> None:
+    def check_file(self, file: ClassVar[Dict[str, Any]]) -> None:
         self.xml_file = file.filename
         self.content = file.content
         self.xml_content = file.xml_tree
@@ -508,4 +514,4 @@ class PfrChecker:
             return
 
         # Проверка по xquery выражениям
-        self._validate_xquery(file, xml_file_path)
+        self._validate_xquery(file)

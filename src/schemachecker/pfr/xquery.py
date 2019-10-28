@@ -4,6 +4,11 @@ from typing import List, Dict, Tuple
 from pyparsing import Literal, Suppress, Group, Word, ZeroOrMore, Optional, alphanums
 from pyparsing import ParseBaseException
 
+import os
+import BaseXClient
+# noinspection PyUnresolvedReferences
+from lxml import etree
+
 
 class Query:
     """
@@ -146,10 +151,7 @@ class Query:
             raise Exception(ex)
 
     def makeup_query(self) -> str:
-        """
-        Метод формирует новый xquery запрос из внутренних структур.
-        :return:
-        """
+        """ Метод формирует новый xquery запрос из внутренних структур. """
         with io.StringIO() as buffer:
             # Добавляем пространство по умолчанию
             buffer.write(f'declare default element namespace "{self.default_namespaces[0]}";\n')
@@ -175,3 +177,34 @@ class Query:
             query = buffer.getvalue()
 
         return query
+
+
+class ExternalVar:
+    def __init__(self, *, xq_file: str, xml_file: str) -> None:
+        self.path = '/home/vasily/PyProjects/FLK/pfr/external_var_doc_node'
+        self.xq_file = os.path.join(self.path, xq_file)
+        self.xml_file = os.path.join(self.path, xml_file)
+        self.charset = 'utf-8'
+        self.parser = etree.XMLParser(encoding=self.charset,
+                                      recover=True,
+                                      remove_comments=True)
+        self.session = BaseXClient.Session('localhost', 1984, 'admin', 'admin')
+
+    def execute_xq(self) -> None:
+        with open(self.xml_file, 'r', encoding=self.charset) as fd:
+            content = fd.read()
+
+        with open(self.xq_file, 'r') as fd:
+            query_file = fd.read()
+
+        self.session.execute(f'open xml_db')
+
+        query = self.session.query(query_file)
+
+        query.bind('$doc', content)
+
+        res = query.execute()
+
+        self.session.close()
+
+        return res
