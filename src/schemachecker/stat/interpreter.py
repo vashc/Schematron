@@ -241,6 +241,7 @@ class Interpreter:
             arg2 = self._evaluate_stack()
             arg1 = self._evaluate_stack()
             arg1, arg2 = self._check_context(arg1, arg2)
+            print(arg1, arg2)
             # Первый логический оператор, тернарное сравнение
             if self.first_op and self.ternary:
                 # Восстанавливаем флаги
@@ -285,6 +286,7 @@ class Interpreter:
 
     def evaluate_expr(self, expr, frame_map) -> bool:
         """ Вычисление контрольного выражения. """
+        print('-'*80)
         self.frame_map = frame_map
         self.stack = deepcopy(expr)
         try:

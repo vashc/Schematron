@@ -55,7 +55,8 @@ class StatChecker:
             _okud, _idf, _idp, _okpo, _year = file_info[:5]
             _period = file_info[5]
             self.period_interpreter.period = _period
-            self.okud = _okud
+            # Уникальный идентификатор формы - ОКУД + IDF
+            self.okud = f'{_okud}_{int(_idf)}'
             if len(file_info) > 6:
                 # Дополнительная, необязательная информация
                 _extinfo = file_info[6:]
@@ -82,7 +83,7 @@ class StatChecker:
             try:
                 self.frames[sec_code] = \
                     DataFrame.from_file_content(
-                        section, self.compendium[_okud].sections[sec_code]
+                        section, self.compendium[self.okud].sections[sec_code]
                     )
             except KeyError as ex:
                 raise InputError(self.filename,
@@ -417,8 +418,9 @@ class StatChecker:
                 scheme['dics'] = self._get_dics_data(content)
 
                 _okud = content.get('OKUD')
+                _idf = content.get('idf')
                 if _okud:
-                    self.compendium[_okud] = scheme
+                    self.compendium[f'{_okud}_{int(_idf)}'] = scheme
                 else:
                     raise OkudError(self.filename)
 
