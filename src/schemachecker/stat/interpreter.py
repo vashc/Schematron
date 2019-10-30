@@ -198,8 +198,8 @@ class Interpreter:
 
     @staticmethod
     def _nullif(element1, element2):
-        #TODO: check if NoneType is multiplied by something. WTF?
-        return None if element1 == element2 else True
+        # TODO: check semantics
+        return None if element1 == element2 else element1
 
     # Тернарные функции
     @staticmethod
@@ -241,7 +241,6 @@ class Interpreter:
             arg2 = self._evaluate_stack()
             arg1 = self._evaluate_stack()
             arg1, arg2 = self._check_context(arg1, arg2)
-            print(arg1, arg2)
             # Первый логический оператор, тернарное сравнение
             if self.first_op and self.ternary:
                 # Восстанавливаем флаги
@@ -283,10 +282,10 @@ class Interpreter:
         """ Метод восстанавливает флаги после получения пустой выборки. """
         self.ternary = False
         self.first_op = False
+        self.condition = False
 
     def evaluate_expr(self, expr, frame_map) -> bool:
         """ Вычисление контрольного выражения. """
-        print('-'*80)
         self.frame_map = frame_map
         self.stack = deepcopy(expr)
         try:
@@ -305,6 +304,7 @@ class Interpreter:
         try:
             return self._evaluate_stack()
         except EmptyExtract:
+            self._empty_extract_recover()
             return False
         except Exception:
             raise InterpreterError(expr)
