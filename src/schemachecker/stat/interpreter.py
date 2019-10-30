@@ -1,14 +1,11 @@
 import operator
-import numpy as np
 from copy import deepcopy
-from .dataframe import DataFrame
-from .exceptions import InterpreterError
+from ._dataframe import DataFrame
+from .exceptions import InterpreterError, EmptyExtract
 
 
 class PeriodInterpreter:
-    """
-    Интерпретатор выражений на период
-    """
+    """ Интерпретатор выражений на период. """
     def __init__(self, period=None):
         self.unary_map = {
             '<':    operator.lt,
@@ -66,19 +63,17 @@ class PeriodInterpreter:
 
 
 class Interpreter:
-    """
-    Общий интерпретатор условных выражений
-    """
+    """ Общий интерпретатор условных выражений. """
     def __init__(self):
-        self.func_map = {
-            'sum':      self._sum,
-            'abs':      self._abs,
-            'floor':    self._floor,
-            'isnull':   self._isnull,
-            'nullif':   self._nullif,
-            'round':    self._round,
-            'coalesce': self._coalesce
-        }
+        # self.func_map = {
+        #     'sum':      self._sum,
+        #     'abs':      self._abs,
+        #     'floor':    self._floor,
+        #     'isnull':   self._isnull,
+        #     'nullif':   self._nullif,
+        #     'round':    self._round,
+        #     'coalesce': self._coalesce
+        # }
 
         self.unary_map = {
             'sum':      self._sum,
@@ -130,34 +125,55 @@ class Interpreter:
     # Унарные функции
     # Метод для определения контекста функции SUM
     @staticmethod
-    def _evaluate_context(arg1, arg2):
-        # Второй аргумент - скаляр, вычисляем сумму по всем элементам
+    def _evaluate_context(arg1, arg2, con_type: int):
+        """
+        Метод вычисляет значения конекстно-зависимых функций (например, SUM).
+        :param arg1:
+        :param arg2:
+        :param con_type: тип контекста:
+            0 - первый аргумент - функция;
+            1 - второй аргумент - функция;
+            2 - оба аргумента - функции.
+        :return:
+        """
+        if con_type == 2:
+            return arg1(axis=2), arg2(axis=2)
+
+        # Второй аргумент - скаляр
         if type(arg2) != DataFrame:
             return arg1(axis=2), arg2
-        # Второй аргумент - датафрейм, смотрим на его размерность
+
+        # Второй аргумент - датафрейм
+        dim = arg2.dim()
+        if dim[0] == 1 and dim[1] == 1:
+            return arg1(axis=2), arg2.get_scalar()
+        elif dim[0] == 1:
+            return arg1(axis=0), arg2
+        elif dim[1] == 1:
+            return arg1(axis=1), arg2
+        # Кто-то накосячил в шаблоне, такую операцию нельзя выполнить
         else:
-            dim = DataFrame.dim(arg2)
-            if dim[0] == 1 and dim[1] == 1:
-                return arg1(axis=2), arg2
-            elif dim[0] == 1:
-                return arg1(axis=0), arg2
-            elif dim[1] == 1:
-                return arg1(axis=1), arg2
-            # Кто-то накосячил в шаблоне, такую операцию нельзя выполнить
-            else:
-                # TODO: raise custom exception
-                print('Ошибка при работе с контекстом функции SUM')
-        return arg1, arg2
+            # TODO: raise custom exception
+            print(arg1, arg2)
+            raise Exception('Ошибка при работе с контекстом функции SUM')
 
     @staticmethod
     def _check_context(arg1, arg2):
-        """
-        Метод проверяет, не вернулся ли promise в качестве аргумента
-        """
-        if type(arg1).__name__ == 'method':
-            arg1, arg2 = Interpreter._evaluate_context(arg1, arg2)
+        """ Метод проверяет, не вернулся ли promise в качестве аргумента. """
+        if type(arg1).__name__ == 'method' and type(arg2).__name__ == 'method':
+            con_type = 2
+        elif type(arg1).__name__ == 'method':
+            con_type = 0
         elif type(arg2).__name__ == 'method':
-            arg2, arg1 = Interpreter._evaluate_context(arg2, arg1)
+            con_type = 1
+            arg1, arg2 = arg2, arg1
+        else:
+            return arg1, arg2
+
+        arg1, arg2 = Interpreter._evaluate_context(arg1, arg2, con_type)
+        if con_type == 1:
+            return arg2, arg1
+
         return arg1, arg2
 
     @staticmethod
@@ -165,16 +181,7 @@ class Interpreter:
         # Аргумент - скаляр
         if type(element) != DataFrame:
             return element
-        dim = DataFrame.dim(element)
-        # Одна размерность равна 1, складываем по другой
-        if dim[0] == 1:
-            return element.sum(axis=1)
-        elif dim[1] == 1:
-            return element.sum(axis=0)
-        # Размерность m*n, нужно определять контекст
-        else:
-            # Возвращаем promise, вычислим, когда будет известен контекст
-            return element.sum
+        return element.sum
 
     @staticmethod
     def _abs(element):
@@ -187,11 +194,6 @@ class Interpreter:
     # Бинарные функции
     @staticmethod
     def _isnull(element, substitution):
-        # Аргумент - скаляр
-        if type(element) != DataFrame:
-            if element and not np.isnan(element):
-                return element
-            return substitution
         return element.fill_none(filler=substitution)
 
     @staticmethod
@@ -276,26 +278,32 @@ class Interpreter:
         else:
             return op
 
-    def evaluate_expr(self, expr, frame_map):
-        """
-        Вычисление котрольного выражения
-        """
+    def _empty_extract_recover(self) -> None:
+        """ Метод восстанавливает флаги после получения пустой выборки. """
+        self.ternary = False
+        self.first_op = False
+
+    def evaluate_expr(self, expr, frame_map) -> bool:
+        """ Вычисление контрольного выражения. """
         self.frame_map = frame_map
         self.stack = deepcopy(expr)
         try:
             return self._evaluate_stack()
+        except EmptyExtract:
+            self._empty_extract_recover()
+            return True
         except Exception:
             raise InterpreterError(expr)
 
-    def evaluate_expr_cond(self, expr, frame_map):
-        """
-        Вычисление условного выражения
-        """
+    def evaluate_expr_cond(self, expr, frame_map) -> bool:
+        """ Вычисление условного выражения. """
         self.condition = True
         self.frame_map = frame_map
         self.stack = deepcopy(expr)
         try:
             return self._evaluate_stack()
+        except EmptyExtract:
+            return False
         except Exception:
             raise InterpreterError(expr)
         finally:

@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     # pprint(checker.compendium['0606010'].sections)
 
-    root_dir = '/home/vasily/PyProjects/FLK/stat/files'
+    root_dir = '/home/vasily/PyProjects/FLK/stat/test'
     for root, dirs, files in os.walk(root_dir):
         for file in files[:]:
             with open(os.path.join(root, file), 'rb') as handler:

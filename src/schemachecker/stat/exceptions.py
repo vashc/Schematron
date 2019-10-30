@@ -1,3 +1,6 @@
+from traceback import format_exc
+
+
 class InternalStatError(Exception):
     def __init__(self) -> None:
         self.message = None
@@ -12,8 +15,8 @@ class TokenizerError(InternalStatError):
 
 
 class InputError(InternalStatError):
-    def __init__(self, xml_file: str, ex: Exception) -> None:
-        self.message = f'Ошибка при обработке файла {xml_file} ({ex})'
+    def __init__(self, xml_file: str, descr: str) -> None:
+        self.message = f'Ошибка при обработке файла {xml_file} ({format_exc()})'
 
 
 class OkudError(InternalStatError):
@@ -24,7 +27,7 @@ class OkudError(InternalStatError):
 
 class InterpreterError(InternalStatError):
     def __init__(self, expression: str) -> None:
-        self.message = f'Ошибка при интерпретации выражения {expression}'
+        self.message = f'Ошибка при интерпретации выражения {expression}: {format_exc()}'
 
 
 class XmlParseError(InternalStatError):
@@ -35,3 +38,8 @@ class XmlParseError(InternalStatError):
 class CompendiumAttributeError(InternalStatError):
     def __init__(self, element: str, ex: Exception) -> None:
         self.message = f'Не найден обязательный атрибут в элементе "{element}": {ex}'
+
+
+class EmptyExtract(InternalStatError):
+    def __init__(self) -> None:
+        self.message = 'Получена пустая выборка'

@@ -6,7 +6,7 @@ from typing import List, Dict, Any, Tuple, Union
 from .utils import DotDict
 from .interpreter import Interpreter, PeriodInterpreter
 from .tokenizer import Tokenizer
-from .dataframe import DataFrame
+from ._dataframe import DataFrame
 from .exceptions import *
 
 
@@ -175,16 +175,25 @@ class StatChecker:
     @staticmethod
     def _get_columns_data(section: etree.ElementTree) -> Dict[str, Dict[str, Any]]:
         """ Метод получения данных о графах в разделе section/columns. """
-        columns_items = section.xpath('./columns//column')
+        columns_items = section.xpath('./columns//column[@type!="B"]')
         columns = DotDict()
 
+        cx = 0
         for col in columns_items:
+            # Коды граф, с использованием которых выполняются проверки, должен быть типа uint
+            if not col.attrib['code'].isdigit():
+                continue
+
             _col = DotDict(col.items())
+            # Индекс графы в векторе col_code
+            _col['index'] = cx
             default_cell = col.find('./default-cell')
             if default_cell is not None:
                 _col['default-cell'] = DotDict(default_cell.items())
 
             columns[col.attrib['code']] = _col
+
+            cx += 1
 
         return columns
 
@@ -198,13 +207,13 @@ class StatChecker:
         for row in rows_items:
             _row = DotDict(row.items())
 
-            cells = row.xpath('./cell')
-            for cell in cells:
-                # Заполнение значения по умолчанию
-                if 'default' in cell.keys():
-                    col_code = cell.attrib['column']
-                    cell_default = cell.attrib['default']
-                    section_dict['columns'][col_code]['default'] = cell_default
+            # cells = row.xpath('./cell')
+            # for cell in cells:
+            #     # Заполнение значения по умолчанию
+            #     if 'default' in cell.keys():
+            #         col_code = cell.attrib['column']
+            #         cell_default = cell.attrib['default']
+            #         section_dict['columns'][col_code]['default'] = cell_default
 
             if _row.type != 'C':
                 rows[row.attrib['code']] = _row
@@ -330,6 +339,7 @@ class StatChecker:
                         'name': str,
                         'columns': {  # Данные о колонках (графах) формы
                             "11": {  # Код графы
+                                'index': int,
                                 'type': str,
                                 'name': str,
                                 ...
@@ -428,7 +438,13 @@ class StatChecker:
             input.verify_result['description'] = ex
             return
 
-        num = 0
+        schema = self.compendium.get(self.okud)
+        if schema is None:
+            raise Exception(f'Не найдена проверочная схема для ОКУД {self.okud}')
+        # В схеме не содержится проверочных выражений
+        if schema.controls is None:
+            return
+
         for control in self.compendium[self.okud].controls:
             # Секция, для которой выполняется проверка
             r_sec = str(control.section[0])
@@ -437,7 +453,6 @@ class StatChecker:
                 period_cond = True
                 condition = True
                 try:
-                    num += 1
                     if control.period:
                         period_cond = self.period_interpreter\
                             .evaluate_expr(control.period)
@@ -455,8 +470,6 @@ class StatChecker:
                     input.verify_result['result'] = 'failed'
                     input.verify_result['description'] = ex
                     return
-
-        print('NUM of control expressions:', num)
 
         if input.verify_result['asserts']:
             input.verify_result['result'] = 'failed'

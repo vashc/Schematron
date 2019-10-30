@@ -3,7 +3,7 @@ import sys
 import asyncio
 import aiohttp
 from lxml import html
-from rarfile import RarFile
+from rarfile import RarFile, BadRarFile
 from io import BytesIO
 from pprint import pprint
 
@@ -13,15 +13,20 @@ compendium_link = base_url + 'XML_plan_2019.htm'
 
 
 async def fetch_file(session, url):
+    print(url)
     async with session.get(url, timeout=60*60) as response:
+        if response.status != 200:
+            return await asyncio.sleep(0)
+
         file_content = await response.content.read()
         zipped_package = RarFile(BytesIO(file_content))
+
         xml_filename = [name for name in zipped_package.namelist()
                         if name.endswith('.xml')][0]
         xml_file = zipped_package.read(xml_filename)
 
-        async with open(os.path.join(ROOT, 'compendium', xml_filename), 'wb') as handler:
-            await handler.write(xml_file)
+        with open(os.path.join(ROOT, 'compendium', xml_filename), 'wb') as handler:
+            handler.write(xml_file)
 
         return await response.text()
 
