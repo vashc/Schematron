@@ -1,12 +1,12 @@
-import os
 import BaseXClient
+import os
+import signal
 # noinspection PyUnresolvedReferences
 from lxml import etree
 from urllib.parse import unquote
-from atexit import register
 from struct import pack, unpack
 from typing import List, Dict, Tuple, Any, ClassVar
-from .utils import Flock  # .
+from .utils import Flock, register_cleanup_function  # .
 from .xquery import Query
 from .exceptions import *
 
@@ -61,7 +61,14 @@ class PfrChecker:
 
         # Корневая директория BaseX
         self.db_data = os.path.join(root, 'basex/data/')
-        # Синхронизация записи в базы данных BaseX для избежания write lock
+        # Синхронизация воркеров
+        self._sync_worker()
+
+        # Сборщик xquery запросов
+        self.query = Query()
+
+    def _sync_worker(self) -> None:
+        """ Метод синхронизации записи в базы данных BaseX для избежания write lock. """
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
             self.db_num = unpack('I', os.read(fd, 4))[0]
             if self.db_num < os.cpu_count():
@@ -72,12 +79,10 @@ class PfrChecker:
             else:
                 raise Exception('Too many BaseX workers')
 
-        # Сборщик xquery запросов
-        self.query = Query()
-
-        # Регистрируем метод финализации
-        register(self._finalize)
-
+    # Регистрируем обработку сигналов supervisor
+    @register_cleanup_function(
+        signals=[signal.SIGTERM, signal.SIGINT, signal.SIGQUIT, signal.SIGHUP, signal.SIGUSR2],
+    )
     def _finalize(self):
         """ Метод для синхронизации процессов через .sync файл при завершении/рестарте. """
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
@@ -87,7 +92,7 @@ class PfrChecker:
                 os.lseek(fd, 0, os.SEEK_SET)
                 os.write(fd, pack('I', num))
             else:
-                raise Exception('Incorrect synchronisation value')
+                raise Exception('Incorrect synchronization value')
 
         if self.session:
             self.session.close()
@@ -105,6 +110,9 @@ class PfrChecker:
         nsmap = self.xml_content.nsmap
         if nsmap.get(None):
             nsmap['d'] = nsmap.pop(None)
+
+        if not any(nsmap.values()) or 'd' not in nsmap.keys():
+            raise WrongNamespace()
 
         try:
             doc_type = self.xml_content.find('.//d:ТипДокумента', namespaces=nsmap).text

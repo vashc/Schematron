@@ -437,7 +437,7 @@ class StatChecker:
             self.process_input(self.filename, self.content)
         except InputError as ex:
             input.verify_result['result'] = 'failed'
-            input.verify_result['description'] = ex
+            input.verify_result['asserts'].append(str(ex))
             return
 
         schema = self.compendium.get(self.okud)

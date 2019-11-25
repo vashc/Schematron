@@ -16,6 +16,11 @@ class DocTypeNotFound(InternalPfrError):
         self.message = 'Не удалось определить тип документа по направлению АДВ'
 
 
+class WrongNamespace(InternalPfrError):
+    def __init__(self) -> None:
+        self.message = 'Неверное или пустое пространство имён'
+
+
 class DocDefinitionNotFound(InternalPfrError):
     def __init__(self):
         self.message = 'Не найдено определение документа'

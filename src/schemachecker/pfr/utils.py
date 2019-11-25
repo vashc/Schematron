@@ -1,8 +1,13 @@
+import atexit
 import errno
 import fcntl
-import os
 import logging
+import os
+import signal
+import sys
+from functools import wraps
 from time import time, sleep
+from typing import List
 
 
 class Translator:
@@ -22,10 +27,7 @@ class Translator:
 
 
 class Flock:
-    """
-    Менеджер контекста для синхронизации записи в файл
-    между несколькими процессами
-    """
+    """ Менеджер контекста для синхронизации записи в файл между несколькими процессами. """
     def __init__(self, path, timeout=None):
         self._path = path
         self._timeout = timeout
@@ -74,3 +76,76 @@ class Logger:
         logger.setLevel('DEBUG')
         logger.addHandler(handler)
         return logger
+
+
+# Зарегистрированные функции очистки
+_registered_cleanup_funcs = set()
+# Уже выполненные функции очистки
+_executed_cleanup_funcs = set()
+
+
+def register_cleanup_function(func: callable=None,
+                              signals: List[int]=None,
+                              logfunc: callable=lambda s: print(s, file=sys.stderr)) -> callable:
+    """
+    Метод для регистрации функции очистки, выполняемой после завершения работы.
+    Функция будет выполнена после нормального завершения или получения сигнала.
+    :param func: выполняемая функция.
+    :param signals: список сигналов для обработки.
+    :param logfunc: функция логирования, по умолчанию выводит в stderr.
+    :return: callable.
+    """
+    def _func_wrapper():
+        if func not in _executed_cleanup_funcs:
+            try:
+                func()
+            finally:
+                _executed_cleanup_funcs.add(func)
+
+    def _signal_wrapper(signum: int=None) -> None:
+        if signum is not None:
+            if logfunc is not None:
+                logfunc(f'Process {os.getpid()} received signal {signum}')
+
+        _func_wrapper()
+        if signum is not None:
+            if signum == signal.SIGINT:
+                raise KeyboardInterrupt
+            sys.exit(signum)
+
+    def _register_func(func: callable, signals: List[int]) -> None:
+        if not callable(func):
+            raise TypeError('{!r} is not callable'.format(func))
+
+        signals = set(signals)
+
+        for sig in signals:
+            # Регистрирует новый обработчик для сигнала, убирает старый.
+            # SIG_IGN - игнорирует сигнал;
+            # SIG_DFL - обработка сигнала по умолчанию.
+            old_handler = signal.signal(sig, _signal_wrapper)
+            if old_handler not in (signal.SIG_DFL, signal.SIG_IGN):
+                if not callable(old_handler):
+                    continue
+                # Чтобы не получать KeyboardInterrupt стек трейс
+                if sig == signal.SIGINT and old_handler is signal.default_int_handler:
+                    continue
+                if old_handler not in _registered_cleanup_funcs:
+                    atexit.register(old_handler)
+                    _registered_cleanup_funcs.add(old_handler)
+
+        # Если не получен сигнал, нормальное завершение
+        if func not in _registered_cleanup_funcs or not signals:
+            atexit.register(_func_wrapper)
+            _registered_cleanup_funcs.add(func)
+
+    if func is None:
+        @wraps
+        def outer(func: callable) -> None:
+            return _register_func(func, signals)
+        return outer
+    else:
+        _register_func(func, signals)
+        return func
+
+

@@ -16,7 +16,7 @@ class TokenizerError(InternalStatError):
 
 class InputError(InternalStatError):
     def __init__(self, xml_file: str, descr: str) -> None:
-        self.message = f'Ошибка при обработке файла {xml_file} ({format_exc()})'
+        self.message = f'Ошибка при обработке файла {xml_file} ({descr})'
 
 
 class OkudError(InternalStatError):
