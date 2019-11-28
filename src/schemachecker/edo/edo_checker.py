@@ -1,5 +1,7 @@
 import os
+# noinspection PyUnresolvedReferences
 from lxml import etree
+from typing import Tuple, ClassVar, Dict, Any
 from .exceptions import *
 
 
@@ -15,7 +17,13 @@ class EdoChecker:
         self.filename = None
         self.xml_content = None
 
-    def setup_compendium(self):
+    def _check_filename(self) -> Tuple[bool, str]:
+        """ Метод проверяет соответствие имени файла и атрибута ИдФайл. """
+        filename = self.filename.split('.')[0]
+        attr_filename = self.xml_content.attrib['ИдФайл']
+        return filename == attr_filename, attr_filename
+
+    def setup_compendium(self) -> None:
         self.compendium = dict()
 
         comp_root = os.path.join(self.root, 'compendium')
@@ -32,15 +40,15 @@ class EdoChecker:
                     except etree.XMLSyntaxError as ex:
                         raise XsdSchemeError(ex)
 
-    def check_file(self, input):
-        self.filename = input.filename
-        self.xml_content = input.xml_tree
+    def check_file(self, file: ClassVar[Dict[str, Any]]) -> None:
+        self.filename = file.filename
+        self.xml_content = file.xml_tree
 
-        input.verify_result = dict()
+        file.verify_result = dict()
 
-        input.verify_result['result'] = 'passed'
-        input.verify_result['sch_asserts'] = []
-        input.verify_result['xsd_asserts'] = []
+        file.verify_result['result'] = 'passed'
+        file.verify_result['sch_asserts'] = []
+        file.verify_result['xsd_asserts'] = []
 
         # Определение проверочной схемы
         prefix = '_'.join(self.filename.split('_')[:2])
@@ -49,22 +57,21 @@ class EdoChecker:
         xsd_content, xsd_scheme = self.compendium[prefix]
 
         # Проверка имени файла
-        filename = self.filename.split('.')[0]
-        attr_filename = self.xml_content.attrib['ИдФайл']
-        if filename != attr_filename:
-            input.verify_result['result'] = 'failed_sch'
-            input.verify_result['sch_asserts'].append((
+        correct_filename, attr_filename = self._check_filename()
+        if not correct_filename:
+            file.verify_result['result'] = 'failed_sch'
+            file.verify_result['sch_asserts'].append((
                 'Проверка имени файла на соответствие значению атрибута @ИдФайл',
                 '0400400007',
                 f'Имя файла обмена {self.filename} не совпадает со значением '
-                f'элемента ИдФайл {attr_filename}'
+                f'атрибута ИдФайл {attr_filename}'
             ))
 
         # Проверка по xsd
         try:
             xsd_scheme.assertValid(self.xml_content)
         except etree.DocumentInvalid:
-            input.verify_result['result'] = 'failed_xsd'
+            file.verify_result['result'] = 'failed_xsd'
             for error in xsd_scheme.error_log:
-                input.verify_result['xsd_asserts']\
+                file.verify_result['xsd_asserts']\
                     .append(f'{error.message} (строка {error.line})')

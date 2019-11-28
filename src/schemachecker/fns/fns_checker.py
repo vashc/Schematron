@@ -1,12 +1,10 @@
 import os
-from typing import Dict, Any, ClassVar, Union
+from typing import Dict, Any, ClassVar, Union, Tuple
 # noinspection PyUnresolvedReferences
 from lxml import etree
 from .interpreter import Interpreter
 from .tokenizer import Tokenizer
 from .exceptions import *
-
-_root = os.path.dirname(os.path.abspath(__file__))
 
 
 class FnsChecker:
@@ -18,7 +16,7 @@ class FnsChecker:
         self.comp_file = 'astral_formatCompendium.xml'
         self.compendium = dict()
 
-        self.xml_file = None
+        self.filename = None
         self.xml_content = None
         self.xsd_content: etree.ElementTree = None
         self.xsd_scheme: etree.XMLSchema = None
@@ -70,7 +68,7 @@ class FnsChecker:
                 replacement, str(
                     self.interpreter.evaluate_expr(replacement,
                                                    self.xml_content,
-                                                   self.xml_file,
+                                                   self.filename,
                                                    assertion['context'])
                 )
             )
@@ -78,9 +76,7 @@ class FnsChecker:
 
     # TODO: вынести в создание компендиума
     def _get_asserts(self, content: etree.ElementTree) -> List[Dict[str, Any]]:
-        """
-        Получение списка проверок Schematron-выражений
-        """
+        """ Получение списка проверок Schematron-выражений. """
         assertions = content.findall('.//xs:appinfo', namespaces=content.nsmap)
         assert_list = []
 
@@ -111,7 +107,7 @@ class FnsChecker:
                             # Опциональная проверка, пропускаем
                             continue
                         # Ошибка, проверка обязательна, контекст не найден
-                        raise ContextError(context, self.xml_file)
+                        raise ContextError(context, self.filename)
 
                     for sch_assert in rule:
                         for error_node in sch_assert:
@@ -151,7 +147,7 @@ class FnsChecker:
             file.verify_result['result'] = 'failed_xsd'
             file.verify_result['description'] = (
                 f'Ошибка при валидации по xsd схеме файла '
-                f'{self.xml_file}: {ex}.')
+                f'{self.filename}: {ex}.')
             return False
 
     def _validate_schematron(self, file: ClassVar[Dict[str, Any]]) -> None:
@@ -170,7 +166,7 @@ class FnsChecker:
             try:
                 assertion_result = self.interpreter.evaluate_expr(assertion['assert'],
                                                                   self.xml_content,
-                                                                  self.xml_file,
+                                                                  self.filename,
                                                                   assertion['context'])
                 if not assertion_result:
                     file.verify_result['sch_asserts'] \
@@ -233,6 +229,28 @@ class FnsChecker:
 
         return version_dict
 
+    def _check_filename(self) -> Tuple[bool, str]:
+        """ Метод проверяет соответствие имени файла и атрибута ИдФайл. """
+        filename = self.filename.split('.')[0]
+        attr_filename = self.xml_content.attrib['ИдФайл']
+        return filename == attr_filename, attr_filename
+
+    def _mandatory_verification(self, file: ClassVar[Dict[str, Any]]) -> bool:
+        """ Метод реализует обязательные проверки, например, проверку соответствия имени файла. """
+        correct_filename, attr_filename = self._check_filename()
+        if not correct_filename:
+            file.verify_result['ver_asserts'].append(
+                f'Имя файла обмена {self.filename} не совпадает со значением '
+                f'атрибута ИдФайл {attr_filename}'
+            )
+
+            file.verify_result['result'] = 'failed_ver'
+            file.verify_result['description'] = (
+                f'Ошибка при проведении обязательных проверок {self.filename}')
+            return False
+
+        return True
+
     def setup_compendium(self) -> None:
         """
         Сборка компендиума в памяти.
@@ -284,16 +302,21 @@ class FnsChecker:
             raise SchemeNotFound(knd, version)
 
     def check_file(self, file: ClassVar[Dict[str, Any]]) -> None:
-        self.xml_file = file.filename
+        self.filename = file.filename
         self.xml_content = file.xml_tree
 
         file.verify_result = dict()
 
         file.verify_result['result'] = 'passed'
+        file.verify_result['ver_asserts'] = []
         file.verify_result['xsd_asserts'] = []
         file.verify_result['sch_asserts'] = []
 
         self._set_scheme(file)
+
+        # Обязательные проверки
+        if not self._mandatory_verification(file):
+            return
 
         # Проверка по xsd
         if not self._validate_xsd(file):

@@ -1,12 +1,13 @@
 import BaseXClient
 import os
+import re
 import signal
 # noinspection PyUnresolvedReferences
 from lxml import etree
 from urllib.parse import unquote
 from struct import pack, unpack
 from typing import List, Dict, Tuple, Any, ClassVar
-from .utils import Flock, register_cleanup_function  # .
+from .utils import Flock, RegisterCleanupFunction
 from .xquery import Query
 from .exceptions import *
 
@@ -67,6 +68,12 @@ class PfrChecker:
         # Сборщик xquery запросов
         self.query = Query()
 
+        # Регистрируем обработчик сигналов
+        register_cleanup_function = RegisterCleanupFunction(
+            signals=[signal.SIGTERM, signal.SIGINT, signal.SIGQUIT, signal.SIGHUP, signal.SIGUSR2]
+        )
+        register_cleanup_function(self._finalize)
+
     def _sync_worker(self) -> None:
         """ Метод синхронизации записи в базы данных BaseX для избежания write lock. """
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
@@ -80,9 +87,6 @@ class PfrChecker:
                 raise Exception('Too many BaseX workers')
 
     # Регистрируем обработку сигналов supervisor
-    @register_cleanup_function(
-        signals=[signal.SIGTERM, signal.SIGINT, signal.SIGQUIT, signal.SIGHUP, signal.SIGUSR2],
-    )
     def _finalize(self):
         """ Метод для синхронизации процессов через .sync файл при завершении/рестарте. """
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
@@ -264,7 +268,7 @@ class PfrChecker:
 
     def _validate_xquery(self, file: ClassVar[Dict[str, Any]]) -> None:
         """ Метод для валидации файла по xquery выражениям. """
-        binds = {'$doc': f'{file.content}'}
+        binds = {'$doc': f'{self.content}'}
         if self.direction == 1:
             binds.update({'$dictFile': f'{self.dict_file}'})
 
@@ -503,7 +507,15 @@ class PfrChecker:
 
     def check_file(self, file: ClassVar[Dict[str, Any]]) -> None:
         self.xml_file = file.filename
-        self.content = file.content
+        # Серверная сторона BaseX некорректно работает с кодировкой cp1251
+        if file.charset == 'cp1251':
+            self.content = file.content.encode().decode('utf-8')
+            self.content = re.sub('encoding="windows-1251"',
+                                  'encoding="utf-8"',
+                                  self.content,
+                                  flags=re.IGNORECASE)
+        else:
+            self.content = file.content
         self.xml_content = file.xml_tree
 
         file.verify_result = dict()

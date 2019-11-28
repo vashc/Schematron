@@ -7,7 +7,7 @@ import signal
 import sys
 from functools import wraps
 from time import time, sleep
-from typing import List
+from typing import List, Dict, Any
 
 
 class Translator:
@@ -84,68 +84,57 @@ _registered_cleanup_funcs = set()
 _executed_cleanup_funcs = set()
 
 
-def register_cleanup_function(func: callable=None,
-                              signals: List[int]=None,
-                              logfunc: callable=lambda s: print(s, file=sys.stderr)) -> callable:
+class RegisterCleanupFunction:
     """
-    Метод для регистрации функции очистки, выполняемой после завершения работы.
+    Класс регистрации функции очистки, выполняемой после завершения работы.
     Функция будет выполнена после нормального завершения или получения сигнала.
-    :param func: выполняемая функция.
-    :param signals: список сигналов для обработки.
-    :param logfunc: функция логирования, по умолчанию выводит в stderr.
-    :return: callable.
     """
-    def _func_wrapper():
-        if func not in _executed_cleanup_funcs:
-            try:
-                func()
-            finally:
-                _executed_cleanup_funcs.add(func)
+    def __init__(self,
+                 signals: List[int]=None,
+                 logfunc: callable=lambda s: print(s, file=sys.stderr),
+                 func_args: List[Any]=None,
+                 func_kwargs: Dict[Any, Any]=None) -> None:
+        """
+        :param signals: список сигналов для обработки.
+        :param logfunc: функция логирования, по умолчанию выводит в stderr.
+        :param func_args: позиционные аргументы, передаваемые в вызываемую функцию.
+        :param func_kwargs: ключевые аргументы, передаваемые в вызываемую функцию.
+        """
+        self.signals = signals
+        self.logfunc = logfunc
+        self.func_args = func_args
+        self.func_kwargs = func_kwargs
 
-    def _signal_wrapper(signum: int=None) -> None:
-        if signum is not None:
-            if logfunc is not None:
-                logfunc(f'Process {os.getpid()} received signal {signum}')
+    def __call__(self, func: callable) -> callable:
+        def _func_wrapper(func: callable,
+                          func_args: List[Any]=None,
+                          func_kwargs: Dict[Any, Any]=None) -> None:
+            if func not in _executed_cleanup_funcs:
+                try:
+                    if func_args is not None:
+                        if func_kwargs is not None:
+                            func(*func_args, **func_kwargs)
+                        else:
+                            func(*func_args)
+                    else:
+                        func()
+                finally:
+                    _executed_cleanup_funcs.add(func)
 
-        _func_wrapper()
-        if signum is not None:
-            if signum == signal.SIGINT:
-                raise KeyboardInterrupt
-            sys.exit(signum)
+        def _register_func(fn: callable,
+                           func_args: List[Any] = None,
+                           func_kwargs: Dict[Any, Any] = None) -> None:
+            def _signal_wrapper(signum, frame) -> None:
+                self.logfunc(f'Process {os.getpid()} received signal {signum}')
 
-    def _register_func(func: callable, signals: List[int]) -> None:
-        if not callable(func):
-            raise TypeError('{!r} is not callable'.format(func))
+                _func_wrapper(fn, func_args, func_kwargs)
 
-        signals = set(signals)
+                sys.exit(signum)
 
-        for sig in signals:
-            # Регистрирует новый обработчик для сигнала, убирает старый.
-            # SIG_IGN - игнорирует сигнал;
-            # SIG_DFL - обработка сигнала по умолчанию.
-            old_handler = signal.signal(sig, _signal_wrapper)
-            if old_handler not in (signal.SIG_DFL, signal.SIG_IGN):
-                if not callable(old_handler):
-                    continue
-                # Чтобы не получать KeyboardInterrupt стек трейс
-                if sig == signal.SIGINT and old_handler is signal.default_int_handler:
-                    continue
-                if old_handler not in _registered_cleanup_funcs:
-                    atexit.register(old_handler)
-                    _registered_cleanup_funcs.add(old_handler)
+            for sig in self.signals:
+                signal.signal(sig, _signal_wrapper)
+                if fn not in _registered_cleanup_funcs:
+                    atexit.register(_func_wrapper, fn, func_args, func_kwargs)
+                    _registered_cleanup_funcs.add(fn)
 
-        # Если не получен сигнал, нормальное завершение
-        if func not in _registered_cleanup_funcs or not signals:
-            atexit.register(_func_wrapper)
-            _registered_cleanup_funcs.add(func)
-
-    if func is None:
-        @wraps
-        def outer(func: callable) -> None:
-            return _register_func(func, signals)
-        return outer
-    else:
-        _register_func(func, signals)
-        return func
-
-
+        _register_func(func, self.func_args, self.func_kwargs)
