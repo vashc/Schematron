@@ -35,6 +35,19 @@ class FssChecker:
         self.executor = ThreadPoolExecutor(max_workers=4)
         self.loop = asyncio.new_event_loop()
 
+    @staticmethod
+    def _set_error_struct(err_list: List[Tuple[str, str]], file: ClassVar[Dict[str, Any]]) -> None:
+        """ Заполнение структуры ошибки для вывода.  """
+        if len(err_list):
+            file.verify_result['result'] = 'failed_sum'
+
+        for error in err_list:
+            file.verify_result['asserts'].append({
+                'error_code': error[0],
+                'description': error[1],
+                'inspection_items': []
+            })
+
     def _parse_fss_response(self, response: str) -> List[Tuple[str, str]]:
         """ Метод для извлечения ошибок из возвращаемого ФСС ответа. """
         tree = etree.parse(StringIO(response), self.parser)
@@ -51,18 +64,20 @@ class FssChecker:
             else:
                 err_code = '[F4ERR_STD]'
                 err_descr = err.text
+
             ret_list.append((err_code, err_descr))
 
         return ret_list
 
     def _validate_xsd(self, file: ClassVar[Dict[str, Any]]) -> bool:
+        ret_list = []
         try:
             self.xsd_scheme.assertValid(self.xml_obj)
             return True
         except etree.DocumentInvalid as ex:
             for error in self.xsd_scheme.error_log:
-                file.verify_result['xsd_asserts'] \
-                    .append(f'{error.message} (строка {error.line})')
+                ret_list.append((str(error.line), error.message))
+                self._set_error_struct(ret_list, file)
 
             file.verify_result['result'] = 'failed_xsd'
             file.verify_result['description'] = (
@@ -98,9 +113,7 @@ class FssChecker:
             response = requests.get(check_url, cookies=self.cookie)
 
             err_list = self._parse_fss_response(response.text)
-            if err_list:
-                file.verify_result['result'] = 'failed_sum'
-                file.verify_result['sum_asserts'].extend(err_list)
+            self._set_error_struct(err_list, file)
 
         # Не получили sessionid, выполнить проверку не удастся
         else:
@@ -121,8 +134,7 @@ class FssChecker:
 
         file.verify_result = dict()
         file.verify_result['result'] = 'passed'
-        file.verify_result['xsd_asserts'] = []
-        file.verify_result['sum_asserts'] = []
+        file.verify_result['asserts'] = []
 
         # Проверка по xsd, если не прошла - возвращаем
         if not self._validate_xsd(file):

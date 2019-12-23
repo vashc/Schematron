@@ -2,7 +2,7 @@ import os
 import re
 # noinspection PyUnresolvedReferences
 from lxml import etree
-from typing import ClassVar, Dict, Any
+from typing import List, Tuple, ClassVar, Dict, Any
 from .exceptions import *
 
 
@@ -26,6 +26,16 @@ class RarChecker:
         # Регулярка для имени xsd схемы
         self.xsd_regex = re.compile('(\d+)-o-(\d+)_(\d+)\.xsd')
 
+    @staticmethod
+    def _set_error_struct(err_list: List[Tuple[str, str]], file: ClassVar[Dict[str, Any]]) -> None:
+        """ Заполнение структуры ошибки для вывода. """
+        for error in err_list:
+            file.verify_result['asserts'].append({
+                'error_code': error[0],
+                'description': error[1],
+                'inspection_items': []
+            })
+
     def _set_scheme(self) -> None:
         """ Метод установки xsd схемы. """
         try:
@@ -37,13 +47,14 @@ class RarChecker:
         self.xsd_scheme = self.compendium[f'{form_num}.{form_ver}']
 
     def _validate_xsd(self, file: ClassVar[Dict[str, Any]]) -> None:
+        ret_list = []
         try:
             self.xsd_scheme.assertValid(self.xml_content)
         except etree.DocumentInvalid:
             file.verify_result['result'] = 'failed_xsd'
             for error in self.xsd_scheme.error_log:
-                file.verify_result['xsd_asserts'] \
-                    .append(f'{error.message} (строка {error.line})')
+                ret_list.append((error.line, error.message))
+                self._set_error_struct(ret_list, file)
 
     def setup_compendium(self) -> None:
         self.compendium = dict()
@@ -67,8 +78,7 @@ class RarChecker:
         file.verify_result = dict()
 
         file.verify_result['result'] = 'passed'
-        file.verify_result['ver_asserts'] = []
-        file.verify_result['xsd_asserts'] = []
+        file.verify_result['asserts'] = []
 
         self._set_scheme()
 

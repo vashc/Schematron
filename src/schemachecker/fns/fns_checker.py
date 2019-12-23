@@ -60,6 +60,16 @@ class FnsChecker:
     def _return_error(text: Union[str, Exception]) -> str:
         return f'Error. {text}.'
 
+    @staticmethod
+    def _set_error_struct(err_list: List[Tuple[str, str]], file: ClassVar[Dict[str, Any]]) -> None:
+        """ Заполнение структуры ошибки для вывода. """
+        for error in err_list:
+            file.verify_result['asserts'].append({
+                'error_code': error[0],
+                'description': error[1],
+                'inspection_items': []
+            })
+
     def _get_error_text(self, assertion: Dict[str, Any]) -> str:
         error = assertion['error']
         error_text = error['text']
@@ -136,13 +146,14 @@ class FnsChecker:
         self.xsd_scheme = etree.XMLSchema(self.xsd_content)
 
     def _validate_xsd(self, file: ClassVar[Dict[str, Any]]) -> bool:
+        ret_list = []
         try:
             self.xsd_scheme.assertValid(self.xml_content)
             return True
         except etree.DocumentInvalid as ex:
             for error in self.xsd_scheme.error_log:
-                file.verify_result['xsd_asserts'] \
-                    .append(f'{error.message} (строка {error.line})')
+                ret_list.append((str(error.line), error.message))
+                self._set_error_struct(ret_list, file)
 
             file.verify_result['result'] = 'failed_xsd'
             file.verify_result['description'] = (
@@ -162,6 +173,7 @@ class FnsChecker:
         if not asserts:
             return
 
+        ret_list = []
         for assertion in asserts:
             try:
                 assertion_result = self.interpreter.evaluate_expr(assertion['assert'],
@@ -169,10 +181,7 @@ class FnsChecker:
                                                                   self.filename,
                                                                   assertion['context'])
                 if not assertion_result:
-                    file.verify_result['sch_asserts'] \
-                        .append((assertion['name'],
-                                 assertion['error']['code'],
-                                 self._get_error_text(assertion)))
+                    ret_list.append((assertion['name'], self._get_error_text(assertion)))
             except ParserError:
                 # FIXME (ParserError)
                 pass
@@ -181,9 +190,10 @@ class FnsChecker:
                 file.verify_result['description'] = ex
                 return
 
-        if file.verify_result['sch_asserts']:
+        if len(ret_list):
             file.verify_result['result'] = 'failed_sch'
             file.verify_result['description'] = 'Ошибки при проверке fns'
+            self._set_error_struct(ret_list, file)
 
     def _get_comp_file(self) -> etree.ElementTree:
         """
@@ -239,10 +249,9 @@ class FnsChecker:
         """ Метод реализует обязательные проверки, например, проверку соответствия имени файла. """
         correct_filename, attr_filename = self._check_filename()
         if not correct_filename:
-            file.verify_result['ver_asserts'].append(
-                f'Имя файла обмена {self.filename} не совпадает со значением '
-                f'атрибута ИдФайл {attr_filename}'
-            )
+            ret_list = [('', f'Имя файла обмена {self.filename} не совпадает со значением '
+                             f'атрибута ИдФайл {attr_filename}')]
+            self._set_error_struct(ret_list, file)
 
             file.verify_result['result'] = 'failed_ver'
             file.verify_result['description'] = (
@@ -308,9 +317,7 @@ class FnsChecker:
         file.verify_result = dict()
 
         file.verify_result['result'] = 'passed'
-        file.verify_result['ver_asserts'] = []
-        file.verify_result['xsd_asserts'] = []
-        file.verify_result['sch_asserts'] = []
+        file.verify_result['asserts'] = []
 
         self._set_scheme(file)
 

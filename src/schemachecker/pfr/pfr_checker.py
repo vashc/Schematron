@@ -74,6 +74,16 @@ class PfrChecker:
         )
         register_cleanup_function(self._finalize)
 
+    @staticmethod
+    def _set_error_struct(err_list: List[Tuple[str, str]], file: ClassVar[Dict[str, Any]]) -> None:
+        """ Метод заполнения структуры ошибки для вывода. """
+        for error in err_list:
+            file.verify_result['asserts'].append({
+                'error_code': error[0],
+                'description': error[1],
+                'inspection_items': []
+            })
+
     def _sync_worker(self) -> None:
         """ Метод синхронизации записи в базы данных BaseX для избежания write lock. """
         with Flock(os.path.join(self.db_data, '.sync')) as fd:
@@ -180,22 +190,24 @@ class PfrChecker:
         except AttributeError:
             raise QueriesNotFound(prefix)
 
-    def _validate_xsd(self, input: ClassVar[Dict[str, Any]]) -> bool:
+    def _validate_xsd(self, file: ClassVar[Dict[str, Any]]) -> bool:
         """ Метод для валидации файла по XSD. """
         success = True
         schemes = self._get_compendium_schemes(self.direction, self.prefix)
         if schemes is None:
             raise SchemesNotFound(self.prefix)
 
+        ret_list = []
         for scheme in schemes.values():
             try:
                 scheme.assertValid(self.xml_content)
             except etree.DocumentInvalid:
                 for error in scheme.error_log:
-                    input.verify_result['xsd_asserts'].append(f'{error.message} (строка {error.line})')
+                    ret_list.append((str(error.line), error.message))
+                    self._set_error_struct(ret_list, file)
 
-                input.verify_result['result'] = 'failed_xsd'
-                input.verify_result['description'] = (
+                file.verify_result['result'] = 'failed_xsd'
+                file.verify_result['description'] = (
                     f'Ошибка при валидации по xsd схеме файла '
                     f'{self.xml_file}.')
                 success = False
@@ -224,12 +236,15 @@ class PfrChecker:
             element_objs = []
             for result in results:
                 element_path = result.text or ''
-                element_objs.append({'Путь до элемента': element_path})
-            input.verify_result['xqr_asserts'].append({
-                'Код ошибки': code,
-                'Код проверки': prot_code,
-                'Описание': description,
-                'Объекты': element_objs
+                element_objs.append({'element_path': element_path,
+                                     'expected_value': '',
+                                     'name': '',
+                                     'value': ''})
+            input.verify_result['asserts'].append({
+                'code': code,
+                'error_code': prot_code,
+                'description': description,
+                'inspection_items': element_objs
             })
 
     @staticmethod
@@ -254,16 +269,16 @@ class PfrChecker:
                                            namespaces=q_nsmap).text
                 element_value = result.find('./d:Объект/d:Значение',
                                             namespaces=q_nsmap).text
-                element_objs.append({'Путь до элемента': element_path,
-                                     'Ожидаемое значение': expected_value or '',
-                                     'Наименование': element_name or '',
-                                     'Значение': element_value or ''})
+                element_objs.append({'element_path': element_path,
+                                     'expected_value': expected_value or '',
+                                     'name': element_name or '',
+                                     'value': element_value or ''})
 
-            file.verify_result['xqr_asserts'].append({
-                'Код ошибки': code,
-                'Код проверки': prot_code,
-                'Описание': description,
-                'Объекты': element_objs
+            file.verify_result['asserts'].append({
+                'code': code,
+                'error_code': prot_code,
+                'description': description,
+                'inspection_items': element_objs
             })
 
     def _validate_xquery(self, file: ClassVar[Dict[str, Any]]) -> None:
@@ -521,8 +536,7 @@ class PfrChecker:
         file.verify_result = dict()
 
         file.verify_result['result'] = 'passed'
-        file.verify_result['xsd_asserts'] = []
-        file.verify_result['xqr_asserts'] = []
+        file.verify_result['asserts'] = []
 
         # Открытие сессии BaseX
         self.session.execute(f'open xml_db{self.db_num}')

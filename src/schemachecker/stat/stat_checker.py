@@ -2,7 +2,7 @@ import os
 # noinspection PyUnresolvedReferences
 from lxml import etree
 from collections import OrderedDict
-from typing import List, Dict, Any, Tuple, Union
+from typing import List, Dict, Any, Tuple, Union, ClassVar
 from .utils import DotDict
 from .interpreter import Interpreter, PeriodInterpreter
 from .tokenizer import Tokenizer
@@ -36,6 +36,16 @@ class StatChecker:
         self.period_interpreter = PeriodInterpreter()
         self.tokenizer = Tokenizer()
         self.condition, self.log_expr, self.period_cond = self.tokenizer.create_tokenizer()
+
+    @staticmethod
+    def _set_error_struct(err_list: List[Tuple[str, str]], file: ClassVar[Dict[str, Any]]) -> None:
+        """ Заполнение структуры ошибки для вывода. """
+        for error in err_list:
+            file.verify_result['asserts'].append({
+                'error_code': error[0],
+                'description': error[1],
+                'inspection_items': []
+            })
 
     def process_input(self, filename, content):
         self.filename = filename
@@ -424,20 +434,22 @@ class StatChecker:
                 else:
                     raise OkudError(self.filename)
 
-    def check_file(self, input):
-        self.filename = input.filename
-        self.content = input.xml_tree
+    def check_file(self, file: ClassVar[Dict[str, Any]]) -> None:
+        self.filename = file.filename
+        self.content = file.xml_tree
 
-        input.verify_result = dict()
+        file.verify_result = dict()
 
-        input.verify_result['result'] = 'passed'
-        input.verify_result['asserts'] = []
+        file.verify_result['result'] = 'passed'
+        file.verify_result['asserts'] = []
 
+        ret_list = []
         try:
             self.process_input(self.filename, self.content)
         except InputError as ex:
-            input.verify_result['result'] = 'failed'
-            input.verify_result['asserts'].append(str(ex))
+            file.verify_result['result'] = 'failed'
+            ret_list.append(('', str(ex)))
+            self._set_error_struct(ret_list, file)
             return
 
         schema = self.compendium.get(self.okud)
@@ -466,12 +478,12 @@ class StatChecker:
                             .evaluate_expr(control.rule, self.frames)
                         # Проверка не выполнена, формируем отчёт с ошибкой
                         if not ret:
-                            input.verify_result['asserts']\
-                                .append((control.id, control.name))
+                            ret_list.append((control.id, control.name))
                 except InterpreterError as ex:
-                    input.verify_result['result'] = 'failed'
-                    input.verify_result['description'] = ex
+                    file.verify_result['result'] = 'failed'
+                    file.verify_result['description'] = ex
                     return
 
-        if input.verify_result['asserts']:
-            input.verify_result['result'] = 'failed'
+        if len(ret_list):
+            self._set_error_struct(ret_list, file)
+            file.verify_result['result'] = 'failed'

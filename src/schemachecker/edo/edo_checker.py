@@ -1,7 +1,7 @@
 import os
 # noinspection PyUnresolvedReferences
 from lxml import etree
-from typing import Tuple, ClassVar, Dict, Any
+from typing import List, Tuple, ClassVar, Dict, Any
 from .exceptions import *
 
 
@@ -16,6 +16,17 @@ class EdoChecker:
         # Данные файла
         self.filename = None
         self.xml_content = None
+
+    @staticmethod
+    def _set_error_struct(err_list: List[Tuple[str, str]], file: ClassVar[Dict[str, Any]]) -> None:
+        """ Заполнение структуры ошибки для вывода. """
+        for error in err_list:
+            element_objs = []
+            file.verify_result['sch_asserts'].append({
+                'error_code': error[0],
+                'description': error[1],
+                'inspection_items': element_objs
+            })
 
     def _check_filename(self) -> Tuple[bool, str]:
         """ Метод проверяет соответствие имени файла и атрибута ИдФайл. """
@@ -47,8 +58,7 @@ class EdoChecker:
         file.verify_result = dict()
 
         file.verify_result['result'] = 'passed'
-        file.verify_result['sch_asserts'] = []
-        file.verify_result['xsd_asserts'] = []
+        file.verify_result['asserts'] = []
 
         # Определение проверочной схемы
         prefix = '_'.join(self.filename.split('_')[:2])
@@ -58,10 +68,10 @@ class EdoChecker:
 
         # Проверка имени файла
         correct_filename, attr_filename = self._check_filename()
+        ret_list = []
         if not correct_filename:
             file.verify_result['result'] = 'failed_sch'
-            file.verify_result['sch_asserts'].append((
-                'Проверка имени файла на соответствие значению атрибута @ИдФайл',
+            ret_list.append((
                 '0400400007',
                 f'Имя файла обмена {self.filename} не совпадает со значением '
                 f'атрибута ИдФайл {attr_filename}'
@@ -73,5 +83,6 @@ class EdoChecker:
         except etree.DocumentInvalid:
             file.verify_result['result'] = 'failed_xsd'
             for error in xsd_scheme.error_log:
-                file.verify_result['xsd_asserts']\
-                    .append(f'{error.message} (строка {error.line})')
+                ret_list.append((str(error.line), error.message))
+
+        self._set_error_struct(ret_list, file)
