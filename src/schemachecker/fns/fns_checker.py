@@ -241,7 +241,7 @@ class FnsChecker:
 
     def _check_filename(self) -> Tuple[bool, str]:
         """ Метод проверяет соответствие имени файла и атрибута ИдФайл. """
-        filename = self.filename.split('.')[0]
+        filename = os.path.splitext(self.filename)[0]
         attr_filename = self.xml_content.attrib['ИдФайл']
         return filename == attr_filename, attr_filename
 
@@ -281,7 +281,7 @@ class FnsChecker:
         }
         """
         compendium = self._get_comp_file()
-        formats = compendium.xpath('//format[@direction="ФНС"]')
+        formats = compendium.xpath('//format[@direction="ФНС" or @direction=""]')
 
         self.compendium = dict()
         for _format in formats:
