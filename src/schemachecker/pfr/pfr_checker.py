@@ -229,7 +229,7 @@ class PfrChecker:
             if len(code_presence):
                 code = code_presence.text
             else:
-                code = 50
+                code = '50'
             prot_code = self.doc_type or ''
             description = checkup.find('./d:Описание', namespaces=q_nsmap).text or ''
             results = checkup.findall('.//d:Результат', namespaces=q_nsmap)
@@ -241,7 +241,7 @@ class PfrChecker:
                                      'name': '',
                                      'value': ''})
             input.verify_result['asserts'].append({
-                'code': code,
+                'pfr_code': code,
                 'error_code': prot_code,
                 'description': description,
                 'inspection_items': element_objs
@@ -275,7 +275,7 @@ class PfrChecker:
                                      'value': element_value or ''})
 
             file.verify_result['asserts'].append({
-                'code': code,
+                'pfr_code': code,
                 'error_code': prot_code,
                 'description': description,
                 'inspection_items': element_objs
