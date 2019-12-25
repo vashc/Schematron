@@ -54,7 +54,8 @@ class RarChecker:
             file.verify_result['result'] = 'failed_xsd'
             for error in self.xsd_scheme.error_log:
                 ret_list.append((error.line, error.message))
-                self._set_error_struct(ret_list, file)
+
+            self._set_error_struct(ret_list, file)
 
     def setup_compendium(self) -> None:
         self.compendium = dict()

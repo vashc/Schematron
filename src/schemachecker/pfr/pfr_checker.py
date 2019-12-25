@@ -204,7 +204,8 @@ class PfrChecker:
             except etree.DocumentInvalid:
                 for error in scheme.error_log:
                     ret_list.append((str(error.line), error.message))
-                    self._set_error_struct(ret_list, file)
+
+                self._set_error_struct(ret_list, file)
 
                 file.verify_result['result'] = 'failed_xsd'
                 file.verify_result['description'] = (
