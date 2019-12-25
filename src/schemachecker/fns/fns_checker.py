@@ -165,6 +165,11 @@ class FnsChecker:
     def _validate_schematron(self, file: ClassVar[Dict[str, Any]]) -> None:
         try:
             asserts = self._get_asserts(self.xsd_content)
+        except InternalFnsError as ex:
+            file.verify_result['result'] = 'failed_sch'
+            file.verify_result['description'] = str(ex)
+            self._set_error_struct([('', str(ex))], file)
+            return
         except Exception as ex:
             file.verify_result['result'] = 'failed_sch'
             file.verify_result['description'] = self._return_error(ex)
