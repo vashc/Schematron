@@ -116,8 +116,20 @@ class FnsChecker:
                         if len(choice_elements):
                             # Опциональная проверка, пропускаем
                             continue
+
+                        # Пропуск опциональных проверок, minOccurs="0"
+                        is_optional = True
+                        min_occurs = content.xpath(f'//xs:element[@name="{context}"]/@minOccurs',
+                                                   namespaces=content.nsmap)
+                        for occur_attrib in min_occurs:
+                            # Ошибка, проверка обязательна, контекст не найден
+                            if occur_attrib != '0':
+                                is_optional = False
+                                break
+
                         # Ошибка, проверка обязательна, контекст не найден
-                        raise ContextError(context, self.filename)
+                        if not is_optional:
+                            raise ContextError(context, self.filename)
 
                     for sch_assert in rule:
                         for error_node in sch_assert:

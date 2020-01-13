@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='SchemaChecker',
-    version='0.0.3.dev116',
+    version='0.0.3.dev118',
     package_dir={'': 'src'},
     packages=['schemachecker',
               'schemachecker.edo',
