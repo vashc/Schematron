@@ -179,7 +179,14 @@ class DataFrame:
             cols = row.xpath('.//col')
             for col in cols:
                 cx = scheme_columns[col.attrib['code']]['index']
-                data[rx, cx] = float(col.text) if col.text else 0
+                if col.text:
+                    try:
+                        # Пользователи иногда заносят в графы не числа
+                        data[rx, cx] = float(col.text)
+                    except ValueError:
+                        data[rx, cx] = 0
+                else:
+                    data[rx, cx] = 0
 
         return DataFrame(data=data,
                          specs=specs,
