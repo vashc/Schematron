@@ -73,6 +73,9 @@ class StatChecker:
         except IndexError:
             raise InputError(self.filename,
                              'Формат названия файла не распознан')
+        except ValueError:
+            raise InputError(self.filename,
+                             'Невалидная информация в заголовке файла')
 
         # Данные о статистическом отчёте
         self.xml_report = DotDict(self.content.items())
